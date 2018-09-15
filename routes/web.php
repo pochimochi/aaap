@@ -17,4 +17,8 @@ Route::get('/about', function () {
     return view('pages.about');
 });
 
+//Route::resource('/registersubmit', 'RegisterController@store');
+Route::post('/registersubmit', 'RegisterController@store');
+Route::get('/register', 'RegisterController@index');
+
 
