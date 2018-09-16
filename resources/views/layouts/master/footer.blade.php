@@ -93,7 +93,7 @@
 
     function validateForm() {
         // This function deals with validation of the form fields
-        var firstName = document.getElementById('firstName');
+        /*var firstName = document.getElementById('firstName');
         var lastName = document.getElementById('lastName');
         var gender = document.getElementById('gender');
         var mobileNumber = document.getElementById('mobileNumber');
@@ -121,8 +121,7 @@
             document.getElementById("mnErr").innerHTML = "Please enter your mobile number.";
             mobileNumber.focus();
             return false;
-        }
-
+        }*/
         // if (city.value.length == 0) {
         //     document.getElementById("cErr").innerHTML = "Please enter your city.";
         //     city.focus();

@@ -8,16 +8,14 @@ class User extends Model
 {
     protected $table = 'Users';
 
-    public $primaryKey = 'userId';
-
     protected $fillable = [
-        'userTypeId', 'firstName', 'middleName', 'lastName', 'genderId', 'profPic',
-         'permanentAddress', 'temporaryAddress', 'idVerification', 'occupation',
-        'dateApplied', 'dateModified', 'membershipStatus', 'statusDate', 'approvedBy', 'emailCode'
+        'userTypeId', 'userFirstName', 'userMiddleName', 'userLastName', 'userGenderId', 'userProfPic',
+        'userPassword', 'permanentAddress', 'temporaryAddress', 'idVerification', 'created_at', 'updated_at',
+        'membershipStatus', 'statusDate', 'approvedBy', 'emailCode'
 
     ];
 
     protected $hidden = [
-        'password'
+        'password', 'created_at', 'updated_at',
     ];
 }

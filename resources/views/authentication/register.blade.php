@@ -30,7 +30,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>First Name</label>
-                                                    <input type="text" name="firstName" id="firstName"
+                                                    <input type="hidden" name="userTypeId" id="userTypeId" value="4">
+                                                    <input type="text" name="userFirstName" id="userFirstName"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="fnErr"></i>
                                                 </div>
@@ -38,14 +39,14 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Middle Name</label>
-                                                    <input type="text" name="middleName" id="middleName"
+                                                    <input type="text" name="userMiddleName" id="userMiddleName"
                                                            class="form-control input-default">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Last Name</label>
-                                                    <input type="text" name="lastName" id="lastName"
+                                                    <input type="text" name="userLastName" id="userLastName"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="lnErr"></i>
                                                 </div>
@@ -56,7 +57,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label">Gender</label>
                                                     <select class="form-control custom-select input-default"
-                                                            name="gender" id="gender">
+                                                            name="userGenderId" id="userGenderId">
                                                         <option value="0">Select Gender</option>
                                                         <?php
                                                         $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From genderlist");
@@ -89,7 +90,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Profile Picture</label>
-                                                    <input type="file" name="profPic" id="file-input"
+                                                    <input type="file" name="userProfPic" id="file-input"
                                                            class="form-control input-default"/>
                                                     <div id="thumb-output"></div>
                                                 </div>
@@ -246,7 +247,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Gender</label>
                                                         <select class="form-control custom-select input-default"
-                                                                name="pwaGender" id="pwaGender">
+                                                                name="pwaGenderId" id="pwaGenderId">
                                                             <option value="">Select Gender</option>
                                                             <?php
                                                             $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From genderlist");
@@ -268,7 +269,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Occupation</label>
-                                                        <input name="occupation" id="occupation" type="text"
+                                                        <input name="pwaOccupation" id="pwaOccupation" type="text"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
@@ -280,14 +281,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Employer's Name</label>
-                                                        <input type="text" name="employer" id="employer"
+                                                        <input type="text" name="employerName" id="employerName"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Contact Number</label>
-                                                        <input type="text" name="contactNumber" id="contactNumber"
+                                                        <input type="text" name="employerContactNumber" id="employerContactNumber"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
@@ -356,7 +357,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Password</label>
-                                                        <input type="password" name="password" id="password"
+                                                        <input type="password" name="userPassword" id="userPassword"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
