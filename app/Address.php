@@ -11,7 +11,7 @@ class Address extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'unitno', 'bldg', 'street', 'cityId', 'countryIds'
+        'unitno', 'bldg', 'street', 'cityId', 'countryId'
 
     ];
 
