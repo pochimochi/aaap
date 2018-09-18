@@ -11,14 +11,49 @@
 |
 */
 
-Route::get('/', 'HomeController@Home');
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', 'HomeController@Home');
 
-Route::get('/about', function () {
-    return view('pages.about');
+    Route::get('/about', function () {
+        return view('pages.about');
+    });
+
+
+    Route::post('/registersubmit', 'RegisterController@store');
+    Route::get('/register', 'RegisterController@index');
+
+
+    Route::post('/loginSubmit', [
+        'uses' => 'LoginController@postLogin',
+        'as' => 'loginSubmit'
+    ]);
+
+    Route::get('/member', [
+        'uses' => 'LoginController@getMember',
+        'as' => 'member'
+    ]);
+
+    Route::get('/login', [
+        'uses' => 'LoginController@index',
+        'as' => 'login'
+    ]);
+
+
+
+    Route::post('/eventsubmit', 'EventController@store');
+    Route::post('/eventedit', 'EventController@edit');
+
+    Route::get('/event','EventController@event');
+
+    Route::post('/articlesubmit', 'ArticleController@store');
+    Route::get('/article', function(){
+        return view('admin.article');
+    });
+
+
 });
 
-//Route::resource('/registersubmit', 'RegisterController@store');
-Route::post('/registersubmit', 'RegisterController@store');
-Route::get('/register', 'RegisterController@index');
+
+
 
 

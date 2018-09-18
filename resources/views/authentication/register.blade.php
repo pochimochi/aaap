@@ -163,7 +163,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
-                                                    <h3 class="box-title m-t-40">Temporay Address</h3>
+                                                    <h3 class="box-title m-t-40">Temporary Address</h3>
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <div class="form-group">
