@@ -8,7 +8,11 @@
       href="https://unpkg.com/file-upload-with-preview/dist/file-upload-with-preview.min.css">
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <body>
-
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>
 <main>
     <div class="morph-wrap">
         <svg class="morph" width="1400" height="770" viewBox="0 0 1400 770">
