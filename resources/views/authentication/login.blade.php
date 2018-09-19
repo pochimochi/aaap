@@ -81,7 +81,12 @@
                                         </label>
                                     </div>
                                     <div class="center">
-                                        <div class="g-recaptcha" data-sitekey="6Lfj6XAUAAAAAP9Mkg2ajxaSAZy0LaV-TS_BcnlK"></div>
+                                        <div class="form-group">
+                                            <div class="g-recaptcha"
+                                                 data-sitekey="6Lfj6XAUAAAAAP9Mkg2ajxaSAZy0LaV-TS_BcnlK">
+
+                                            </div>
+                                        </div>
                                         <button type="submit" class="btn btn-primary btn-rounded">Sign in
                                         </button>
                                         <input type="hidden" name="_token" value="{{ Session::token() }}">
