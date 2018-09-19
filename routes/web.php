@@ -12,7 +12,7 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-    Route::get('/', 'HomeController@Home');
+    Route::get('/home', 'HomeController@Home');
 
     Route::get('/about', function () {
         return view('pages.about');
@@ -23,30 +23,20 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/register', 'RegisterController@index');
 
 
-    Route::post('/loginSubmit', [
-        'uses' => 'LoginController@postLogin',
-        'as' => 'loginSubmit'
-    ]);
+    Route::post('/loginSubmit', 'LoginController@postLogin');
 
     Route::get('/member', [
         'uses' => 'LoginController@getMember',
         'as' => 'member'
     ]);
 
-    Route::get('/login', [
-        'uses' => 'LoginController@index',
-        'as' => 'login'
-    ]);
-
-
-
+    Route::get('/login','LoginController@index');
     Route::post('/eventsubmit', 'EventController@store');
     Route::post('/eventedit', 'EventController@edit');
-
-    Route::get('/event','EventController@event');
+    Route::get('/event', 'EventController@event');
 
     Route::post('/articlesubmit', 'ArticleController@store');
-    Route::get('/article', function(){
+    Route::get('/article', function () {
         return view('admin.article');
     });
 

@@ -9,12 +9,15 @@
 namespace App\Http\Controllers;
 
 
+use App\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 
 class LoginController extends Controller
 {
+
     public function getMember()
     {
         return view('member');
@@ -27,42 +30,27 @@ class LoginController extends Controller
 
     public function postLogin(Request $request)
     {
-
-        $key = "6Lfj6XAUAAAAADmbWGqfzyG3Zzu5QOlbG90qW1Dd";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, [
-            'secret' => $key,
-            'response' => request('g-recaptcha-response'),
-            'remoteip' => $_SERVER['REMOTE_ADDR'],
+        $helper = new Helper();
+        $valid = Validator::make($request->all(), [
+            'emailAddress' => 'required|max:255|exists:users',
+            'userPassword' => 'required|max:64',
+            /*'g-recaptcha-response' => 'required|captcha'*/
         ]);
-
-        $returncode = json_decode(curl_exec($ch));
-        curl_close($ch);
-
-        if ($returncode->success) {
-            $request->validate([
-                'emailAddress' => 'required|max:255|',
-                'userPassword' => 'required|max:64',
-                /*'g-recaptcha-response' => 'required|captcha'*/
-            ]);
+        if ($helper->reCaptchaVerify($request['g-recaptcha-response'])->success && $valid->passes()) {
 
 
             if (Auth::attempt(['emailAddress' => $request['emailAddress'], 'password' => $request['userPassword']])) {
                 alert()->success('Login Initiated', 'Successfully');
-                return view('pages.home');
+                return redirect('/home');
 
 
             } else {
                 alert()->error('Login Failed', 'Email Address or Password is incorrect.');
-                return view('authentication.login');
+                return redirect('/login');
             }
         } else {
             alert()->warning('Login Failed', 'Please retry your ReCaptcha');
-            return view('authentication.login');
+            return redirect('/login')->withErrors($valid);
         }
 
 

@@ -21,16 +21,26 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-9">
                         <form action="{{URL::to('/registersubmit')}}" name="regForm" id="regForm" method="post">
+                            @csrf
                             <div class="login-content card">
                                 <div class="login-form">
                                     <h4>REGISTER AS A NEW MEMBER</h4>
+
+                                    @foreach($errors->all() as $error)
+
+                                        <div class="alert alert-danger">
+                                            {{$error}}
+                                        </div>
+
+                                    @endforeach
+
                                     <div class="tab">
                                         <h3 class="box-title m-t-40">Personal Information</h3>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>First Name</label>
-                                                    <input type="hidden" name="userTypeId" id="userTypeId" value="4">
+
                                                     <input type="text" name="userFirstName" id="userFirstName"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="fnErr"></i>
@@ -58,7 +68,7 @@
                                                     <label class="control-label">Gender</label>
                                                     <select class="form-control custom-select input-default"
                                                             name="userGenderId" id="userGenderId">
-                                                        <option value="0">Select Gender</option>
+                                                        <option value="">Select Gender</option>
                                                         <?php
                                                         $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From genderlist");
                                                         $row = mysqli_num_rows($sql);
@@ -147,7 +157,7 @@
                                                             <div class="form-group">
                                                                 <label>Country</label>
                                                                 <select class="form-control custom-select input-default"
-                                                                        name="country" id="country">
+                                                                        name="countryId" id="countryId">
                                                                     <option value="">Select Country</option>
                                                                     <?php
                                                                     $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
@@ -288,7 +298,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Contact Number</label>
-                                                        <input type="text" name="employerContactNumber" id="employerContactNumber"
+                                                        <input type="text" name="employerContactNumber"
+                                                               id="employerContactNumber"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
@@ -369,7 +380,7 @@
                                                      data-sitekey="6LdUCFIUAAAAACh2JiAz75yzM146G_aVQyPVpvMk"></div>
 
                                             </div>
-
+                                            <input type="hidden" name="_token" value="{{ Session::token() }}">
                                         </div>
                                     </div>
                                     <div class="row">

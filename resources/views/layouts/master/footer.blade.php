@@ -33,9 +33,9 @@
 <script src="{{asset('js/custom.min.js')}}"></script>
 <!--https://stackoverflow.com/questions/30930079/how-to-get-bootstrap-carousel-to-fit-100-to-screen -->
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         var height = $(window).height();  //getting windows height
-        jQuery('#carousels').css('height',(height - 120)+'px');   //and setting height of carousel
+        jQuery('#carousels').css('height', (height - 120) + 'px');   //and setting height of carousel
 
     });
     $('.carousel').carousel({
@@ -73,6 +73,11 @@
         fixStepIndicator(n)
     }
 
+    function validateForm() {
+
+        return true;
+    }
+
     function nextPrev(n) {
         // This function will figure out which tab to display
         var x = document.getElementsByClassName("tab");
@@ -91,7 +96,6 @@
         // Otherwise, display the correct tab:
         showTab(currentTab);
     }
-
 
 
     function fixStepIndicator(n) {
