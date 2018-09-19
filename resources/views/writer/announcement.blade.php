@@ -27,7 +27,6 @@
 </head>
 
 <body class="fix-header fix-sidebar">
-<!-- Preloader - style you can find in spinners.css -->
 
 <!-- Main wrapper  -->
 <div id="main-wrapper">
