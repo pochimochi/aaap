@@ -80,12 +80,12 @@ class RegisterController extends Controller
             'employerAddress' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
             'employerContactNumber' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
             'description' => 'nullable|string',
-            'pwaLastName' => 'nullable|string',
-            'pwaFirstName' => 'nullable|string',
-            'pwaMiddleName' => 'nullable|string',
+            'pwaLastName' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
+            'pwaFirstName' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
+            'pwaMiddleName' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaGenderId' => 'required|integer',
             'pwaOccupation' => 'nullable|string',
-            'landlineNumber' => 'nullable|integer|regex:^(09|\+639)\d{9}$',
+            'landlineNumber' => 'nullable|integer',
             'mobileNumber' => 'nullable|string|(\+?\d{2}?\s?\d{3}\s?\d{3}\s?\d{4})|([0]\d{3}\s?\d{3}\s?\d{4})'
 
 
