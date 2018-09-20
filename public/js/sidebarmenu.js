@@ -1,5 +1,5 @@
 /*
-Template Name: Admin Press Admin
+Template Name: admin Press admin
 Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: js

@@ -17,7 +17,7 @@ class EventController extends Controller
 
         $events = DB::select('select * from events');
 
-        return view('admin.event', ['events'=>$events]);
+        return view('pages.admin.eventevent', ['events'=>$events]);
     }
 
     /**
