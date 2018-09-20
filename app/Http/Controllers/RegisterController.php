@@ -190,15 +190,15 @@ class RegisterController extends Controller
             'ecountry' => 'nullable|integer|exists:countries,countryId',
             'employerName' => 'required|string|regex:/^[a-z ,.\'-]+$/i',
             'employerAddress' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
-            'employerContactNumber' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
+            'employerContactNumber' => 'nullable',
             'description' => 'nullable|string',
             'pwaLastName' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaFirstName' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaMiddleName' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaGenderId' => 'required|integer',
             'pwaOccupation' => 'nullable|string',
-            'landlineNumber' => 'nullable|integer',
-            'mobileNumber' => 'nullable|string|(\+?\d{2}?\s?\d{3}\s?\d{3}\s?\d{4})|([0]\d{3}\s?\d{3}\s?\d{4})'
+            'landlineNumber' => 'nullable',
+            'mobileNumber' => 'nullable|string'
 
 
         ]);
