@@ -18,4 +18,6 @@ class City extends Model
     protected $hidden = [
 
     ];
+
+
 }

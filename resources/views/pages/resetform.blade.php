@@ -65,7 +65,7 @@
 <script src="js/anime.min.js"></script>
 <script src="js/scrollMonitor.js"></script>
 <script src="js/demo1.js"></script>
-@include('layouts.master.footer')
+
 </body>
 
 </html>

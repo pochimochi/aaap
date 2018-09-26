@@ -20,7 +20,7 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-lg-9">
-                        <form action="{{URL::to('/registersubmit')}}" name="regForm" id="regForm" method="post">
+                        <form action="{{URL::to('/registersubmit')}}" name="regForm" enctype="multipart/form-data" id="regForm" method="post">
                             <div class="login-content card">
                                 <div class="login-form">
                                     <h4>REGISTER AS A NEW MEMBER</h4>
@@ -418,6 +418,6 @@
 </main>
 
 
-@include('layouts.master.footer')
+
 </body>
 </html>

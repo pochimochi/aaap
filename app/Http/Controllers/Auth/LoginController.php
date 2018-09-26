@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Joyce Sison
+ * UserController: Joyce Sison
  * Date: 17/09/2018
  * Time: 8:38 PM
  */
@@ -10,18 +10,17 @@ namespace App\Http\Controllers;
 
 
 use App\Helper;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 
 class LoginController extends Controller
 {
 
-    public function getMember()
-    {
-        return view('member');
-    }
+
 
     public function index()
     {
@@ -36,11 +35,18 @@ class LoginController extends Controller
             'userPassword' => 'required|max:64',
             /*'g-recaptcha-response' => 'required|captcha'*/
         ]);
-        if ($helper->reCaptchaVerify($request['g-recaptcha-response'])->success && $valid->passes()) {
+        if (/*$helper->reCaptchaVerify($request['g-recaptcha-response'])->success && */
+        $valid->passes()) {
 
+            $attempt = Auth::attempt(['emailAddress' => $request['emailAddress'], 'password' => $request['userPassword']]);
+            if ($attempt == true) {
 
-            if (Auth::attempt(['emailAddress' => $request['emailAddress'], 'password' => $request['userPassword']])) {
-                alert()->success('Login Initiated', 'Successfully');
+                $user = Auth::user();
+                \session(['user' => $user]);
+                \session(['userId' => $user->userId]);
+                \session(['role' => $user->userTypeId]);
+
+                alert()->success('Login Successful!', 'Welcome ' . $user->userFirstName);
                 return redirect('/home');
 
 

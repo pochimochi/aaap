@@ -240,6 +240,6 @@
     </div>
     <!-- End Wrapper -->
     <!-- All Jquery -->
-@include('layouts.master.footer')
+
 </body>
 </html>

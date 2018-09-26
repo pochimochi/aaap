@@ -375,7 +375,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * Sets whether or not an image is updated on resize.
 	     * If an image is set to be updated, it is immediately rendered.
 	     *
-	     * @param {Object} el Image DOM element
+	     * @param {Object} el Images DOM element
 	     * @param {Boolean} value Resizable update flag value
 	     */
 	    setResizeUpdate: function(el, value) {
@@ -499,7 +499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                if (imageAttr.src.indexOf(options.domain) === 0) {
 	                    prepareImageElement(options, engineSettings, imageAttr.src, image);
 	                } else if (imageHasDataSrcURL) {
-	                    //Image has a valid data-src and an invalid src
+	                    //Images has a valid data-src and an invalid src
 	                    if (imageRendered) {
 	                        //If the placeholder has already been render, re-render it
 	                        prepareImageElement(options, engineSettings, imageAttr.dataSrc, image);
@@ -570,8 +570,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @private
 	 * @param options Instance options from Holder.run
 	 * @param renderSettings Instance configuration
-	 * @param src Image URL
-	 * @param el Image DOM element
+	 * @param src Images URL
+	 * @param el Images DOM element
 	 */
 	function prepareImageElement(options, engineSettings, src, el) {
 	    var holderFlags = parseURL(src.substr(src.lastIndexOf(options.domain)), options);
@@ -1221,7 +1221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Sets up aspect ratio metadata for fluid placeholders, in order to preserve proportions when resizing
 	 *
 	 * @private
-	 * @param el Image DOM element
+	 * @param el Images DOM element
 	 */
 	function setInitialDimensions(el) {
 	    if (el.holderData) {

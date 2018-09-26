@@ -7,7 +7,7 @@ use App\City;
 use App\Event;
 use App\EventCategories;
 use App\EventImages;
-use App\Image;
+use App\Images;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +17,7 @@ class EventController extends Controller
 
         $events = DB::select('select * from events');
 
-        return view('pages.admin.eventevent', ['events'=>$events]);
+        return view('pages.admin.event', ['events'=>$events]);
     }
 
     /**

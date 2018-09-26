@@ -7,13 +7,16 @@ use App\City;
 use App\Contact;
 use App\Employer;
 use App\Helper;
+use App\Images;
 use App\Pwa;
 use App\Relationship;
 use App\User;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 use PHPMailer\PHPMailer\PHPMailer;
 
 
@@ -96,7 +99,7 @@ class RegisterController extends Controller
         if ((!empty($check->get('0')->emailAddress)) == 1) {
             $password = $check->get('0')->password;
             $emailAddress = $check->get('0')->emailAddress;
-            $link = "http://localhost/aaap/public/newpass?key=" . $emailAddress . "&reset=" . $password . "&time=" . Carbon::now() . "'";
+            $link = "http://localhost/aaap/public/newpass?key=" . $emailAddress . "&reset=" . $password . "&time=" . Carbon::now() . "";
             $bodyhtml = '
 <html>
 <body>
@@ -155,6 +158,8 @@ class RegisterController extends Controller
 
     }
 
+
+
     public function store(Request $request)
     {
         $helper = new Helper();
@@ -165,7 +170,7 @@ class RegisterController extends Controller
             'userMiddleName' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'userLastName' => 'required|max:30|:regex/^[a-z ,.\'-]+$/i',
             'userGenderId' => 'required',
-            'userProfPic' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
+            //'userProfPic' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
             'userPassword' => 'required|max:64',
             //'idVerification' => 'required|max:300|mimes:jpeg,jpg,png|image',
             //'membershipStatus' => 'required|integer',
@@ -205,9 +210,11 @@ class RegisterController extends Controller
         if ($valid->passes()) {
             if ($helper->reCaptchaVerify($request['g-recaptcha-response'])->success) {
 
+
                 $userinfo = $request->all();
+                $userinfo['userPassword'] = bcrypt($userinfo['userPassword']);
                 $userinfo['membershipStatus'] = 1;
-                $userinfo['idVerification'] = 1;
+
                 $userinfo['userTypeId'] = 4;
 
                 $temporaryaddress = $request->only([
@@ -222,7 +229,10 @@ class RegisterController extends Controller
                     'eunitno' => 'unitno', 'ebldg' => 'bldg', 'estreet' => 'street', 'ecity' => 'city',
                     'ecountry' => 'countryId'
                 ]);
-
+                $profilepicpath = $request->file('userProfPic')->store('public');
+                $idverificationpath = $request->file('idVerification')->store('public');
+                $imageId = Images::create(['imageLocation' => $profilepicpath]);
+                $verificationId = Images::create(['imageLocation' => $idverificationpath]);
 
                 $tcityid = City::create(['name' => $temporaryaddress['city']]);
                 $temporaryaddress['cityId'] = $tcityid->id;
@@ -234,6 +244,8 @@ class RegisterController extends Controller
 
                 $userinfo['temporaryAddress'] = $taddressid->id;
                 $userinfo['permanentAddress'] = $paddressid->id;
+                $userinfo['userProfPic'] = $imageId->id;
+                $userinfo['idVerification'] = $verificationId->id;
 
                 $userid = User::create($userinfo);
                 $userinfo['userId'] = $userid->id;
@@ -254,7 +266,7 @@ class RegisterController extends Controller
                 Relationship::create($userinfo);
 
                 alert()->success('Registration Successful!!', 'Welcome to AAAP');
-                return redirect('/home');
+                return redirect('/login');
             } else {
                 return redirect('/register')->withInput();
             }
@@ -264,6 +276,7 @@ class RegisterController extends Controller
 
 
     }
+
 
     /**
      * Display the specified resource.

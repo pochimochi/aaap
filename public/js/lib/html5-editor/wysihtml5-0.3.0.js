@@ -7389,7 +7389,7 @@ wysihtml5.Commands = Base.extend(
           parent;
 
       if (image) {
-        // Image already selected, set the caret before it and delete it
+        // Images already selected, set the caret before it and delete it
         composer.selection.setBefore(image);
         parent = image.parentNode;
         parent.removeChild(image);
@@ -8589,7 +8589,7 @@ wysihtml5.views.View = Base.extend(
 
     // --------- Show url in tooltip when hovering links or images ---------
     var titlePrefixes = {
-      IMG: "Image: ",
+      IMG: "Images: ",
       A:   "Link: "
     };
     
