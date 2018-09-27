@@ -22,7 +22,7 @@
                 <li class="nav-item m-l-10"><a class="nav-link sidebartoggler hidden-sm-down text-muted  "
                                                href="javascript:void(0)"><i class="ti-menu"></i></a></li>
             </ul>
-            <!-- UserController profile -->
+            <!-- User profile -->
             <ul class="navbar-nav my-lg-0">
                 <!-- Profile -->
                 <li class="nav-item dropdown">

@@ -46,7 +46,7 @@ class LoginController extends Controller
                 \session(['userId' => $user->userId]);
                 \session(['role' => $user->userTypeId]);
 
-                alert()->success('Login Successful!', 'Welcome ' . $user->userFirstName);
+                alert()->success('Login Successful!', 'Welcome ' . $user->userFirstName . session('role'));
                 return redirect('/home');
 
 

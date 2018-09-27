@@ -8,6 +8,39 @@
       href="https://unpkg.com/file-upload-with-preview/dist/file-upload-with-preview.min.css">
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{URL::to('/home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contents">Contents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline" href="{{URL::to('/login')}}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{URL::to('/register')}}">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <main>
     <div class="morph-wrap">
@@ -20,16 +53,16 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-lg-9">
-                        <form action="{{URL::to('/registersubmit')}}" name="regForm" enctype="multipart/form-data" id="regForm" method="post">
+                        <form action="{{URL::to('/registersubmit')}}" name="regForm" id="regForm" method="post">
                             <div class="login-content card">
                                 <div class="login-form">
                                     <h4>REGISTER AS A NEW MEMBER</h4>
                                     @if($errors->any())
                                         <div class="alert alert-danger">
                                             <ul>
-                                        @foreach($errors->all() as $error)
-                                            <li>{{$error}}</li>
-                                        @endforeach
+                                                @foreach($errors->all() as $error)
+                                                    <li>{{$error}}</li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     @endif
@@ -40,7 +73,8 @@
                                                 <div class="form-group">
                                                     <label>First Name</label>
 
-                                                    <input value="{{ old('userFirstName') }}" type="text" name="userFirstName" id="userFirstName"
+                                                    <input value="{{ old('userFirstName') }}" type="text"
+                                                           name="userFirstName" id="userFirstName"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="fnErr"></i>
                                                 </div>
@@ -48,14 +82,16 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Middle Name</label>
-                                                    <input value="{{ old('userMiddleName') }}" type="text" name="userMiddleName" id="userMiddleName"
+                                                    <input value="{{ old('userMiddleName') }}" type="text"
+                                                           name="userMiddleName" id="userMiddleName"
                                                            class="form-control input-default">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Last Name</label>
-                                                    <input value="{{ old('userLastName') }}" type="text" name="userLastName" id="userLastName"
+                                                    <input value="{{ old('userLastName') }}" type="text"
+                                                           name="userLastName" id="userLastName"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="lnErr"></i>
                                                 </div>
@@ -82,14 +118,16 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Landline Number</label>
-                                                    <input value="{{ old('landlineNumber') }}" type="text" name="landlineNumber" id="landlineNumber"
+                                                    <input value="{{ old('landlineNumber') }}" type="text"
+                                                           name="landlineNumber" id="landlineNumber"
                                                            class="form-control input-default">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Mobile Number</label>
-                                                    <input value="{{ old('mobileNumber') }}" type="text" name="mobileNumber" id="mobileNumber"
+                                                    <input value="{{ old('mobileNumber') }}" type="text"
+                                                           name="mobileNumber" id="mobileNumber"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="mnErr"></i>
                                                 </div>
@@ -99,7 +137,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Profile Picture</label>
-                                                    <input value="{{ old('userProfPic') }}" type="file" name="userProfPic" id="file-input"
+                                                    <input value="{{ old('userProfPic') }}" type="file"
+                                                           name="userProfPic" id="file-input"
                                                            class="form-control input-default"/>
                                                     <div id="thumb-output"></div>
                                                 </div>
@@ -107,7 +146,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>ID Verification</label>
-                                                    <input value="{{ old('idVerification') }}" type="file" name="idVerification" id="id-input"
+                                                    <input value="{{ old('idVerification') }}" type="file"
+                                                           name="idVerification" id="id-input"
                                                            class="form-control input-default"/>
                                                     <div id="thumb1-output"></div>
                                                     <i style="color:red;" id="idErr"></i>
@@ -124,21 +164,24 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label>Unit Number</label>
-                                                                <input value="{{ old('unitno') }}" type="text" name="unitno" id="unitno"
+                                                                <input value="{{ old('unitno') }}" type="text"
+                                                                       name="unitno" id="unitno"
                                                                        class="form-control input-default">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label>Building</label>
-                                                                <input value="{{ old('bldg') }}" type="text" name="bldg" id="bldg"
+                                                                <input value="{{ old('bldg') }}" type="text" name="bldg"
+                                                                       id="bldg"
                                                                        class="form-control input-default">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label>Street</label>
-                                                                <input value="{{ old('street') }}" type="text" name="street" id="street"
+                                                                <input value="{{ old('street') }}" type="text"
+                                                                       name="street" id="street"
                                                                        class="form-control input-default">
                                                             </div>
                                                         </div>
@@ -147,7 +190,8 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>City</label>
-                                                                <input value="{{ old('city') }}" type="text" name="city" id="city"
+                                                                <input value="{{ old('city') }}" type="text" name="city"
+                                                                       id="city"
                                                                        class="form-control input-default">
                                                                 <i style="color:red;" id="cErr"></i>
                                                             </div>
@@ -177,21 +221,24 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label>Unit Number</label>
-                                                                <input value="{{ old('tunitno') }}" type="text" name="tunitno" id="tunitno"
+                                                                <input value="{{ old('tunitno') }}" type="text"
+                                                                       name="tunitno" id="tunitno"
                                                                        class="form-control input-default">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label>Building</label>
-                                                                <input value="{{ old('tbldg') }}" type="text" name="tbldg" id="tbldg"
+                                                                <input value="{{ old('tbldg') }}" type="text"
+                                                                       name="tbldg" id="tbldg"
                                                                        class="form-control input-default">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label>Street</label>
-                                                                <input value="{{ old('tstreet') }}" type="text" name="tstreet" id="tstreet"
+                                                                <input value="{{ old('tstreet') }}" type="text"
+                                                                       name="tstreet" id="tstreet"
                                                                        class="form-control input-default">
                                                             </div>
                                                         </div>
@@ -200,7 +247,8 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>City</label>
-                                                                <input value="{{ old('tcity') }}" type="text" name="tcity" id="tcity"
+                                                                <input value="{{ old('tcity') }}" type="text"
+                                                                       name="tcity" id="tcity"
                                                                        class="form-control input-default">
                                                             </div>
                                                         </div>
@@ -232,21 +280,24 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>First Name</label>
-                                                        <input value="{{ old('pwaFirstName') }}" type="text" name="pwaFirstName" id="pwaFirstName"
+                                                        <input value="{{ old('pwaFirstName') }}" type="text"
+                                                               name="pwaFirstName" id="pwaFirstName"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Middle Name</label>
-                                                        <input value="{{ old('pwaMiddleName') }}" type="text" name="pwaMiddleName" id="pwaMiddleName"
+                                                        <input value="{{ old('pwaMiddleName') }}" type="text"
+                                                               name="pwaMiddleName" id="pwaMiddleName"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Last Name</label>
-                                                        <input value="{{ old('pwaLastName') }}" type="text" name="pwaLastName" id="pwaLastName"
+                                                        <input value="{{ old('pwaLastName') }}" type="text"
+                                                               name="pwaLastName" id="pwaLastName"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
@@ -271,14 +322,16 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Relationship to PWA</label>
-                                                        <input value="{{ old('relationship') }}" type="text" name="description" id="description"
+                                                        <input value="{{ old('relationship') }}" type="text"
+                                                               name="description" id="description"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Occupation</label>
-                                                        <input value="{{ old('pwaOccupation') }}" name="pwaOccupation" id="pwaOccupation" type="text"
+                                                        <input value="{{ old('pwaOccupation') }}" name="pwaOccupation"
+                                                               id="pwaOccupation" type="text"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
@@ -290,14 +343,16 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Employer's Name</label>
-                                                        <input value="{{ old('employerName') }}" type="text" name="employerName" id="employerName"
+                                                        <input value="{{ old('employerName') }}" type="text"
+                                                               name="employerName" id="employerName"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Contact Number</label>
-                                                        <input value="{{ old('employerContactNumber') }}" type="text" name="employerContactNumber"
+                                                        <input value="{{ old('employerContactNumber') }}" type="text"
+                                                               name="employerContactNumber"
                                                                id="employerContactNumber"
                                                                class="form-control input-default">
                                                     </div>
@@ -307,21 +362,24 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Unit Number</label>
-                                                        <input value="{{ old('eunitno') }}" type="text" name="eunitno" id="eunitno"
+                                                        <input value="{{ old('eunitno') }}" type="text" name="eunitno"
+                                                               id="eunitno"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Building</label>
-                                                        <input value="{{ old('ebldg') }}" type="text" name="ebldg" id="ebldg"
+                                                        <input value="{{ old('ebldg') }}" type="text" name="ebldg"
+                                                               id="ebldg"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Street</label>
-                                                        <input value="{{ old('estreet') }}" type="text" name="estreet" id="estreet"
+                                                        <input value="{{ old('estreet') }}" type="text" name="estreet"
+                                                               id="estreet"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
@@ -330,7 +388,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>City</label>
-                                                        <input value="{{ old('ecity') }}" type="text" name="ecity" id="ecity"
+                                                        <input value="{{ old('ecity') }}" type="text" name="ecity"
+                                                               id="ecity"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
@@ -360,26 +419,30 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Email Address</label>
-                                                        <input value="{{ old('emailAddress') }}" type="email" name="emailAddress" id="emailAddress"
+                                                        <input value="{{ old('emailAddress') }}" type="email"
+                                                               name="emailAddress" id="emailAddress"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Password</label>
-                                                        <input value="{{ old('userPassword') }}" type="password" name="userPassword" id="userPassword"
+                                                        <input value="{{ old('userPassword') }}" type="password"
+                                                               name="userPassword" id="userPassword"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
-
                                             </div>
-                                            <div class="row align-items-center">
-
-                                                <div class="g-recaptcha"
-                                                     data-sitekey="6Lfj6XAUAAAAAP9Mkg2ajxaSAZy0LaV-TS_BcnlK"></div>
-
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="g-recaptcha"
+                                                             data-sitekey="6Lfj6XAUAAAAAP9Mkg2ajxaSAZy0LaV-TS_BcnlK"></div>
+                                                    </div>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="row">
@@ -418,6 +481,10 @@
 </main>
 
 
-
+@include('layouts.master.footer')
 </body>
 </html>
+
+
+<!-- Custom scripts for this template -->
+<script src="js/new-age.min.js"></script>

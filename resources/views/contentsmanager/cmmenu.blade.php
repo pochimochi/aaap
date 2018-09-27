@@ -1,15 +1,8 @@
 <div id="main-wrapper">
-    <!-- header header  -->
     <div class="header">
         <nav class="navbar top-navbar navbar-expand-md navbar-light">
-            <!-- Logo -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                    <!-- Logo icon -->
-                    <!--<b><img src="images/logo.png" alt="homepage" class="dark-logo" /></b>-->
-                    <!--End Logo icon -->
-                    <!-- Logo text -->
-                    <!--<span><img src="images/logo-text.png" alt="homepage" class="dark-logo" /></span>-->
                 </a>
             </div>
             <!-- End Logo -->
@@ -39,5 +32,25 @@
                 </ul>
             </div>
         </nav>
+    </div>
+    <!-- End header header -->
+    <!-- Left Sidebar  -->
+    <div class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li class="nav-devider"></li>
+                    <li class="nav-label">Manage Contents</li>
+                    <li><a href="{{URL::to('/announcement')}}" aria-expanded="false"><i class="fa fa-bullhorn"></i><span
+                                    class="hide-menu">Announcements</span></a>
+                    </li>
+                    <li><a href="{{URL::to('/event')}}" aria-expanded="false"><i class="fa fa-newspaper-o"></i><span
+                                    class="hide-menu">Events</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>

@@ -63,6 +63,6 @@ class Kernel extends HttpKernel
         'member' => \App\Http\Middleware\IsMember::class,
         'admin' => \App\Http\Middleware\Admin::class,
         'writer' => \App\Http\Middleware\Writer::class,
-        'eventmanager' => \App\Http\Middleware\EventManager::class,
+        'contentmanager' => \App\Http\Middleware\ContentManager::class,
     ];
 }

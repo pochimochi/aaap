@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class EventManager
+class ContentManager
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,9 @@ class EventManager
      */
     public function handle($request, Closure $next)
     {
-        if (!session('role') != 3) {
+        if (session('role') != '3') {
             // user value cannot be found in session
-            alert()->warning('Oops!', 'You need to be an Event Manager to access this page.');
+            alert()->warning('Oops!', 'You need to be an Content Manager to access this page.');
             return redirect('/home');
 
         }

@@ -8,6 +8,8 @@ class EventImages extends Model
 {
     protected $table = 'eventimages';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'eventImageId', 'imageId', 'eventId'
     ];

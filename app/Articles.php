@@ -9,7 +9,7 @@ class Articles extends Model
     protected $table = 'articles';
 
     protected $fillable = [
-        'articleId', 'title', 'body', 'created_at', 'updated_at', 'modifiedBy',  'statusId',
+        'id', 'title', 'body', 'created_at', 'updated_at', 'modifiedBy',  'statusId',
         'articleTypeId',
 
     ];

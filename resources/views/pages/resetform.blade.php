@@ -1,4 +1,3 @@
-<html>
 @include('layouts.master.header')
 <!--SVG background-->
 <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
@@ -17,29 +16,24 @@
                     <div class="col-lg-4">
                         <div class="login-content card">
                             <div class="login-form">
-                                <h3>Reset Password</h3>
-                                <p>Enter you email for the link</p>
+                                <h4>RESET PASSWORD</h4>
                                 <ul>
                                     @foreach($errors->all() as $error)
-
                                         <div class="alert alert-danger">
                                             {{$error}}
                                         </div>
-
                                     @endforeach
                                 </ul>
                                 <form method="post" action="{{URL::to('/sendemail')}}">
                                     <div class="form-group">
-                                        <input type="email" placeholder="Email" name="email" class="form-control input-rounded">
+                                        <input type="email" placeholder="Enter your email address" name="email"
+                                               class="form-control input-rounded">
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-rounded">Submit</button>
                                         <input type="hidden" name="_token" value="{{ Session::token() }}">
                                     </div>
-
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
@@ -48,24 +42,5 @@
         </div>
     </div>
 </main>
-<script src="js/lib/jquery/jquery.min.js"></script>
-<!-- Bootstrap tether Core JavaScript -->
-<script src="js/lib/bootstrap/js/popper.min.js"></script>
-<script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
-<!-- slimscrollbar scrollbar JavaScript -->
-<script src="js/jquery.slimscroll.js"></script>
-<!--Menu sidebar -->
-<script src="js/sidebarmenu.js"></script>
-<!--stickey kit -->
-<script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-<!--Custom JavaScript -->
-<script src="js/custom.min.js"></script>
-<!--SVG background-->
-<script src="js/imagesloaded.pkgd.min.js"></script>
-<script src="js/anime.min.js"></script>
-<script src="js/scrollMonitor.js"></script>
-<script src="js/demo1.js"></script>
-
+@include('layouts.master.footer')
 </body>
-
-</html>

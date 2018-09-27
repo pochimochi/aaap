@@ -14,33 +14,44 @@
 Route::group(['middleware' => ['web']], function () {
     //main pages
     Route::get('/home', 'HomeController@Home');
-    Route::get('/about', function () {
-        return view('pages.about');
-    });
+
 
     Route::group(['middleware' => 'member'], function () {
         //member
         Route::get('/profile', 'UserController@profile');
+        Route::get('/member', function () {
+            return view('member');
+        });
 
 
-        Route::group(['middleware' => 'eventmanager'], function () {
+        Route::group(['middleware' => 'contentmanager'], function () {
+            //announcements
+            Route::get('/announcement', 'AnnouncementsController@announcement');
+            Route::post('/announcementSubmit', 'AnnouncementsController@store');
+            Route::get('/announcementedit/{announcementId}', 'AnnouncementsController@edit');
+            Route::post('edit/announcementedit/{announcementId}', 'AnnouncementsController@update');
+            Route::post('announcements/changeStatus', array('as' => 'changeStatus', 'uses' => 'AnnouncementsController@changeStatus'));
+
             //events
             Route::post('/eventsubmit', 'EventController@store');
-            Route::post('/eventedit', 'EventController@edit');
             Route::get('/event', 'EventController@event');
+            Route::get('/eventedit/{eventId}', 'EventController@edit');
+            Route::post('edit/eventedit/{eventId}', 'EventController@update');
+
         });
         Route::group(['middleware' => 'writer'], function () {
             //articles
+            Route::get('/article', 'ArticleController@article');
             Route::post('/articlesubmit', 'ArticleController@store');
-            Route::get('/article', function () {
-                return view('pages.admin.article');
-            });
+            Route::get('/articleedit/{articleId}', 'ArticleController@edit');
+            Route::post('edit/articleedit/{articleId}', 'ArticleController@update');
         });
 
 
     });
+
     //logout
-    Route::get('/logout', function(){
+    Route::get('/logout', function () {
         Session::flush();
         Auth::logout();
         return redirect('/login');

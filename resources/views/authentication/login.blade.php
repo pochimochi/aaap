@@ -1,17 +1,6 @@
 <html lang="en">
-
+@include('layouts.master.header')
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <!--    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">-->
-    <title>Association for Adults with Autism Philippines</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/helper.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -28,7 +17,39 @@
 </head>
 
 <body class="fix-header fix-sidebar">
-<!-- Preloader - style you can find in spinners.css -->
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{URL::to('/home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contents">Contents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline" href="{{URL::to('/login')}}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{URL::to('/register')}}">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="preloader">
     <svg class="circular" viewBox="25 25 50 50">
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
@@ -103,26 +124,7 @@
         </div>
     </div>
 </main>
-<!-- End Wrapper -->
-<!-- All Jquery -->
-<script src="js/lib/jquery/jquery.min.js"></script>
-<!-- Bootstrap tether Core JavaScript -->
-<script src="js/lib/bootstrap/js/popper.min.js"></script>
-<script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
-<!-- slimscrollbar scrollbar JavaScript -->
-<script src="js/jquery.slimscroll.js"></script>
-<!--Menu sidebar -->
-<script src="js/sidebarmenu.js"></script>
-<!--stickey kit -->
-<script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-<!--Custom JavaScript -->
-<script src="js/custom.min.js"></script>
-<!--SVG background-->
-<script src="js/imagesloaded.pkgd.min.js"></script>
-<script src="js/anime.min.js"></script>
-<script src="js/scrollMonitor.js"></script>
-<script src="js/demo1.js"></script>
-
 </body>
-
 </html>
+
+@include('layouts.master.footer')
