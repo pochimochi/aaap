@@ -1,5 +1,5 @@
 @include ('layouts.master.header')
-@include ('admin.adminmenu')
+@include ('layouts.admin.adminmenu')
 <script>
     function submitForm() {
         $("#form2").submit();

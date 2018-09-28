@@ -251,13 +251,13 @@
                                                        class=" form-control input-default">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                       {{-- <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>Image</label>
                                                 <input name="eventImage" type="file"
                                                        value="{{$event->eventImage}}"/>
                                             </div>
-                                        </div>
+                                        </div>--}}
                                     </div>
                                 </div>
                             </div>

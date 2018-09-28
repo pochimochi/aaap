@@ -16,7 +16,7 @@ class AnnouncementsController extends Controller
     public function announcement()
     {
         $announcements = DB::select('select * from announcements');
-        return view('contentsmanager.announcement', ['announcements' => $announcements]);
+        return view('pages.contentsmanager.announcement', ['announcements' => $announcements]);
     }
 
 
@@ -48,7 +48,7 @@ class AnnouncementsController extends Controller
     public function edit($announcementId)
     {
         $announcement = Announcements::find($announcementId);
-        return view('contentsmanager.announcementedit', compact('announcement', 'announcementId'));
+        return view('pages.contentsmanager.announcementedit', compact('announcement', 'announcementId'));
     }
 
 
@@ -79,7 +79,7 @@ class AnnouncementsController extends Controller
         $announcement->save();
 
         alert()->success('Announcement', 'Updated');
-        return redirect('announcement');
+        return redirect('/announcement');
     }
 
 

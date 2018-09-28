@@ -16,7 +16,7 @@ class Writer
      */
     public function handle($request, Closure $next)
     {
-        if (!session('role') != 2) {
+        if (session('role') != 2) {
             // user value cannot be found in session
             alert()->warning('Oops!', 'You need to be a Writer to access this page.');
             return redirect('/home');

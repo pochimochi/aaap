@@ -7,7 +7,7 @@ use App\City;
 use App\Contact;
 use App\Employer;
 use App\Helper;
-use App\Images;
+use App\Image;
 use App\Pwa;
 use App\Relationship;
 use App\User;
@@ -16,7 +16,6 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
-use Intervention\Image\Facades\Image;
 use PHPMailer\PHPMailer\PHPMailer;
 
 
@@ -40,7 +39,7 @@ class RegisterController extends Controller
 
     public function reset()
     {
-        return view('pages.resetform');
+        return view('pages.master.resetform');
     }
 
     public function savepassword(Request $request)
@@ -229,10 +228,10 @@ class RegisterController extends Controller
                     'eunitno' => 'unitno', 'ebldg' => 'bldg', 'estreet' => 'street', 'ecity' => 'city',
                     'ecountry' => 'countryId'
                 ]);
-                $profilepicpath = $request->file('userProfPic')->store('public');
-                $idverificationpath = $request->file('idVerification')->store('public');
-                $imageId = Images::create(['imageLocation' => $profilepicpath]);
-                $verificationId = Images::create(['imageLocation' => $idverificationpath]);
+                $profilepicpath = $request->file('userProfPic')->store('storage');
+                $idverificationpath = $request->file('idVerification')->store('storage');
+                $imageId = Image::create(['imageLocation' => $profilepicpath]);
+                $verificationId = Image::create(['imageLocation' => $idverificationpath]);
 
                 $tcityid = City::create(['name' => $temporaryaddress['city']]);
                 $temporaryaddress['cityId'] = $tcityid->id;

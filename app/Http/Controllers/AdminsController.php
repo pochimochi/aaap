@@ -16,12 +16,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
-class AdminsController
+class AdminsController extends Controller
 {
     public function index()
     {
-        $admins = DB::select('select * from users where userTypeId= 2 and 3');
-        return view('admin.admins', ['admins' => $admins]);
+        $admins = User::all()->whereIn('userTypeId', ['2', '3']);
+        return view('pages.admin.admins', ['admins' => $admins]);
     }
 
     public function store(Request $request)

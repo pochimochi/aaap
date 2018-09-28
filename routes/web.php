@@ -24,7 +24,7 @@ Route::group(['middleware' => ['web']], function () {
         });
 
 
-        Route::group(['middleware' => 'contentmanager'], function () {
+        Route::group(['middleware' => 'member'], function () {
             //announcements
             Route::get('/announcement', 'AnnouncementsController@announcement');
             Route::post('/announcementSubmit', 'AnnouncementsController@store');
@@ -46,6 +46,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/articleedit/{articleId}', 'ArticleController@edit');
             Route::post('edit/articleedit/{articleId}', 'ArticleController@update');
         });
+        Route::group(['middleware' => 'admin'], function () {
+            Route::get('/admins', 'AdminsController@index');
+            Route::post('/adminSubmit', 'AdminsController@store');
+            Route::get('/members', 'MembersController@index');
+            Route::post('/changeStatus', 'AdminsController@changeStatus');
+        });
 
 
     });
@@ -62,7 +68,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/sendemail', 'RegisterController@resetPasswordEmail');
     Route::get('/newpass', 'RegisterController@newPassword');
     Route::get('/newpassform/{email}', function ($email) {
-        return view('pages.newpassword', compact('email', $email));
+        return view('pages.master.newpassword', compact('email', $email));
     });
     Route::post('/savepassword', 'RegisterController@savepassword');
 

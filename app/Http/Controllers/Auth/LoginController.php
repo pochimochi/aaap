@@ -24,7 +24,10 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('authentication.login');
+        if(session()->exists('user')){
+            return redirect('/home');
+        }
+        return view('pages.authentication.login');
     }
 
     public function postLogin(Request $request)
@@ -46,7 +49,7 @@ class LoginController extends Controller
                 \session(['userId' => $user->userId]);
                 \session(['role' => $user->userTypeId]);
 
-                alert()->success('Login Successful!', 'Welcome ' . $user->userFirstName . session('role'));
+                alert()->success('Login Successful!', 'Welcome ' . $user->userFirstName);
                 return redirect('/home');
 
 

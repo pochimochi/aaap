@@ -11,11 +11,11 @@ namespace App\Http\Controllers;
 use DB;
 
 
-class MembersController
+class MembersController extends Controller
 {
     public function index(){
         $members = DB::select('select * from users where userTypeId = 4');
-        return view('admin.members', ['members' => $members]);
+        return view('pages.admin.members', ['members' => $members]);
 
 
     }

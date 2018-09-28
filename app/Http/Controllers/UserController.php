@@ -7,7 +7,7 @@ use App\City;
 use App\Contact;
 use App\Country;
 use App\Employer;
-use App\Images;
+use App\Image;
 use App\Pwa;
 use App\Relationship;
 use App\User;
@@ -20,7 +20,7 @@ class UserController extends Controller
     {
 
         $user = User::all()->where('userId', '=', session()->get('userId'))->first();
-        $profpic = Images::all()->where('imageId', '=', $user->userProfPic)->first();
+        $profpic = Image::all()->where('imageId', '=', $user->userProfPic)->first();
 
         $permanentaddress = Address::all()->where('addressId', '=', $user->permanentAddress)->first();
         $pcity = City::all()->where('cityId', '=', $permanentaddress->cityId)->first();
@@ -34,13 +34,11 @@ class UserController extends Controller
         $relationship = Relationship::all()->where('userId', '=', $user->userId)->first();
         $pwa = Pwa::all()->where('pwaIdNumber', '=', $relationship->pwaIdNumber)->first();
 
-        $array = array_merge($user->toArray(), $profpic->toArray(), $permanentaddress->toArray(),
+        $users = array_merge($user->toArray(), $profpic->toArray(), $permanentaddress->toArray(),
             $pcity->toArray(), $pcountry->toArray(), $temporaryaddress->toArray(), $tcity->toArray(), $tcountry->toArray(), $contact->toArray(), $employer->toArray(),
             $employerAddress->toArray(), $relationship->toArray(), $pwa->toArray());
 
-
-        return view('pages.profile')
-            ->with('user', $array);
+        return view('pages.master.profile', ['users' => $users]);
 
     }
 

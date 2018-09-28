@@ -18,12 +18,32 @@
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#about">About</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#contents">Contents</a>
-                </li>
+                {{--   <li class="nav-item">
+                       <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link js-scroll-trigger" href="#contents">Contents</a>
+                   </li>--}}
+                @if(session('role') == 1)
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{URL::to('/admins')}}">Administrators</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{URL::to('/members')}}">Members</a>
+                    </li>
+                @elseif(session('role') == 2)
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{URL::to('/article')}}">Articles</a>
+                    </li>
+                @elseif(session('role') == 3)
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{URL::to('/event')}}">Event</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{URL::to('/announcement')}}">Announcements</a>
+                    </li>
+                @endif
+
                 @if(!session()->exists('user'))
                     <li class="nav-item">
                         <a class="btn btn-outline" href="{{URL::to('/login')}}">Login</a>
@@ -33,6 +53,9 @@
                         <a class="nav-link js-scroll-trigger" href="{{URL::to('/register')}}">Register</a>
                     </li>
                 @else
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{URL::to('/profile')}}">Profile</a>
+                    </li>
                     <li class="nav-item">
                         <a class="btn btn-outline" href="{{URL::to('/logout')}}">Logout</a>
                     </li>
@@ -53,8 +76,13 @@
             <div class="col-lg-7 my-auto">
                 <div class="header-content mx-auto">
                     <h1 class="mb-auto codrops-header__title">Association for Adults with Autism Philippines</h1>
-                    <a href="{{URL::to('/register')}}" class="btn btn-outline btn-xl js-scroll-trigger">Become a
-                        Member!</a>
+                    @if(session('role') == 4)
+                        <a href="{{URL::to('/register')}}" class="btn btn-outline active btn-xl js-scroll-trigger">Become
+                            a
+                            Member!</a>
+                    @else
+                        <h2 class="mb-auto">Welcome {{session('user')->userFirstName}}!</h2>
+                    @endif
                 </div>
             </div>
         </div>

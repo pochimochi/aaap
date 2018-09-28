@@ -22,7 +22,7 @@ class EventController extends Controller
 
         $events = DB::select('select * from events');
 
-        return view('contentsmanager.event', ['events' => $events]);
+        return view('pages.contentsmanager.event', ['events' => $events]);
     }
 
     public function store(Request $request)
@@ -67,7 +67,7 @@ class EventController extends Controller
         $event = Event::find($eventId);
         $address = Address::find($event->addressId);
         $city = City::find($address->cityId);
-        return view('contentsmanager.eventedit')
+        return view('pages.contentsmanager.eventedit')
             ->with(compact('event', 'eventId'))
             ->with(compact('address', 'event->addressId'))
             ->with(compact('city', 'address->cityId'));

@@ -1,5 +1,5 @@
 @include ('layouts.master.header')
-@include ('contentsmanager.cmmenu')
+@include ('layouts.admin.cmmenu')
 <div class="page-wrapper">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
@@ -23,7 +23,7 @@
                         @endif
                         <div class="basic-elements">
                             <form method="post"
-                                  action="{{action('AnnouncementsController@update', $announcementId)}}">
+                                  action="{{action('AnnouncementsController@update', $announcementId)}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-body">
                                     <div class="row">

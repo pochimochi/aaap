@@ -1,5 +1,5 @@
 @include ('layouts.master.header')
-@include ('admin.adminmenu')
+@include ('layouts.admin.adminmenu')
 <body class="fix-header fix-sidebar">
 <div class="page-wrapper">
     <div class="row page-titles">
@@ -32,7 +32,7 @@
                                     <td>{{ $member->userFirstName}}</td>
                                     <td>{{ $member->userLastName }}</td>
                                     <td>{{ $member->emailAddress}}</td>
-                                    <td>{{ \Carbon\Carbon::parse($admin->created_at)->format('d/m/Y')}}</td>
+                                    <td>{{ \Carbon\Carbon::parse($member->created_at)->format('d/m/Y')}}</td>
                                     <td>{{ $member->membershipStatus== 1 ? 'Active' : 'Inactive'}}</td>
                                 </tr>
                             @endforeach

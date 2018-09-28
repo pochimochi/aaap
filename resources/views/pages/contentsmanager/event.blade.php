@@ -1,5 +1,5 @@
 @include('layouts.master.header')
-@include('contentsmanager.cmmenu')
+@include('layouts.admin.cmmenu')
 <body class="fix-header fix-sidebar">
 <div class="page-wrapper">
     <div class="row page-titles">
