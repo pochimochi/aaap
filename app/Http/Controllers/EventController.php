@@ -44,7 +44,7 @@ class EventController extends Controller
 
         $eventinfo = $request->all();
         $cityId = City::create(['name' => $eventinfo['cityId']]);
-        dd($cityId->cityId);
+        ($cityId->cityId);
         $eventinfo['cityId'] = $cityId->cityId;
         $addressid = Address::create($eventinfo);
         $eventinfo['addressId'] = $addressid->addressId;
@@ -96,7 +96,7 @@ class EventController extends Controller
         $addressid = Address::where('addressId', $eventinfo['addressId'])
             ->update(['street' => $eventinfo['street'], 'bldg' => $eventinfo['bldg'], 'unitno' => $eventinfo['unitno']]);
 
-        $eventinfo1 = $request->except(['_token', 'street', 'bldg', 'unitno', 'cityname', 'cityId', 'fileToUpload']);
+        $eventinfo1 = $request->except(['_token', 'street', 'bldg', 'unitno', 'cityname', 'cityId', 'fileToUpload' , 'eventImage']);
 
         Event::where('eventId', $eventId)
             ->update($eventinfo1);

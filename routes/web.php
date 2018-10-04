@@ -14,24 +14,22 @@
 Route::group(['middleware' => ['web']], function () {
     //main pages
     Route::get('/home', 'HomeController@Home');
-
-
-    Route::group(['middleware' => 'member'], function () {
+    Route::get('/profile', 'UserController@profile');
+    //---------------------------------------------------------------------------------
+    Route::group(['middleware' => 'member', 'prefix' => 'member'], function () {
         //member
-        Route::get('/profile', 'UserController@profile');
-        Route::get('/member', function () {
-            return view('member');
-        });
 
-
-        Route::group(['middleware' => 'member'], function () {
+        Route::resource('articles', 'ArticleController')->only(['index', 'show']);
+        Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);
+    });
+    //-------------------------------------------------------------------------------------
+    Route::group(['middleware' => 'admingroup'], function () {
+        //---------------------------------------------------------------------------------
+        Route::group(['middleware' => 'contentmanager', 'prefix' => 'contentmanager'], function () {
             //announcements
-            Route::get('/announcement', 'AnnouncementsController@announcement');
-            Route::post('/announcementSubmit', 'AnnouncementsController@store');
-            Route::get('/announcementedit/{announcementId}', 'AnnouncementsController@edit');
-            Route::post('edit/announcementedit/{announcementId}', 'AnnouncementsController@update');
-            Route::post('announcements/changeStatus', array('as' => 'changeStatus', 'uses' => 'AnnouncementsController@changeStatus'));
 
+            Route::get('announcements/changeStatus/{announcementId}/{status}', 'AnnouncementsController@changeStatus');
+            Route::resource('announcements', 'AnnouncementsController');
             //events
             Route::post('/eventsubmit', 'EventController@store');
             Route::get('/event', 'EventController@event');
@@ -39,46 +37,30 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('edit/eventedit/{eventId}', 'EventController@update');
 
         });
-        Route::group(['middleware' => 'writer'], function () {
+        //---------------------------------------------------------------------------------
+        Route::group(['middleware' => 'writer', 'prefix' => 'writer'], function () {
             //articles
-            Route::get('/article', 'ArticleController@article');
-            Route::post('/articlesubmit', 'ArticleController@store');
-            Route::get('/articleedit/{articleId}', 'ArticleController@edit');
-            Route::post('edit/articleedit/{articleId}', 'ArticleController@update');
+            Route::resource('newsletter', 'NewsletterController');
+            Route::resource('articles', 'ArticleController');
         });
-        Route::group(['middleware' => 'admin'], function () {
-            Route::get('/admins', 'AdminsController@index');
-            Route::post('/adminSubmit', 'AdminsController@store');
+        //---------------------------------------------------------------------------------
+        Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
+            Route::get('/changeStatus/{userId}/{status}', 'AdminsController@changeStatus');
+            Route::resource('adminMaintenance', 'AdminsController')->only(['index', 'store']);
             Route::get('/members', 'MembersController@index');
-            Route::post('/changeStatus', 'AdminsController@changeStatus');
         });
-
-
     });
-
-    //logout
-    Route::get('/logout', function () {
-        Session::flush();
-        Auth::logout();
-        return redirect('/login');
-    });
-
-    //forgot password
-    Route::get('/forgotpassword', 'RegisterController@reset');
-    Route::post('/sendemail', 'RegisterController@resetPasswordEmail');
-    Route::get('/newpass', 'RegisterController@newPassword');
-    Route::get('/newpassform/{email}', function ($email) {
-        return view('pages.master.newpassword', compact('email', $email));
-    });
-    Route::post('/savepassword', 'RegisterController@savepassword');
+    //forgotpassword
+    Route::get('/forgotpassword', 'ForgotPasswordController@getKeys');
+    Route::post('/forgotpassword/save', 'ForgotPasswordController@saveNewPassword');
+    Route::resource('/forgotpassword', 'ForgotPasswordController')->except(['index', 'destroy', 'show', 'update']);
 
     //register
-    Route::post('/registersubmit', 'RegisterController@store');
-    Route::get('/register', 'RegisterController@index');
-
+    Route::resource('register', 'RegisterController')->only(['store', 'index']);
+    //logout
+    Route::get('/logout', 'LoginController@logout');
     //login
-    Route::post('/loginSubmit', 'LoginController@postLogin');
-    Route::get('/login', 'LoginController@index')->name('login');
+    Route::resource('login', 'LoginController')->only(['index', 'store']);
 
 
 });

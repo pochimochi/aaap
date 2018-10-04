@@ -1,14 +1,14 @@
-@extends('layouts.master.header')
-<!-- Custom CSS -->
-<link href="css/helper.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+@extends('layouts.master.master')
+<body class="open"></body>
+@section('content')
 
-    @include('layouts.master.homenav')
-    <br>
 
-        <div class="container">
+<div class="content">
+    <div class="card">
+        <div class="card-body">
             <div class="row">
-                <div class="col-sm-10"><h1>User name</h1></div>
+                <div class="col-sm-10">
+                    <h1>{{$users['userFirstName'] . " ".$users['userMiddleName']. " ".$users['userLastName']}}</h1></div>
 
             </div>
             <br>
@@ -17,12 +17,12 @@
 
 
                     <div class="text-center">
-                        <img src="{{asset($users['imageLocation'])}}" class="avatar img-circle img-thumbnail"
+                        <img src="{{asset('/storage/'.$users['imageLocation'])}}" class="avatar img-circle img-thumbnail"
                              alt="avatar">
                         <h6>Upload a different photo...</h6>
 
                     </div>
-                    </hr><br>
+                    <br>
 
 
                     <ul class="list-group">
@@ -36,6 +36,7 @@
                         </li>
                         <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span>
                             78
+
                         </li>
                     </ul>
 
@@ -43,294 +44,393 @@
                 </div><!--/col-3-->
                 <div class="col-sm-9">
                     <ul class="nav nav-tabs customtab" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#profile" role="tab"><span
                                         class="hidden-sm-up"><i class="ti-home"></i></span> <span
                                         class="hidden-xs-down">Profile</span></a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings" role="tab"><span
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#address" role="tab"><span
+                                        class="hidden-sm-up"><i class="ti-user"></i></span> <span
+                                        class="hidden-xs-down">Address</span></a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#pwa" role="tab"><span
                                         class="hidden-sm-up"><i class="ti-user"></i></span> <span
                                         class="hidden-xs-down">PWA</span></a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#credentials" role="tab"><span
                                         class="hidden-sm-up"><i class="ti-email"></i></span> <span
                                         class="hidden-xs-down">Credentials</span></a></li>
                     </ul>
 
+                    <form class="form" action="{{URL::to('/')}}" method="post" id="registrationForm">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="profile">
+                                <h3 class="box-title m-t-40">Personal Information</h3>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>First Name</label>
 
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="home">
-                            <hr>
-                            <form class="form" action="##" method="post" id="registrationForm">
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="first_name"><h4>First name</h4></label>
-                                        <input type="text" class="form-control" name="first_name" id="first_name"
-                                               placeholder="first name" title="enter your first name if any.">
+                                            <input value="{{ $users['userFirstName'] }}" type="text"
+                                                   name="userFirstName" id="userFirstName"
+                                                   class="form-control input-default">
+                                            <i style="color:red;" id="fnErr"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            <input value="{{ $users['userMiddleName'] }}" type="text"
+                                                   name="userMiddleName" id="userMiddleName"
+                                                   class="form-control input-default">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input value="{{ $users['userLastName'] }}" type="text"
+                                                   name="userLastName" id="userLastName"
+                                                   class="form-control input-default">
+                                            <i style="color:red;" id="lnErr"></i>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Gender</label>
+                                            <select class="form-control custom-select input-default"
+                                                    name="userGenderId" id="userGenderId">
+                                                <option value="">Select Gender</option>
+                                                <option value="1">Male</option>
+                                                <option value="1">Female</option>
 
-                                    <div class="col-xs-6">
-                                        <label for="last_name"><h4>Last name</h4></label>
-                                        <input type="text" class="form-control" name="last_name" id="last_name"
-                                               placeholder="last name" title="enter your last name if any.">
+                                            </select>
+                                            <i style="color:red;" id="gErr"></i>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="phone"><h4>Phone</h4></label>
-                                        <input type="text" class="form-control" name="phone" id="phone"
-                                               placeholder="enter phone" title="enter your phone number if any.">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Landline Number</label>
+                                            <input value="{{ $users['landlineNumber'] }}" type="text"
+                                                   name="landlineNumber" id="landlineNumber"
+                                                   class="form-control input-default">
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        <label for="mobile"><h4>Mobile</h4></label>
-                                        <input type="text" class="form-control" name="mobile" id="mobile"
-                                               placeholder="enter mobile number"
-                                               title="enter your mobile number if any.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Email</h4></label>
-                                        <input type="email" class="form-control" name="email" id="email"
-                                               placeholder="you@email.com" title="enter your email.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Location</h4></label>
-                                        <input type="email" class="form-control" id="location" placeholder="somewhere"
-                                               title="enter a location">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password"><h4>Password</h4></label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                               placeholder="password" title="enter your password.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password2"><h4>Verify</h4></label>
-                                        <input type="password" class="form-control" name="password2" id="password2"
-                                               placeholder="password2" title="enter your password2.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-12">
-                                        <br>
-                                        <button class="btn btn-lg btn-success" type="submit"><i
-                                                    class="glyphicon glyphicon-ok-sign"></i> Save
-                                        </button>
-                                        <button class="btn btn-lg" type="reset"><i
-                                                    class="glyphicon glyphicon-repeat"></i>
-                                            Reset
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <hr>
-
-                        </div><!--/tab-pane-->
-                        <div class="tab-pane" id="messages">
-
-                            <h2></h2>
-
-                            <hr>
-                            <form class="form" action="##" method="post" id="registrationForm">
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="first_name"><h4>First name</h4></label>
-                                        <input type="text" class="form-control" name="first_name" id="first_name"
-                                               placeholder="first name" title="enter your first name if any.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="last_name"><h4>Last name</h4></label>
-                                        <input type="text" class="form-control" name="last_name" id="last_name"
-                                               placeholder="last name" title="enter your last name if any.">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Mobile Number</label>
+                                            <input value="{{ $users['mobileNumber'] }}" type="text"
+                                                   name="mobileNumber" id="mobileNumber"
+                                                   class="form-control input-default">
+                                            <i style="color:red;" id="mnErr"></i>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                            </div>
 
-                                    <div class="col-xs-6">
-                                        <label for="phone"><h4>Phone</h4></label>
-                                        <input type="text" class="form-control" name="phone" id="phone"
-                                               placeholder="enter phone" title="enter your phone number if any.">
+                            <div class="tab-pane" id="address">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h3 class="box-title m-t-40">Permanent Address</h3>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Unit Number</label>
+                                                    <input value="{{ $paddress['unitno'] }}" type="text"
+                                                           name="unitno" id="unitno"
+                                                           class="form-control input-default">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Building</label>
+                                                    <input value="{{ $paddress['bldg'] }}" type="text" name="bldg"
+                                                           id="bldg"
+                                                           class="form-control input-default">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Street</label>
+                                                    <input value="{{ $paddress['street'] }}" type="text"
+                                                           name="street" id="street"
+                                                           class="form-control input-default">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <input value="{{ $paddress['city'] }}" type="text" name="city"
+                                                           id="city"
+                                                           class="form-control input-default">
+                                                    <i style="color:red;" id="cErr"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    <select class="form-control custom-select input-default"
+                                                            name="countryId" id="countryId">
+                                                        <option value="">Select Country</option>
+                                                        <?php
+                                                        $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
+                                                        $row = mysqli_num_rows($sql);
+                                                        while ($row = mysqli_fetch_array($sql)) {
+                                                            echo "<option value='" . $row['countryId'] . "'>" . $row['name'] . "</option>";
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                    <i style="color:red;" id="countryErr"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <h3 class="box-title m-t-40">Temporary Address</h3>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Unit Number</label>
+                                                    <input value="{{ $taddress['tunitno'] }}" type="text"
+                                                           name="tunitno" id="tunitno"
+                                                           class="form-control input-default">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Building</label>
+                                                    <input value="{{ $taddress['tbldg'] }}" type="text"
+                                                           name="tbldg" id="tbldg"
+                                                           class="form-control input-default">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Street</label>
+                                                    <input value="{{ $taddress['tstreet'] }}" type="text"
+                                                           name="tstreet" id="tstreet"
+                                                           class="form-control input-default">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <input value="{{ $taddress['tcity'] }}" type="text"
+                                                           name="tcity" id="tcity"
+                                                           class="form-control input-default">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    <select class="form-control custom-select input-default"
+                                                            name="tcountry" id="tcountry">
+                                                        <option value="">Select Country</option>
+                                                        <?php
+                                                        $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
+                                                        $row = mysqli_num_rows($sql);
+                                                        while ($row = mysqli_fetch_array($sql)) {
+                                                            echo "<option value='" . $row['countryId'] . "'>" . $row['name'] . "</option>";
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        <label for="mobile"><h4>Mobile</h4></label>
-                                        <input type="text" class="form-control" name="mobile" id="mobile"
-                                               placeholder="enter mobile number"
-                                               title="enter your mobile number if any.">
+                            </div>
+                            <div class="tab-pane" id="pwa">
+                                <div class="col-lg-12">
+                                    <h3 class="box-title m-t-40">Person with Autism Information</h3>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                <input value="{{ $users['pwaFirstName'] }}" type="text"
+                                                       name="pwaFirstName" id="pwaFirstName"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Middle Name</label>
+                                                <input value="{{ $users['pwaMiddleName'] }}" type="text"
+                                                       name="pwaMiddleName" id="pwaMiddleName"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input value="{{ $users['pwaLastName'] }}" type="text"
+                                                       name="pwaLastName" id="pwaLastName"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Gender</label>
+                                                <select class="form-control custom-select input-default"
+                                                        name="pwaGenderId" id="pwaGenderId">
+                                                    <option value="">Select Gender</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="0">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Relationship to PWA</label>
+                                                <input value="{{ $relationships['relationship'] }}" type="text"
+                                                       name="description" id="description"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Occupation</label>
+                                                <input value="{{ $users['pwaOccupation'] }}" name="pwaOccupation"
+                                                       id="pwaOccupation" type="text"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Email</h4></label>
-                                        <input type="email" class="form-control" name="email" id="email"
-                                               placeholder="you@email.com" title="enter your email.">
+                                <div class="col-lg-12">
+                                    <h3 class="box-title m-t-40">About the Employer</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Employer's Name</label>
+                                                <input value="{{ $users['employerName'] }}" type="text"
+                                                       name="employerName" id="employerName"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Contact Number</label>
+                                                <input value="{{ $users['employerContactNumber'] }}" type="text"
+                                                       name="employerContactNumber"
+                                                       id="employerContactNumber"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Unit Number</label>
+                                                <input value="{{ $eaddress['eunitno'] }}" type="text" name="eunitno"
+                                                       id="eunitno"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Building</label>
+                                                <input value="{{ $eaddress['ebldg'] }}" type="text" name="ebldg"
+                                                       id="ebldg"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Street</label>
+                                                <input value="{{ $eaddress['estreet'] }}" type="text" name="estreet"
+                                                       id="estreet"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                <input value="{{ $eaddress['ecity'] }}" type="text" name="ecity"
+                                                       id="ecity"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                <select name="ecountry" id="ecountry"
+                                                        class="form-control custom-select input-default">
+                                                    <option value="">Select Country</option>
+                                                    <?php
+                                                    $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
+                                                    $row = mysqli_num_rows($sql);
+                                                    while ($row = mysqli_fetch_array($sql)) {
+                                                        echo "<option value='" . $row['countryId'] . "'>" . $row['name'] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Location</h4></label>
-                                        <input type="email" class="form-control" id="location" placeholder="somewhere"
-                                               title="enter a location">
+                            </div>
+                            <div class="tab-pane" id="credentials">
+                                <div class="col-lg-12">
+                                    <h3 class="box-title m-t-40">Login Credentials</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Email Address</label>
+                                                <input value="{{ $users['emailAddress'] }}" type="email"
+                                                       name="emailAddress" id="emailAddress"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input value="" type="password"
+                                                       name="userPassword" id="userPassword"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password"><h4>Password</h4></label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                               placeholder="password" title="enter your password.">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="g-recaptcha"
+                                                     data-sitekey="6Lfj6XAUAAAAAP9Mkg2ajxaSAZy0LaV-TS_BcnlK"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                            </div>
+                        </div>
+                        <div class="row pull-right">
 
-                                    <div class="col-xs-6">
-                                        <label for="password2"><h4>Verify</h4></label>
-                                        <input type="password" class="form-control" name="password2" id="password2"
-                                               placeholder="password2" title="enter your password2.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-12">
-                                        <br>
-                                        <button class="btn btn-lg btn-success" type="submit"><i
-                                                    class="glyphicon glyphicon-ok-sign"></i> Save
-                                        </button>
-                                        <button class="btn btn-lg" type="reset"><i
-                                                    class="glyphicon glyphicon-repeat"></i>
-                                            Reset
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div><!--/tab-pane-->
-                        <div class="tab-pane" id="settings">
+                            <button type="button" class="btn btn-warning" id="cancel">Cancel
+                            </button>
 
 
-                            <hr>
-                            <form class="form" action="##" method="post" id="registrationForm">
-                                <div class="form-group">
+                            <button type="button" class="btn btn-success" id="save">Save
+                            </button>
 
-                                    <div class="col-xs-6">
-                                        <label for="first_name"><h4>First name</h4></label>
-                                        <input type="text" class="form-control" name="first_name" id="first_name"
-                                               placeholder="first name" title="enter your first name if any.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="last_name"><h4>Last name</h4></label>
-                                        <input type="text" class="form-control" name="last_name" id="last_name"
-                                               placeholder="last name" title="enter your last name if any.">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="phone"><h4>Phone</h4></label>
-                                        <input type="text" class="form-control" name="phone" id="phone"
-                                               placeholder="enter phone" title="enter your phone number if any.">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        <label for="mobile"><h4>Mobile</h4></label>
-                                        <input type="text" class="form-control" name="mobile" id="mobile"
-                                               placeholder="enter mobile number"
-                                               title="enter your mobile number if any.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Email</h4></label>
-                                        <input type="email" class="form-control" name="email" id="email"
-                                               placeholder="you@email.com" title="enter your email.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Location</h4></label>
-                                        <input type="email" class="form-control" id="location" placeholder="somewhere"
-                                               title="enter a location">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password"><h4>Password</h4></label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                               placeholder="password" title="enter your password.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password2"><h4>Verify</h4></label>
-                                        <input type="password" class="form-control" name="password2" id="password2"
-                                               placeholder="password2" title="enter your password2.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-12">
-                                        <br>
-                                        <button class="btn btn-lg btn-success pull-right" type="submit"><i
-                                                    class="glyphicon glyphicon-ok-sign"></i> Save
-                                        </button>
-                                        <!--<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>-->
-                                    </div>
-                                </div>
-                            </form>
                         </div>
 
-                    </div><!--/tab-pane-->
+                        <input type="hidden" name="_token" value="{{ Session::token() }}">
+                    </form>
+                </div>
+            </div>
+        </div>
 
+    </div>
 
-                </div><!--/col-9-->
-            </div><!--/row-->
-
-            <!-- End Wrapper -->
-            <!-- All Jquery -->
-            <script src="js/lib/jquery/jquery.min.js"></script>
-            <!-- Bootstrap tether Core JavaScript -->
-            <script src="js/lib/bootstrap/js/popper.min.js"></script>
-            <script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
-            <!-- slimscrollbar scrollbar JavaScript -->
-            <script src="js/jquery.slimscroll.js"></script>
-            <!--Menu sidebar -->
-            <script src="js/sidebarmenu.js"></script>
-            <!--stickey kit -->
-            <script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-            <!--Custom JavaScript -->
-            <script src="js/custom.min.js"></script>
+</div>
+@endsection
 
 

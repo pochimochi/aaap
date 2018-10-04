@@ -21,16 +21,23 @@ class LoginController extends Controller
 {
 
 
-
     public function index()
     {
-        if(session()->exists('user')){
-            return redirect('/home');
+
+        if (!Auth::user() && session()->exists('user')) {
+            if (Auth::user()->userTypeId == 4) {
+                return redirect('/home');
+            } elseif (Auth::user()->userTypeId != 4 ) {
+                return redirect('/home');
+            }
+        } else{
+            return view('pages.authentication.login');
         }
-        return view('pages.authentication.login');
+
+
     }
 
-    public function postLogin(Request $request)
+    public function store(Request $request)
     {
         $helper = new Helper();
         $valid = Validator::make($request->all(), [
@@ -38,19 +45,25 @@ class LoginController extends Controller
             'userPassword' => 'required|max:64',
             /*'g-recaptcha-response' => 'required|captcha'*/
         ]);
-        if (/*$helper->reCaptchaVerify($request['g-recaptcha-response'])->success && */
-        $valid->passes()) {
+        if ($helper->reCaptchaVerify($request['g-recaptcha-response'])->success &&
+            $valid->passes()) {
 
             $attempt = Auth::attempt(['emailAddress' => $request['emailAddress'], 'password' => $request['userPassword']]);
             if ($attempt == true) {
+                if (Auth::user()->membershipStatus == 1) {
+                    $user = Auth::user();
+                    \session(['user' => $user]);
+                    \session(['userId' => $user->userId]);
+                    \session(['role' => $user->userTypeId]);
 
-                $user = Auth::user();
-                \session(['user' => $user]);
-                \session(['userId' => $user->userId]);
-                \session(['role' => $user->userTypeId]);
 
-                alert()->success('Login Successful!', 'Welcome ' . $user->userFirstName);
-                return redirect('/home');
+                    alert()->success('Login Successful!', 'Welcome ' . $user->userFirstName);
+                    return redirect('home');
+                } else {
+                    alert()->warning('Login Failed', 'Your Account is suspended.');
+
+                    return redirect('/login');
+                }
 
 
             } else {
@@ -61,8 +74,14 @@ class LoginController extends Controller
             alert()->warning('Login Failed', 'Please retry your ReCaptcha');
             return redirect('/login')->withErrors($valid);
         }
+    }
 
-
+    public function logout()
+    {
+        Session::flush();
+        session()->flush();
+        Auth::logout();
+        return redirect('/home');
     }
 
 }

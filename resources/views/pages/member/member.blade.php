@@ -1,4 +1,4 @@
-@include('layouts.master.header')
+@include('layouts.master.master')
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">

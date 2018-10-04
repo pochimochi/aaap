@@ -1,55 +1,81 @@
-@include('layouts.master.header')
-<!--SVG background-->
-<link rel="stylesheet" type="text/css" href="{{asset('css/normalize.css')}}"/>
-<link rel="stylesheet" type="text/css" href="{{asset('css/demo.css')}}"/>
-<body>
-<main>
-    <div class="morph-wrap">
-        <svg class="morph" width="1400" height="770" viewBox="0 0 1400 770">
-            <path d="M 262.9,252.2 C 210.1,338.2 212.6,487.6 288.8,553.9 372.2,626.5 511.2,517.8 620.3,536.3 750.6,558.4 860.3,723 987.3,686.5 1089,657.3 1168,534.7 1173,429.2 1178,313.7 1096,189.1 995.1,130.7 852.1,47.07 658.8,78.95 498.1,119.2 410.7,141.1 322.6,154.8 262.9,252.2 Z"/>
-        </svg>
-    </div>
-    <div id="main-wrapper">
-        <div class="unix-login">
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-4">
-                        <div class="login-content card">
-                            <div class="login-form">
-                                <h4>RESET PASSWORD</h4>
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <div class="alert alert-danger">
-                                            {{$error}}
-                                        </div>
-                                    @endforeach
-                                </ul>
-                                <form method="post" action="{{URL::to('/savepassword')}}" id="form">
-                                    <div class="form-group">
-                                        <input type="password" placeholder="New Password" name="password"
-                                               class="form-control input-rounded">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" placeholder="Confirm Password"
-                                               name="password_confirmation"
-                                               class="form-control input-rounded">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" id="button" onclick="return confirm('Are you sure?')"
-                                                class="btn btn-primary btn-rounded">Submit
-                                        </button>
-                                        <input type="hidden" name="emailAddress" value="{{ $email }}">
-                                        <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                    </div>
-                                </form>
-                            </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{env('APP_NAME')}}</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="{{asset('images/logos/logoicontest.png')}}">
+    <link rel="shortcut icon" href="{{asset('images/logos/logoicontest.png')}}">
+
+    <link rel="stylesheet" href="{{asset('')}}assets/css/normalize.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/themify-icons.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/pe-icon-7-filled.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/flag-icon.min.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/lib/datatable/dataTables.bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="{{asset('')}}assets/css/style.css">
+    <link href="{{asset('')}}assets/weather/css/weather-icons.css" rel="stylesheet"/>
+    <link href="{{asset('')}}assets/calendar/fullcalendar.css" rel="stylesheet"/>
+
+
+    <link href="{{asset('')}}assets/css/charts/chartist.min.css" rel="stylesheet">
+    <link href="{{asset('')}}assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
+
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body class="bg-dark">
+<div class="sufee-login d-flex align-content-center flex-wrap">
+    <div class="container">
+
+
+        <div class="login-content card">
+            <div class="login-form">
+                <h4>RESET PASSWORD</h4>
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <div class="alert alert-danger">
+                            {{$error}}
                         </div>
+                    @endforeach
+                </ul>
+                <form method="post" action="{{URL::to('/forgotpassword/save')}}" id="form">
+                    <div class="form-group">
+                        <input type="password" placeholder="New Password" name="password"
+                               class="form-control input-rounded">
                     </div>
-                </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Confirm Password"
+                               name="password_confirmation"
+                               class="form-control input-rounded">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="button" onclick="return confirm('Are you sure?')"
+                                class="btn btn-primary btn-rounded">Submit
+                        </button>
+                        <input type="hidden" name="emailAddress" value="{{ $email }}">
+                        <input type="hidden" name="_token" value="{{ Session::token() }}">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</main>
+</div>
+
+
+<script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+@include('sweetalert::alert')
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="{{asset('')}}assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="{{asset('')}}assets/js/popper.min.js"></script>
+<script src="{{asset('')}}assets/js/plugins.js"></script>
+<script src="{{asset('')}}assets/js/main.js"></script>
 </body>
-@include('layouts.master.footer')
+
 

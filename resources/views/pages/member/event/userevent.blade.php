@@ -1,5 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-@include('layouts.master.header')
+@include('layouts.master.master')
 <body class="fix-header fix-sidebar">
 <div id="main-wrapper">
     <div class="header">

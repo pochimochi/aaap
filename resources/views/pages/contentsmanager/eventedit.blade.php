@@ -1,59 +1,5 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-@include('layouts.master.header')
-<body class="fix-header fix-sidebar">
-<div id="main-wrapper">
-    <div class="header">
-        <nav class="navbar top-navbar navbar-expand-md navbar-light">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                </a>
-            </div>
-            <!-- End Logo -->
-            <div class="navbar-collapse">
-                <!--toggle and nav items -->
-                <ul class="navbar-nav mr-auto mt-md-0">
-                    <!-- This is  -->
-                    <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up text-muted  "
-                                            href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
-                    <li class="nav-item m-l-10"><a class="nav-link sidebartoggler hidden-sm-down text-muted  "
-                                                   href="javascript:void(0)"><i class="ti-menu"></i></a></li>
-                </ul>
-                <!-- User profile -->
-                <ul class="navbar-nav my-lg-0">
-                    <!-- Profile -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false"><img src="images/users/5.jpg" alt="user"
-                                                                           class="profile-pic"/></a>
-                        <div class="dropdown-menu dropdown-menu-right animated zoomIn">
-                            <ul class="dropdown-user">
-                                <li><a href="#"><i class="ti-user"></i> Profile</a></li>
-                                <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <!-- End header header -->
-    <!-- Left Sidebar  -->
-    <div class="left-sidebar">
-        <!-- Sidebar scroll-->
-        <div class="scroll-sidebar">
-            <!-- Sidebar navigation-->
-            <nav class="sidebar-nav">
-                <ul id="sidebarnav">
-                    <li class="nav-devider"></li>
-                    <li class="nav-label">Manage Contents</li>
-                    <li><a href="" aria-expanded="false"><i class="fa fa-calendar"></i><span
-                                    class="hide-menu">Events</span></a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
+@include ('layouts.master.master')
+@include ('layouts.admin.cmmenu')
 <div class="page-wrapper">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
@@ -75,7 +21,7 @@
                         </div>
                     @endif
                     <div class="basic-elements">
-                        <form action="{{action('EventController@update', $eventId)}}" method="post">
+                        <form action="{{action('EventController@update', $eventId)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-body">
                                 <div class="row">
@@ -251,13 +197,12 @@
                                                        class=" form-control input-default">
                                             </div>
                                         </div>
-                                       {{-- <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label>Image</label>
-                                                <input name="eventImage" type="file"
-                                                       value="{{$event->eventImage}}"/>
+                                                <input name="eventImage" type="file"/>
                                             </div>
-                                        </div>--}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

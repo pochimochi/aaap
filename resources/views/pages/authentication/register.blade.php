@@ -1,6 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-@include('layouts.master.header')
+<!DOCTYPE HTML>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{env('APP_NAME')}}</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="{{asset('images/logos/logoicontest.png')}}">
+    <link rel="shortcut icon" href="{{asset('images/logos/logoicontest.png')}}">
+
+    <link rel="stylesheet" href="{{asset('')}}assets/css/normalize.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/themify-icons.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/pe-icon-7-filled.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/flag-icon.min.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/css/lib/datatable/dataTables.bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="{{asset('')}}assets/css/style.css">
+    <link href="{{asset('')}}assets/weather/css/weather-icons.css" rel="stylesheet"/>
+    <link href="{{asset('')}}assets/calendar/fullcalendar.css" rel="stylesheet"/>
+
+
+    <link href="{{asset('')}}assets/css/charts/chartist.min.css" rel="stylesheet">
+    <link href="{{asset('')}}assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
+
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <style>
+        #regForm {
+
+        }
+
+        /* Style the input fields */
+        input {
+            padding: 10px;
+            width: 100%;
+            font-size: 17px;
+            font-family: Raleway;
+            border: 1px solid #aaaaaa;
+        }
+
+        /* Mark input boxes that gets an error on validation: */
+        input.invalid {
+            background-color: #ffdddd;
+        }
+
+        /* Hide all steps by default: */
+        .tab {
+            display: none;
+        }
+
+        /* Make circles that indicate the steps of the form: */
+        .step {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        /* Mark the active step: */
+        .step.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+            background-color: #4CAF50;
+        }
+    </style>
+
+
+</head>
 <!--SVG background-->
 <link rel="stylesheet" type="text/css" href="{{asset('css/normalize.css')}}"/>
 <link rel="stylesheet" type="text/css" href="{{asset('css/demo.css')}}"/>
@@ -8,54 +90,18 @@
       href="https://unpkg.com/file-upload-with-preview/dist/file-upload-with-preview.min.css">
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <body>
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-            Menu
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{URL::to('/home')}}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#contents">Contents</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline" href="{{URL::to('/login')}}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{URL::to('/register')}}">Register</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
-<main>
-    <div class="morph-wrap">
-        <svg class="morph" width="1400" height="770" viewBox="0 0 1400 770">
-            <path d="M 262.9,252.2 C 210.1,338.2 212.6,487.6 288.8,553.9 372.2,626.5 511.2,517.8 620.3,536.3 750.6,558.4 860.3,723 987.3,686.5 1089,657.3 1168,534.7 1173,429.2 1178,313.7 1096,189.1 995.1,130.7 852.1,47.07 658.8,78.95 498.1,119.2 410.7,141.1 322.6,154.8 262.9,252.2 Z"/>
-        </svg>
-    </div>
+
+<main class="bg-dark">
+
     <div id="main-wrapper">
         <div class="unix-login">
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-lg-9">
-                        <form action="{{URL::to('/registersubmit')}}" name="regForm" id="regForm" method="post">
-                            <div class="login-content card">
-                                <div class="login-form">
+                        <form action="{{URL::to('/register')}}" name="regForm" id="regForm" method="post">
+                            <div class="login-content card" style="max-width: inherit">
+                                <div class="login-form" style="width: available">
                                     <h4>REGISTER AS A NEW MEMBER</h4>
                                     @if($errors->any())
                                         <div class="alert alert-danger">
@@ -104,13 +150,9 @@
                                                     <select class="form-control custom-select input-default"
                                                             name="userGenderId" id="userGenderId">
                                                         <option value="">Select Gender</option>
-                                                        <?php
-                                                        $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From genderlist");
-                                                        $row = mysqli_num_rows($sql);
-                                                        while ($row = mysqli_fetch_array($sql)) {
-                                                            echo "<option value='" . $row['genderId'] . "'>" . $row['name'] . "</option>";
-                                                        }
-                                                        ?>
+                                                        <option value="1">Male</option>
+                                                        <option value="0">Female</option>
+
                                                     </select>
                                                     <i style="color:red;" id="gErr"></i>
                                                 </div>
@@ -135,22 +177,30 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
                                                     <label>Profile Picture</label>
+
+
                                                     <input value="{{ old('userProfPic') }}" type="file"
                                                            name="userProfPic" id="file-input"
-                                                           class="form-control input-default"/>
+                                                           class="form-control-file"/>
+
                                                     <div id="thumb-output"></div>
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>ID Verification</label>
+
                                                     <input value="{{ old('idVerification') }}" type="file"
                                                            name="idVerification" id="id-input"
-                                                           class="form-control input-default"/>
+                                                           class="form-control-file"/>
+
                                                     <div id="thumb1-output"></div>
                                                     <i style="color:red;" id="idErr"></i>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -172,7 +222,8 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label>Building</label>
-                                                                <input value="{{ old('bldg') }}" type="text" name="bldg"
+                                                                <input value="{{ old('bldg') }}" type="text"
+                                                                       name="bldg"
                                                                        id="bldg"
                                                                        class="form-control input-default">
                                                             </div>
@@ -190,7 +241,8 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>City</label>
-                                                                <input value="{{ old('city') }}" type="text" name="city"
+                                                                <input value="{{ old('city') }}" type="text"
+                                                                       name="city"
                                                                        id="city"
                                                                        class="form-control input-default">
                                                                 <i style="color:red;" id="cErr"></i>
@@ -330,7 +382,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Occupation</label>
-                                                        <input value="{{ old('pwaOccupation') }}" name="pwaOccupation"
+                                                        <input value="{{ old('pwaOccupation') }}"
+                                                               name="pwaOccupation"
                                                                id="pwaOccupation" type="text"
                                                                class="form-control input-default">
                                                     </div>
@@ -351,7 +404,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Contact Number</label>
-                                                        <input value="{{ old('employerContactNumber') }}" type="text"
+                                                        <input value="{{ old('employerContactNumber') }}"
+                                                               type="text"
                                                                name="employerContactNumber"
                                                                id="employerContactNumber"
                                                                class="form-control input-default">
@@ -362,7 +416,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Unit Number</label>
-                                                        <input value="{{ old('eunitno') }}" type="text" name="eunitno"
+                                                        <input value="{{ old('eunitno') }}" type="text"
+                                                               name="eunitno"
                                                                id="eunitno"
                                                                class="form-control input-default">
                                                     </div>
@@ -378,7 +433,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Street</label>
-                                                        <input value="{{ old('estreet') }}" type="text" name="estreet"
+                                                        <input value="{{ old('estreet') }}" type="text"
+                                                               name="estreet"
                                                                id="estreet"
                                                                class="form-control input-default">
                                                     </div>
@@ -481,10 +537,112 @@
 </main>
 
 
-@include('layouts.master.footer')
+<!-- Custom scripts for this template -->
+<script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+@include('sweetalert::alert')
+<script>
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+    function showTab(n) {
+        // This function will display the specified tab of the form ...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        // ... and fix the Previous/Next buttons:
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Submit";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Next";
+        }
+        // ... and run a function that displays the correct step indicator:
+        fixStepIndicator(n)
+    }
+
+    function validateForm() {
+        return true;
+    }
+
+    function nextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + n;
+        // if you have reached the end of the form... :
+        if (currentTab >= x.length) {
+            //...the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+
+    function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class to the current step:
+        x[n].className += " active";
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#file-input').on('change', function () { //on file input change
+            if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
+            {
+                $('#thumb-output').html(''); //clear html of output element
+                var data = $(this)[0].files; //this file data
+                $.each(data, function (index, file) { //loop though each file
+                    if (/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)) { //check supported file type
+                        var fRead = new FileReader(); //new filereader
+                        fRead.onload = (function (file) { //trigger function on successful read
+                            return function (e) {
+                                var img = $('<img/>').addClass('thumb').attr('src', e.target.result); //create image element
+                                $('#thumb-output').append(img); //append image to output element
+                            };
+                        })(file);
+                        fRead.readAsDataURL(file); //URL representing the file's data.
+                    }
+                });
+            } else {
+                alert("Your browser doesn't support File API!"); //if File API is absent
+            }
+        });
+    });
+    $(document).ready(function () {
+        $('#id-input').on('change', function () { //on file input change
+            if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
+            {
+                $('#thumb1-output').html(''); //clear html of output element
+                var data = $(this)[0].files; //this file data
+                $.each(data, function (index, file) { //loop though each file
+                    if (/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)) { //check supported file type
+                        var fRead = new FileReader(); //new filereader
+                        fRead.onload = (function (file) { //trigger function on successful read
+                            return function (e) {
+                                var img = $('<img/>').addClass('thumb').attr('src', e.target.result); //create image element
+                                $('#thumb1-output').append(img); //append image to output element
+                            };
+                        })(file);
+                        fRead.readAsDataURL(file); //URL representing the file's data.
+                    }
+                });
+            } else {
+                alert("Your browser doesn't support File API!"); //if File API is absent
+            }
+        });
+    });
+</script>
 </body>
 </html>
-
-
-<!-- Custom scripts for this template -->
-<script src="js/new-age.min.js"></script>

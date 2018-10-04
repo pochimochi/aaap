@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class ContentManager
+class AdminGroup
 {
     /**
      * Handle an incoming request.
@@ -19,9 +19,9 @@ class ContentManager
         if (!Auth::user() || !session()->exists('user')) {
             return redirect('/login');
         } else {
-            if (Auth::user()->userTypeId != 3) {
+            if (Auth::user()->userTypeId == 4) {
                 // user value cannot be found in session
-                alert()->warning('Oops!', 'You need to be a Writer to access this page.');
+                alert()->warning('Oops!', 'You need to be an Administrator to access this page.');
                 return redirect('/home');
 
             }

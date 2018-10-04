@@ -1,3 +1,5 @@
+(function($){
+
 var map;
 $(document).ready(function(){
     map = new GMaps({
@@ -191,7 +193,7 @@ $(document).ready(function(){
         lng: -73.95
     });
     map.loadFromKML({
-        url: 'http://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss',
+        url: 'https://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss',
         suppressInfoWindows: true,
         events: {
             click: function(point){
@@ -239,3 +241,6 @@ map = new GMaps({
         alert('dragend');
     }
 });
+
+
+})(jQuery);

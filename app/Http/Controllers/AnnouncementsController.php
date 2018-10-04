@@ -13,9 +13,15 @@ use Illuminate\Support\Facades\Storage;
 
 class AnnouncementsController extends Controller
 {
-    public function announcement()
+    public function index()
     {
-        $announcements = DB::select('select * from announcements');
+        $announcements = DB::table('announcements')->where('statusId', '=', 1)->where('aTypeId', '=', 1)->paginate(5);
+        return view('pages.member.announcements.index', ['announcements' => $announcements]);
+    }
+
+    public function create()
+    {
+        $announcements = Announcements::all();
         return view('pages.contentsmanager.announcement', ['announcements' => $announcements]);
     }
 
@@ -40,14 +46,14 @@ class AnnouncementsController extends Controller
         return redirect()->back();
     }
 
-    public function show(Request $request)
-    {
-
-    }
-
     public function edit($announcementId)
     {
         $announcement = Announcements::find($announcementId);
+
+        $imageid = AnnouncementImage::all()->where('announcementId', $announcementId)->first();
+        $imagelocation = Image::all()->where('imageId', $imageid->imagesId)->first();
+
+        $announcement['imageLocation'] = $imagelocation->imageLocation;
         return view('pages.contentsmanager.announcementedit', compact('announcement', 'announcementId'));
     }
 
@@ -64,23 +70,42 @@ class AnnouncementsController extends Controller
         $announcement = Announcements::find($announcementId);
         $input = $request->all();
 
-//        $path = Storage::putFile('img/uploads', $input["announcementImage"]);
-//        $imagestore["imageLocation"] = $path;
-//        $image = Image::create($imagestore);
-//
-//        AnnouncementImage::where('announcementId', $announcementId)->update(['imagesId' => $image->id]);
+        $file = $request->file('announcementImage')->getClientOriginalName();
+        $request->file('announcementImage')->storeAs('/public', $file);
+
+        $imagestore["imageLocation"] = $file;
+        $image = Image::create($imagestore);
+
+        AnnouncementImage::where('announcementId', $announcementId)->update(['imagesId' => $image->id]);
 
         $announcement->title = $request->get('title');
         $announcement->description = $request->get('description');
         $announcement->modifiedBy = $request->get('modifiedBy');
         $announcement->aTypeId = $request->get('aTypeId');
-        $announcement->statusId = $request->get('statusId');
         $announcement->dueDate = $request->get('dueDate');
         $announcement->save();
 
         alert()->success('Announcement', 'Updated');
-        return redirect('/announcement');
+        return redirect('/contentmanager/announcements/create');
     }
 
+    public function view()
+    {
+        $announcements = DB::select('select * from announcements where statusId = 1');
+        return view('member.announcement', ['announcements' => $announcements]);
+    }
+
+    public function changeStatus($announcementId, $status)
+    {
+        $announcements = Announcements::find($announcementId);
+        $announcements->statusId = $status;
+        if ($announcements->save()) {
+            toast('Status Changed!', 'success', 'bottom-right');
+            return redirect()->back();
+        } else {
+            alert()->error('Oops!', 'something went wrong 😞');
+            return redirect()->back();
+        }
+    }
 
 }

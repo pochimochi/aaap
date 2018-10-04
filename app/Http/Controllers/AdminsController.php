@@ -16,13 +16,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
-class AdminsController extends Controller
+class AdminsController
 {
     public function index()
     {
-        $admins = User::all()->whereIn('userTypeId', ['2', '3']);
-        return view('pages.admin.admins', ['admins' => $admins]);
+        $admins = DB::select('select * from users where userTypeId = 2 or userTypeId = 3');
+        return view('admin.admins', ['admins' => $admins]);
     }
+
 
     public function store(Request $request)
     {
@@ -52,14 +53,16 @@ class AdminsController extends Controller
         return redirect()->back();
     }
 
-    public function changeStatus(Request $request)
+    public function changeStatus($userId, $status)
     {
-        dd($request->all());
-        $admins = User::find($request->id)->first();
-//$admins = Admin
-        $admins->membershipStatus = $request->membershipStatus;
-        $admins->save();
-        alert()->success('Successfully', 'changed status');
-        return redirect('members');
+        $admins = User::find($userId);
+        $admins->membershipStatus = $status;
+        if ($admins->save()) {
+            toast('Status Changed!','success','bottom-right');
+            return redirect('admins');
+        } else {
+            alert()->error('Oops!', 'something went wrong 😞');
+            return redirect()->back();
+        }
     }
 }

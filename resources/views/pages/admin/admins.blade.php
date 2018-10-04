@@ -1,9 +1,31 @@
 @include ('layouts.master.header')
-@include ('layouts.admin.adminmenu')
+@include ('admin.adminmenu')
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
     function submitForm() {
-        $("#form2").submit();
+        $('#submit').trigger("click");
     }
+</script>
+<script type="text/javascript">
+
+    $('#btnSubmit').on('click', function (e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save it!'
+        }).then((result) => {
+            if (result.value) {
+                form.submit();
+            }
+        })
+    });
+
 </script>
 <body class="fix-header fix-sidebar">
 <div class="page-wrapper">
@@ -39,7 +61,7 @@
                                                         name="userTypeId" id="userTypeId">
                                                     <option value="">Select Type</option>
                                                     <option value="2">Writer</option>
-                                                    <option value="3">Event Manager</option>
+                                                    <option value="3">Content Manager</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -68,7 +90,6 @@
                                                 <input value="{{ old('userFirstName') }}" type="text"
                                                        name="userFirstName" id="userFirstName"
                                                        class="form-control input-default">
-                                                <i style="color:red;" id="fnErr"></i>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -114,10 +135,9 @@
                     </div>
                 </div>
             </div>
-            {{--<form id="form2" action="{{URL::to('/changeStatus')}}" method="POST">--}}
-                @csrf
-
-                <div class="col-lg-12">
+            <div class="col-lg-12">
+                <form id="status" action="{{URL::to('/changeStatus')}}" method="post">
+                    @csrf
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">List of Administrators</h4>
@@ -142,21 +162,13 @@
                                                    value="{{ $admin->userId}}">{{ $admin->userId}}</td>
                                         <td>{{ $admin->userFirstName}}</td>
                                         <td>{{ $admin->userLastName }}</td>
-                                        <td>{{ $admin->userTypeId == 2 ? 'Writer' : 'Event Manager'}}</td>
+                                        <td>{{ $admin->userTypeId == 2 ? 'Writer' : 'Content Manager'}}</td>
                                         <td>{{ $admin->emailAddress}}</td>
                                         <td>{{ \Carbon\Carbon::parse($admin->created_at)->format('d/m/Y')}}</td>
-                                        <td><select onchange="submitForm()"
-                                                    class="form-control custom-select input-default"
-                                                    name="membershipStatus" id="membershipStatus">
-                                                <option value="1"
-                                                        @if($admin->membershipStatus=="1") selected @endif>
-                                                    Active
-                                                </option>
-                                                <option value="0"
-                                                        @if($admin->membershipStatus=="0") selected @endif>
-                                                    Inactive
-                                                </option>
-                                            </select></td>
+                                        <td><a id="btn" type="submit"
+                                               href="{{URL::to('/changeStatus/'. $admin->userId. '/'.  ($admin->membershipStatus == 1 ? '0' : '1')  .'')}}"
+                                               class="btn {{$admin->membershipStatus == 1 ? 'btn-success' : 'btn-danger'}}">{{$admin->membershipStatus == 1 ? 'Active' : 'Inactive' }}</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -164,8 +176,9 @@
                         </div>
                         <br>
                     </div>
-                </div>
-            {{--</form>--}}
+                    <button type="submit" class="positive" name="submit" id="submit" hidden="hidden">save</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -173,4 +186,3 @@
             href="https://colorlib.com">Colorlib</a>
 </footer>
 @include('layouts.master.footer')
-

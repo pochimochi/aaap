@@ -1,4 +1,4 @@
-@include('layouts.master.header')
+@include('layouts.master.master')
 @include('layouts.admin.cmmenu')
 <body class="fix-header fix-sidebar">
 <div class="page-wrapper">
