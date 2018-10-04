@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\City;
 use App\Event;
-use App\EventCategories;
+use App\EventAttendance;
 use App\EventImages;
 use App\Image;
 use App\User;
@@ -106,66 +106,75 @@ class EventController extends Controller
 
     }
 
-    public function userevent()
+    public function search(Request $request)
+    {
+    $search = $request->search;
+    $events = DB::table('events')->where('eventName', 'LIKE', '%' . $search . '%')->paginate(10);
+
+        return view('pages.member.event.eventview', ['eventName' => $events]);
+
+    }
+    public function userevent(Request $request)
     {
 
         $events = DB::select('select * from events');
 
-        return view('event.userevent', ['events' => $events]);
+        return view('pages.member.event.userevent', ['events' => $events]);
+
+//        return view('pages.member.event.userevent', ['events' => $events]);
     }
 
-    public function eventview(Request $request, $eventId)
+    public function userjoin($eventId)
     {
 
-        $eventinfo = $request->except(['_token']);
-
-        $cityId = City::where('cityId', $eventinfo['cityId'])
-            ->update(['name' => $eventinfo['cityname']]);
-
-        $addressid = Address::where('addressId', $eventinfo['addressId'])
-            ->update(['street' => $eventinfo['street'], 'bldg' => $eventinfo['bldg'], 'unitno' => $eventinfo['unitno']]);
-
-        $eventinfo1 = $request->except(['_token', 'street', 'bldg', 'unitno', 'cityname', 'cityId', 'fileToUpload']);
-
-        Event::where('eventId', $eventId)
-            ->update($eventinfo1);
-
-
-        return view('event.eventview');
-
-//        $event = Event::find($eventId);
-//        $address = Address::find($event->addressId);
-//        $city = City::find($address->cityId);
-////        Dd($event->eventid);
-////        $city = City::find($address->cityId);
-//        return view('event.eventview')
-//            ->with(compact('event','eventId'))
-//
-//            ->with(compact('address', 'addressId'))
-//
-//            ->with(compact('city', 'cityId'));
-    }
-
-    public function eventviews($eventId)
-    {
         $event = Event::find($eventId);
         $address = Address::find($event->addressId);
         $city = City::find($address->cityId);
-        return view('event.eventview')
+        return view('pages.member.event.userjoin')
             ->with(compact('event', 'eventId'))
-            ->with(compact('address', 'addressId'))
-            ->with(compact('city', 'cityId'));
+            ->with(compact('address', 'event->addressId'))
+            ->with(compact('city', 'address->cityId'));
+
+
+
+
+
+//        $attendanceinfo = $request->all();
+//
+//        $userId = User::where(['userId' => $attendanceinfo['userId']]);
+//        ($userId->userId);
+//        $attendanceinfo['userId'] = $userId->userId;
+//        $eventId = Event::where($attendanceinfo);
+//        $attendanceinfo['eventId'] = $eventId->eventId;
+//        dd($eventId);
+//        $attendanceid = EventAttendance::create($attendanceinfo);
+//
+//        return view('pages.member.event.userevent' ,'Succesfully', 'Joined');
+
     }
-//    public function joinevent(request $request){
-//
-//        $eventattend = $request->all();
-//        $eventuser = User::create(['user' => $eventattend['userId']]);
-//        $eventattend['userId'] = $userId->userId;
-//        $eventid = Event::create($eventattend);
-//        $eventattend['eventId'] = $eventid->eventId;
-//        Event::create($eventattend);
-//
-//
-//        return  redirect('event');
-//    }
+
+    public function userjoins(Request $request)
+    {
+        $attendanceinfo = $request->all();
+
+        $userId = User::where(['userId' => $attendanceinfo['userId']]);
+        ($userId->userId);
+        $attendanceinfo['userId'] = $userId->userId;
+        $eventId = Event::where($attendanceinfo);
+        $attendanceinfo['eventId'] = $eventId->eventId;
+        dd($eventId);
+        $attendanceid = EventAttendance::create($attendanceinfo);
+
+        return view('pages.member.event.userevent' ,'Succesfully', 'Joined');
+    }
+
+    public function usercancels($attendanceid)
+    {
+        $attendance = EventAttendance::findorfail($attendanceid);
+
+        $attendance->delete();
+
+        return redirect('member/userevent' , 'You are not Joined in this Event Anymore.');
+    }
+
 }

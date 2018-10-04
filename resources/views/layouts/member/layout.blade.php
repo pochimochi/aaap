@@ -49,7 +49,7 @@
 
     <!-- Default CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('')}}assetsuser/css/default.css">
-
+    <link rel="stylesheet" href="{{asset('')}}assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <!-- Color CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('')}}assetsuser/css/color.css">
 
@@ -94,7 +94,20 @@
 
 <!-- Main Script -->
 <script src="{{asset('')}}assetsuser/js/main.js"></script>
-
+<script src="{{asset('assets/js/lib/data-table/datatables.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/data-table/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/data-table/buttons.bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/data-table/jszip.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/data-table/pdfmake.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/data-table/vfs_fonts.js')}}"></script>
+<script src="{{asset('assets/js/lib/data-table/buttons.html5.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/data-table/buttons.print.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/data-table/buttons.colVis.min.js')}}"></script>
+<script src="{{asset('assets/js/lib/data-table/datatables-init.js')}}"></script>
+<script type="text/javascript">
+    $('table').DataTable({});
+</script>
 </body>
 
 </html>

@@ -21,6 +21,12 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::resource('articles', 'ArticleController')->only(['index', 'show']);
         Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);
+
+        //EventMembers
+        Route::get('/userevent', 'EventController@userevent');
+        Route::get('/userjoin/{eventId}', 'EventController@userjoin');
+        Route::get('/search', 'EventController@search');
+        Route::post('/userjoins', 'EventController@userjoins');
     });
     //-------------------------------------------------------------------------------------
     Route::group(['middleware' => 'admingroup'], function () {
@@ -47,6 +53,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
             Route::get('/changeStatus/{userId}/{status}', 'AdminsController@changeStatus');
             Route::resource('adminMaintenance', 'AdminsController')->only(['index', 'store']);
+            Route::get('/memberchangeStatus/{userId}/{status}', 'AdminsController@changeStatus');
             Route::get('/members', 'MembersController@index');
         });
     });

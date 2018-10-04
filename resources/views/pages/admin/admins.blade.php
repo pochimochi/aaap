@@ -1,38 +1,14 @@
-@include ('layouts.master.header')
-@include ('admin.adminmenu')
+@extends('layouts.master.master')
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
     function submitForm() {
         $('#submit').trigger("click");
     }
 </script>
-<script type="text/javascript">
+@section('content')
+<body class="open">
+<div class="content">
 
-    $('#btnSubmit').on('click', function (e) {
-        e.preventDefault();
-        var form = $(this).parents('form');
-        swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, save it!'
-        }).then((result) => {
-            if (result.value) {
-                form.submit();
-            }
-        })
-    });
-
-</script>
-<body class="fix-header fix-sidebar">
-<div class="page-wrapper">
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h3 class="text-primary">Manage Administrators</h3></div>
-    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -166,7 +142,7 @@
                                         <td>{{ $admin->emailAddress}}</td>
                                         <td>{{ \Carbon\Carbon::parse($admin->created_at)->format('d/m/Y')}}</td>
                                         <td><a id="btn" type="submit"
-                                               href="{{URL::to('/changeStatus/'. $admin->userId. '/'.  ($admin->membershipStatus == 1 ? '0' : '1')  .'')}}"
+                                               href="{{URL::to('admin/changeStatus/'. $admin->userId. '/'.  ($admin->membershipStatus == 1 ? '0' : '1')  .'')}}"
                                                class="btn {{$admin->membershipStatus == 1 ? 'btn-success' : 'btn-danger'}}">{{$admin->membershipStatus == 1 ? 'Active' : 'Inactive' }}</a>
                                         </td>
                                     </tr>
@@ -182,7 +158,4 @@
         </div>
     </div>
 </div>
-<footer class="footer"> © 2018 All rights reserved. Template designed by <a
-            href="https://colorlib.com">Colorlib</a>
-</footer>
-@include('layouts.master.footer')
+@endsection

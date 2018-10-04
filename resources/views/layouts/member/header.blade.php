@@ -16,7 +16,7 @@
                         <ul class="navbar-nav ml-auto">
                             @if(session('user'))
                             <li class="nav-item dropdown">
-                                <a href="#"
+                                <a href="{{URL::to('member/userevent')}}"
                                    class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2">
                                     Events
                                 </a>

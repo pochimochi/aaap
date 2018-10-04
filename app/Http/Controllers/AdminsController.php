@@ -16,12 +16,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
-class AdminsController
+class AdminsController extends Controller
 {
     public function index()
     {
         $admins = DB::select('select * from users where userTypeId = 2 or userTypeId = 3');
-        return view('admin.admins', ['admins' => $admins]);
+        return view('pages.admin.admins', ['admins' => $admins]);
     }
 
 
@@ -59,7 +59,7 @@ class AdminsController
         $admins->membershipStatus = $status;
         if ($admins->save()) {
             toast('Status Changed!','success','bottom-right');
-            return redirect('admins');
+            return redirect()->back();
         } else {
             alert()->error('Oops!', 'something went wrong 😞');
             return redirect()->back();
