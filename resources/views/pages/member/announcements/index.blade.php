@@ -32,16 +32,17 @@
     <div class="cover">
         @include('layouts.member.header')
     </div>
+    <div class="lg-space"></div>
     <div class="asvg">
         <div class="container">
-            <form action="{{URL::to('/search')}}" method="POST" role="search">
+            {{--<form action="{{URL::to('/search')}}" method="POST" role="search">
                 {{ csrf_field() }}
                 <div class="input-group">
                     <input type="text" class="form-control" name="q"
                            placeholder="Search title"> <span class="input-group-btn">
             <button type="submit" class="btn btn-default">
                 <span class="glyphicon glyphicon-search"></span>
-            </button>
+            </button>--}}
         </span>
                 </div>
             </form>
@@ -49,16 +50,16 @@
                 @if(isset($announcements))
                     <div class="col-lg-8">
                         @foreach ($announcements as $announcement)
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $announcement->title}}</h5>
+                            <div class="box box-shadow">
+
+                                    <h5 >{{ $announcement->title}}</h5>
                                     <small class="text-muted">Posted
                                         By: {{ $announcement->postedBy}}</small>
                                     <p class="card-text">@php echo $announcement->description @endphp</p>
                                     <p class="card-text">
                                         <small class="text-muted">{{ \Carbon\Carbon::parse($announcement->created_at)->format('d/m/Y')}}</small>
                                     </p>
-                                </div>
+
                             </div>
                         @endforeach
                     </div>

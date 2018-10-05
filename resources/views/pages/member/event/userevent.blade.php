@@ -1,57 +1,47 @@
 @extends('layouts.member.layout')
 @section('content')
     @include('layouts.member.header')
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h4>List of Events</h4>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id="myTable" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Event</th>
+    <div class="container">
 
-                    </tr>
-                    </thead>
-                    <tbody>
 
-                    @foreach ($events as $event)
+
+                <div class="table-responsive">
+                    <table id="myTable" class="table table-bordered table-striped">
+                        <thead>
                         <tr>
+                            <th>Event</th>
 
-                                <td>
-<div class="col-6">
-    <div class="card">
-        <div class="card-body">
-            hello
-        </div>
-    </div>
-</div>
-
-                                </td>
-
-
-                            {{--<td>{{ $event->eventName }}<br>
-                                {{ $event->eventDescription }}<br>
-                                {{ $event->postedBy }}
-                                {{ $event->modifiedBy }}<br>
-                                {{ $event->isPaid== 1 ? 'General' : 'Special'}}<br>
-                                {{ $event->status== 1 ? 'Active' : 'Inactive'}}
-                                {{ $event->endDate }}<br>
-                                <a href="{{URL::to('/userjoin', $event->eventId)}}"
-                                   class="btn btn-warning btn-rounded">Join</a></td>--}}
-                            {{--<td><a href="{{URL::to('/eventdelete', $event->eventId)}}"--}}
-                            {{--class="btn btn-warning btn-rounded">Delete</a></td>--}}
                         </tr>
-                    @endforeach
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
+                        @foreach ($events as $event)
+                            <tr>
+
+
+
+    <td><div class="box box-shadow">{{ $event->eventName }}<br>
+        {{ $event->eventDescription }}<br>
+        {{ $event->postedBy }}
+        {{ $event->modifiedBy }}<br>
+        {{ $event->isPaid== 1 ? 'General' : 'Special'}}<br>
+        {{ $event->status== 1 ? 'Active' : 'Inactive'}}
+        {{ $event->endDate }}<br>
+        <a href="{{URL::to('/userjoin', $event->eventId)}}"
+           class="btn btn-warning btn-rounded">Join</a></div></td>
+
+
+                                {{--<td><a href="{{URL::to('/eventdelete', $event->eventId)}}"
+                                class="btn btn-warning btn-rounded">Delete</a></td>--}}
+                            </tr>
+                        @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 @endsection
