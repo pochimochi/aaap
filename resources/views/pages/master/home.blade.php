@@ -13,11 +13,13 @@
                     <div class="col-12 col-lg-5 mx-lg-auto">
                         <div class="text-center text-lg-left">
                             <h1 class="xxl-font-size font-weight__700 text-black">
-                                Join Association for Adults with Autism, Philippines.
+                                @if(session('user') && Auth::user()) Welcome to the @else Join @endif Association for Adults with Autism, Philippines.
                             </h1>
                             <div class="md-space"></div>
-                            <a href="#" class="btn btn-primary btn-rounded base-plus-font-size py-3 px-5">Be a
+                            @if(!session('user') || !Auth::user())
+                            <a href="{{URL::to('/register')}}" class="btn btn-primary btn-rounded base-plus-font-size py-3 px-5">Be a
                                 Member Today!</a>
+                            @endif
                         </div>
                     </div>
                     <div class="col-12 col-lg-7 mt-5 mt-lg-0">
