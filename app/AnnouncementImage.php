@@ -12,13 +12,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class AnnouncementImage extends model
 {
-    protected $table = 'announcementImages';
+    protected $table = 'announcementimages';
 
     protected $fillable = [
-        'imagesId', 'announcementId',
+        'image_id', 'announcement_id',
     ];
 
-    protected $primaryKey = 'announcementImagesId ';
+    protected $primaryKey = 'id';
 
     public $timestamps = false;
 

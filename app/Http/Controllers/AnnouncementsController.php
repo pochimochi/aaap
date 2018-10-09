@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Announcements;
-use DB;
 use Carbon\Carbon;
 use App\AnnouncementImage;
 use App\Image;
@@ -17,10 +16,7 @@ class AnnouncementsController extends Controller
 
     public function index()
     {
-
-        $announcements = Announcements::all()->where('statusId', '=', 1)->where('aTypeId', '=', 1);
-
-
+        $announcements = Announcements::all()->where('status_id', '=', 1)->where('type_id', '=', 1);
         return view('pages.member.announcements.index', ['announcements' => $announcements]);
     }
 
@@ -37,58 +33,58 @@ class AnnouncementsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'postedBy' => 'required'
+            'posted_by' => 'required'
         ]);
 
         $announcementInfo = $request->all();
         $announcementId = Announcements::create($announcementInfo);
 
         $announcementImages = $request->file('announcementImage')->store('public');
-        $imageId = Image::create(['imageLocation' => $announcementImages]);
+        $imageId = Image::create(['location' => $announcementImages]);
 
-        AnnouncementImage::create(['imagesId' => $imageId->id, 'announcementId' => $announcementId->announcementId]);
+        AnnouncementImage::create(['image_id' => $imageId->id, 'announcement_id' => $announcementId->id]);
 
         alert()->success('Announcement', 'Added');
         return redirect()->back();
     }
 
-    public function edit($announcementId)
+    public function edit($id)
     {
-        $announcement = Announcements::find($announcementId);
+        $announcement = Announcements::find($id);
 
-        $imageid = AnnouncementImage::all()->where('announcementId', $announcementId)->first();
-        $imagelocation = Image::all()->where('imageId', $imageid->imagesId)->first();
+        $imageid = AnnouncementImage::all()->where('announcement_id', $id)->first();
+        $imagelocation = Image::all()->where('id', $imageid->image_id)->first();
 
-        $announcement['imageLocation'] = $imagelocation->imageLocation;
-        return view('pages.contentsmanager.announcementedit', compact('announcement', 'announcementId'));
+        $announcement['location'] = $imagelocation->location;
+        return view('pages.contentsmanager.announcementedit', compact('announcement', 'id'));
     }
 
 
-    public function update(Request $request, $announcementId)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'postedBy' => 'required',
-            'modifiedBy' => 'required'
+            'posted_by' => 'required',
+            'modified_by' => 'required'
         ]);
 
-        $announcement = Announcements::find($announcementId);
+        $announcement = Announcements::find($id);
         $input = $request->all();
 
         $file = $request->file('announcementImage')->getClientOriginalName();
-        $request->file('announcementImage')->storeAs('/public', $file);
+        $request->file('announcementImage')->storeAs('public', $file);
 
-        $imagestore["imageLocation"] = $file;
+        $imagestore["location"] = $file;
         $image = Image::create($imagestore);
 
-        AnnouncementImage::where('announcementId', $announcementId)->update(['imagesId' => $image->id]);
+        AnnouncementImage::where('announcement_id', $id)->update(['image_id' => $image->id]);
 
         $announcement->title = $request->get('title');
         $announcement->description = $request->get('description');
-        $announcement->modifiedBy = $request->get('modifiedBy');
-        $announcement->aTypeId = $request->get('aTypeId');
-        $announcement->dueDate = $request->get('dueDate');
+        $announcement->modified_by = $request->get('modified_by');
+        $announcement->type_id = $request->get('type_id');
+        $announcement->due_date = $request->get('due_date');
         $announcement->save();
 
         alert()->success('Announcement', 'Updated');
@@ -100,20 +96,20 @@ class AnnouncementsController extends Controller
     public function indexSelect($type)
     {
         if($type == 1){
-            $announcements = Announcements::all()->where('statusId', '=', 1)->where('aTypeId', '=', 1);
+            $announcements = Announcements::all()->where('status_id', '=', 1)->where('type_id', '=', 1);
         }elseif($type == 0){
-            $announcements = Announcements::all()->where('statusId', '=', 1)->where('aTypeId', '=', 0);
+            $announcements = Announcements::all()->where('status_id', '=', 1)->where('type_id', '=', 0);
         }else{
-            $announcements = Announcements::all()->where('statusId', '=', 1)->where('aTypeId', '=', 1);
+            $announcements = Announcements::all()->where('status_id', '=', 1)->where('type_id', '=', 1);
         }
 
         return view('pages.member.announcements.index', ['announcements' => $announcements]);
     }
 
-    public function changeStatus($announcementId, $status)
+    public function changeStatus($id, $status)
     {
-        $announcements = Announcements::find($announcementId);
-        $announcements->statusId = $status;
+        $announcements = Announcements::find($id);
+        $announcements->status_id = $status;
         if ($announcements->save()) {
             toast('Status Changed!', 'success', 'bottom-right');
             return redirect()->back();
