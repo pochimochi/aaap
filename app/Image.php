@@ -10,7 +10,7 @@ class Image extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'imageId', 'imageLocation'
+        'imageId', 'location'
 
     ];
 
