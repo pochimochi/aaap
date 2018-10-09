@@ -92,14 +92,13 @@ class AnnouncementsController extends Controller
     }
 
 
-
     public function indexSelect($type)
     {
-        if($type == 1){
+        if ($type == 1) {
             $announcements = Announcements::all()->where('status_id', '=', 1)->where('type_id', '=', 1);
-        }elseif($type == 0){
+        } elseif ($type == 0) {
             $announcements = Announcements::all()->where('status_id', '=', 1)->where('type_id', '=', 0);
-        }else{
+        } else {
             $announcements = Announcements::all()->where('status_id', '=', 1)->where('type_id', '=', 1);
         }
 
@@ -118,5 +117,4 @@ class AnnouncementsController extends Controller
             return redirect()->back();
         }
     }
-
 }
