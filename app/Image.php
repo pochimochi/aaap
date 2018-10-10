@@ -17,4 +17,8 @@ class Image extends Model
     protected $hidden = [
 
     ];
+    public function user()
+    {
+        return $this->hasOne('\App\User');
+    }
 }
