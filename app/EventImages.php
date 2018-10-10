@@ -11,10 +11,8 @@ class EventImages extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'eventImageId', 'imageId', 'eventId'
+        'image_id', 'event_id'
     ];
 
-    protected $hidden = [
-        'eventImageId', 'imageId', 'eventId'
-    ];
+
 }
