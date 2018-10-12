@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Announcements;
-use Carbon\Carbon;
-use App\AnnouncementImage;
-use App\Image;
+
+use App\Images;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use App\logs;
 
 class AnnouncementsController extends Controller
 {
@@ -16,7 +15,10 @@ class AnnouncementsController extends Controller
 
     public function index()
     {
-        $announcements = Announcements::all()->where('status_id', '=', 1)->where('type_id', '=', 1);
+        $announcements = Announcements::all()
+            ->where('status_id', '=', 1)
+            ->where('type_id', '=', 1);
+//            ->paginate(5);
         return view('pages.member.announcements.index', ['announcements' => $announcements]);
     }
 
@@ -30,33 +32,36 @@ class AnnouncementsController extends Controller
 
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'posted_by' => 'required'
         ]);
 
         $announcementInfo = $request->all();
-        $announcementId = Announcements::create($announcementInfo);
+        $announcementInfo['status_id'] = 1;
+        $file1 = $request->file('announcementImage')->getClientOriginalName();
+        $request->file('announcementImage')->storeAs('public', $file1);
+        $announcementInfo['image_id'] = Images::create(['location' => $file1])->id;
+        $announcementInfo['posted_by'] = session('user')['id'];
+        Announcements::create($announcementInfo);
+        /*AnnouncementImage::create(['image_id' => $imageId->id, 'announcement_id' => $announcementId->id]);*/
 
-        $announcementImages = $request->file('announcementImage')->store('public');
-        $imageId = Image::create(['location' => $announcementImages]);
-
-        AnnouncementImage::create(['image_id' => $imageId->id, 'announcement_id' => $announcementId->id]);
-
+        $log = new logs();
+        $log->savelog(session('user')['id'], 'Added an Announcement');
         alert()->success('Announcement', 'Added');
-        return redirect()->back();
+        return redirect('contentmanager/announcements/create');
     }
 
     public function edit($id)
     {
         $announcement = Announcements::find($id);
 
-        $imageid = AnnouncementImage::all()->where('announcement_id', $id)->first();
-        $imagelocation = Image::all()->where('id', $imageid->image_id)->first();
+        /*$imageid = AnnouncementImage::all()->where('announcement_id', $id)->first();*/
+        /*$imagelocation = Image::all()->where('id', $imageid->image_id)->first();*/
 
-        $announcement['location'] = $imagelocation->location;
-        return view('pages.contentsmanager.announcementedit', compact('announcement', 'id'));
+        /*$announcement['location'] = $imagelocation->location;*/
+        return view('pages.contentsmanager.announcementedit', ['announcement' => $announcement]);
     }
 
 
@@ -65,28 +70,39 @@ class AnnouncementsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'posted_by' => 'required',
-            'modified_by' => 'required'
         ]);
 
         $announcement = Announcements::find($id);
-        $input = $request->all();
 
-        $file = $request->file('announcementImage')->getClientOriginalName();
-        $request->file('announcementImage')->storeAs('public', $file);
+        if ($request->file('announcementImage') != null) {
+            $file = $request->file('announcementImage')->getClientOriginalName();
+            $request->file('announcementImage')->storeAs('public', $file);
 
-        $imagestore["location"] = $file;
-        $image = Image::create($imagestore);
+            Images::where('id', $announcement->image->id)->update(['location' => $file]);
+        }
 
-        AnnouncementImage::where('announcement_id', $id)->update(['image_id' => $image->id]);
+
+        /*if ($request->file('announcementImage') != null) {
+            $announcement['image_name'] = $request->file('announcementImage')->getClientOriginalName();
+            $img = (new \Intervention\Image\ImageManager)->make($request->file('announcementImage'));
+            $img->resize(850, 315, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            Storage::put('public/' . $announcement['image_name'] . '', (string)$img->encode());
+            $announcement['image_id'] = Images::create(['location' => $announcement['image_name']])->id;
+//            Images::create(['id' => $announcement['image_id'], 'announcement_id' => $id]);
+        }*/
+
 
         $announcement->title = $request->get('title');
         $announcement->description = $request->get('description');
-        $announcement->modified_by = $request->get('modified_by');
+        $announcement->modified_by = session('user')['id'];
         $announcement->type_id = $request->get('type_id');
         $announcement->due_date = $request->get('due_date');
         $announcement->save();
 
+        $log = new logs();
+        $log->savelog(session('user')['id'], 'Updated an Announcement');
         alert()->success('Announcement', 'Updated');
         return redirect('/contentmanager/announcements/create');
     }
@@ -110,6 +126,8 @@ class AnnouncementsController extends Controller
         $announcements = Announcements::find($id);
         $announcements->status_id = $status;
         if ($announcements->save()) {
+            $log = new logs();
+            $log->savelog(session('user')['id'], 'Changed an Announcement Status');
             toast('Status Changed!', 'success', 'bottom-right');
             return redirect()->back();
         } else {

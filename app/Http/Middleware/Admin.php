@@ -19,7 +19,7 @@ class Admin
         if (!Auth::user() || !session()->exists('user')) {
             return redirect('/login');
         } else {
-            if (Auth::user()->userTypeId != 1) {
+            if (Auth::user()->role_id != 1) {
                 // user value cannot be found in session
                 alert()->warning('Oops!', 'You need to be a Writer to access this page.');
                 return redirect('/home');

@@ -8,17 +8,19 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Event extends Model
+class EventAttendance extends Model
 {
     protected $table = 'eventattendance';
 
+    public $timestamps =false;
+
     protected $fillable = [
-        'attendanceid',	'eventId',	'date',	'userId'
+        'id',	'event_id',	'date',	'user_id', 'status'
     ];
 
     protected $hidden = [
-        'attendanceid',	'eventId',	'date',	'userId'
+        'id',	'event_id',	'date',	'user_id', 'status'
     ];
 
-    protected $primaryKey = 'attendanceId';
+    protected $primaryKey = 'id';
 }

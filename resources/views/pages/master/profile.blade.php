@@ -8,7 +8,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-10">
-                    <h1>{{$users['userFirstName'] . " ".$users['userMiddleName']. " ".$users['userLastName']}}</h1></div>
+                    <h1>{{$users['firstname'] . " ".$users['middlename']. " ".$users['lastname']}}</h1></div>
 
             </div>
             <br>
@@ -17,7 +17,7 @@
 
 
                     <div class="text-center">
-                        <img src="{{asset('/storage/'.$users['imageLocation'])}}" class="avatar img-circle img-thumbnail"
+                        <img src="{{asset('/storage/'.$users->profilepic->location)}}" class="avatar img-circle img-thumbnail"
                              alt="avatar">
                         <h6>Upload a different photo...</h6>
 
@@ -67,7 +67,7 @@
                                         <div class="form-group">
                                             <label>First Name</label>
 
-                                            <input value="{{ $users['userFirstName'] }}" type="text"
+                                            <input value="{{ $users['firstname'] }}" type="text"
                                                    name="userFirstName" id="userFirstName"
                                                    class="form-control input-default">
                                             <i style="color:red;" id="fnErr"></i>
@@ -76,7 +76,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Middle Name</label>
-                                            <input value="{{ $users['userMiddleName'] }}" type="text"
+                                            <input value="{{ $users['middlename'] }}" type="text"
                                                    name="userMiddleName" id="userMiddleName"
                                                    class="form-control input-default">
                                         </div>
@@ -84,7 +84,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Last Name</label>
-                                            <input value="{{ $users['userLastName'] }}" type="text"
+                                            <input value="{{ $users['lastname'] }}" type="text"
                                                    name="userLastName" id="userLastName"
                                                    class="form-control input-default">
                                             <i style="color:red;" id="lnErr"></i>
@@ -108,7 +108,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Landline Number</label>
-                                            <input value="{{ $users['landlineNumber'] }}" type="text"
+                                            <input value="{{ $users->contact->landline_number }}" type="text"
                                                    name="landlineNumber" id="landlineNumber"
                                                    class="form-control input-default">
                                         </div>
@@ -116,7 +116,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Mobile Number</label>
-                                            <input value="{{ $users['mobileNumber'] }}" type="text"
+                                            <input value="{{ $users->contact->mobile_number }}" type="text"
                                                    name="mobileNumber" id="mobileNumber"
                                                    class="form-control input-default">
                                             <i style="color:red;" id="mnErr"></i>
@@ -134,7 +134,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Unit Number</label>
-                                                    <input value="{{ $paddress['unitno'] }}" type="text"
+                                                    <input value="{{ $users->permanentaddress->unitno }}" type="text"
                                                            name="unitno" id="unitno"
                                                            class="form-control input-default">
                                                 </div>
@@ -142,7 +142,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Building</label>
-                                                    <input value="{{ $paddress['bldg'] }}" type="text" name="bldg"
+                                                    <input value="{{ $users->permanentaddress->bldg }}" type="text" name="bldg"
                                                            id="bldg"
                                                            class="form-control input-default">
                                                 </div>
@@ -150,7 +150,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Street</label>
-                                                    <input value="{{ $paddress['street'] }}" type="text"
+                                                    <input value="{{ $users->permanentaddress->street }}" type="text"
                                                            name="street" id="street"
                                                            class="form-control input-default">
                                                 </div>
@@ -160,7 +160,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>City</label>
-                                                    <input value="{{ $paddress['city'] }}" type="text" name="city"
+                                                    <input value="{{ $users->permanentaddress->city->name }}" type="text" name="city"
                                                            id="city"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="cErr"></i>
@@ -176,7 +176,7 @@
                                                         $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
                                                         $row = mysqli_num_rows($sql);
                                                         while ($row = mysqli_fetch_array($sql)) {
-                                                            echo "<option value='" . $row['countryId'] . "'>" . $row['name'] . "</option>";
+                                                            echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
                                                         }
                                                         ?>
                                                     </select>
@@ -191,7 +191,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Unit Number</label>
-                                                    <input value="{{ $taddress['tunitno'] }}" type="text"
+                                                    <input value="{{ $users->temporaryaddress->unitno }}" type="text"
                                                            name="tunitno" id="tunitno"
                                                            class="form-control input-default">
                                                 </div>
@@ -199,7 +199,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Building</label>
-                                                    <input value="{{ $taddress['tbldg'] }}" type="text"
+                                                    <input value="{{ $users->temporaryaddress->bldg }}" type="text"
                                                            name="tbldg" id="tbldg"
                                                            class="form-control input-default">
                                                 </div>
@@ -207,7 +207,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Street</label>
-                                                    <input value="{{ $taddress['tstreet'] }}" type="text"
+                                                    <input value="{{ $users->temporaryaddress->street }}" type="text"
                                                            name="tstreet" id="tstreet"
                                                            class="form-control input-default">
                                                 </div>
@@ -217,7 +217,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>City</label>
-                                                    <input value="{{ $taddress['tcity'] }}" type="text"
+                                                    <input value="{{ $users->temporaryaddress->city->name }}" type="text"
                                                            name="tcity" id="tcity"
                                                            class="form-control input-default">
                                                 </div>
@@ -232,7 +232,7 @@
                                                         $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
                                                         $row = mysqli_num_rows($sql);
                                                         while ($row = mysqli_fetch_array($sql)) {
-                                                            echo "<option value='" . $row['countryId'] . "'>" . $row['name'] . "</option>";
+                                                            echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
                                                         }
                                                         ?>
                                                     </select>
@@ -250,7 +250,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>First Name</label>
-                                                <input value="{{ $users['pwaFirstName'] }}" type="text"
+                                                <input value="{{ $users->pwa->pwaFirstName }}" type="text"
                                                        name="pwaFirstName" id="pwaFirstName"
                                                        class="form-control input-default">
                                             </div>
@@ -258,7 +258,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Middle Name</label>
-                                                <input value="{{ $users['pwaMiddleName'] }}" type="text"
+                                                <input value="{{ $users->pwa->pwaMiddleName }}" type="text"
                                                        name="pwaMiddleName" id="pwaMiddleName"
                                                        class="form-control input-default">
                                             </div>
@@ -266,7 +266,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Last Name</label>
-                                                <input value="{{ $users['pwaLastName'] }}" type="text"
+                                                <input value="{{ $users->pwa->pwaLastName }}" type="text"
                                                        name="pwaLastName" id="pwaLastName"
                                                        class="form-control input-default">
                                             </div>
@@ -287,7 +287,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Relationship to PWA</label>
-                                                <input value="{{ $relationships['relationship'] }}" type="text"
+                                                <input value="{{ $users->pwa->pwaRelationship }}" type="text"
                                                        name="description" id="description"
                                                        class="form-control input-default">
                                             </div>
@@ -295,7 +295,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Occupation</label>
-                                                <input value="{{ $users['pwaOccupation'] }}" name="pwaOccupation"
+                                                <input value="{{ $users->pwa->pwaOccupation }}" name="pwaOccupation"
                                                        id="pwaOccupation" type="text"
                                                        class="form-control input-default">
                                             </div>
@@ -308,7 +308,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Employer's Name</label>
-                                                <input value="{{ $users['employerName'] }}" type="text"
+                                                <input value="{{ $users->pwa->pwaFirstName }}" type="text"
                                                        name="employerName" id="employerName"
                                                        class="form-control input-default">
                                             </div>
@@ -316,7 +316,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Contact Number</label>
-                                                <input value="{{ $users['employerContactNumber'] }}" type="text"
+                                                <input value="{{ $users->pwa->employer->employerContactNumber }}" type="text"
                                                        name="employerContactNumber"
                                                        id="employerContactNumber"
                                                        class="form-control input-default">
@@ -327,7 +327,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Unit Number</label>
-                                                <input value="{{ $eaddress['eunitno'] }}" type="text" name="eunitno"
+                                                <input value="{{ $users->pwa->employer->address->unitno }}" type="text" name="eunitno"
                                                        id="eunitno"
                                                        class="form-control input-default">
                                             </div>
@@ -335,7 +335,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Building</label>
-                                                <input value="{{ $eaddress['ebldg'] }}" type="text" name="ebldg"
+                                                <input value="{{ $users->pwa->employer->address->bldg }}" type="text" name="ebldg"
                                                        id="ebldg"
                                                        class="form-control input-default">
                                             </div>
@@ -343,7 +343,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Street</label>
-                                                <input value="{{ $eaddress['estreet'] }}" type="text" name="estreet"
+                                                <input value="{{ $users->pwa->employer->address->street }}" type="text" name="estreet"
                                                        id="estreet"
                                                        class="form-control input-default">
                                             </div>
@@ -353,7 +353,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>City</label>
-                                                <input value="{{ $eaddress['ecity'] }}" type="text" name="ecity"
+                                                <input value="{{ $users->pwa->employer->address->city->name }}" type="text" name="ecity"
                                                        id="ecity"
                                                        class="form-control input-default">
                                             </div>
@@ -368,7 +368,7 @@
                                                     $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
                                                     $row = mysqli_num_rows($sql);
                                                     while ($row = mysqli_fetch_array($sql)) {
-                                                        echo "<option value='" . $row['countryId'] . "'>" . $row['name'] . "</option>";
+                                                        echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
                                                     }
                                                     ?>
                                                 </select>
@@ -384,8 +384,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Email Address</label>
-                                                <input value="{{ $users['emailAddress'] }}" type="email"
-                                                       name="emailAddress" id="emailAddress"
+                                                <input value="{{ $users['email'] }}" type="email"
+                                                       name="email" id="email"
                                                        class="form-control input-default">
                                             </div>
                                         </div>
@@ -393,7 +393,7 @@
                                             <div class="form-group">
                                                 <label>Password</label>
                                                 <input value="" type="password"
-                                                       name="userPassword" id="userPassword"
+                                                       name="password" id="password"
                                                        class="form-control input-default">
                                             </div>
                                         </div>

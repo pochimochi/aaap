@@ -13,9 +13,9 @@ class Event extends Model
     protected $table = 'events';
 
     protected $fillable = [
-        'eventId', 'eventName', 'eventDescription', 'eventCategoryId', 'startDate', 'endDate',  'venue',
-        'addressId', 'status', 'isPaid', 'rate', 'created_at', 'updated_at',
-        'modifiedBy', 'postedBy'
+        'id', 'name', 'description', 'category_id', 'start_date', 'end_date',  'venue',
+        'address_id', 'status', 'paid', 'rate', 'created_at', 'updated_at',
+        'modified_by', 'posted_by'
 
     ];
 
@@ -23,5 +23,12 @@ class Event extends Model
          'created_at', 'updated_at',
     ];
 
-    protected $primaryKey = 'eventId';
+    public function address(){
+        return $this->belongsTo('\App\Address');
+
+    }
+    public function image(){
+        return $this->belongsTo('\App\Images', 'image_id');
+    }
+
 }

@@ -68,9 +68,94 @@
 <div class="wrapper h-100">
 
 
-
     @yield('content')
+    <footer class="footer section bg-light-primary text-gray pt-2">
+        <div class="container">
+            <!-- Empty Space -->
+            <div class="lg-space"></div>
+            <!--/ End Empty Space -->
+            <div class="row">
+                <div class="col-12 col-lg-3 pl-lg-0">
+                    <div class="text-center text-lg-left">
+                        <img src="{{asset('images/logos/logotexttest.png')}}" class="img-fluid footer-logo__img"
+                             alt="logo">
+                        <!-- Empty Space -->
+                        <div class="sm-space"></div>
+                        <!--/ End Empty Space -->
+                        <p class="sm-font-size">
+                            The Association for Adults with Autism, Philippines is a non-profit association, established
+                            by parents of individuals within the Autism Spectrum Disorder (ASD) and professionals
+                            dedicated to the welfare of those with this developmental disorder.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-10 col-lg-8 mx-auto ml-auto">
+                    <div class="row">
+                        <ul class="nav col flex-column sm-font-size">
+                            <li class="nav-link nav-head text-uppercase font-weight__500 text-black base-font-size font-family-secondary">
+                                Company
+                            </li>
+                            <li class="nav-item"><a href="#" class="nav-link text-gray">Features</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link text-gray">Pricing</a></li>
+                        </ul>
+                        <ul class="nav col flex-column sm-font-size">
+                            <li class="nav-link nav-head text-uppercase font-weight__500 text-black base-font-size font-family-secondary">
+                                Support
+                            </li>
+                            <li class="nav-item"><a href="#" class="nav-link text-gray">Help</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link text-gray">FAQ</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link text-gray">Contact</a></li>
+                        </ul>
+                        <ul class="nav col flex-column sm-font-size">
+                            <li class="nav-link nav-head text-uppercase font-weight__500 text-black base-font-size font-family-secondary">
+                                Legal
+                            </li>
+                            <li class="nav-item"><a href="#" class="nav-link text-gray">Terms</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link text-gray">Privacy</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link text-gray">Policy</a></li>
+                        </ul>
+                        <ul class="nav col flex-column sm-font-size">
+                            <li class="nav-link nav-head text-uppercase font-weight__500 text-black base-font-size font-family-secondary">
+                                Press
+                            </li>
+                            <li class="nav-item"><a href="#" class="nav-link text-gray">Press Release</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link text-gray">Press Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Empty Space -->
+            <div class="lg-space"></div>
+            <!--/ End Empty Space -->
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-4 pl-lg-0">
+                    <ul class="nav sm-font-size justify-content-center justify-content-lg-start">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link text-gray pl-lg-0"><i class="fab fa-facebook-square"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link text-gray"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link text-gray"><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 pr-lg-0">
+                    <div class="credit sm-font-size text-center text-lg-right text-dark-gray">
+                        <span>Theme by</span> <a class="text-black" href="https://themesfor.app/">Themes For App</a> |
+                        <span>Illustration by</span> <a href="https://undraw.co/illustrations"
+                                                        class="text-black">Undraw</a>.
+                    </div>
+                    <div class="copyright xs-font-size text-center text-lg-right">
+                        © 2018. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
+
 <script>
     function myMap() {
         var mapProp = {

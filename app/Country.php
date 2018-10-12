@@ -18,4 +18,8 @@ class Country extends Model
     protected $hidden = [
 
     ];
+    public function address()
+    {
+        return $this->hasMany('\App\Address');
+    }
 }

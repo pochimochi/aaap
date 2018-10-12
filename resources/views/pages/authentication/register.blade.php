@@ -92,14 +92,15 @@
 <body>
 
 
-<main class="bg-dark">
+<main class="bgsvg">
 
     <div id="main-wrapper">
         <div class="unix-login">
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-lg-9">
-                        <form action="{{URL::to('/register')}}" name="regForm" id="regForm" method="post">
+                        <form action="{{URL::to('/register')}}" name="regForm" enctype="multipart/form-data"
+                              id="regForm" method="post">
                             <div class="login-content card" style="max-width: inherit">
                                 <div class="login-form" style="width: available">
                                     <h4>REGISTER AS A NEW MEMBER</h4>
@@ -120,7 +121,7 @@
                                                     <label>First Name</label>
 
                                                     <input value="{{ old('userFirstName') }}" type="text"
-                                                           name="userFirstName" id="userFirstName"
+                                                           name="firstname" id="firstname"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="fnErr"></i>
                                                 </div>
@@ -129,7 +130,7 @@
                                                 <div class="form-group">
                                                     <label>Middle Name</label>
                                                     <input value="{{ old('userMiddleName') }}" type="text"
-                                                           name="userMiddleName" id="userMiddleName"
+                                                           name="middlename" id="middlename"
                                                            class="form-control input-default">
                                                 </div>
                                             </div>
@@ -137,7 +138,7 @@
                                                 <div class="form-group">
                                                     <label>Last Name</label>
                                                     <input value="{{ old('userLastName') }}" type="text"
-                                                           name="userLastName" id="userLastName"
+                                                           name="lastname" id="lastname"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="lnErr"></i>
                                                 </div>
@@ -148,10 +149,13 @@
                                                 <div class="form-group">
                                                     <label class="control-label">Gender</label>
                                                     <select class="form-control custom-select input-default"
-                                                            name="userGenderId" id="userGenderId">
+                                                            name="gender" id="gender">
                                                         <option value="">Select Gender</option>
-                                                        <option value="1">Male</option>
-                                                        <option value="0">Female</option>
+                                                        <option value="1" @if(old('gender') == 1) selected @endif>Male
+                                                        </option>
+                                                        <option value="0" @if(old('gender') == 0) selected @endif>
+                                                            Female
+                                                        </option>
 
                                                     </select>
                                                     <i style="color:red;" id="gErr"></i>
@@ -160,16 +164,16 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Landline Number</label>
-                                                    <input value="{{ old('landlineNumber') }}" type="text"
-                                                           name="landlineNumber" id="landlineNumber"
+                                                    <input value="{{ old('landline_number') }}" type="text"
+                                                           name="landline_number" id="landline_number"
                                                            class="form-control input-default">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Mobile Number</label>
-                                                    <input value="{{ old('mobileNumber') }}" type="text"
-                                                           name="mobileNumber" id="mobileNumber"
+                                                    <input value="{{ old('mobile_number') }}" type="text"
+                                                           name="mobile_number" id="mobile_number"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="mnErr"></i>
                                                 </div>
@@ -182,8 +186,8 @@
                                                     <label>Profile Picture</label>
 
 
-                                                    <input value="{{ old('userProfPic') }}" type="file"
-                                                           name="userProfPic" id="file-input"
+                                                    <input value="{{ old('profile_id') }}" type="file"
+                                                           name="profile_id" id="file-input"
                                                            class="form-control-file"/>
 
                                                     <div id="thumb-output"></div>
@@ -194,8 +198,8 @@
                                                 <div class="form-group">
                                                     <label>ID Verification</label>
 
-                                                    <input value="{{ old('idVerification') }}" type="file"
-                                                           name="idVerification" id="id-input"
+                                                    <input value="{{ old('idverification_id') }}" type="file"
+                                                           name="idverification_id" id="id-input"
                                                            class="form-control-file"/>
 
                                                     <div id="thumb1-output"></div>
@@ -252,15 +256,12 @@
                                                             <div class="form-group">
                                                                 <label>Country</label>
                                                                 <select class="form-control custom-select input-default"
-                                                                        name="countryId" id="countryId">
+                                                                        name="country_id" id="country_id">
                                                                     <option value="">Select Country</option>
-                                                                    <?php
-                                                                    $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
-                                                                    $row = mysqli_num_rows($sql);
-                                                                    while ($row = mysqli_fetch_array($sql)) {
-                                                                        echo "<option value='" . $row['countryId'] . "'>" . $row['name'] . "</option>";
-                                                                    }
-                                                                    ?>
+                                                                    @foreach($country as $countries)
+                                                                        <option value="{{$countries->id}}" @if(old('country_id') == $countries->id)
+                                                                             selected   @endif>{{$countries->name}}</option>
+                                                                    @endforeach
                                                                 </select>
                                                                 <i style="color:red;" id="countryErr"></i>
                                                             </div>
@@ -310,13 +311,10 @@
                                                                 <select class="form-control custom-select input-default"
                                                                         name="tcountry" id="tcountry">
                                                                     <option value="">Select Country</option>
-                                                                    <?php
-                                                                    $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
-                                                                    $row = mysqli_num_rows($sql);
-                                                                    while ($row = mysqli_fetch_array($sql)) {
-                                                                        echo "<option value='" . $row['countryId'] . "'>" . $row['name'] . "</option>";
-                                                                    }
-                                                                    ?>
+                                                                    @foreach($country as $countries)
+                                                                        <option value="{{$countries->id}}"@if(old('tcountry') == $countries->id)
+                                                                        selected   @endif>{{$countries->name}}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -359,23 +357,22 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Gender</label>
                                                         <select class="form-control custom-select input-default"
-                                                                name="pwaGenderId" id="pwaGenderId">
+                                                                name="pwaGender" id="pwaGender">
                                                             <option value="">Select Gender</option>
-                                                            <?php
-                                                            $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From genderlist");
-                                                            $row = mysqli_num_rows($sql);
-                                                            while ($row = mysqli_fetch_array($sql)) {
-                                                                echo "<option value='" . $row['genderId'] . "'>" . $row['name'] . "</option>";
-                                                            }
-                                                            ?>
+                                                            <option value="1" @if(old('gender') == 1) selected @endif>Male
+                                                            </option>
+                                                            <option value="0" @if(old('gender') == 0) selected @endif>
+                                                                Female
+                                                            </option>
+
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Relationship to PWA</label>
-                                                        <input value="{{ old('relationship') }}" type="text"
-                                                               name="description" id="description"
+                                                        <input value="{{ old('pwaRelationship') }}" type="text"
+                                                               name="pwaRelationship" id="pwaRelationship"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
@@ -455,13 +452,11 @@
                                                         <select name="ecountry" id="ecountry"
                                                                 class="form-control custom-select input-default">
                                                             <option value="">Select Country</option>
-                                                            <?php
-                                                            $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
-                                                            $row = mysqli_num_rows($sql);
-                                                            while ($row = mysqli_fetch_array($sql)) {
-                                                                echo "<option value='" . $row['countryId'] . "'>" . $row['name'] . "</option>";
-                                                            }
-                                                            ?>
+
+                                                            @foreach($country as $countries)
+                                                                <option value="{{$countries->id}}"@if(old('ecountry') == $countries->id)
+                                                                selected   @endif>{{$countries->name}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -475,16 +470,16 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Email Address</label>
-                                                        <input value="{{ old('emailAddress') }}" type="email"
-                                                               name="emailAddress" id="emailAddress"
+                                                        <input value="{{ old('email') }}" type="email"
+                                                               name="email" id="email"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Password</label>
-                                                        <input value="{{ old('userPassword') }}" type="password"
-                                                               name="userPassword" id="userPassword"
+                                                        <input value="{{ old('password') }}" type="password"
+                                                               name="password" id="password"
                                                                class="form-control input-default">
                                                     </div>
                                                 </div>

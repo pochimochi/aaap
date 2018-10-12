@@ -19,7 +19,7 @@ class Writer
         if (!Auth::user() || !session()->exists('user')) {
             return redirect('/login');
         } else {
-            if (Auth::user()->userTypeId != 2) {
+            if (Auth::user()->role_id != 2) {
                 // user value cannot be found in session
                 alert()->warning('Oops!', 'You need to be a Writer to access this page.');
                 return redirect('/home');

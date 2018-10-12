@@ -35,7 +35,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Article Type</label>
                                             <select class="form-control custom-select input-default"
-                                                    name="articleTypeId">
+                                                    name="articletype_id">
                                                 <option value="">Select Article Type</option>
                                                 <option value="1">Case Studies</option>
                                                 <option value="2">Commentaries</option>
@@ -68,10 +68,10 @@
                                         <div class="form-group">
                                             <label class="control-label">Status</label>
                                             <select class="form-control custom-select  input-default"
-                                                    name="statusId">
+                                                    name="status_id">
                                                 <option>Select Status</option>
-                                                <option value="0">Inactive</option>
                                                 <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
                                             </select>
                                         </div>
                                     </div>
@@ -117,16 +117,16 @@
                             @foreach ($articles as $article)
 
                                 <tr>
-                                    <td>{{ $article->articleId}}</td>
+                                    <td>{{ $article->id}}</td>
                                     <td>{{ $article->title}}</td>
                                     {{--<td>@php echo substr($article->body, 0, 50) . "..." @endphp</td>--}}
                                     <td>{{ $article->created_at}}</td>
-                                    <td>{{ $article->postedBy }}</td>
+                                    <td>{{ $article->user->firstname . ' ' .$article->user->lastname }}</td>
                                     <td>{{ $article->updated_at}}</td>
-                                    <td>{{ $article->modifiedBy }}</td>
-                                    <td>{{ $article->statusId == 1 ? 'Active' : 'Inactive'}}</td>
-                                    <td>{{ $article->articleTypeId}}</td>
-                                    <td><a href="{{URL::to('/writer/articles/'.$article->articleId.'/edit')}}"
+                                    <td>{{ $article->modified_by}}</td>
+                                    <td>{{ $article->status_id == 1 ? 'Active' : 'Inactive'}}</td>
+                                    <td>{{ $article->articletype_id /*== 6 ?'Case Studies' : 'Commentaries' : 'Methodologies' : 'Reports' : 'Research' : 'Review'*/ }}</td>
+                                    <td><a href="{{URL::to('/writer/articles/'.$article->id.'/edit')}}"
                                            class="btn btn-warning btn-rounded">Edit</a></td>
                                 </tr>
                             @endforeach
@@ -140,8 +140,6 @@
             </div>
         </div>
     </div>
-
-
 
 
 

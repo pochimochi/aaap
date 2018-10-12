@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <form id="status" action="{{URL::to('/changemStatus')}}" method="post">
+                    <form id="status" action="{{URL::to('/changeStatus')}}" method="post">
                         @csrf
                         <div class="card">
                             <div class="card-body">
@@ -34,14 +34,14 @@
                                     <tbody>
                                     @foreach ($members as $member)
                                         <tr>
-                                            <td>{{ $member->userId}}</td>
-                                            <td>{{ $member->userFirstName}}</td>
-                                            <td>{{ $member->userLastName }}</td>
-                                            <td>{{ $member->emailAddress}}</td>
+                                            <td>{{ $member->id}}</td>
+                                            <td>{{ $member->firstname}}</td>
+                                            <td>{{ $member->lastname }}</td>
+                                            <td>{{ $member->email}}</td>
                                             <td>{{ \Carbon\Carbon::parse($member->created_at)->format('d/m/Y')}}</td>
                                             <td><a id="btn" type="submit"
-                                                   href="{{URL::to('/memberchangeStatus/'. $member->userId. '/'.  ($member->membershipStatus == 1 ? '0' : '1')  .'')}}"
-                                                   class="btn {{$member->membershipStatus == 1 ? 'btn-success' : 'btn-danger'}}">{{$member->membershipStatus == 1 ? 'Active' : 'Inactive' }}</a>
+                                                   href="{{URL::to('/admin/memberchangeStatus/'. $member->id. '/'.  ($member->active == 1 ? '0' : '1')  .'')}}"
+                                                   class="btn {{$member->active == 1 ? 'btn-success' : 'btn-danger'}}">{{$member->active == 1 ? 'Active' : 'Inactive' }}</a>
                                             </td>
                                         </tr>
                                     @endforeach

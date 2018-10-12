@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Articles;
+use App\logs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +21,7 @@ class ArticleController extends Controller
                 $articles = Articles::all();
                 return view('pages.writer.create', ['articles' => $articles]);
             }else{
-                $articles = Articles::all()->where('statusId', '=', '1');
+                $articles = Articles::all()->where('status_id', '=', '1');
                 return view('pages.member.article.index', ['articles' => $articles]);
             }
         }else{
@@ -53,19 +54,21 @@ class ArticleController extends Controller
     {
         $valid = Validator::make($request->all(), [
             'title' => 'required|max:150',
-            'articleTypeId' => 'required',
+            'articletype_id' => 'required',
             'body' => 'required',
-            'modifiedBy' => 'nullable|max:70',
-            'statusId' => 'nullable|integer',
+            'modified_by' => 'nullable|max:70',
+            'status_id' => 'nullable|integer',
 
 
         ]);
         if ($valid->passes()) {
             $articleinfo = $request->all();
-            $articleinfo['postedBy'] = session('user')->userId;
-            $articleinfo['modifiedBy'] = 0;
+            $articleinfo['posted_by'] = session('user')['id'];
+            $articleinfo['modified_by'] = 0;
 
             Articles::create($articleinfo);
+            $log = new logs();
+            $log->savelog(session('user')['id'], 'Added an Article');
             alert()->success('Article Added!', 'You have successfully added an article!');
             return redirect('/writer/articles/create');
         } else {
@@ -82,9 +85,9 @@ class ArticleController extends Controller
      */
     public function show($articleId)
     {
-        $article = Articles::all()->where('articleId', $articleId)->first();
+        $article = Articles::all()->where('id', $articleId)->first();
 
-        return view('pages.member.article.show', compact('article', 'articleId'));
+        return view('pages.member.article.show', compact('article', 'id'));
     }
 
     /**
@@ -95,9 +98,9 @@ class ArticleController extends Controller
      */
     public function edit($articleId)
     {
-        $article = Articles::all()->where('articleId', $articleId)->first();
+        $article = Articles::all()->where('id', $articleId)->first();
 
-        return view('pages.writer.edit', compact('article', 'articleId'));
+        return view('pages.writer.edit', compact('article', 'id'));
     }
 
     /**
@@ -111,17 +114,19 @@ class ArticleController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'statusId' => 'required'
+            'status_id' => 'required'
         ]);
 
-        $articleId = $request->get('articleId');
-        $article = Articles::all()->where('articleId', '=', $articleId)->first();
+        $articleId = $request->get('id');
+        $article = Articles::all()->where('id', '=', $articleId)->first();
         $article->title = $request->get('title');
         $article->body = $request->get('body');
-        $article->modifiedBy = session('user')->userId;
-        $article->articleTypeId = $request->get('articleTypeId');
-        $article->statusId = $request->get('statusId');
+        $article->modified_by = session('user')['id'];
+        $article->articletype_id = $request->get('articletype_id');
+        $article->status_id = $request->get('status_id');
         $article->save();
+        $log = new logs();
+        $log->savelog(session('user')['id'], 'Updated an Article');
         alert()->success('Article Updated!', 'You have successfully updated an article!');
         return redirect('writer/articles/create');
     }
@@ -143,6 +148,8 @@ class ArticleController extends Controller
         }
 
         if ($article->save()) {
+            $log = new logs();
+            $log->savelog(session('user_id'), 'Changed an article status');
             toast('Status Changed!', 'success', 'bottom-right');
             return redirect()->back();
         } else {

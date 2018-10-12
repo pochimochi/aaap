@@ -9,11 +9,11 @@ class EventCategories extends Model
     protected $table = 'eventcategories';
 
     protected $fillable = [
-        'eventCategoryId', 'eventId', 'categoryId'
+        'id', 'event_id', 'category_id'
 
     ];
 
     protected $hidden = [
-        'eventCategoryId', 'eventId', 'categoryId'
+        'id', 'event_id', 'category_id'
     ];
 }

@@ -19,7 +19,7 @@ class AdminGroup
         if (!Auth::user() || !session()->exists('user')) {
             return redirect('/login');
         } else {
-            if (Auth::user()->userTypeId == 4) {
+            if (Auth::user()->role_id == 4) {
                 // user value cannot be found in session
                 alert()->warning('Oops!', 'You need to be an Administrator to access this page.');
                 return redirect('/home');

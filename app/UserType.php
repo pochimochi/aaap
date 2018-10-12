@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserType extends Model
 {
-    protected $table = 'usertype';
+    protected $table = 'user_role';
     public $timestamps = false;
     protected $fillable = [
         'name'
@@ -16,4 +16,9 @@ class UserType extends Model
     protected $hidden = [
 
     ];
+
+    public function user(){
+        return $this->hasOne('\App\User', 'role_id');
+    }
+
 }

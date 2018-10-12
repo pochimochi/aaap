@@ -20,6 +20,13 @@
                                     Events
                                 </a>
                             </li>
+                           {{-- <li>
+                                    <a href="{{URL::to('member/userjoin')}}"
+                                       class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2">
+                                        Events Joined
+                                    </a>
+
+                            </li>--}}
                             <div class="dropdown">
                                 <a class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2 dropdown-toggle" href="#" role="button"
                                    id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -75,7 +82,7 @@
                         @else
                             <li class="nav-item m-1">
                                 <a href="{{URL::to('/logout')}}"
-                                   class="btn btn-md btn-danger font-family-secondary sm-font-size px-3 font-weight__500">
+                                   class="btn btn-rounded btn-danger font-family-secondary sm-font-size px-3 font-weight__500">
                                     Log Out
                                 </a>
                             </li>

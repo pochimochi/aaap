@@ -15,7 +15,7 @@ use DB;
 class MembersController extends Controller
 {
     public function index(){
-        $members = DB::select('select * from users where userTypeId = 4');
+        $members = User::all()->where('role_id', 4);
         return view('pages.admin.members', ['members' => $members]);
 
 
@@ -23,7 +23,7 @@ class MembersController extends Controller
     public function changeStatus($userId, $status)
     {
         $members = User::find($userId);
-        $members->membershipStatus = $status;
+        $members->active = $status;
         if ($members->save()) {
             toast('Status Changed!', 'success', 'bottom-right');
             return redirect('members');

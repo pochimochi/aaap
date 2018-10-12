@@ -31,70 +31,66 @@
 
 </head>
 
-<body class="bg-dark">
+<body>
 
 
 <!-- Main wrapper  -->
 
-
-<div class="sufee-login d-flex align-content-center flex-wrap">
-    <div class="container">
-
-
-        <div class="login-content">
-
-            <div class="login-form">
-                <h2 align="center">Login</h2>
-                @if($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+<div class="bgsvg">
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-form">
+                    <h2 align="center">Login</h2>
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
 
-                <form action="{{URL::to('/login')}}" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" name="emailAddress" class="form-control input-rounded">
-
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" name="userPassword" class="form-control input-rounded">
-
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Remember Me
-                        </label>
-                        <label class="pull-right">
-                            <a href="{{URL::to('/forgotpassword/create')}}">Forgotten Password?</a>
-                        </label>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <div class="g-recaptcha" align="center"
-                             data-sitekey="6Lfj6XAUAAAAAP9Mkg2ajxaSAZy0LaV-TS_BcnlK" style="display: block">
+                    <form action="{{URL::to('/login')}}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="email" name="email" class="form-control input-rounded">
 
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-rounded">Sign in
-                    </button>
-                    <input type="hidden" name="_token" value="{{ Session::token() }}">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control input-rounded">
 
-                    <div class="register-link m-t-15 text-center">
-                        <p>Don't have account ? <a href="{{URL::to('/register')}}"> Sign Up Here</a></p>
-                    </div>
-                </form>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Remember Me
+                            </label>
+                            <label class="pull-right">
+                                <a href="{{URL::to('/forgotpassword/create')}}">Forgotten Password?</a>
+                            </label>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <div class="g-recaptcha" align="center"
+                                 data-sitekey="6Lfj6XAUAAAAAP9Mkg2ajxaSAZy0LaV-TS_BcnlK" style="display: block">
+
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-rounded">Sign in
+                        </button>
+                        <input type="hidden" name="_token" value="{{ Session::token() }}">
+
+                        <div class="register-link m-t-15 text-center">
+                            <p>Don't have account ? <a href="{{URL::to('/register')}}"> Sign Up Here</a></p>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-
-
     </div>
 </div>
 

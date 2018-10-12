@@ -11,11 +11,21 @@ class Pwa extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'pwaLastName', 'pwaFirstName', 'pwaMiddleName', 'pwaGenderId', 'pwaOccupation'
+        'pwaLastName', 'pwaFirstName', 'pwaMiddleName', 'pwaGender', 'pwaOccupation', 'user_id', 'pwaRelationship', 'employer_id'
 
     ];
 
     protected $hidden = [
         'userId'
     ];
+
+    public function pwa()
+    {
+        return $this->belongsTo('\App\User');
+    }
+
+    public function employer()
+    {
+        return $this->belongsTo('\App\Employer', 'employer_id');
+    }
 }

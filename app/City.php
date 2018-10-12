@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     protected $table = 'cities';
-    protected $primaryKey = 'cityId';
     public $timestamps = false;
 
     protected $fillable = [
@@ -18,6 +17,9 @@ class City extends Model
     protected $hidden = [
 
     ];
-
+    public function address()
+    {
+        return $this->hasOne('\App\Address');
+    }
 
 }

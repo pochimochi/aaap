@@ -20,7 +20,7 @@
                             @endif
                             <div class="basic-elements">
                                 <form method="post"
-                                      action="{{action('AnnouncementsController@update', $id)}}"
+                                      action="{{action('AnnouncementsController@update', $announcement->id)}}"
                                       enctype="multipart/form-data">
                                     @method('PUT')
                                     @csrf
@@ -70,7 +70,7 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="card shadow">
-                                                    <img src="{{asset('/storage/'.$announcement->location)}}" class="img-fluid">
+                                                    <img src="{{asset('/storage/'.$announcement->image->location.'')}}" class="img-fluid">
                                                 </div>
                                             </div>
                                         </div>
@@ -86,7 +86,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class=" row">
+                                        {{--<div class=" row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <h6>Posted By</h6>
@@ -103,7 +103,7 @@
                                                            value="{{$announcement->modified_by}}">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>--}}
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="form-group">

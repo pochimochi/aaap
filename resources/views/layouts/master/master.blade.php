@@ -39,10 +39,26 @@
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+    <script src="{{asset('js/dropzone.js')}}"></script>
     <script type="text/javascript">
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 
 
@@ -66,6 +82,7 @@
                     <li><a href="{{URL::to('/admin/adminMaintenance')}}"><i class="menu-icon fa fa-users"></i>Administrators</a>
                     </li>
                     <li><a href="{{URL::to('/admin/members')}}"><i class="menu-icon fa fa-user"></i>Members</a></li>
+                    <li><a href="{{URL::to('/admin/logs')}}"><i class="menu-icon fa fa-address-book"></i>Logs</a></li>
                 @elseif(session('role') == 2)
                     <li><a href="{{URL::to('writer/articles')}}"><i
                                     class="menu-icon fa fa-book"></i>View Articles</a></li>
@@ -74,8 +91,10 @@
                     <li><a href="{{URL::to('writer/newsletter')}}"><i
                                     class="menu-icon fa fa-mail-forward"></i>Newsletters</a></li>
                 @elseif(session('role') == 3)
-                    <li><a href="{{URL::to('/contentmanager/event')}}"><i class="menu-icon fa fa-calendar-check-o"></i>Event</a></li>
-                    <li><a href="{{URL::to('/contentmanager/announcements/create')}}"><i class="menu-icon fa fa-bookmark"></i>Announcements</a>
+                    <li><a href="{{URL::to('/contentmanager/event')}}"><i class="menu-icon fa fa-calendar-check-o"></i>Event</a>
+                    </li>
+                    <li><a href="{{URL::to('/contentmanager/announcements/create')}}"><i
+                                    class="menu-icon fa fa-bookmark"></i>Announcements</a>
                     </li>
                 @endif
                 <li>
@@ -87,7 +106,7 @@
                     <li><a href="{{URL::to('/register')}}"><i class="menu-icon fa fa-registered"></i>Register</a></li>
                 @else
 
-                    <li><a href="{{URL::to('/profile')}}"><i class="menu-icon fa fa-laptop"></i>Profile</a></li>
+                    {{--<li><a href="{{URL::to('/profile')}}"><i class="menu-icon fa fa-laptop"></i>Profile</a></li>--}}
                     <li><a href="{{URL::to('/logout')}}"><i class="menu-icon fa fa-sign-out"></i>Logout</a></li>
                 @endif
 
@@ -112,7 +131,7 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href="./"><img src="{{asset('images/logos/logotexttest.png')}}" alt="Logo"></a>
+                <a class="navbar-brand" href="{{url('/home')}}"><img src="{{asset('images/logos/logotexttest.png')}}" alt="Logo"></a>
                 <a class="navbar-brand hidden" href="./"><img src="{{asset('images/logos/logoicontest.png')}}"
                                                               alt="Logo"></a>
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
@@ -145,7 +164,7 @@
 
                         <div class="user-menu dropdown-menu">
 
-                            <a class="nav-link" href="{{URL::to('/profile')}}"><i class="fa fa-user"></i>My Profile</a>
+                            {{--<a class="nav-link" href="{{URL::to('/profile')}}"><i class="fa fa-user"></i>My Profile</a>--}}
 
                             <a class="nav-link" href="{{URL::to('/logout')}}"><i class="fa fa-power-off"></i>Logout</a>
 

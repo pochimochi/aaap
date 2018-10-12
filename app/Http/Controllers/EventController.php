@@ -7,12 +7,13 @@ use App\City;
 use App\Event;
 use App\EventAttendance;
 use App\EventImages;
-use App\Image;
-use App\User;
+use App\Images;
+use App\logs;
+use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Image;
+use Intervention\Image\ImageManager;
 
 
 class EventController extends Controller
@@ -20,42 +21,43 @@ class EventController extends Controller
     public function event()
     {
 
-        $events = DB::select('select * from events');
+        $events = Event::all();
 
         return view('pages.contentsmanager.event', ['events' => $events]);
     }
+
 
     public function store(Request $request)
     {
         $request->validate([
 
-            'eventName' => 'required|string|max:100',
-            'eventDescription' => 'required|max:500',
+            'name' => 'required|string|max:100',
+            'description' => 'required|max:500',
             'venue' => 'required|max:50',
-            'postedBy' => 'required',
-//            'modifiedBy' => 'required', sa update lang to
-            'cityId' => 'required',
+            'city' => 'required',
             'unitno' => 'required|max:5',
             'bldg' => 'required|max:50',
             'street' => 'required|max:50'
 
         ]);
-
-
         $eventinfo = $request->all();
-        $cityId = City::create(['name' => $eventinfo['cityId']]);
-        ($cityId->cityId);
-        $eventinfo['cityId'] = $cityId->cityId;
-        $addressid = Address::create($eventinfo);
-        $eventinfo['addressId'] = $addressid->addressId;
-        $eventid = Event::create($eventinfo);
+        $event = new Event($eventinfo);
+        $eventinfo['city_id'] = City::create(['name' => $eventinfo['city']])->id;
+        $eventinfo['address_id'] = Address::create($eventinfo)->id;
+        $eventinfo['posted_by'] = session('user')['id'];
 
-        $eventImages = $request->file('eventImage')->store('public');
-        $imageId = Image::create(['imageLocation' => $eventImages]);
+        $eventinfo['image_name'] = $request->file('eventImage')->getClientOriginalName();
+        $img = (new \Intervention\Image\ImageManager)->make($request->file('eventImage'));
+        /*$img->resize(850, 315, function ($constraint) {
+            $constraint->aspectRatio();
+        });*/
+        Storage::put('public/' . $eventinfo['image_name'] . '', (string)$img->encode());
+        $eventinfo['image_id'] = Images::create(['location' => $eventinfo['image_name']])->id;
+        $eventinfo['event_id'] = Event::create($eventinfo)->id;
+        /*EventImages::create(['image_id' => $eventinfo['image_id'], 'event_id' => $eventinfo['event_id']]);*/
 
-        EventImages::create(['imageId' => $imageId->id, 'eventId' => $eventid->eventId]);
-
-
+        $log = new logs();
+        $log->savelog(session('user')['id'], 'Added an Event');
         alert()->success('Event', 'Added');
         return redirect()->back();
 
@@ -65,107 +67,113 @@ class EventController extends Controller
     {
 
         $event = Event::find($eventId);
-        $address = Address::find($event->addressId);
-        $city = City::find($address->cityId);
-        return view('pages.contentsmanager.eventedit')
-            ->with(compact('event', 'eventId'))
-            ->with(compact('address', 'event->addressId'))
-            ->with(compact('city', 'address->cityId'));
+
+        return view('pages.contentsmanager.eventedit', ['event' => $event]);
+
 
     }
 
     public function update(Request $request, $eventId)
     {
         $this->validate($request, [
-            'eventName' => 'required|max:100',
-            'eventDescription' => 'required|max: 500',
+            'name' => 'required|max:100',
+            'description' => 'required|max: 500',
             'venue' => 'required|max:50',
-            'modifiedBy' => 'required',
-//            'status' => 'required',
-            'cityname' => 'required',
+            'status' => 'required',
+            'city' => 'required',
             'unitno' => 'required|max:5',
             'bldg' => 'required|max:50',
             'street' => 'required|max:50'
         ]);
 
+
         $eventinfo = $request->except(['_token']);
+        $event = Event::find($eventId);
 
-        $cityId = City::where('cityId', $eventinfo['cityId'])
-            ->update(['name' => $eventinfo['cityname']]);
 
-        $addressid = Address::where('addressId', $eventinfo['addressId'])
+        if ($request->file('eventImage') != null) {
+            $eventinfo['image_name'] = $request->file('eventImage')->getClientOriginalName();
+            $img = (new \Intervention\Image\ImageManager)->make($request->file('eventImage'));
+            $img->resize(850, 315, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            Storage::put('public/' . $eventinfo['image_name'] . '', (string)$img->encode());
+            $eventinfo['image_id'] = Images::create(['location' => $eventinfo['image_name']])->id;
+
+        }
+
+
+        City::where('id', $event->address->city->id)
+            ->update(['name' => $eventinfo['city']]);
+
+        Address::where('id', $event->address->id)
             ->update(['street' => $eventinfo['street'], 'bldg' => $eventinfo['bldg'], 'unitno' => $eventinfo['unitno']]);
 
-        $eventinfo1 = $request->except(['_token', 'street', 'bldg', 'unitno', 'cityname', 'cityId', 'fileToUpload' , 'eventImage']);
+        $eventinfo['modified_by'] = session('user')['id'];
+        $eventinfo = $request->except(['_token', 'street', 'bldg', 'eventImage', 'unitno', 'city', 'city_id', 'fileToUpload', 'event_image']);
 
-        Event::where('eventId', $eventId)
-            ->update($eventinfo1);
 
+        Event::where('id', $eventId)
+            ->update($eventinfo);
+
+        $log = new logs();
+        $log->savelog(session('user')['id'], 'Updated an Event');
         alert()->success('Event', 'Updated');
-        return redirect()->back();
+        return redirect('/contentmanager/event');
 
     }
 
-    public function search(Request $request)
+    public function changeStatus($eventId, $status)
     {
-    $search = $request->search;
-    $events = DB::table('events')->where('eventName', 'LIKE', '%' . $search . '%')->paginate(10);
-
-        return view('pages.member.event.eventview', ['eventName' => $events]);
-
-    }
-    public function userevent(Request $request)
-    {
-
-        $events = DB::select('select * from events');
-
-        return view('pages.member.event.userevent', ['events' => $events]);
-
-//        return view('pages.member.event.userevent', ['events' => $events]);
-    }
-
-    public function userjoin($eventId)
-    {
-
         $event = Event::find($eventId);
-        $address = Address::find($event->addressId);
-        $city = City::find($address->cityId);
-        return view('pages.member.event.userjoin')
-            ->with(compact('event', 'eventId'))
-            ->with(compact('address', 'event->addressId'))
-            ->with(compact('city', 'address->cityId'));
+        $event->status = $status;
+        if ($event->save()) {
+            $log = new logs();
+            $log->savelog(session('user')['id'], 'Changed an Event Status');
 
-
-
-
-
-//        $attendanceinfo = $request->all();
-//
-//        $userId = User::where(['userId' => $attendanceinfo['userId']]);
-//        ($userId->userId);
-//        $attendanceinfo['userId'] = $userId->userId;
-//        $eventId = Event::where($attendanceinfo);
-//        $attendanceinfo['eventId'] = $eventId->eventId;
-//        dd($eventId);
-//        $attendanceid = EventAttendance::create($attendanceinfo);
-//
-//        return view('pages.member.event.userevent' ,'Succesfully', 'Joined');
-
+            toast('Status Changed!', 'success', 'bottom-left');
+            return redirect()->back();
+        } else {
+            alert()->error('Oops!', 'something went wrong 😞');
+            return redirect()->back();
+        }
     }
 
-    public function userjoins(Request $request)
+    public function userevent()
     {
-        $attendanceinfo = $request->all();
+        $events = Event::all()->where('status', '=', 1);
+        return view('pages.member.event.userevent', ['events' => $events]);
+    }
 
-        $userId = User::where(['userId' => $attendanceinfo['userId']]);
-        ($userId->userId);
-        $attendanceinfo['userId'] = $userId->userId;
-        $eventId = Event::where($attendanceinfo);
-        $attendanceinfo['eventId'] = $eventId->eventId;
-        dd($eventId);
-        $attendanceid = EventAttendance::create($attendanceinfo);
+//    public function userjoin(Request $request, $eventId)
+//    {
+//
+//        $attendance['user_id'] = Auth::user()->id;
+//        $attendance['event_id'] = $eventId;
+//        $attendance['status'] = 1;
+//
+//        EventAttendance::where($attendance);
+//
+//        return view('pages.member.event.userjoin', ['events' => $eventId]);
+//
+//    }
 
-        return view('pages.member.event.userevent' ,'Succesfully', 'Joined');
+    public function userjoins(Request $request, $eventId)
+    {
+
+        $attend = $request->except(['_token']);
+
+
+
+        $attendance['user_id'] = Auth::user()->id;
+        $attendance['event_id'] = $eventId;
+        $attendance['status'] = 1;
+
+        EventAttendance::create($attendance);
+
+
+        alert()->success('Event', 'Joined');
+        return redirect()->back();
     }
 
     public function usercancels($attendanceid)
@@ -174,7 +182,10 @@ class EventController extends Controller
 
         $attendance->delete();
 
-        return redirect('member/userevent' , 'You are not Joined in this Event Anymore.');
+        return redirect('member/userevent', 'You are not Joined in this Event Anymore.');
     }
 
 }
+
+
+

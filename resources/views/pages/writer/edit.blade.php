@@ -17,7 +17,7 @@
                             </div>
                         @endif
                         <div class="basic-elements">
-                            <form method="post" action="{{URL::to('/writer/articles', $article->articleId)}}">
+                            <form method="post" action="{{URL::to('/writer/articles', $article->id)}}">
                                 @csrf
                                 @method('Put')
                                 <div class="form-body">
@@ -25,9 +25,9 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="control-label">Article ID</label>
-                                                <input type="text" name="articleId" id="articleId"
+                                                <input type="text" name="id" id="id"
                                                        class="form-control input-default"
-                                                       value="{{$article->articleId}}" readonly="true">
+                                                       value="{{$article->id}}" readonly="true">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -42,23 +42,23 @@
                                             <div class="form-group">
                                                 <label class="control-label">Article Type</label>
                                                 <select class="form-control custom-select input-default"
-                                                        name="articleTypeId" value="{{$article->articleTypeId}}">
-                                                    <option value="1" @if($article->articleTypeId=="1") selected @endif>
+                                                        name="articletype_id" value="{{$article->articletype_id}}">
+                                                    <option value="1" @if($article->articletype_id=="1") selected @endif>
                                                         Case Studies
                                                     </option>
-                                                    <option value="2" @if($article->articleTypeId=="2") selected @endif>
+                                                    <option value="2" @if($article->articletype_id=="2") selected @endif>
                                                         Commentaries
                                                     </option>
-                                                    <option value="3" @if($article->articleTypeId=="3") selected @endif>
+                                                    <option value="3" @if($article->articletype_id=="3") selected @endif>
                                                         Methodologies
                                                     </option>
-                                                    <option value="4" @if($article->articleTypeId=="4") selected @endif>
+                                                    <option value="4" @if($article->articletype_id=="4") selected @endif>
                                                         Reports
                                                     </option>
-                                                    <option value="5" @if($article->articleTypeId=="5") selected @endif>
+                                                    <option value="5" @if($article->articletype_id=="5") selected @endif>
                                                         Research
                                                     </option>
-                                                    <option value="6" @if($article->articleTypeId=="6") selected @endif>
+                                                    <option value="6" @if($article->articletype_id=="6") selected @endif>
                                                         Review
                                                     </option>
                                                 </select>
@@ -89,16 +89,17 @@
                                         <div class="form-group">
                                             <label class="control-label">Status</label>
                                             <select class="form-control custom-select  input-default"
-                                                    name="statusId">
+                                                    name="status_id">
                                                 <option>Select Status</option>
-                                                <option value="0"
-                                                        @if($article->statusId=="0") selected @endif>
-                                                    Inactive
-                                                </option>
                                                 <option value="1"
-                                                        @if($article->statusId=="1") selected @endif>
+                                                        @if($article->status_id=="1") selected @endif>
                                                     Active
                                                 </option>
+                                                <option value="0"
+                                                        @if($article->status_id=="0") selected @endif>
+                                                    Inactive
+                                                </option>
+
                                             </select>
                                         </div>
                                     </div>

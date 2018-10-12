@@ -20,7 +20,8 @@ class AdminsController extends Controller
 {
     public function index()
     {
-        $admins = DB::select('select * from users where userTypeId = 2 or userTypeId = 3');
+        $admins = User::all()->whereIn('role_id', ['2' , '3']);
+
         return view('pages.admin.admins', ['admins' => $admins]);
     }
 
@@ -28,26 +29,26 @@ class AdminsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'userTypeId' => 'required|integer',
-            'userFirstName' => 'required|max:30|string|regex:/^[a-z ,.\'-]+$/i',
-            'userMiddleName' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
-            'userLastName' => 'required|max:30|:regex/^[a-z ,.\'-]+$/i',
-            'userGenderId' => 'required',
+            'role_id' => 'required|integer',
+            'firstname' => 'required|max:30|string|regex:/^[a-z ,.\'-]+$/i',
+            'middlename' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
+            'lastname' => 'required|max:30|:regex/^[a-z ,.\'-]+$/i',
+            'gender' => 'required',
 //            'userProfPic' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
-            'userPassword' => 'required|min:8|max:64|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/',
+            'password' => 'required|min:8|max:64|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/',
             'approvedBy' => 'nullable|string',
             'emailCode' => 'nullable',
-            'emailAddress' => 'required|unique:users|email',
+            'email' => 'required|unique:users|email',
         ]);
 
         $userinfo = $request->all();
-        $userinfo['userPassword'] = bcrypt($userinfo['userPassword']);
-        $userinfo['membershipStatus'] = 1;
-        $userinfo['idVerification'] = 1;
-        $userinfo['permanentAddress'] = 0;
+        $userinfo['password'] = bcrypt($userinfo['password']);
+        $userinfo['status'] = 1;
+        $userinfo['idverification_id'] = 1;
+        $userinfo['permanentaddress_id'] = 0;
 
         $userid = User::create($userinfo);
-        $userinfo['userId'] = $userid->id;
+        $userinfo['id'] = $userid->id;
 
         alert()->success('New Administrator', 'Added');
         return redirect()->back();
@@ -56,9 +57,9 @@ class AdminsController extends Controller
     public function changeStatus($userId, $status)
     {
         $admins = User::find($userId);
-        $admins->membershipStatus = $status;
+        $admins->active = $status;
         if ($admins->save()) {
-            toast('Status Changed!','success','bottom-right');
+            toast('Status Changed!', 'success', 'bottom-right');
             return redirect()->back();
         } else {
             alert()->error('Oops!', 'something went wrong 😞');

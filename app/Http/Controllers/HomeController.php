@@ -11,6 +11,8 @@ class HomeController extends Controller
     {
         if (Auth::user() && session('user')) {
             if (session('role') != 4) {
+
+
                 return view('pages.master.dashboard');
             } else {
                 return view('pages.master.home');

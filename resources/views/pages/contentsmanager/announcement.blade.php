@@ -75,7 +75,7 @@
                                                 <div class="form-group">
                                                     <label>Status</label>
                                                     <select class="form-control custom-select input-default"
-                                                            name="status" id="status">
+                                                            name="status_id" id="status_id">
                                                         <option value="">Select Status</option>
                                                         <option value="1">Active</option>
                                                         <option value="0">Inactive</option>
@@ -93,19 +93,13 @@
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label>Description</label>
-                                                    <textarea class="form-control input-default" id="description" rows="3"
+                                                    <textarea class="form-control input-default" id="description"
+                                                              rows="3"
                                                               name="description"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class=" row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>Posted By</label>
-                                                    <input type="text" name="posted_by" id="posted_by"
-                                                           class=" form-control input-default">
-                                                </div>
-                                            </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Due Date</label>
@@ -154,7 +148,7 @@
                                         <tr>
                                             <td>{{ $announcement->id }}</td>
                                             <td>{{ $announcement->title }}</td>
-                                            <td>{{ $announcement->posted_by }}</td>
+                                            <td>{{ $announcement->user->firstname . ' ' . $announcement->user->lastname }}</td>
                                             {{--<td>{{ $announcement->modifiedBy }}</td>--}}
                                             <td>{{ \Carbon\Carbon::parse($announcement->created_at)->format('d/m/Y')}}</td>
                                             {{--<td>{{ \Carbon\Carbon::parse($announcement->updated_at)->format('d/m/Y')}}</td>--}}
@@ -162,17 +156,19 @@
                                             <td>{{ \Carbon\Carbon::parse($announcement->due_date)->format('d/m/Y')}}</td>
                                             <td><a id="btn" type="submit" onclick="confirm('Are you sure?')"
                                                    href="{{URL::to('contentmanager/announcements/changeStatus/'. $announcement->id. '/'.  ($announcement->status_id == 1 ? '0' : '1')  .'')}}"
-                                                   class="btn {{$announcement->status_id == 1 ? 'btn-success' : 'btn-danger'}}">{{$announcement->status_id == 1 ? 'Active' : 'Inactive' }}</a>
+                                                   class="{{$announcement->status_id == 1 ? 'btn btn-rounded btn-success' : 'btn btn-rounded btn-danger'}}">{{$announcement->status_id == 1 ? 'Active' : 'Inactive' }}</a>
                                             </td>
-                                            <td><a href="{{URL::to('/contentmanager/announcements/'. $announcement->id .'/edit')}}"
-                                                   class="btn btn-warning btn-rounded">Edit</a></td>
+                                            <td>
+                                                <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id .'/edit')}}"
+                                                   class="btn btn-rounded btn-warning ">Edit</a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <br>
-                            <button type="submit" class="positive" name="submit" id="submit" hidden="hidden">save</button>
+                            <button type="submit" class="positive" name="submit" id="submit" hidden="hidden">save
+                            </button>
                         </form>
                     </div>
                 </div>
