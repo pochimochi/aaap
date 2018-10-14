@@ -19,6 +19,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => 'member', 'prefix' => 'member'], function () {
         //member
 
+        Route::post('/member/articles/search', 'ArticleController@searching');
         Route::resource('articles', 'ArticleController')->only(['index', 'show']);
         Route::get('announcements/type/{type}', 'AnnouncementsController@indexSelect');
         Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);

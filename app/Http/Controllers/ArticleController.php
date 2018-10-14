@@ -14,21 +14,28 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         if(session('user')){
             if(session('role') == 2){
                 $articles = Articles::all();
+
                 return view('pages.writer.create', ['articles' => $articles]);
             }else{
-                $articles = Articles::all()->where('status_id', '=', '1');
+                $articles = Articles::where('status_id', '=', '1')->paginate(6);
+
                 return view('pages.member.article.index', ['articles' => $articles]);
             }
         }else{
             return redirect('/home');
         }
+    }
+    public function searching(Request $request){
 
+        $articles = Articles::where('title', 'LIKE', '%' . $request->search . '%')->paginate(6);
 
+        return view('pages.member.article.index', ['articles' => $articles]);
 
 
     }
@@ -85,9 +92,9 @@ class ArticleController extends Controller
      */
     public function show($articleId)
     {
-        $article = Articles::all()->where('id', $articleId)->first();
+        $article = Articles::find($articleId);
 
-        return view('pages.member.article.show', compact('article', 'id'));
+        return view('pages.member.article.show', ['article' => $article]);
     }
 
     /**

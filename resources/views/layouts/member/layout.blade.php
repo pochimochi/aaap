@@ -69,6 +69,7 @@
 
 
     @yield('content')
+
     <footer class="footer section bg-light-primary text-gray pt-2">
         <div class="container">
             <!-- Empty Space -->

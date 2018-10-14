@@ -43,8 +43,22 @@ class ForgotPasswordController extends Controller
         <hr />
         </body>
         </html>';
+
+
+
+
+
+
+
             $helper = new helper();
             $result = $helper->emailSend($request['email'], $body, 'Forgot password');
+
+
+
+
+
+
+
             if ($result == false) {
                 \alert()->error('Email was not sent!', 'Try Again Later');
                 return redirect()->back()->withErrors($result->ErrorInfo);
