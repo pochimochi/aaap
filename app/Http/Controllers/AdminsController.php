@@ -14,14 +14,14 @@ use App\Address;
 use App\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\logs;
 
 
 class AdminsController extends Controller
 {
     public function index()
     {
-        $admins = User::all()->whereIn('role_id', ['2' , '3']);
-
+        $admins = User::all()->whereIn('role_id', ['2', '3']);
         return view('pages.admin.admins', ['admins' => $admins]);
     }
 
@@ -34,7 +34,7 @@ class AdminsController extends Controller
             'middlename' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'lastname' => 'required|max:30|:regex/^[a-z ,.\'-]+$/i',
             'gender' => 'required',
-//            'userProfPic' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
+//            'profpic' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
             'password' => 'required|min:8|max:64|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/',
             'approvedBy' => 'nullable|string',
             'emailCode' => 'nullable',
@@ -50,6 +50,8 @@ class AdminsController extends Controller
         $userid = User::create($userinfo);
         $userinfo['id'] = $userid->id;
 
+        $log = new logs();
+        $log->savelog(session('user')['id'], 'Added a New User');
         alert()->success('New Administrator', 'Added');
         return redirect()->back();
     }
@@ -59,6 +61,8 @@ class AdminsController extends Controller
         $admins = User::find($userId);
         $admins->active = $status;
         if ($admins->save()) {
+            $log = new logs();
+            $log->savelog(session('user')['id'], 'Changed User Status');
             toast('Status Changed!', 'success', 'bottom-right');
             return redirect()->back();
         } else {

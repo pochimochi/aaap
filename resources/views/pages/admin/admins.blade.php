@@ -14,7 +14,7 @@
                 <div class="col-lg-12">
                     <div class="card card-outline-primary">
                         <div class="card-header">
-                            <h4 class="">Add Administrator</h4>
+                            <h4 class="">Add Writer or Content Manager</h4>
                         </div>
                         </br>
                         <div class="card-body">
@@ -116,7 +116,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">List of Administrators</h4>
+                            <h4 class="card-title">List of Users</h4>
                         </div>
                         <div class="table-responsive m-t-40">
                             <table id="myTable" class="table table-bordered table-striped">
