@@ -20,15 +20,16 @@
                                     Events
                                 </a>
                             </li>
-                           {{-- <li>
-                                    <a href="{{URL::to('member/userjoin')}}"
-                                       class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2">
-                                        Events Joined
-                                    </a>
+                            {{-- <li>
+                                     <a href="{{URL::to('member/userjoin')}}"
+                                        class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2">
+                                         Events Joined
+                                     </a>
 
-                            </li>--}}
+                             </li>--}}
                             <div class="dropdown">
-                                <a class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2 dropdown-toggle" href="#" role="button"
+                                <a class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2 dropdown-toggle"
+                                   href="#" role="button"
                                    id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">
                                     Announcements
@@ -48,25 +49,25 @@
                                 </a>
                             </li>
                         @endif
-                        <li class="nav-item">
-                            <a href="#about"
-                               class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2">
-                                About
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#contact"
-                               class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2">
-                                Contact
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#contact"
-                               class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2">
-                                FAQ
-                            </a>
-                        </li>
                         @if(!session('user'))
+                            <li class="nav-item">
+                                <a href="#about"
+                                   class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2">
+                                    About
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#contact"
+                                   class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2">
+                                    Contact
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#contact"
+                                   class="nav-link text-dark-gray font-family-secondary font-weight__700 mx-lg-2">
+                                    FAQ
+                                </a>
+                            </li>
                             <li class="nav-item m-1">
                                 <a href="{{URL::to('/login')}}"
                                    class="btn btn-md btn-secondary font-family-secondary sm-font-size px-3 font-weight__500">

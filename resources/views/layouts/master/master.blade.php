@@ -72,12 +72,6 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="menu-title">Dashboard</li><!-- /.menu-title -->
-                <li><a href="#about"><i class="menu-icon fa fa-info-circle"></i>About</a></li>
-                <li>
-                    <a href="{{URL::to('/home')}}" data-toggle="tooltip" data-placement="top"
-                       title="Tooltip on top"><i
-                                class="menu-icon fa fa-home"></i>Home</a>
-
                 @if(session('role') == 1)
                     <li><a href="{{URL::to('/admin/adminMaintenance')}}"><i class="menu-icon fa fa-users"></i>Administrators</a>
                     </li>
@@ -93,8 +87,16 @@
                 @elseif(session('role') == 3)
                     <li><a href="{{URL::to('/contentmanager/event')}}"><i class="menu-icon fa fa-calendar-check-o"></i>Event</a>
                     </li>
-                    <li><a href="{{URL::to('/contentmanager/announcements/create')}}"><i
-                                    class="menu-icon fa fa-bookmark"></i>Announcements</a>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Announcement</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-plus"></i><a href="{{URL::to('/contentmanager/announcements/create')}}">Add</a>
+                            </li>
+                            <li><i class="fa fa-list"></i><a
+                                        href="{{URL::to('/contentmanager/announcements')}}">List</a>
+                            </li>
+                        </ul>
                     </li>
                 @endif
                 <li>
@@ -131,7 +133,8 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{url('/home')}}"><img src="{{asset('images/logos/logotexttest.png')}}" alt="Logo"></a>
+                <a class="navbar-brand" href="{{url('/home')}}"><img src="{{asset('images/logos/logotexttest.png')}}"
+                                                                     alt="Logo"></a>
                 <a class="navbar-brand hidden" href="./"><img src="{{asset('images/logos/logoicontest.png')}}"
                                                               alt="Logo"></a>
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
