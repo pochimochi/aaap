@@ -15,10 +15,7 @@
                       {{--  <div class="card-header">--}}
                             <h3 class="card-title">
                                 <a class="text-muted" href="{{URL::to('member/articles/'. $article->articleId .'')}}">
-
-
                                     {{ $article->title}}
-
                                 </a>
                                 <small>
                                     @if (session('role') != 4)
