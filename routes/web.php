@@ -63,6 +63,7 @@ Route::group(['middleware' => ['web']], function () {
 
         });
     });
+
     //forgotpassword
     Route::get('/forgotpassword', 'ForgotPasswordController@getKeys');
     Route::post('/forgotpassword/save', 'ForgotPasswordController@saveNewPassword');

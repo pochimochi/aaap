@@ -40,7 +40,7 @@
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
-                <div class="login-form">
+                <div class="login-form shadow">
                     <h2 align="center">Login</h2>
                     @if($errors->any())
                         <div class="alert alert-danger">
