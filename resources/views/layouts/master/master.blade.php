@@ -132,10 +132,12 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{url('/home')}}"><img src="{{asset('images/logos/logotexttest.png')}}" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="{{asset('images/logos/logoicontest.png')}}"
-                                                              alt="Logo"></a>
-                <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                <a id="menuToggle" class=""><i class="fa fa-bars"></i></a>
+            &nbsp;&nbsp;
+                <a class="navbar-brand" href="{{url('/home')}}"><img src="{{asset('images/logos/logo.png')}}" width="" alt="Logo"></a>
+
+
+
             </div>
         </div>
         <div class="top-right">
@@ -149,8 +151,7 @@
                              <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                          </form>
                      </div>
---}}
-                </div>
+--}}                </div>
                 <div class="user-area dropdown float-right">
                     @if(session()->exists('user'))
 

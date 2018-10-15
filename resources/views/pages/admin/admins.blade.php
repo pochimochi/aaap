@@ -141,7 +141,7 @@
                                         <td>{{ $admin->role_id == 2 ? 'Writer' : 'Content Manager'}}</td>
                                         <td>{{ $admin->email}}</td>
                                         <td>{{ \Carbon\Carbon::parse($admin->created_at)->format('d/m/Y')}}</td>
-                                        <td><a id="btn" type="submit"
+                                        <td><a id="btn"
                                                href="{{URL::to('admin/changeStatus/'. $admin->id. '/'.  ($admin->active == 1 ? '0' : '1')  .'')}}"
                                                class="btn  {{$admin->active == 1 ? 'btn-success' : 'btn-danger'}}">{{$admin->active == 1 ? 'Active' : 'Inactive' }}</a>
                                         </td>

@@ -1,6 +1,7 @@
 @extends('layouts.master.master')
-<body class="open"></body>
+
 @section('content')
+    <body class="open"></body>
     <div class="content">
         <div class="card shadow">
             <div class="card-body">

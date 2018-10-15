@@ -1,11 +1,11 @@
 @extends('layouts.master.master')
-<body class="open"></body>
+
 @section('content')
 
-
+    <body class="open"></body>
 
     <div class="content">
-        <div class="container-fluid">
+        <div class="container">
 
             <div class="card">
                 <div class="card-header">Create an Article</div>
@@ -97,7 +97,7 @@
 
                     <div class="">
                         <table id="myTable" class="table">
-                            <thead>
+                            <thead class="thead-light">
                             <tr>
                                 <th>Article ID</th>
                                 <th>Title</th>
@@ -128,17 +128,20 @@
                                         <td>{{ $article->user->firstname . ' ' .$article->user->lastname }}</td>
                                         <td>{{ $article->updated_at}}</td>
                                         <td>{{ $article->modified_by}}</td>
-
                                         <td>{{ $article->articletype_id /*== 6 ?'Case Studies' : 'Commentaries' : 'Methodologies' : 'Reports' : 'Research' : 'Review'*/ }}</td>
-                                        <td><button type="submit" id="changestatus" onclick="confirm('are you sure?')"
-                                                    class="{{$article->status_id == 1 ? 'btn btn-rounded btn-success' : 'btn btn-rounded btn-danger'}}">{{$article->status_id == 1 ? 'Active' : 'Inactive' }}</button>
+                                        <td align="center">
+                                            <button type="submit" id="changestatus" onclick="confirm('are you sure?')"
+                                                    class="{{$article->status_id == 1 ? 'btn btn-success' : 'btn btn-rounded btn-danger'}}">{{$article->status_id == 1 ? 'Active' : 'Inactive' }}</button>
+
                                         </td>
-                                        <td><div class="btn-group">
+                                        <td>
+                                            <div class="input-group-btn">
                                                 <a href="{{URL::to('/writer/articles/'.$article->id.'/edit')}}"
-                                                   class="btn btn-warning btn-rounded">Edit</a>
+                                                   class="btn btn-warning  " role="button">Edit</a>
                                                 <a href="{{URL::to('/writer/articles/'.$article->id)}}"
-                                                   class="btn btn-info btn-rounded">Show</a>
-                                            </div> </td>
+                                                   class="btn btn-info " role="button">Show</a>
+                                            </div>
+                                        </td>
                                     </form>
 
                                 </tr>
@@ -147,12 +150,12 @@
                             </tbody>
                         </table>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
+
+
 
 
 
@@ -178,22 +181,22 @@
                 }
             })
         });</script>
-   {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        function send() {
-            preventDefault();
-            $.ajax({
-                url: '{{action('ArticleController@changeStatus')}}',
-                type: 'post',
-                data: $('form').serialize(), // Remember that you need to have your csrf token included
-                dataType: 'json',
-                success: function( _response ){
-                    alert($('form').serialize())
-                },
-                error: function( _response ){
-                    alert($('form').serialize())
-                }
-            });
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script>
+         function send() {
+             preventDefault();
+             $.ajax({
+                 url: '{{action('ArticleController@changeStatus')}}',
+                 type: 'post',
+                 data: $('form').serialize(), // Remember that you need to have your csrf token included
+                 dataType: 'json',
+                 success: function( _response ){
+                     alert($('form').serialize())
+                 },
+                 error: function( _response ){
+                     alert($('form').serialize())
+                 }
+             });
 
-    </script>--}}
+     </script>--}}
 @endsection
