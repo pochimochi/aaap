@@ -19,7 +19,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => 'member', 'prefix' => 'member'], function () {
         //member
 
-        Route::post('/member/articles/search', 'ArticleController@searching');
+        Route::post('/member/articles/find', 'ArticleController@searching');
+        Route::get('/member/articles/find', 'ArticleController@searching');
+        Route::get('articles/archived', 'ArticleController@archived');
         Route::resource('articles', 'ArticleController')->only(['index', 'show']);
         Route::get('announcements/type/{type}', 'AnnouncementsController@indexSelect');
         Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);
@@ -53,6 +55,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['middleware' => 'writer', 'prefix' => 'writer'], function () {
             //articles
             Route::resource('newsletter', 'NewsletterController');
+            Route::post('articles/change', 'ArticleController@changeStatus');
             Route::resource('articles', 'ArticleController');
         });
         //---------------------------------------------------------------------------------

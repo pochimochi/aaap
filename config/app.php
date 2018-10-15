@@ -153,7 +153,7 @@ return [
 
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // Laravel IDE helper
         Intervention\Image\ImageServiceProvider::class,
-        Laravel\Scout\ScoutServiceProvider::class,
+
 
         /*
          * Application Service Providers...

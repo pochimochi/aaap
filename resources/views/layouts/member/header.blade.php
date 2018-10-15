@@ -1,10 +1,10 @@
 <!-- Header -->
 <header class="header">
     <div class="header-inner">
-        <nav class="navbar navbar-expand-lg pt-5">
+        <nav class="navbar navbar-expand-sm pt-3">
             <div class="container">
-                <a class="navbar-brand logo md-font-size font-family-secondary text-dark-gray m-0" href="{{url('/home')}}">
-                    <img src="{{asset('images/logos/logotexttest.png')}}" class="logo-img" alt="logo">
+                <a class="navbar-brand" href="{{url('/home')}}" style="margin-top: 10px">
+                    <img src="{{asset('images/logos/logo.png')}}" width="250" class="logo-img" alt="logo">
                 </a>
                 <button class="navbar-toggler base-plus-font-size" type="button" data-toggle="collapse"
                         data-target="#main-menu" aria-controls="main-menu" aria-expanded="false"

@@ -106,8 +106,8 @@
                                 <th>Published By</th>
                                 <th>Date Modified</th>
                                 <th>Modified By</th>
-                                <th>Status</th>
                                 <th>Article Type</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -117,17 +117,30 @@
                             @foreach ($articles as $article)
 
                                 <tr>
-                                    <td>{{ $article->id}}</td>
-                                    <td>{{ $article->title}}</td>
-                                    {{--<td>@php echo substr($article->body, 0, 50) . "..." @endphp</td>--}}
-                                    <td>{{ $article->created_at}}</td>
-                                    <td>{{ $article->user->firstname . ' ' .$article->user->lastname }}</td>
-                                    <td>{{ $article->updated_at}}</td>
-                                    <td>{{ $article->modified_by}}</td>
-                                    <td>{{ $article->status_id == 1 ? 'Active' : 'Inactive'}}</td>
-                                    <td>{{ $article->articletype_id /*== 6 ?'Case Studies' : 'Commentaries' : 'Methodologies' : 'Reports' : 'Research' : 'Review'*/ }}</td>
-                                    <td><a href="{{URL::to('/writer/articles/'.$article->id.'/edit')}}"
-                                           class="btn btn-warning btn-rounded">Edit</a></td>
+                                    <form action="{{action('ArticleController@changeStatus')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$article->id}}">
+                                        <input type="hidden" name="status_id" value="{{$article->status_id }}">
+                                        <td>{{ $article->id}}</td>
+                                        <td>{{ $article->title}}</td>
+                                        {{--<td>@php echo substr($article->body, 0, 50) . "..." @endphp</td>--}}
+                                        <td>{{ $article->created_at}}</td>
+                                        <td>{{ $article->user->firstname . ' ' .$article->user->lastname }}</td>
+                                        <td>{{ $article->updated_at}}</td>
+                                        <td>{{ $article->modified_by}}</td>
+
+                                        <td>{{ $article->articletype_id /*== 6 ?'Case Studies' : 'Commentaries' : 'Methodologies' : 'Reports' : 'Research' : 'Review'*/ }}</td>
+                                        <td><button type="submit" id="changestatus" onclick="confirm('are you sure?')"
+                                                    class="{{$article->status_id == 1 ? 'btn btn-rounded btn-success' : 'btn btn-rounded btn-danger'}}">{{$article->status_id == 1 ? 'Active' : 'Inactive' }}</button>
+                                        </td>
+                                        <td><div class="btn-group">
+                                                <a href="{{URL::to('/writer/articles/'.$article->id.'/edit')}}"
+                                                   class="btn btn-warning btn-rounded">Edit</a>
+                                                <a href="{{URL::to('/writer/articles/'.$article->id)}}"
+                                                   class="btn btn-info btn-rounded">Show</a>
+                                            </div> </td>
+                                    </form>
+
                                 </tr>
                             @endforeach
 
@@ -165,4 +178,22 @@
                 }
             })
         });</script>
+   {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function send() {
+            preventDefault();
+            $.ajax({
+                url: '{{action('ArticleController@changeStatus')}}',
+                type: 'post',
+                data: $('form').serialize(), // Remember that you need to have your csrf token included
+                dataType: 'json',
+                success: function( _response ){
+                    alert($('form').serialize())
+                },
+                error: function( _response ){
+                    alert($('form').serialize())
+                }
+            });
+
+    </script>--}}
 @endsection

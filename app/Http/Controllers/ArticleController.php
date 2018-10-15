@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Articles;
 use App\logs;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,21 +18,39 @@ class ArticleController extends Controller
 
     public function index()
     {
-        if(session('user')){
-            if(session('role') == 2){
-                $articles = Articles::all();
+        $articles = Articles::all();
+        foreach ($articles as $article) {
+            if (Carbon::parse($article->due_date)->lt(Carbon::now())) {
+                $article->status_id = 0;
+                $article->save();
+            }
 
+        }
+
+
+        if (session('user')) {
+            if (session('role') == 2) {
+
+                $articles = Articles::all();
                 return view('pages.writer.create', ['articles' => $articles]);
-            }else{
+            } else {
                 $articles = Articles::where('status_id', '=', '1')->paginate(6);
 
                 return view('pages.member.article.index', ['articles' => $articles]);
             }
-        }else{
+        } else {
             return redirect('/home');
         }
     }
-    public function searching(Request $request){
+
+    public function archived()
+    {
+        $articles = Articles::where('status_id', 0)->orderBy('created_at')->paginate(6);
+        return view('pages.member.article.index', ['articles' => $articles]);
+    }
+
+    public function searching(Request $request)
+    {
 
         $articles = Articles::where('title', 'LIKE', '%' . $request->search . '%')->paginate(6);
 
@@ -72,6 +91,7 @@ class ArticleController extends Controller
             $articleinfo = $request->all();
             $articleinfo['posted_by'] = session('user')['id'];
             $articleinfo['modified_by'] = 0;
+            $articleinfo['due_date'] = Carbon::now()->addYear(1);
 
             Articles::create($articleinfo);
             $log = new logs();
@@ -93,8 +113,36 @@ class ArticleController extends Controller
     public function show($articleId)
     {
         $article = Articles::find($articleId);
+        if (session('user')) {
+            if (session('role') == 2) {
+                return view('pages.writer.show', ['article' => $article]);
+            } else {
+                return view('pages.member.article.show', ['article' => $article]);
+            }
+        } else {
+            return redirect('/home');
+        }
+    }
 
-        return view('pages.member.article.show', ['article' => $article]);
+    public function changeStatus(Request $request)
+    {
+
+        $announcements = Articles::find($request->id);
+        if ($request->status_id == 0) {
+            $announcements->due_date = Carbon::now()->addYear(1);
+            $announcements->status_id = 1;
+        } else {
+            $announcements->status_id = 0;
+        }
+        if ($announcements->save()) {
+            $log = new logs();
+            $log->savelog(session('user')['id'], 'Changed an Announcement Status');
+            toast('Status Changed!', 'success', 'bottom-right');
+            return redirect()->back();
+        } else {
+            alert()->error('Oops!', 'something went wrong 😞');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -148,15 +196,15 @@ class ArticleController extends Controller
     {
         $article = Articles::find($articleId);
 
-        if ($article->statusId == 1) {
-            $article->statusId = 0;
+        if ($article->status_id == 1) {
+            $article->status_id = 0;
         } else {
-            $article->statusId = 1;
+            $article->status_id = 1;
         }
 
         if ($article->save()) {
             $log = new logs();
-            $log->savelog(session('user_id'), 'Changed an article status');
+            $log->savelog(session('user')['id'], 'Changed an article status');
             toast('Status Changed!', 'success', 'bottom-right');
             return redirect()->back();
         } else {

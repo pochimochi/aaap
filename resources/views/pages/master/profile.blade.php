@@ -1,23 +1,29 @@
-@extends('layouts.master.master')
+@extends('layouts.member.layout')
 <body class="open"></body>
 @section('content')
+    <div class="cover">
+        @include('layouts.member.header')
+    </div>
+    <div class="lg-space"></div>
+    <section class="bg-light section">
+        <div class="container">
 
-
-<div class="content">
-    <div class="card">
-        <div class="card-body">
             <div class="row">
                 <div class="col-sm-10">
-                    <h1>{{$users['firstname'] . " ".$users['middlename']. " ".$users['lastname']}}</h1></div>
+                    <h1>{{$users['firstname'] . " ".$users['middlename']. " ".$users['lastname']}}</h1>
+
+                </div>
 
             </div>
             <br>
+
             <div class="row">
                 <div class="col-sm-3"><!--left col-->
 
 
                     <div class="text-center">
-                        <img src="{{asset('/storage/'.$users->profilepic->location)}}" class="avatar img-circle img-thumbnail"
+                        <img src="{{asset('/storage/'.$users->profilepic->location)}}"
+                             class="avatar img-circle img-thumbnail"
                              alt="avatar">
                         <h6>Upload a different photo...</h6>
 
@@ -27,14 +33,18 @@
 
                     <ul class="list-group">
                         <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span>
+                        <li class="list-group-item text-right"><span
+                                    class="pull-left"><strong>Shares</strong></span>
                             125
                         </li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13
+                        <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span>
+                            13
                         </li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37
+                        <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span>
+                            37
                         </li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span>
+                        <li class="list-group-item text-right"><span
+                                    class="pull-left"><strong>Followers</strong></span>
                             78
 
                         </li>
@@ -44,7 +54,8 @@
                 </div><!--/col-3-->
                 <div class="col-sm-9">
                     <ul class="nav nav-tabs customtab" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#profile" role="tab"><span
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#profile"
+                                                role="tab"><span
                                         class="hidden-sm-up"><i class="ti-home"></i></span> <span
                                         class="hidden-xs-down">Profile</span></a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#address" role="tab"><span
@@ -53,7 +64,8 @@
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#pwa" role="tab"><span
                                         class="hidden-sm-up"><i class="ti-user"></i></span> <span
                                         class="hidden-xs-down">PWA</span></a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#credentials" role="tab"><span
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#credentials"
+                                                role="tab"><span
                                         class="hidden-sm-up"><i class="ti-email"></i></span> <span
                                         class="hidden-xs-down">Credentials</span></a></li>
                     </ul>
@@ -61,68 +73,72 @@
                     <form class="form" action="{{URL::to('/')}}" method="post" id="registrationForm">
                         <div class="tab-content">
                             <div class="tab-pane active" id="profile">
-                                <h3 class="box-title m-t-40">Personal Information</h3>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>First Name</label>
+                                <div class="container">
+                                    <h3 class="box-title m-t-40">Personal Information</h3>
+                                    <div class="row">
 
-                                            <input value="{{ $users['firstname'] }}" type="text"
-                                                   name="userFirstName" id="userFirstName"
-                                                   class="form-control input-default">
-                                            <i style="color:red;" id="fnErr"></i>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+
+                                                <input value="{{ $users['firstname'] }}" type="text"
+                                                       name="userFirstName" id="userFirstName"
+                                                       class="form-control input-default">
+                                                <i style="color:red;" id="fnErr"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Middle Name</label>
+                                                <input value="{{ $users['middlename'] }}" type="text"
+                                                       name="userMiddleName" id="userMiddleName"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input value="{{ $users['lastname'] }}" type="text"
+                                                       name="userLastName" id="userLastName"
+                                                       class="form-control input-default">
+                                                <i style="color:red;" id="lnErr"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Middle Name</label>
-                                            <input value="{{ $users['middlename'] }}" type="text"
-                                                   name="userMiddleName" id="userMiddleName"
-                                                   class="form-control input-default">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Gender</label>
+                                                <select class="form-control custom-select input-default"
+                                                        name="userGenderId" id="userGenderId">
+                                                    <option value="">Select Gender</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="1">Female</option>
+
+                                                </select>
+                                                <i style="color:red;" id="gErr"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Last Name</label>
-                                            <input value="{{ $users['lastname'] }}" type="text"
-                                                   name="userLastName" id="userLastName"
-                                                   class="form-control input-default">
-                                            <i style="color:red;" id="lnErr"></i>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Landline Number</label>
+                                                <input value="{{ $users->contact->landline_number }}" type="text"
+                                                       name="landlineNumber" id="landlineNumber"
+                                                       class="form-control input-default">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Mobile Number</label>
+                                                <input value="{{ $users->contact->mobile_number }}" type="text"
+                                                       name="mobileNumber" id="mobileNumber"
+                                                       class="form-control input-default">
+                                                <i style="color:red;" id="mnErr"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="control-label">Gender</label>
-                                            <select class="form-control custom-select input-default"
-                                                    name="userGenderId" id="userGenderId">
-                                                <option value="">Select Gender</option>
-                                                <option value="1">Male</option>
-                                                <option value="1">Female</option>
 
-                                            </select>
-                                            <i style="color:red;" id="gErr"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Landline Number</label>
-                                            <input value="{{ $users->contact->landline_number }}" type="text"
-                                                   name="landlineNumber" id="landlineNumber"
-                                                   class="form-control input-default">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Mobile Number</label>
-                                            <input value="{{ $users->contact->mobile_number }}" type="text"
-                                                   name="mobileNumber" id="mobileNumber"
-                                                   class="form-control input-default">
-                                            <i style="color:red;" id="mnErr"></i>
-                                        </div>
-                                    </div>
-                                </div>
 
                             </div>
 
@@ -134,7 +150,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Unit Number</label>
-                                                    <input value="{{ $users->permanentaddress->unitno }}" type="text"
+                                                    <input value="{{ $users->permanentaddress->unitno }}"
+                                                           type="text"
                                                            name="unitno" id="unitno"
                                                            class="form-control input-default">
                                                 </div>
@@ -142,7 +159,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Building</label>
-                                                    <input value="{{ $users->permanentaddress->bldg }}" type="text" name="bldg"
+                                                    <input value="{{ $users->permanentaddress->bldg }}" type="text"
+                                                           name="bldg"
                                                            id="bldg"
                                                            class="form-control input-default">
                                                 </div>
@@ -150,7 +168,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Street</label>
-                                                    <input value="{{ $users->permanentaddress->street }}" type="text"
+                                                    <input value="{{ $users->permanentaddress->street }}"
+                                                           type="text"
                                                            name="street" id="street"
                                                            class="form-control input-default">
                                                 </div>
@@ -160,7 +179,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>City</label>
-                                                    <input value="{{ $users->permanentaddress->city->name }}" type="text" name="city"
+                                                    <input value="{{ $users->permanentaddress->city->name }}"
+                                                           type="text" name="city"
                                                            id="city"
                                                            class="form-control input-default">
                                                     <i style="color:red;" id="cErr"></i>
@@ -191,7 +211,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Unit Number</label>
-                                                    <input value="{{ $users->temporaryaddress->unitno }}" type="text"
+                                                    <input value="{{ $users->temporaryaddress->unitno }}"
+                                                           type="text"
                                                            name="tunitno" id="tunitno"
                                                            class="form-control input-default">
                                                 </div>
@@ -207,7 +228,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Street</label>
-                                                    <input value="{{ $users->temporaryaddress->street }}" type="text"
+                                                    <input value="{{ $users->temporaryaddress->street }}"
+                                                           type="text"
                                                            name="tstreet" id="tstreet"
                                                            class="form-control input-default">
                                                 </div>
@@ -217,7 +239,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>City</label>
-                                                    <input value="{{ $users->temporaryaddress->city->name }}" type="text"
+                                                    <input value="{{ $users->temporaryaddress->city->name }}"
+                                                           type="text"
                                                            name="tcity" id="tcity"
                                                            class="form-control input-default">
                                                 </div>
@@ -316,7 +339,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Contact Number</label>
-                                                <input value="{{ $users->pwa->employer->employerContactNumber }}" type="text"
+                                                <input value="{{ $users->pwa->employer->employerContactNumber }}"
+                                                       type="text"
                                                        name="employerContactNumber"
                                                        id="employerContactNumber"
                                                        class="form-control input-default">
@@ -327,7 +351,9 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Unit Number</label>
-                                                <input value="{{ $users->pwa->employer->address->unitno }}" type="text" name="eunitno"
+                                                <input value="{{ $users->pwa->employer->address->unitno }}"
+                                                       type="text"
+                                                       name="eunitno"
                                                        id="eunitno"
                                                        class="form-control input-default">
                                             </div>
@@ -335,7 +361,9 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Building</label>
-                                                <input value="{{ $users->pwa->employer->address->bldg }}" type="text" name="ebldg"
+                                                <input value="{{ $users->pwa->employer->address->bldg }}"
+                                                       type="text"
+                                                       name="ebldg"
                                                        id="ebldg"
                                                        class="form-control input-default">
                                             </div>
@@ -343,7 +371,9 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Street</label>
-                                                <input value="{{ $users->pwa->employer->address->street }}" type="text" name="estreet"
+                                                <input value="{{ $users->pwa->employer->address->street }}"
+                                                       type="text"
+                                                       name="estreet"
                                                        id="estreet"
                                                        class="form-control input-default">
                                             </div>
@@ -353,7 +383,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>City</label>
-                                                <input value="{{ $users->pwa->employer->address->city->name }}" type="text" name="ecity"
+                                                <input value="{{ $users->pwa->employer->address->city->name }}"
+                                                       type="text" name="ecity"
                                                        id="ecity"
                                                        class="form-control input-default">
                                             </div>
@@ -411,26 +442,26 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row pull-right">
+                        {{--  <div class="row pull-right">
 
-                            <button type="button" class="btn btn-warning" id="cancel">Cancel
-                            </button>
+                              <button type="button" class="btn btn-warning" id="cancel">Cancel
+                              </button>
 
 
-                            <button type="button" class="btn btn-success" id="save">Save
-                            </button>
+                              <button type="button" class="btn btn-success" id="save">Save
+                              </button>
 
-                        </div>
-
+                          </div>
+  --}}
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
                     </form>
                 </div>
             </div>
+
         </div>
 
-    </div>
+    </section>
 
-</div>
 @endsection
 
 
