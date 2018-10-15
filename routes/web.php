@@ -22,7 +22,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('articles', 'ArticleController')->only(['index', 'show']);
         Route::get('announcements/type/{type}', 'AnnouncementsController@indexSelect');
         Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);
-        Route::post('/member/announcements/search', 'AnnouncementsController@searching');
+        Route::post('announcements/search', 'AnnouncementsController@searching'); // HERE
 
         //EventMembers
         Route::get('/userevent', 'EventController@userevent');
@@ -39,7 +39,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('announcements/changeStatus/{announcementId}/{status}', 'AnnouncementsController@changeStatus');
             Route::resource('announcements', 'AnnouncementsController');
             Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);
-//            Route::post('/contentmanager/announcements/search', 'AnnouncementsController@searching');
             //events
 
             Route::post('/eventsubmit', 'EventController@store');

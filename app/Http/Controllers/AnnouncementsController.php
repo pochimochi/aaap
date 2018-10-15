@@ -47,20 +47,8 @@ class AnnouncementsController extends Controller
 
     public function searching(Request $request)
     {
-        if (session('user')) {
-            if (session('role') == 3) {
-                $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->paginate(6);
-                return view('pages.contentsmanager.announcement.index', ['announcements' => $announcements]);
-            } else if (session('role') == 4) {
-                $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status_id', '=', '1')->paginate(6);
-                return view('pages.member.announcement.index', ['announcements' => $announcements]);
-            }
-        } else {
-            $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status_id', '=', '1')->paginate(6);
-            return view('pages.member.announcement.index', ['announcements' => $announcements]);
-        }
-
-
+        $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status_id', '=', '1')->paginate(5);
+        return view('pages.member.announcement.index', ['announcements' => $announcements]);
     }
 
     public function create()
