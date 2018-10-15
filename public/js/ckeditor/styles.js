@@ -82,13 +82,13 @@ CKEDITOR.stylesSet.add( 'default', [
 	/* Object styles */
 
 	{
-		name: 'Styled Image (left)',
+		name: 'Styled Images (left)',
 		element: 'img',
 		attributes: { 'class': 'left' }
 	},
 
 	{
-		name: 'Styled Image (right)',
+		name: 'Styled Images (right)',
 		element: 'img',
 		attributes: { 'class': 'right' }
 	},
@@ -112,8 +112,8 @@ CKEDITOR.stylesSet.add( 'default', [
 
 	/* Widget styles */
 
-	{ name: 'Clean Image', type: 'widget', widget: 'image', attributes: { 'class': 'image-clean' } },
-	{ name: 'Grayscale Image', type: 'widget', widget: 'image', attributes: { 'class': 'image-grayscale' } },
+	{ name: 'Clean Images', type: 'widget', widget: 'image', attributes: { 'class': 'image-clean' } },
+	{ name: 'Grayscale Images', type: 'widget', widget: 'image', attributes: { 'class': 'image-grayscale' } },
 
 	{ name: 'Featured Snippet', type: 'widget', widget: 'codeSnippet', attributes: { 'class': 'code-featured' } },
 

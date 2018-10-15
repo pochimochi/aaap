@@ -11,11 +11,22 @@ class Employer extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'userId', 'employerName', 'employerAddress', 'employerContactNumber'
+        'user_id', 'employerName', 'employerAddress', 'employerContactNumber', 'address_id'
 
     ];
 
     protected $hidden = [
         'userId'
     ];
+
+    public function pwa()
+    {
+        return $this->hasOne('\App\Pwa');
+
+    }
+    public function address()
+    {
+        return $this->belongsTo('\App\Address');
+
+    }
 }

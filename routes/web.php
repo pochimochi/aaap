@@ -12,41 +12,70 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-    Route::get('/', 'HomeController@Home');
+    //main pages
+    Route::get('/home', 'HomeController@Home');
+    Route::get('/profile', 'UserController@profile');
+    //---------------------------------------------------------------------------------
+    Route::group(['middleware' => 'member', 'prefix' => 'member'], function () {
+        //member
 
-    Route::get('/about', function () {
-        return view('pages.about');
+        Route::resource('articles', 'ArticleController')->only(['index', 'show']);
+        Route::get('announcements/type/{type}', 'AnnouncementsController@indexSelect');
+        Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);
+        Route::post('/member/announcements/search', 'AnnouncementsController@searching');
+
+        //EventMembers
+        Route::get('/userevent', 'EventController@userevent');
+        Route::get('/userjoin/{userId}', 'EventController@userjoin');
+        Route::get('/search', 'EventController@search');
+        Route::get('/userjoins/{eventId}', 'EventController@userjoins');
     });
+    //-------------------------------------------------------------------------------------
+    Route::group(['middleware' => 'admingroup'], function () {
+        //---------------------------------------------------------------------------------
+        Route::group(['middleware' => 'contentmanager', 'prefix' => 'contentmanager'], function () {
+            //announcements
 
-    Route::get('/home1', function () {
-        return view('pages.home1');
+            Route::get('announcements/changeStatus/{announcementId}/{status}', 'AnnouncementsController@changeStatus');
+            Route::resource('announcements', 'AnnouncementsController');
+            Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);
+//            Route::post('/contentmanager/announcements/search', 'AnnouncementsController@searching');
+            //events
+
+            Route::post('/eventsubmit', 'EventController@store');
+            Route::get('/event', 'EventController@event');
+            Route::get('/eventedit/{eventId}', 'EventController@edit');
+            Route::post('edit/eventedit/{eventId}', 'EventController@update');
+            Route::get('event/changeStatus/{eventId}/{status}', 'EventController@changeStatus');
+
+        });
+        //---------------------------------------------------------------------------------
+        Route::group(['middleware' => 'writer', 'prefix' => 'writer'], function () {
+            //articles
+            Route::resource('newsletter', 'NewsletterController');
+            Route::resource('articles', 'ArticleController');
+        });
+        //---------------------------------------------------------------------------------
+        Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
+            Route::get('/changeStatus/{userId}/{status}', 'AdminsController@changeStatus');
+            Route::resource('adminMaintenance', 'AdminsController')->only(['index', 'store']);
+            Route::get('/memberchangeStatus/{userId}/{status}', 'AdminsController@changeStatus');
+            Route::get('/members', 'MembersController@index');
+            Route::get('/logs', 'AuditLogController@index');
+        });
     });
+    //forgotpassword
+    Route::get('/forgotpassword', 'ForgotPasswordController@getKeys');
+    Route::post('/forgotpassword/save', 'ForgotPasswordController@saveNewPassword');
+    Route::resource('/forgotpassword', 'ForgotPasswordController')->except(['index', 'destroy', 'show', 'update']);
 
-//Route::resource('/registersubmit', 'RegisterController@store');
+    //register
+    Route::resource('register', 'RegisterController')->only(['store', 'index']);
+    //logout
+    Route::get('/logout', 'LoginController@logout');
+    //login
+    Route::resource('login', 'LoginController')->only(['index', 'store']);
 
-    Route::post('/registersubmit', 'RegisterController@store');
-    Route::get('/register', 'RegisterController@index');
-
-    Route::post('/loginSubmit', [
-        'uses' => 'LoginController@postLogin',
-        'as' => 'loginSubmit'
-    ]);
-
-    Route::get('/login', [
-        'uses' => 'LoginController@index',
-        'as' => 'login'
-    ]);
-
-    Route::get('/member', [
-        'uses' => 'LoginController@getMember',
-        'as' => 'member'
-    ]);
-
-
-    Route::get('/announcement', 'AnnouncementsController@announcement');
-    Route::post('/announcementSubmit', 'AnnouncementsController@store');
-    Route::get('/announcementedit/{announcementId}','AnnouncementsController@edit');
-    Route::post('edit/announcementedit/{announcementId}','AnnouncementsController@update');
 
 });
 
