@@ -1,10 +1,13 @@
-
-
-@extends('layouts.master.master')
-
+@extends('layouts.master.admin')
+@section('sidenav')
+    @include('layouts.master.nav')
+@endsection
+@section('pagetitle')
+    Edit Article
+@endsection
 
 @section('content')
-    <div class="content">
+
 @if (session('user')['role_id'] == 3)
         <!-- Widgets  -->
         <div class="row">
@@ -98,7 +101,7 @@
         </div>
         <!-- Widgets End -->
 @endif
-    </div><!-- .content -->
+
 
 
 

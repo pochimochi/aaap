@@ -1,5 +1,10 @@
-@extends('layouts.master.master')
-
+@extends('layouts.master.admin')
+@section('sidenav')
+    @include('layouts.master.nav')
+@endsection
+@section('pagetitle')
+    Edit Article
+@endsection
 @section('content')
     <body class="open"></body>
     <div class="content">
@@ -35,11 +40,11 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <button id="btnSubmit" type="submit" class="btn btn-outline-success">
+                                <button id="btnSubmit" type="submit" class="btn btn-success">
                                     Send Newsletter
                                 </button>
 
-                                <button id="btnReset" type="reset" class="btn btn-outline-danger">
+                                <button id="btnReset" type="reset" class="btn btn-danger">
                                     Reset
                                 </button>
                             </div>
