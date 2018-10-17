@@ -62,14 +62,18 @@
                                                class="form-control input-default">
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Password</label>
-                                        <input value="{{ old('password') }}" type="password"
-                                               name="password" id="password"
-                                               class="form-control input-default">
+                                        <label class="control-label">Gender</label>
+                                        <select class="form-control custom-select input-default"
+                                                name="gender" id="gender">
+                                            <option value="">Select Gender</option>
+                                            <option value="1">Male</option>
+                                            <option value="2">Female</option>
+                                        </select>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -99,19 +103,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Gender</label>
-                                        <select class="form-control custom-select input-default"
-                                                name="gender" id="gender">
-                                            <option value="">Select Gender</option>
-                                            <option value="1">Male</option>
-                                            <option value="2">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+
+
                             <div class="form-actions">
                                 <input class="btn btn-success btn-rounded" type="submit"
                                        value="Submit">

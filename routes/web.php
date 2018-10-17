@@ -69,6 +69,8 @@ Route::group(['middleware' => ['web']], function () {
         });
     });
 
+    //admin new password
+    Route::get('/setPassword', 'AdminsController@setPassword');
     //forgotpassword
     Route::get('/forgotpassword', 'ForgotPasswordController@getKeys');
     Route::post('/forgotpassword/save', 'ForgotPasswordController@saveNewPassword');

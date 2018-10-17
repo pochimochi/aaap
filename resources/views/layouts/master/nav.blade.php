@@ -114,12 +114,12 @@
                     <li class="nav-item"><a class="nav-link" href="{{URL::to('writer/newsletter')}}"><i
                                     class="ni ni-notification-70"></i>Newsletters</a></li>
                 @elseif(session('role') == 3)
-                    <li class="nav-item"><a class="nav-link" href="{{URL::to('/contentmanager/event')}}"><i class="menu-icon fa fa-calendar-check-o"></i>Event</a>
+                    <li class="nav-item"><a class="nav-link" href="{{URL::to('/contentmanager/event')}}"><i class="ni ni-square-pin text-red"></i>Event</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{URL::to('/contentmanager/announcements/create')}}"><i
-                                    class="menu-icon fa fa-bookmark"></i>Announcements</a>
+                                    class="menu-icon fa fa-bookmark text-teal"></i>Announcements</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{action('AuditLogController@index')}}"><i class="menu-icon fa fa-address-book"></i>Logs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{action('AuditLogController@index')}}"><i class="menu-icon fa fa-address-book text-success"></i>Logs</a></li>
                 @endif
                 <li>
                     <hr class="my-3">

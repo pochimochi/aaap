@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Announcements;
 
 use App\Images;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\logs;
@@ -15,6 +16,14 @@ class AnnouncementsController extends Controller
 
     public function index()
     {
+        $announcements = Announcements::all();
+        foreach ($announcements as $announcement) {
+            if (Carbon::parse($announcement->due_date)->lt(Carbon::now())) {
+                $announcement->status_id = 0;
+                $announcement->save();
+            }
+
+        }
         if (session('user')) {
             if (session('role') == 3) {
                 $announcements = Announcements::paginate(10);
@@ -133,7 +142,12 @@ class AnnouncementsController extends Controller
     public function changeStatus($id, $status)
     {
         $announcements = Announcements::find($id);
-        $announcements->status_id = $status;
+        if ($announcements->status_id == 0) {
+            $announcements->due_date = Carbon::now()->addYear(1);
+            $announcements->status_id = 1;
+        } else {
+            $announcements->status_id = 0;
+        }
         if ($announcements->save()) {
             $log = new logs();
             $log->savelog(session('user')['id'], 'Changed an Announcement Status');

@@ -127,14 +127,14 @@ class ArticleController extends Controller
     public function changeStatus(Request $request)
     {
 
-        $announcements = Articles::find($request->id);
+        $articles = Articles::find($request->id);
         if ($request->status_id == 0) {
-            $announcements->due_date = Carbon::now()->addYear(1);
-            $announcements->status_id = 1;
+            $articles->due_date = Carbon::now()->addYear(1);
+            $articles->status_id = 1;
         } else {
-            $announcements->status_id = 0;
+            $articles->status_id = 0;
         }
-        if ($announcements->save()) {
+        if ($articles->save()) {
             $log = new logs();
             $log->savelog(session('user')['id'], 'Changed an Announcement Status');
             toast('Status Changed!', 'success', 'bottom-right');

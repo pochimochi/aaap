@@ -12,15 +12,9 @@ use App\Image;
 use App\Images;
 use App\logs;
 use App\Pwa;
-use App\Relationship;
 use App\User;
-use Carbon\Carbon;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Validator;
-use PHPMailer\PHPMailer\PHPMailer;
 
 
 class RegisterController extends Controller

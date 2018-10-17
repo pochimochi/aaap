@@ -44,20 +44,8 @@ class ForgotPasswordController extends Controller
         </body>
         </html>';
 
-
-
-
-
-
-
             $helper = new helper();
             $result = $helper->emailSend($request['email'], $body, 'Forgot password');
-
-
-
-
-
-
 
             if ($result == false) {
                 \alert()->error('Email was not sent!', 'Try Again Later');
@@ -106,7 +94,7 @@ class ForgotPasswordController extends Controller
         if ($valid->passes()) {
             $query = DB::table('users')
                 ->where('email', '=', $request['emailAddress'])
-                ->update(['password' => bcrypt($request['password'])]);
+                ->update(['password' => bcrypt($request['password']), 'active' => '1']);
             if ($query == 1) {
                 alert()->success('Success!!', 'Your password has been saved!');
                 return redirect('/login');

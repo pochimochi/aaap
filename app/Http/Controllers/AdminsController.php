@@ -10,8 +10,10 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use App\Employer;
+use App\Helper;
 use App\Images;
 use App\Pwa;
+use Carbon\Carbon;
 use DB;
 use App\User;
 use App\Address;
@@ -39,16 +41,14 @@ class AdminsController extends Controller
             'lastname' => 'required|max:30|:regex/^[a-z ,.\'-]+$/i',
             'gender' => 'required',
 //            'userProfPic' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
-            'password' => 'required|min:8|max:64|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/',
             'approvedBy' => 'nullable|string',
             'emailCode' => 'nullable',
-            'email' => 'required|unique:users|email',
+            'email' => 'required|email',
         ]);
 
         $userinfo = $request->all();
-        $userinfo['password'] = bcrypt($userinfo['password']);
         $userinfo['status'] = 1;
-        $userinfo['active'] = 1;
+        $userinfo['active'] = 0;
         $userinfo['mobile_number'] = '';
         $userinfo['landline_number'] = '';
         $userinfo['ecity'] = '';
@@ -90,10 +90,35 @@ class AdminsController extends Controller
         $userinfo['employer_id'] = Employer::create($userinfo)->id;
 
         $userinfo['pwa_id'] = Pwa::create($userinfo)->id;
+        $link = "http://localhost/aaap/public/setPassword?key=" . $userinfo['email'] . "&time=" . Carbon::now()->format('Y-m-d%20H:i:s') . "";
+        $body = "<h1>Welcome to the Association for Adults with Autism, Philippines!</h1>
 
+<hr />
+<h3>Hello!</h3>
 
-        alert()->success('New Administrator', 'Added');
-        return redirect()->back();
+<p>You are now a part of the content team! and&nbsp;for your account,&nbsp;Use the button below to activate your account by entering your new password.&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><a href=" . $link . ">Activate Account</a></p>
+
+<p>&nbsp;</p>
+
+<hr />
+<p>Welcome to the team,&nbsp;<br />
+The AAAP Team</p>
+
+<hr />";
+        $helper = new Helper();
+        $result = $helper->emailSend($userinfo['email'], $body, 'Welcome to AAAP Admin!');
+        if ($result == false) {
+            alert()->error('Email was not sent!', 'Try Again Later');
+            return redirect()->back()->withErrors($result->ErrorInfo);
+        } else {
+            alert()->success('New Administrator Added', 'Email link was successfully sent!');
+            return redirect()->back();
+        }
+
     }
 
     public function changeStatus($userId, $status)
@@ -106,6 +131,25 @@ class AdminsController extends Controller
         } else {
             alert()->error('Oops!', 'something went wrong 😞');
             return redirect()->back();
+        }
+    }
+    public function setPassword(Request $request){
+        if ($request->exists('time') == true) {
+            $time1 = $request->query('time');
+            $email = $request['key'];
+            $carbontime = Carbon::parse($time1);
+
+            $minutespassed = $carbontime->diffInMinutes(Carbon::now());
+
+            if ($minutespassed <= 1140) {
+                return view('pages.master.newpassword', compact('email', $email));
+            } else {
+                \alert()->error('Whoops!', 'The Link has expired! Please try again.');
+                return redirect('/login');
+            }
+        } else {
+            alert()->error('Whoops!', 'There was an error!');
+            return redirect('/login');
         }
     }
 }
