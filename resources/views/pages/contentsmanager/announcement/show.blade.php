@@ -22,8 +22,6 @@
 
 
         <div class="card col shadow">
-            <img src="{{asset('/storage/'.$announcement->image->location)}}"
-                 class="card-profile-image" alt="avatar">
             <div class="card-body">
                 <h3 class="card-title">
                     <a class="text-muted"
@@ -44,7 +42,7 @@
                     <div class="row">
                         <div class="col-lg-6"><img
                                     src="{{asset('/storage/'.$announcement->image->location)}}"
-                                    class=""
+                                    class="" height="100"
                                     alt="avatar"></div>
                         <div class="col-lg-6">
                             <p class="card-text">@php echo $announcement->description @endphp</p>
