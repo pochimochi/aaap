@@ -15,37 +15,14 @@
     <!-- Icons -->
     <link href="{{asset('argon/assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
     <link href="{{asset('argon/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
-{{--    <link rel="stylesheet" href="{{asset('assets/css/lib/datatable/dataTables.bootstrap.min.css')}}">--}}
     <!-- Argon CSS -->
     <link type="text/css" href="{{asset('argon/assets/css/argon.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css">
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" class="init">
+{{--    <link rel="stylesheet" href="{{asset('argon/assets/css/responsive.bootstrap.css')}}">--}}
+    <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Responsive/css/responsive.bootstrap4.css')}}">
+    <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/media/css/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" href="{{asset('')}}">
 
 
-
-        $(document).ready(function() {
-            $('table').DataTable( {
-                responsive: {
-                    details: {
-                        type: 'column',
-                        target: 'tr'
-                    }
-                },
-                columnDefs: [ {
-                    className: 'control',
-                    orderable: false,
-                    targets:   0
-                } ],
-                order: [ 1, 'asc' ]
-            } );
-        } );
-
-
-
-    </script>
 </head>
 
 <body>
@@ -188,7 +165,35 @@
 <script src="{{asset('assets/js/lib/data-table/buttons.print.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/data-table/buttons.colVis.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/data-table/datatables-init.js')}}"></script>--}}
+<script type="text/javascript" language="javascript" src="{{asset('button')}}"></script>
 
+<script type="text/javascript" language="javascript" src="{{asset('argon/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+<script type="text/javascript" language="javascript" src="{{asset('argon/DataTables-1.10.19/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" language="javascript" src="{{asset('argon/DataTables-1.10.19/extensions/Responsive/js/dataTables.responsive.js')}}"></script>
+<script type="text/javascript">
+
+
+
+    $(document).ready(function() {
+        $('table').DataTable( {
+            responsive: {
+                details: {
+                    type: 'column',
+                    target: 'tr'
+                }
+            },
+            columnDefs: [ {
+                className: 'control',
+                orderable: false,
+                targets:   0
+            } ],
+            order: [ 1, 'asc' ]
+        } );
+    } );
+
+
+
+</script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 @include('sweetalert::alert')
 {{--<script type="text/javascript">
