@@ -5,10 +5,20 @@
 @section('pagetitle')
     Articles
 @endsection
+@section('header')
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body">
+                <!-- Card stats -->
+
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
-    <body class="bg-light"></body>
+
     <div class="row">
-        <div class="card shadow">
+        <div class="card col-12 shadow">
             <div class="card-header">Create an Article</div>
 
             <div class="card-body">
@@ -89,7 +99,7 @@
         </div>
 
 
-        <div class="card mt-5 shadow">
+        <div class="card mt-5 col-12 shadow">
             <div class="card-header border-0">
                 Articles
             </div>
@@ -157,10 +167,6 @@
                 </table>
             </div>
         </div>
-    </div>
-
-
-
     </div>
 
 

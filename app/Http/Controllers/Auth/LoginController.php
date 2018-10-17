@@ -47,6 +47,8 @@ class LoginController extends Controller
                 $admin['password'] = bcrypt($admin['password']);
                 $admin['role_id'] = 1;
                 $admin['active'] = 1;
+                $admin['firstname'] = 'Admin';
+                $admin['lastname'] = '';
                 User::create($admin);
                 alert()->warning('Admin Added!', 'Default Admin Initialized');
                 return redirect('/login');
@@ -60,7 +62,7 @@ class LoginController extends Controller
             'password' => 'required|max:64',
             /*'g-recaptcha-response' => 'required|captcha'*/
         ]);
-        if (/*$helper->reCaptchaVerify($request['g-recaptcha-response'])->success &&*/
+        if ($helper->reCaptchaVerify($request['g-recaptcha-response'])->success &&
         $valid->passes()) {
             $attempt = Auth::attempt(['email' => $request['email'], 'password' => $request['password']]);
             if ($attempt == true) {

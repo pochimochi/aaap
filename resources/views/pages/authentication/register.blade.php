@@ -127,8 +127,8 @@
         <div class="container">
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
-                    <div class="col-lg-5 col-md-6">
-                        <h1 class="text-white">Register</h1>
+                    <div class="col">
+                        <h1 class="text-white">Register Now!</h1>
                         <p class="text-lead text-light">Become a member of AAAP</p>
                     </div>
                 </div>
@@ -147,9 +147,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <div class="card bg-secondary shadow-lg border-0">
-                    <div class="card-header border-0">
-                        <h4>REGISTER AS A NEW MEMBER</h4>
-                    </div>
+
                     <div class="card-body px-lg-5 py-lg-5">
                         <form action="{{URL::to('/register')}}" name="regForm" enctype="multipart/form-data"
                               id="regForm" method="post">

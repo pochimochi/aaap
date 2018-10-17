@@ -8,6 +8,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
+use App\Employer;
+use App\Images;
+use App\Pwa;
 use DB;
 use App\User;
 use App\Address;
@@ -20,7 +24,7 @@ class AdminsController extends Controller
 {
     public function index()
     {
-        $admins = User::all()->whereIn('role_id', ['2' , '3']);
+        $admins = User::all()->whereIn('role_id', ['2', '3']);
 
         return view('pages.admin.admins', ['admins' => $admins]);
     }
@@ -44,11 +48,49 @@ class AdminsController extends Controller
         $userinfo = $request->all();
         $userinfo['password'] = bcrypt($userinfo['password']);
         $userinfo['status'] = 1;
+        $userinfo['active'] = 1;
+        $userinfo['mobile_number'] = '';
+        $userinfo['landline_number'] = '';
+        $userinfo['ecity'] = '';
         $userinfo['idverification_id'] = 1;
         $userinfo['permanentaddress_id'] = 0;
+        $file1 = '';
+        $file2 = '';
+        if ($request->file() != null) {
 
-        $userid = User::create($userinfo);
-        $userinfo['id'] = $userid->id;
+            if ($request->file('profile_id') != null) {
+                $file1 = $request->file('profile_id')->getClientOriginalName();
+                $request->file('profile_id')->storeAs('public', $file1);
+            }
+            if ($request->file('idverification_id')) {
+                $file2 = $request->file('idverification_id')->getClientOriginalName();
+                $request->file('idverification_id')->storeAs('public', $file2);
+            }
+        }
+        $userinfo['profile_id'] = Images::create(['location' => $file1])->id;
+        $userinfo['idverification_id'] = Images::create(['location' => $file2])->id;
+
+        $userinfo['tcity_id'] = City::create(['name' => ' '])->id;
+        $userinfo['temporaryaddress_id'] = Address::create([
+            'unitno' => '', 'bldg' => '', 'street' => '',
+            'city_id' => $userinfo['tcity_id'], 'country_id' => '174'])->id;
+
+        $userinfo['city_id'] = City::create(['name' => ''])->id;
+        $userinfo['permanentaddress_id'] = Address::create([
+            'unitno' => '', 'bldg' => '', 'street' => '',
+            'city_id' => $userinfo['city_id'], 'country_id' => '174'])->id;
+
+        $userinfo['user_id'] = User::create($userinfo)->id;
+        Contact::create($userinfo);
+
+        $userinfo['ecity_id'] = City::create(['name' => $userinfo['ecity']])->id;
+        $userinfo['address_id'] = Address::create([
+            'unitno' => '', 'bldg' => '', 'street' => '',
+            'city_id' => $userinfo['ecity_id'], 'country_id' => '174'])->id;
+        $userinfo['employer_id'] = Employer::create($userinfo)->id;
+
+        $userinfo['pwa_id'] = Pwa::create($userinfo)->id;
+
 
         alert()->success('New Administrator', 'Added');
         return redirect()->back();
