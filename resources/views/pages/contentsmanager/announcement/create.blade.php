@@ -25,7 +25,6 @@
             }
         })
     });
-
 </script>
 <body class="fix-header fix-sidebar">
 @section('content')
@@ -154,15 +153,18 @@
                                             {{--<td>{{ \Carbon\Carbon::parse($announcement->updated_at)->format('d/m/Y')}}</td>--}}
                                             <td>{{ $announcement->type_id == 1 ? 'General' : 'Special'}}</td>
                                             <td>{{ \Carbon\Carbon::parse($announcement->due_date)->format('d/m/Y')}}</td>
-                                            <td><a id="btn" type="submit" onclick="confirm('Are you sure?')"
-                                                   href="{{URL::to('contentmanager/webannouncements/changeStatus/'. $announcement->id. '/'.  ($announcement->status_id == 1 ? '0' : '1')  .'')}}"
+                                            <td><a onclick="confirm('Are you sure?')"
+                                                   href="{{URL::to('contentmanager/announcements/changeStatus/'. $announcement->id. '/'.  ($announcement->status_id == 1 ? '0' : '1')  .'')}}"
                                                    class="{{$announcement->status_id == 1 ? 'btn btn-rounded btn-success' : 'btn btn-rounded btn-danger'}}">{{$announcement->status_id == 1 ? 'Active' : 'Inactive' }}</a>
                                             </td>
                                             <td>
-                                                <a href="{{URL::to('announcement'. $announcement->id.'')}}"
-                                                   class="btn btn-rounded btn-warning ">View</a></br>
-                                                <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id .'/edit')}}"
-                                                   class="btn btn-rounded btn-warning ">Edit</a></td>
+                                                <nobr>
+                                                    <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id.'')}}"
+                                                       class="btn btn-rounded btn-primary ">View</a>
+                                                    <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id .'/edit')}}"
+                                                       class="btn btn-rounded btn-warning ">Edit</a>
+                                                </nobr>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

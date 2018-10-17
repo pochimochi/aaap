@@ -22,6 +22,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('articles', 'ArticleController')->only(['index', 'show']);
         Route::get('announcements/type/{type}', 'AnnouncementsController@indexSelect');
         Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);
+        Route::post('announcements/search', 'AnnouncementsController@searching'); // HERE
 
         //EventMembers
         Route::get('/userevent', 'EventController@userevent');

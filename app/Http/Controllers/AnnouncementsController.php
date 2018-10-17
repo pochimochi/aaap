@@ -20,14 +20,12 @@ class AnnouncementsController extends Controller
                 $announcements = Announcements::paginate(10);
                 return view('pages.contentsmanager.announcement.index', ['announcements' => $announcements]);
             } else if (session('role') == 4) {
-                $announcements = Announcements::all()->where('status_id', '=', '1');
-                return view('pages.member.announcements.index', ['announcements' => $announcements]);
+                $announcements = Announcements::where('status_id', '=', '1')->paginate(10);;
+                return view('pages.member.announcement.index', ['announcements' => $announcements]);
             }
         } else {
             return redirect('/home');
         }
-//        $announcements = Announcements::all()->where('status_id', '=', 1)->where('type_id', '=', 1);
-//        return view('pages.member.announcements.index', ['announcements' => $announcements]);
     }
 
     public function show($id)
@@ -47,9 +45,10 @@ class AnnouncementsController extends Controller
 
     }
 
-    public function searching()
+    public function searching(Request $request)
     {
-        Announcements::all()->where('title', 'like', '$request->search');
+        $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status_id', '=', '1')->paginate(5);
+        return view('pages.member.announcement.index', ['announcements' => $announcements]);
     }
 
     public function create()

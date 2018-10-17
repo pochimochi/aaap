@@ -69,7 +69,8 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="card shadow">
-                                                    <img src="{{asset('/storage/'.$announcement->image->location.'')}}" class="img-fluid">
+                                                    <img src="{{asset('/storage/'.$announcement->image->location.'')}}"
+                                                         class="img-fluid">
                                                 </div>
                                             </div>
                                         </div>
@@ -79,7 +80,8 @@
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <h6>Description</h6>
-                                                    <input type="text" class=" form-control input-default"
+                                                    <input class="form-control input-default"
+                                                           rows="3"
                                                            name="description" id="description"
                                                            value="{{$announcement->description}}">
                                                 </div>
@@ -117,7 +119,8 @@
                                     <div class="form-actions">
                                         <input class="btn btn-success btn-rounded" type="submit" id="btnSubmit"
                                                value="Update">
-                                        <a href="{{URL::to('/contentmanager/announcements/create')}}" class="btn btn-dark btn-rounded">Back</a>
+                                        <a href="{{URL::to('/contentmanager/announcements/create')}}"
+                                           class="btn btn-dark btn-rounded">Back</a>
                                     </div>
                                 </form>
                             </div>
