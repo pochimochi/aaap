@@ -1,63 +1,81 @@
 @extends('layouts.member.layout')
-@section('content')
+@section('navbar')
     @include('layouts.member.header')
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="lg-space"></div>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="box box-shadow">
-                                <h3 class="card-title">
-                                    <a class="text-muted"
-                                       href="{{URL::to('/member/announcements/'. $announcement->id.'')}}">
-                                        {{ $announcement->title}}
-                                    </a>
-                                    <small>
-                                        @if (session('role') != 4)
-                                            @if($announcement->status_id == 0)
-                                                <span class="badge badge-danger float-right mt-1">Archived</span>
-                                            @else
-                                                <span class="badge badge-success float-right mt-1">Active</span>
-                                            @endif
+    <div class="position-relative">
+        <!-- shape Hero -->
+        <section class="section section-lg section-shaped pb-250">
+            <div class="shape shape-style-1 shape-default">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="lg-space"></div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="card shadow">
+                                        <div class="card-body">
+                                        <h3 class="card-title">
+                                            <a class="display-4 mb-0"
+                                               href="{{URL::to('/member/announcements/'. $announcement->id.'')}}">
+                                                {{ $announcement->title}}
+                                            </a>
+                                            <small>
+                                                @if (session('role') != 4)
+                                                    @if($announcement->status_id == 0)
+                                                        <span class="badge badge-danger float-right mt-1">Archived</span>
+                                                    @else
+                                                        <span class="badge badge-success float-right mt-1">Active</span>
+                                                    @endif
+                                                @endif
+                                            </small>
+                                        </h3>
+                                        <small class="text-muted"><b>Posted
+                                                By: </b> {{ $announcement->user->firstname . ' ' . $announcement->user->lastname}}
+                                            on {{ \Carbon\Carbon::parse($announcement->created_at)->format('d/m/Y')}}
+                                        </small>
+                                        </br>
+                                        @if($announcement->modified_by != 0)
+                                            <small class="text-muted"><b>Modified
+                                                    By: </b> {{ App\User::find($announcement->modified_by)->firstname . ' ' . $announcement->user->lastname}}
+                                                on: {{ \Carbon\Carbon::parse($announcement->updated_at)->format('d/m/Y')}}
+                                            </small>
+                                            &nbsp;@endif
+                                        <div class="lg-space"></div>
+                                        @if($announcement->image_id != 0)
+                                            <div class="row">
+                                                <div class="col-lg-6"><img
+                                                            src="{{asset('/storage/'.$announcement->image->location)}}"
+                                                            class="avatar img-circle img-thumbnail"
+                                                            alt="avatar"></div>
+                                                <div class="col-lg-6"><p
+                                                            class="card-text">@php echo $announcement->description @endphp</p>
+                                                </div>
+                                            </div>
+                                            &nbsp;
+                                        @else()
+                                            <p>@php echo $announcement->description @endphp</p>
                                         @endif
-                                    </small>
-                                </h3>
-                                <small class="text-muted"><b>Posted
-                                        By: </b> {{ $announcement->user->firstname . ' ' . $announcement->user->lastname}}
-                                    on {{ \Carbon\Carbon::parse($announcement->created_at)->format('d/m/Y')}}</small>
-                                </br>
-                                @if($announcement->modified_by != 0)
-                                    <small class="text-muted"><b>Modified
-                                            By: </b> {{ App\User::find($announcement->modified_by)->firstname . ' ' . $announcement->user->lastname}}
-                                        on: {{ \Carbon\Carbon::parse($announcement->updated_at)->format('d/m/Y')}}
-                                    </small>
-                                    &nbsp;@endif
-                                <div class="lg-space"></div>
-                                @if($announcement->image_id != 0)
-                                    <div class="row">
-                                        <div class="col-lg-6"><img
-                                                    src="{{asset('/storage/'.$announcement->image->location)}}"
-                                                    class="avatar img-circle img-thumbnail"
-                                                    alt="avatar"></div>
-                                        <div class="col-lg-6"><p
-                                                    class="card-text">@php echo $announcement->description @endphp</p>
+                                        <div class="row justify-content-end">
+                                            <a class="btn btn-rounded btn-primary"
+                                               href="{{URL::to('/member/announcements/type', '1')}}">Back</a>
                                         </div>
                                     </div>
-                                    &nbsp;
-                                @else()
-                                    <p class="card-text">@php echo $announcement->description @endphp</p>
-                                @endif
-                                <div class="row justify-content-end">
-                                    <a class="btn btn-rounded btn-primary"
-                                       href="{{URL::to('/member/announcements/type', '1')}}">Back</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 @endsection
