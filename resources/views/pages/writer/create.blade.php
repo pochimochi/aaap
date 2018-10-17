@@ -106,7 +106,7 @@
 
 
             <div class="card-body">
-                <table id="myTable" class="table table-responsive">
+                <table id="myTable" class="table table-bordered">
                     <thead>
                     <tr>
                         <th>ID</th>

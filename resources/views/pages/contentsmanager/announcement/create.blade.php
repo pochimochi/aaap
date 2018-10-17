@@ -136,62 +136,63 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="card">
-                        <form id="status" action="{{URL::to('/changeStatus')}}" method="post">
-                            @csrf
-                            <div class="card-body">
-                                <h4 class="card-title">List of Announcements</h4>
-                            </div>
-                            <div class="">
+                        <div class="card-body">
+                            <form id="status" action="{{URL::to('/changeStatus')}}" method="post">
+                                @csrf
+                                <div class="card-body">
+                                    <h4 class="card-title">List of Announcements</h4>
 
-                                <table id="myTable" class="table responsive table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Expand</th>
-                                        <th>ID</th>
-                                        <th>Title</th>
-                                        <th>Posted By</th>
-                                        {{--<th>Modified By</th>--}}
-                                        <th>Date Created</th>
-                                        {{--<th>Date Updated</th>--}}
-                                        <th>Type</th>
-                                        <th>Due Date</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($announcements as $announcement)
+                                    <table id="myTable" class="table table-bordered">
+                                        <thead>
                                         <tr>
-                                            <td></td>
-                                            <td>{{ $announcement->id }}</td>
-                                            <td>{{ $announcement->title }}</td>
-                                            <td>{{ $announcement->user->firstname . ' ' . $announcement->user->lastname }}</td>
-                                            {{--<td>{{ $announcement->modifiedBy }}</td>--}}
-                                            <td>{{ \Carbon\Carbon::parse($announcement->created_at)->format('d/m/Y')}}</td>
-                                            {{--<td>{{ \Carbon\Carbon::parse($announcement->updated_at)->format('d/m/Y')}}</td>--}}
-                                            <td>{{ $announcement->type_id == 1 ? 'General' : 'Special'}}</td>
-                                            <td>{{ \Carbon\Carbon::parse($announcement->due_date)->format('d/m/Y')}}</td>
-                                            <td><a onclick="confirm('Are you sure?')"
-                                                   href="{{URL::to('contentmanager/announcements/changeStatus/'. $announcement->id. '/'.  ($announcement->status_id == 1 ? '0' : '1')  .'')}}"
-                                                   class="{{$announcement->status_id == 1 ? 'btn btn-rounded btn-success' : 'btn btn-rounded btn-danger'}}">{{$announcement->status_id == 1 ? 'Active' : 'Inactive' }}</a>
-                                            </td>
-                                            <td>
-                                                <nobr>
-                                                    <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id.'')}}"
-                                                       class="btn btn-rounded btn-primary ">View</a>
-                                                    <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id .'/edit')}}"
-                                                       class="btn btn-rounded btn-warning ">Edit</a>
-                                                </nobr>
-                                            </td>
+                                            <th>Expand</th>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Posted By</th>
+                                            {{--<th>Modified By</th>--}}
+                                            <th>Date Created</th>
+                                            {{--<th>Date Updated</th>--}}
+                                            <th>Type</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <br>
-                            <button type="submit" class="positive" name="submit" id="submit" hidden="hidden">save
-                            </button>
-                        </form>
+                                        </thead>
+                                        <tbody>
+                                        @foreach ($announcements as $announcement)
+                                            <tr>
+                                                <td></td>
+                                                <td>{{ $announcement->id }}</td>
+                                                <td>{{ $announcement->title }}</td>
+                                                <td>{{ $announcement->user->firstname . ' ' . $announcement->user->lastname }}</td>
+                                                {{--<td>{{ $announcement->modifiedBy }}</td>--}}
+                                                <td>{{ \Carbon\Carbon::parse($announcement->created_at)->format('d/m/Y')}}</td>
+                                                {{--<td>{{ \Carbon\Carbon::parse($announcement->updated_at)->format('d/m/Y')}}</td>--}}
+                                                <td>{{ $announcement->type_id == 1 ? 'General' : 'Special'}}</td>
+                                                <td>{{ \Carbon\Carbon::parse($announcement->due_date)->format('d/m/Y')}}</td>
+                                                <td><a onclick="confirm('Are you sure?')"
+                                                       href="{{URL::to('contentmanager/announcements/changeStatus/'. $announcement->id. '/'.  ($announcement->status_id == 1 ? '0' : '1')  .'')}}"
+                                                       class="{{$announcement->status_id == 1 ? 'btn btn-rounded btn-success' : 'btn btn-rounded btn-danger'}}">{{$announcement->status_id == 1 ? 'Active' : 'Inactive' }}</a>
+                                                </td>
+                                                <td>
+                                                    <nobr>
+                                                        <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id.'')}}"
+                                                           class="btn btn-rounded btn-primary ">View</a>
+                                                        <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id .'/edit')}}"
+                                                           class="btn btn-rounded btn-warning ">Edit</a>
+                                                    </nobr>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <br>
+                                <button type="submit" class="positive" name="submit" id="submit" hidden="hidden">save
+                                </button>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>

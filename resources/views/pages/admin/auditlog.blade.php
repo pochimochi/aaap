@@ -1,4 +1,20 @@
-@extends('layouts.master.master')
+@extends('layouts.master.admin')
+@section('sidenav')
+    @include('layouts.master.nav')
+@endsection
+@section('pagetitle')
+    Members
+@endsection
+@section('header')
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body">
+                <!-- Card stats -->
+
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
     <div class="content">
         <div class="card">

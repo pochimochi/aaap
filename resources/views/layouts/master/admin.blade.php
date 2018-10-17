@@ -17,12 +17,9 @@
     <link href="{{asset('argon/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
     <!-- Argon CSS -->
     <link type="text/css" href="{{asset('argon/assets/css/argon.css')}}" rel="stylesheet">
-{{--    <link rel="stylesheet" href="{{asset('argon/assets/css/responsive.bootstrap.css')}}">--}}
-    <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Responsive/css/responsive.bootstrap4.css')}}">
+
     <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/media/css/dataTables.bootstrap4.css')}}">
-    <link rel="stylesheet" href="{{asset('')}}">
-
-
+    <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Responsive/css/responsive.dataTables.min.css')}}">
 </head>
 
 <body>
@@ -154,28 +151,15 @@
 <script src="{{asset('argon/assets/js/argon.js')}}"></script>
 
 <script src="{{asset('argon/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-{{--<script src="{{asset('assets/js/lib/data-table/datatables.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/data-table/dataTables.buttons.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/data-table/buttons.bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/data-table/jszip.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/data-table/pdfmake.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/data-table/vfs_fonts.js')}}"></script>
-<script src="{{asset('assets/js/lib/data-table/buttons.html5.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/data-table/buttons.print.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/data-table/buttons.colVis.min.js')}}"></script>
-<script src="{{asset('assets/js/lib/data-table/datatables-init.js')}}"></script>--}}
-<script type="text/javascript" language="javascript" src="{{asset('button')}}"></script>
 
-<script type="text/javascript" language="javascript" src="{{asset('argon/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
-<script type="text/javascript" language="javascript" src="{{asset('argon/DataTables-1.10.19/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" charset="utf8" src="{{asset('argon/DataTables-1.10.19/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" charset="utf8" src="{{asset('argon/DataTables-1.10.19/media/js/dataTables.bootstrap4.min.js')}}"></script>
 <script type="text/javascript" language="javascript" src="{{asset('argon/DataTables-1.10.19/extensions/Responsive/js/dataTables.responsive.js')}}"></script>
 <script type="text/javascript">
-
-
-
     $(document).ready(function() {
         $('table').DataTable( {
+            pagingType: 'numbers',
+
             responsive: {
                 details: {
                     type: 'column',
@@ -190,9 +174,6 @@
             order: [ 1, 'asc' ]
         } );
     } );
-
-
-
 </script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 @include('sweetalert::alert')
