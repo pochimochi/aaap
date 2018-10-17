@@ -149,6 +149,7 @@
 <!-- Argon JS -->
 <script src="{{asset('argon/assets/js/argon.js')}}"></script>
 
+<script src="{{asset('argon/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/data-table/datatables.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/data-table/dataTables.buttons.min.js')}}"></script>

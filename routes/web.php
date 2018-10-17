@@ -40,6 +40,7 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('announcements/changeStatus/{announcementId}/{status}', 'AnnouncementsController@changeStatus');
             Route::resource('announcements', 'AnnouncementsController');
+            Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);
             //events
 
             Route::post('/eventsubmit', 'EventController@store');

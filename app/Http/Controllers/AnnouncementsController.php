@@ -15,18 +15,46 @@ class AnnouncementsController extends Controller
 
     public function index()
     {
-        $announcements = Announcements::all()
-            ->where('status_id', '=', 1)
-            ->where('type_id', '=', 1);
-//            ->paginate(5);
-        return view('pages.member.announcements.index', ['announcements' => $announcements]);
+        if (session('user')) {
+            if (session('role') == 3) {
+                $announcements = Announcements::paginate(10);
+                return view('pages.contentsmanager.announcement.index', ['announcements' => $announcements]);
+            } else if (session('role') == 4) {
+                $announcements = Announcements::where('status_id', '=', '1')->paginate(10);;
+                return view('pages.member.announcement.index', ['announcements' => $announcements]);
+            }
+        } else {
+            return redirect('/home');
+        }
     }
 
+    public function show($id)
+    {
+
+        if (session('user')) {
+            if (session('role') == 3) {
+                $announcement = Announcements::where('id', $id)->first();
+                return view('pages.contentsmanager.announcement.show', compact('announcement', 'id'));
+            } else if (session('role') == 4) {
+                $announcement = Announcements::where('id', $id)->first();
+                return view('pages.member.announcement.show', compact('announcement', 'id'));
+            }
+        } else {
+            return redirect('/home');
+        }
+
+    }
+
+    public function searching(Request $request)
+    {
+        $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status_id', '=', '1')->paginate(5);
+        return view('pages.member.announcement.index', ['announcements' => $announcements]);
+    }
 
     public function create()
     {
         $announcements = Announcements::all();
-        return view('pages.contentsmanager.announcement', ['announcements' => $announcements]);
+        return view('pages.contentsmanager.announcement.create', ['announcements' => $announcements]);
     }
 
 
@@ -56,12 +84,7 @@ class AnnouncementsController extends Controller
     public function edit($id)
     {
         $announcement = Announcements::find($id);
-
-        /*$imageid = AnnouncementImage::all()->where('announcement_id', $id)->first();*/
-        /*$imagelocation = Image::all()->where('id', $imageid->image_id)->first();*/
-
-        /*$announcement['location'] = $imagelocation->location;*/
-        return view('pages.contentsmanager.announcementedit', ['announcement' => $announcement]);
+        return view('pages.contentsmanager.announcement.edit', ['announcement' => $announcement]);
     }
 
 
@@ -81,19 +104,6 @@ class AnnouncementsController extends Controller
             Images::where('id', $announcement->image->id)->update(['location' => $file]);
         }
 
-
-        /*if ($request->file('announcementImage') != null) {
-            $announcement['image_name'] = $request->file('announcementImage')->getClientOriginalName();
-            $img = (new \Intervention\Image\ImageManager)->make($request->file('announcementImage'));
-            $img->resize(850, 315, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            Storage::put('public/' . $announcement['image_name'] . '', (string)$img->encode());
-            $announcement['image_id'] = Images::create(['location' => $announcement['image_name']])->id;
-//            Images::create(['id' => $announcement['image_id'], 'announcement_id' => $id]);
-        }*/
-
-
         $announcement->title = $request->get('title');
         $announcement->description = $request->get('description');
         $announcement->modified_by = session('user')['id'];
@@ -111,14 +121,13 @@ class AnnouncementsController extends Controller
     public function indexSelect($type)
     {
         if ($type == 1) {
-            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(1);
+            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(10);
         } elseif ($type == 0) {
-            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 0)->paginate(1);
+            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 0)->paginate(10);
         } else {
-            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(1);
+            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(10);
         }
-
-        return view('pages.member.announcements.index', ['announcements' => $announcements]);
+        return view('pages.member.announcement.index', ['announcements' => $announcements]);
     }
 
     public function changeStatus($id, $status)
