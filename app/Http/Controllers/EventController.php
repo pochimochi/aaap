@@ -18,14 +18,56 @@ use Intervention\Image\ImageManager;
 
 class EventController extends Controller
 {
-    public function event()
+    public function index()
     {
-
-        $events = Event::all();
-
-        return view('pages.contentsmanager.event', ['events' => $events]);
+        if (session('user')) {
+            if (session('role') == 3) {
+                $events = Event::paginate(10);
+                return view('pages.contentsmanager.event.create', ['events' => $events]);
+            } else if (session('role') == 4) {
+                $events = Event::where('status', '=', '1')->paginate(10);;
+                return view('pages.member.event.index', ['events' => $events]);
+            }
+        } else {
+            return redirect('/home');
+        }
     }
 
+//    public function joined($attendId, $eventId)
+//    {
+//        $attend = EventAttendance::find($attendId);
+//        Event::where('id', $attend->events->id)->find($eventId);
+//        return view('pages.member.event.joined', ['events' => $attend]);
+//    }
+
+    public function userjoin($attendId, $eventId)
+    {
+        $attend = EventAttendance::find($attendId);
+        Event::where('id', $attend->events->id)->find($eventId);
+        return view('pages.member.event.userjoin', ['events' => $attend]);
+
+    }
+
+    public function show($id)
+    {
+        if (session('user')) {
+            if (session('role') == 3) {
+                $event = Event::where('id', $id)->first();
+                return view('pages.contentsmanager.event.show', compact('event', 'id'));
+            } else if (session('role') == 4) {
+                $event = Event::where('id', $id)->first();
+                return view('pages.member.event.show', compact('event', 'id'));
+            }
+        } else {
+            return redirect('/home');
+        }
+    }
+
+    public function create()
+    {
+        $events = Event::all();
+        return view('pages.contentsmanager.event.create', ['events' => $events]);
+    }
 
     public function store(Request $request)
     {
@@ -59,18 +101,14 @@ class EventController extends Controller
         $log = new logs();
         $log->savelog(session('user')['id'], 'Added an Event');
         alert()->success('Event', 'Added');
-        return redirect()->back();
+        return redirect('contentmanager/events/create');
 
     }
 
     public function edit($eventId)
     {
-
         $event = Event::find($eventId);
-
         return view('pages.contentsmanager.eventedit', ['event' => $event]);
-
-
     }
 
     public function update(Request $request, $eventId)
@@ -119,7 +157,7 @@ class EventController extends Controller
         $log = new logs();
         $log->savelog(session('user')['id'], 'Updated an Event');
         alert()->success('Event', 'Updated');
-        return redirect('/contentmanager/event');
+        return redirect('/contentmanager/events/create');
 
     }
 
@@ -139,30 +177,11 @@ class EventController extends Controller
         }
     }
 
-    public function userevent()
-    {
-        $events = Event::all()->where('status', '=', 1);
-        return view('pages.member.event.userevent', ['events' => $events]);
-    }
-
-//    public function userjoin(Request $request, $eventId)
-//    {
-//
-//        $attendance['user_id'] = Auth::user()->id;
-//        $attendance['event_id'] = $eventId;
-//        $attendance['status'] = 1;
-//
-//        EventAttendance::where($attendance);
-//
-//        return view('pages.member.event.userjoin', ['events' => $eventId]);
-//
-//    }
 
     public function userjoins(Request $request, $eventId)
     {
 
         $attend = $request->except(['_token']);
-
 
 
         $attendance['user_id'] = Auth::user()->id;
@@ -176,15 +195,48 @@ class EventController extends Controller
         return redirect()->back();
     }
 
-    public function usercancels($attendanceid)
+    public function usercancels($id)
     {
-        $attendance = EventAttendance::findorfail($attendanceid);
+        $attend = EventAttendance::find($id);
 
-        $attendance->delete();
-
-        return redirect('member/userevent', 'You are not Joined in this Event Anymore.');
+        if ($attend->status == 1) {
+            $attend->status = 0;
+        } else {
+            $attend->status = 1;
+        }
+        alert()->success('Event', 'Cancelled');
+        return redirect()->back();
     }
 
+    public function searching(Request $request)
+    {
+
+        $events = Event::where('name', 'LIKE', '%' . $request->search . '%')->paginate(10);
+
+        return view('pages.member.event.userevent', ['events' => $events]);
+    }
+
+
+    public function destroy($eventId)
+    {
+        $event = Event::find($eventId);
+
+        if ($event->status == 1) {
+            $event->status = 0;
+        } else {
+            $event->status = 1;
+        }
+
+        if ($event->save()) {
+            $log = new logs();
+            $log->savelog(session('user_id'), 'Changed an event status');
+            toast('Status Changed!', 'success', 'bottom-right');
+            return redirect()->back();
+        } else {
+            alert()->error('Oops!', 'something went wrong :(');
+            return redirect()->back();
+        }
+    }
 }
 
 

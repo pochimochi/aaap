@@ -1,55 +1,54 @@
 @extends('layouts.member.layout')
-@section('content')
-    <div class="cover">
-        @include('layouts.member.header')
-    </div>
-    <div class="sm-space"></div>
-
-    <section class="section bg-light">
-        <div class="container">
-            <form action="{{action('ArticleController@searching')}}" method="post">
-                @csrf
-                <div class="row">
-                    <div class="col">
-                        <div class="btn-group">
-                            <a href="{{action('ArticleController@archived')}}" class="btn btn-danger">Archived
-                                Posts</a>
-                            {{-- </div>
-                             <div class="col">--}}
-                            <a href="{{url('member/articles')}}" class="btn  btn-success">Active
-                                Posts</a>
-                        </div>
-                    </div>
-
-                    <div class="col-4">
-                        <div class="input-group">
-                            <input type="text" name="search" placeholder="Search" class="form-control">
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+@section('navbar')
+    @include('layouts.member.header')
+    <div class="position-relative">
+        <section class="section section-lg section-shaped pb-250">
+            <div class="shape shape-style-1 shape-default">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="col-lg-12">
+                <div class="container" align="right">
+                    <form action="{{action('ArticleController@searching')}}" method="post">
+                        @csrf
+                        <div class="col-4">
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-4">
+                                    <div class="input-group-prepend"><span class="input-group-text"><i
+                                                    class="ni ni-zoom-split-in"></i></span>
+                                    </div>
+                                    <input class="form-control" name="search" placeholder="Search Title"
+                                           type="text">
+                                    <button type="submit" class="btn btn-success"><i
+                                                class="fa fa-search"></i></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-
-            </form>
-        </div>
-        <div class="lg-space"></div>
+            </div>
             <div class="row">
                 <div class="container">
                     <div class="card-columns">
-
                         @if($articles->count() < 1)
                             <div class="col-12">
                                 <div class="alert alert-danger">No articles found<br>
                                     <a href="{{url('/member/articles')}}">Go back</a></div>
                             </div>
-
                         @else
                             @foreach ($articles as $article)
                                 <div class="col">
                                     <div class="card box-shadow">
-                                        {{--  <div class="card-header">--}}
-                                        <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ-qSKUAn_Wrf2ual1MutbimsksDls9P-cEhqudvlWTLtaxtGrwg" alt="Card image cap">
+                                        <img class="card-img-top"
+                                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ-qSKUAn_Wrf2ual1MutbimsksDls9P-cEhqudvlWTLtaxtGrwg"
+                                             alt="Card image cap">
                                         <div class="card-body">
                                             <h3 class="card-title">
                                                 <a class="text-black"
@@ -87,19 +86,15 @@
                     </div>
                     <br>
                     <div class="row">
-
-
                         <div class="col-4 align-self-end">
                             {{ $articles->links() }}
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
+        </section>
+    </div>
 
-    </section>
 
 
 @endsection

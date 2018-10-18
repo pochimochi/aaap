@@ -58,8 +58,10 @@
                             </div>
                         </div>
                             @else
-                            <button type="button" class="btn btn-warning btn-warning dropdown-toggle" >
-                                Options
+                            <button class="btn-shadow btn btn-success  dropdown-toggle" >
+                                <span class="btn-inner--icon"><i class="ni ni-bullet-list-67"></i></span>
+
+                                <span class="btn-inner--text">Options</span>
                             </button>
                             @endif
                     </a>
@@ -151,7 +153,8 @@
 <script src="{{asset('argon/assets/js/argon.js')}}"></script>
 
 <script src="{{asset('argon/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-
+<script src="{{asset('argon/assets/vendor/chart.js/dist/Chart.min.js')}}" charset="utf-8"></script>
+<script src="{{asset('argon/assets/vendor/chart.js/dist/Chart.extension.min.js')}}" charset="utf-8"></script>
 <script type="text/javascript" charset="utf8" src="{{asset('argon/DataTables-1.10.19/media/js/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" charset="utf8" src="{{asset('argon/DataTables-1.10.19/media/js/dataTables.bootstrap4.min.js')}}"></script>
 <script type="text/javascript" language="javascript" src="{{asset('argon/DataTables-1.10.19/extensions/Responsive/js/dataTables.responsive.js')}}"></script>

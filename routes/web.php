@@ -25,12 +25,14 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('articles', 'ArticleController')->only(['index', 'show']);
         Route::get('announcements/type/{type}', 'AnnouncementsController@indexSelect');
         Route::resource('announcements', 'AnnouncementsController')->only(['index', 'show']);
-
+        Route::post('announcements/search', 'AnnouncementsController@searching'); // HERE
         //EventMembers
-        Route::get('/userevent', 'EventController@userevent');
-        Route::get('/userjoin/{userId}', 'EventController@userjoin');
-        Route::get('/search', 'EventController@search');
-        Route::get('/userjoins/{eventId}', 'EventController@userjoins');
+        Route::resource('events', 'EventController')->only(['index', 'show']);
+//        Route::get('/event/joined', 'EventController@joined');
+        Route::get('/search', 'EventController@searching');
+        Route::get('/userjoin', 'EventController@userjoin');
+//        Route::get('/userevent', 'EventController@userevent');
+//        Route::get('/userjoin/{userId}', 'EventController@userjoin');
     });
     //-------------------------------------------------------------------------------------
     Route::group(['middleware' => 'admingroup'], function () {
@@ -42,12 +44,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::resource('announcements', 'AnnouncementsController');
 
             //events
-
-            Route::post('/eventsubmit', 'EventController@store');
-            Route::get('/event', 'EventController@event');
-            Route::get('/eventedit/{eventId}', 'EventController@edit');
-            Route::post('edit/eventedit/{eventId}', 'EventController@update');
+            Route::resource('events', 'EventController');
+            Route::resource('events', 'EventController')->only(['index', 'show']);
             Route::get('event/changeStatus/{eventId}/{status}', 'EventController@changeStatus');
+
+            /* Route::post('/eventsubmit', 'EventController@store');
+             Route::get('/event', 'EventController@event');
+             Route::get('/eventedit/{eventId}', 'EventController@edit');
+             Route::post('edit/eventedit/{eventId}', 'EventController@update');
+             Route::get('event/changeStatus/{eventId}/{status}', 'EventController@changeStatus');*/
 
             Route::get('/logs', 'AuditLogController@index');
 
@@ -75,6 +80,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/forgotpassword', 'ForgotPasswordController@getKeys');
     Route::post('/forgotpassword/save', 'ForgotPasswordController@saveNewPassword');
     Route::resource('/forgotpassword', 'ForgotPasswordController')->except(['index', 'destroy', 'show', 'update']);
+
 
     //register
     Route::resource('register', 'RegisterController')->only(['store', 'index']);
