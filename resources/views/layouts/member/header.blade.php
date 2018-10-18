@@ -28,11 +28,17 @@
                 </div>
                 <ul class="navbar-nav navbar-nav-hover align-items-lg-center ml-lg-auto">
                     @if(session('user'))
-                        <li class="nav-item">
-                            <a href="{{URL::to('member/userevent')}}" class="nav-link">
-                                <i class="ni ni-ui-04 d-lg-none"></i>
+                        <li class="nav-item dropdown">
+                            <a href="" class="nav-link" data-toggle="dropdown" href="" role="button">
+                                <i class="ni ni-collection d-lg-none"></i>
                                 <span class="nav-link-inner--text">Events</span>
                             </a>
+                            <div class="dropdown-menu">
+                                <a href="{{URL::to('/member/events')}}"
+                                   class="dropdown-item">List</a>
+                                <a href="{{URL::to('member/userjoin')}}"
+                                   class="dropdown-item">Joined Events</a>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown" href="#" role="button">
