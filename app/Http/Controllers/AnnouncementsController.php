@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Announcements;
 
 use App\Images;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\logs;
@@ -15,18 +16,54 @@ class AnnouncementsController extends Controller
 
     public function index()
     {
-        $announcements = Announcements::all()
-            ->where('status_id', '=', 1)
-            ->where('type_id', '=', 1);
-//            ->paginate(5);
-        return view('pages.member.announcements.index', ['announcements' => $announcements]);
+        $announcements = Announcements::all();
+        foreach ($announcements as $announcement) {
+            if (Carbon::parse($announcement->due_date)->lt(Carbon::now())) {
+                $announcement->status_id = 0;
+                $announcement->save();
+            }
+
+        }
+        if (session('user')) {
+            if (session('role') == 3) {
+                $announcements = Announcements::paginate(10);
+                return view('pages.contentsmanager.announcement.index', ['announcements' => $announcements]);
+            } else if (session('role') == 4) {
+                $announcements = Announcements::where('status_id', '=', '1')->paginate(10);;
+                return view('pages.member.announcement.index', ['announcements' => $announcements]);
+            }
+        } else {
+            return redirect('/home');
+        }
     }
 
+    public function show($id)
+    {
+
+        if (session('user')) {
+            if (session('role') == 3) {
+                $announcement = Announcements::where('id', $id)->first();
+                return view('pages.contentsmanager.announcement.show', compact('announcement', 'id'));
+            } else if (session('role') == 4) {
+                $announcement = Announcements::where('id', $id)->first();
+                return view('pages.member.announcement.show', compact('announcement', 'id'));
+            }
+        } else {
+            return redirect('/home');
+        }
+
+    }
+
+    public function searching(Request $request)
+    {
+        $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status_id', '=', '1')->paginate(5);
+        return view('pages.member.announcement.index', ['announcements' => $announcements]);
+    }
 
     public function create()
     {
         $announcements = Announcements::all();
-        return view('pages.contentsmanager.announcement', ['announcements' => $announcements]);
+        return view('pages.contentsmanager.announcement.create', ['announcements' => $announcements]);
     }
 
 
@@ -34,8 +71,12 @@ class AnnouncementsController extends Controller
     {
 
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|max:100',
             'description' => 'required',
+            'type_id' => 'required',
+            'due_date' => 'nullable|after:today',
+        ], [
+            'type_id.required' => 'The type of the announcement must be specified.',
         ]);
 
         $announcementInfo = $request->all();
@@ -56,20 +97,19 @@ class AnnouncementsController extends Controller
     public function edit($id)
     {
         $announcement = Announcements::find($id);
-
-        /*$imageid = AnnouncementImage::all()->where('announcement_id', $id)->first();*/
-        /*$imagelocation = Image::all()->where('id', $imageid->image_id)->first();*/
-
-        /*$announcement['location'] = $imagelocation->location;*/
-        return view('pages.contentsmanager.announcementedit', ['announcement' => $announcement]);
+        return view('pages.contentsmanager.announcement.edit', ['announcement' => $announcement]);
     }
 
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|max:100',
             'description' => 'required',
+            'type_id' => 'required',
+            'due_date' => 'nullable|after:today',
+        ], [
+            'type_id.required' => 'The type of the announcement must be specified.',
         ]);
 
         $announcement = Announcements::find($id);
@@ -80,19 +120,6 @@ class AnnouncementsController extends Controller
 
             Images::where('id', $announcement->image->id)->update(['location' => $file]);
         }
-
-
-        /*if ($request->file('announcementImage') != null) {
-            $announcement['image_name'] = $request->file('announcementImage')->getClientOriginalName();
-            $img = (new \Intervention\Image\ImageManager)->make($request->file('announcementImage'));
-            $img->resize(850, 315, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            Storage::put('public/' . $announcement['image_name'] . '', (string)$img->encode());
-            $announcement['image_id'] = Images::create(['location' => $announcement['image_name']])->id;
-//            Images::create(['id' => $announcement['image_id'], 'announcement_id' => $id]);
-        }*/
-
 
         $announcement->title = $request->get('title');
         $announcement->description = $request->get('description');
@@ -111,20 +138,24 @@ class AnnouncementsController extends Controller
     public function indexSelect($type)
     {
         if ($type == 1) {
-            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(1);
+            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(10);
         } elseif ($type == 0) {
-            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 0)->paginate(1);
+            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 0)->paginate(10);
         } else {
-            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(1);
+            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(10);
         }
-
-        return view('pages.member.announcements.index', ['announcements' => $announcements]);
+        return view('pages.member.announcement.index', ['announcements' => $announcements]);
     }
 
     public function changeStatus($id, $status)
     {
         $announcements = Announcements::find($id);
-        $announcements->status_id = $status;
+        if ($announcements->status_id == 0) {
+            $announcements->due_date = Carbon::now()->addYear(1);
+            $announcements->status_id = 1;
+        } else {
+            $announcements->status_id = 0;
+        }
         if ($announcements->save()) {
             $log = new logs();
             $log->savelog(session('user')['id'], 'Changed an Announcement Status');

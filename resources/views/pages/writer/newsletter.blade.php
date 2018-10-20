@@ -1,6 +1,22 @@
-@extends('layouts.master.master')
-<body class="open"></body>
+@extends('layouts.master.admin')
+@section('sidenav')
+    @include('layouts.master.nav')
+@endsection
+@section('pagetitle')
+    Edit Article
+@endsection
+@section('header')
+    <div class="header bg-gradient-teal pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body">
+                <!-- Card stats -->
+
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
+    <body class="open"></body>
     <div class="content">
         <div class="card shadow">
             <div class="card-body">
@@ -34,11 +50,11 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <button id="btnSubmit" type="submit" class="btn btn-outline-success">
+                                <button id="btnSubmit" type="submit" class="btn btn-success">
                                     Send Newsletter
                                 </button>
 
-                                <button id="btnReset" type="reset" class="btn btn-outline-danger">
+                                <button id="btnReset" type="reset" class="btn btn-danger">
                                     Reset
                                 </button>
                             </div>

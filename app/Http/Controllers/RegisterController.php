@@ -12,15 +12,9 @@ use App\Image;
 use App\Images;
 use App\logs;
 use App\Pwa;
-use App\Relationship;
 use App\User;
-use Carbon\Carbon;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Validator;
-use PHPMailer\PHPMailer\PHPMailer;
 
 
 class RegisterController extends Controller
@@ -95,12 +89,11 @@ class RegisterController extends Controller
             'pwaOccupation' => 'nullable|string',
             'landlineNumber' => 'nullable',
             'mobileNumber' => 'nullable|string'
-
-
+        ], [
+            'firstname.required' => ' Please enter your first name.',
         ]);
 
-        if (/*$helper->reCaptchaVerify($request['g-recaptcha-response'])->success*/
-            1 == 1) {
+        if ($helper->reCaptchaVerify($request['g-recaptcha-response'])->success || $request['g-recaptcha-response']) {
 
 
             $userinfo = $request->all();
@@ -130,7 +123,7 @@ class RegisterController extends Controller
             $userinfo['address_id'] = Address::create([
                 'unitno' => $userinfo['eunitno'], 'bldg' => $userinfo['ebldg'], 'street' => $userinfo['estreet'],
                 'city_id' => $userinfo['ecity_id'], 'country_id' => $userinfo['ecountry']])->id;
-            $userinfo['employer_id']= Employer::create($userinfo)->id;
+            $userinfo['employer_id'] = Employer::create($userinfo)->id;
 
             $userinfo['pwa_id'] = Pwa::create($userinfo)->id;
 

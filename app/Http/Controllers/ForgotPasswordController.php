@@ -28,7 +28,7 @@ class ForgotPasswordController extends Controller
 
         if ($check != null) {
             $password = $check->password;
-            $link = "http://localhost/aaap/public/forgotpassword?key=" . $emailAddress . "&reset=" . $password . "&time=" . Carbon::now() . "";
+            $link = "http://localhost/forgotpassword?key=" . $emailAddress . "&reset=" . $password . "&time=" . Carbon::now() . "";
             $body = '<html>
         <body>
         <h1>Password Reset</h1>
@@ -43,8 +43,10 @@ class ForgotPasswordController extends Controller
         <hr />
         </body>
         </html>';
+
             $helper = new helper();
             $result = $helper->emailSend($request['email'], $body, 'Forgot password');
+
             if ($result == false) {
                 \alert()->error('Email was not sent!', 'Try Again Later');
                 return redirect()->back()->withErrors($result->ErrorInfo);
@@ -92,7 +94,7 @@ class ForgotPasswordController extends Controller
         if ($valid->passes()) {
             $query = DB::table('users')
                 ->where('email', '=', $request['emailAddress'])
-                ->update(['password' => bcrypt($request['password'])]);
+                ->update(['password' => bcrypt($request['password']), 'active' => '1']);
             if ($query == 1) {
                 alert()->success('Success!!', 'Your password has been saved!');
                 return redirect('/login');

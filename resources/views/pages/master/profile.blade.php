@@ -1,436 +1,188 @@
-@extends('layouts.master.master')
-<body class="open"></body>
-@section('content')
-
-
-<div class="content">
-    <div class="card">
-        <div class="card-body">
+@extends('layouts.master.admin')
+@section('sidenav')
+    @include('layouts.master.nav')
+@endsection
+@section('pagetitle')
+    Profile
+@endsection
+@section('header')
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+         style="min-height: 600px; background-image: url({{asset('/storage/'. $users->profilepic->location)}}); background-size: cover; background-position: center top;">
+        <!-- Mask -->
+        <span class="mask bg-gradient-default opacity-8"></span>
+        <!-- Header container -->
+        <div class="container-fluid d-flex align-items-center">
             <div class="row">
-                <div class="col-sm-10">
-                    <h1>{{$users['firstname'] . " ".$users['middlename']. " ".$users['lastname']}}</h1></div>
-
+                <div class="col-lg-7 col-md-10">
+                    <h1 class="display-2 text-white">Hello {{session('user')['firstname']}}</h1>
+                    <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with
+                        your work and manage your projects or assigned tasks</p>
+                    <a href="#!" class="btn btn-info">Edit profile</a>
+                </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-sm-3"><!--left col-->
+        </div>
+    </div>
+@endsection
+@section('content')
+    <!-- Page content -->
+    <div class="row">
+        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+            <div class="card card-profile shadow">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 order-lg-2">
+                        <div class="card-profile-image">
+                            <a href="#">
+                                <img src="{{asset('/storage/'. $users->profilepic->location)}}" class="rounded-circle">
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-
+                <div class="card-body pt-0 pt-md-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                <div>
+                                    <span class="heading">{{\App\Event::all()->where('posted_by', $users->id)->count()}}</span>
+                                    <span class="description">Posts</span>
+                                </div>
+                                <div>
+                                    <span class="heading">10</span>
+                                    <span class="description">Photos</span>
+                                </div>
+                                <div>
+                                    <span class="heading">89</span>
+                                    <span class="description">Comments</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="text-center">
-                        <img src="{{asset('/storage/'.$users->profilepic->location)}}" class="avatar img-circle img-thumbnail"
-                             alt="avatar">
-                        <h6>Upload a different photo...</h6>
+                        <h3>
+                            {{$users['firstname'].' '.$users['lastname']}}
+                        </h3>
+                        <div class="h5 font-weight-300">
+                            <i class="ni location_pin mr-2"></i>{{$users->permanentaddress->city->name .' ' .$users->permanentaddress->country->name}}
+                        </div>
+                        <div class="h5 mt-4">
+                            <i class="ni business_briefcase-24 mr-2"></i>{{$users->usertype->name}} - AAAP
+                        </div>
 
                     </div>
-                    <br>
-
-
-                    <ul class="list-group">
-                        <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span>
-                            125
-                        </li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13
-                        </li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37
-                        </li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span>
-                            78
-
-                        </li>
-                    </ul>
-
-
-                </div><!--/col-3-->
-                <div class="col-sm-9">
-                    <ul class="nav nav-tabs customtab" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#profile" role="tab"><span
-                                        class="hidden-sm-up"><i class="ti-home"></i></span> <span
-                                        class="hidden-xs-down">Profile</span></a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#address" role="tab"><span
-                                        class="hidden-sm-up"><i class="ti-user"></i></span> <span
-                                        class="hidden-xs-down">Address</span></a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#pwa" role="tab"><span
-                                        class="hidden-sm-up"><i class="ti-user"></i></span> <span
-                                        class="hidden-xs-down">PWA</span></a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#credentials" role="tab"><span
-                                        class="hidden-sm-up"><i class="ti-email"></i></span> <span
-                                        class="hidden-xs-down">Credentials</span></a></li>
-                    </ul>
-
-                    <form class="form" action="{{URL::to('/')}}" method="post" id="registrationForm">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="profile">
-                                <h3 class="box-title m-t-40">Personal Information</h3>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>First Name</label>
-
-                                            <input value="{{ $users['firstname'] }}" type="text"
-                                                   name="userFirstName" id="userFirstName"
-                                                   class="form-control input-default">
-                                            <i style="color:red;" id="fnErr"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Middle Name</label>
-                                            <input value="{{ $users['middlename'] }}" type="text"
-                                                   name="userMiddleName" id="userMiddleName"
-                                                   class="form-control input-default">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Last Name</label>
-                                            <input value="{{ $users['lastname'] }}" type="text"
-                                                   name="userLastName" id="userLastName"
-                                                   class="form-control input-default">
-                                            <i style="color:red;" id="lnErr"></i>
-                                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 order-xl-1">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">My account</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <h6 class="heading-small text-muted mb-4">User information</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-username">First Name</label>
+                                        <input value="{{ $users['firstname'] }}" type="text" readonly
+                                               name="userFirstName" class="form-control-plaintext">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="control-label">Gender</label>
-                                            <select class="form-control custom-select input-default"
-                                                    name="userGenderId" id="userGenderId">
-                                                <option value="">Select Gender</option>
-                                                <option value="1">Male</option>
-                                                <option value="1">Female</option>
-
-                                            </select>
-                                            <i style="color:red;" id="gErr"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Landline Number</label>
-                                            <input value="{{ $users->contact->landline_number }}" type="text"
-                                                   name="landlineNumber" id="landlineNumber"
-                                                   class="form-control input-default">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Mobile Number</label>
-                                            <input value="{{ $users->contact->mobile_number }}" type="text"
-                                                   name="mobileNumber" id="mobileNumber"
-                                                   class="form-control input-default">
-                                            <i style="color:red;" id="mnErr"></i>
-                                        </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-username">Middle Name</label>
+                                        <input value="{{ $users['middlename'] }}" type="text" readonly
+                                               name="middlename" class="form-control-plaintext">
                                     </div>
                                 </div>
-
-                            </div>
-
-                            <div class="tab-pane" id="address">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <h3 class="box-title m-t-40">Permanent Address</h3>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Unit Number</label>
-                                                    <input value="{{ $users->permanentaddress->unitno }}" type="text"
-                                                           name="unitno" id="unitno"
-                                                           class="form-control input-default">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Building</label>
-                                                    <input value="{{ $users->permanentaddress->bldg }}" type="text" name="bldg"
-                                                           id="bldg"
-                                                           class="form-control input-default">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Street</label>
-                                                    <input value="{{ $users->permanentaddress->street }}" type="text"
-                                                           name="street" id="street"
-                                                           class="form-control input-default">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>City</label>
-                                                    <input value="{{ $users->permanentaddress->city->name }}" type="text" name="city"
-                                                           id="city"
-                                                           class="form-control input-default">
-                                                    <i style="color:red;" id="cErr"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Country</label>
-                                                    <select class="form-control custom-select input-default"
-                                                            name="countryId" id="countryId">
-                                                        <option value="">Select Country</option>
-                                                        <?php
-                                                        $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
-                                                        $row = mysqli_num_rows($sql);
-                                                        while ($row = mysqli_fetch_array($sql)) {
-                                                            echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                    <i style="color:red;" id="countryErr"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <h3 class="box-title m-t-40">Temporary Address</h3>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Unit Number</label>
-                                                    <input value="{{ $users->temporaryaddress->unitno }}" type="text"
-                                                           name="tunitno" id="tunitno"
-                                                           class="form-control input-default">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Building</label>
-                                                    <input value="{{ $users->temporaryaddress->bldg }}" type="text"
-                                                           name="tbldg" id="tbldg"
-                                                           class="form-control input-default">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Street</label>
-                                                    <input value="{{ $users->temporaryaddress->street }}" type="text"
-                                                           name="tstreet" id="tstreet"
-                                                           class="form-control input-default">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>City</label>
-                                                    <input value="{{ $users->temporaryaddress->city->name }}" type="text"
-                                                           name="tcity" id="tcity"
-                                                           class="form-control input-default">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Country</label>
-                                                    <select class="form-control custom-select input-default"
-                                                            name="tcountry" id="tcountry">
-                                                        <option value="">Select Country</option>
-                                                        <?php
-                                                        $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
-                                                        $row = mysqli_num_rows($sql);
-                                                        while ($row = mysqli_fetch_array($sql)) {
-                                                            echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="tab-pane" id="pwa">
-                                <div class="col-lg-12">
-                                    <h3 class="box-title m-t-40">Person with Autism Information</h3>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>First Name</label>
-                                                <input value="{{ $users->pwa->pwaFirstName }}" type="text"
-                                                       name="pwaFirstName" id="pwaFirstName"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Middle Name</label>
-                                                <input value="{{ $users->pwa->pwaMiddleName }}" type="text"
-                                                       name="pwaMiddleName" id="pwaMiddleName"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input value="{{ $users->pwa->pwaLastName }}" type="text"
-                                                       name="pwaLastName" id="pwaLastName"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="control-label">Gender</label>
-                                                <select class="form-control custom-select input-default"
-                                                        name="pwaGenderId" id="pwaGenderId">
-                                                    <option value="">Select Gender</option>
-                                                    <option value="1">Male</option>
-                                                    <option value="0">Female</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Relationship to PWA</label>
-                                                <input value="{{ $users->pwa->pwaRelationship }}" type="text"
-                                                       name="description" id="description"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Occupation</label>
-                                                <input value="{{ $users->pwa->pwaOccupation }}" name="pwaOccupation"
-                                                       id="pwaOccupation" type="text"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <h3 class="box-title m-t-40">About the Employer</h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Employer's Name</label>
-                                                <input value="{{ $users->pwa->pwaFirstName }}" type="text"
-                                                       name="employerName" id="employerName"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Contact Number</label>
-                                                <input value="{{ $users->pwa->employer->employerContactNumber }}" type="text"
-                                                       name="employerContactNumber"
-                                                       id="employerContactNumber"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Unit Number</label>
-                                                <input value="{{ $users->pwa->employer->address->unitno }}" type="text" name="eunitno"
-                                                       id="eunitno"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Building</label>
-                                                <input value="{{ $users->pwa->employer->address->bldg }}" type="text" name="ebldg"
-                                                       id="ebldg"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Street</label>
-                                                <input value="{{ $users->pwa->employer->address->street }}" type="text" name="estreet"
-                                                       id="estreet"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>City</label>
-                                                <input value="{{ $users->pwa->employer->address->city->name }}" type="text" name="ecity"
-                                                       id="ecity"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Country</label>
-                                                <select name="ecountry" id="ecountry"
-                                                        class="form-control custom-select input-default">
-                                                    <option value="">Select Country</option>
-                                                    <?php
-                                                    $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
-                                                    $row = mysqli_num_rows($sql);
-                                                    while ($row = mysqli_fetch_array($sql)) {
-                                                        echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">Last Name</label>
+                                        <input value="{{ $users['lastname'] }}" type="text" readonly
+                                               name="userFirstName" class="form-control-plaintext">
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="credentials">
-                                <div class="col-lg-12">
-                                    <h3 class="box-title m-t-40">Login Credentials</h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Email Address</label>
-                                                <input value="{{ $users['email'] }}" type="email"
-                                                       name="email" id="email"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Password</label>
-                                                <input value="" type="password"
-                                                       name="password" id="password"
-                                                       class="form-control input-default">
-                                            </div>
-                                        </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-first-name">Email Address</label>
+                                        <input value="{{ $users['email'] }}" type="text" readonly
+                                               name="userFirstName" class="form-control-plaintext">
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="g-recaptcha"
-                                                     data-sitekey="6Lfj6XAUAAAAAP9Mkg2ajxaSAZy0LaV-TS_BcnlK"></div>
-                                            </div>
-                                        </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-last-name">Gender</label>
+                                        <input value="{{ ($users['gender'] == 1 ? 'Male' : 'Female') }}" type="text" readonly
+                                               name="userFirstName" class="form-control-plaintext">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row pull-right">
-
-                            <button type="button" class="btn btn-warning" id="cancel">Cancel
-                            </button>
-
-
-                            <button type="button" class="btn btn-success" id="save">Save
-                            </button>
-
+                        <hr class="my-4">
+                        <!-- Address -->
+                        <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-address">Address</label>
+                                        <input id="input-address" class="form-control form-control-alternative"
+                                               placeholder="Home Address"
+                                               value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-city">City</label>
+                                        <input type="text" id="input-city" class="form-control form-control-alternative"
+                                               placeholder="City" value="New York">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-country">Country</label>
+                                        <input type="text" id="input-country"
+                                               class="form-control form-control-alternative" placeholder="Country"
+                                               value="United States">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-country">Postal code</label>
+                                        <input type="number" id="input-postal-code"
+                                               class="form-control form-control-alternative" placeholder="Postal code">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <input type="hidden" name="_token" value="{{ Session::token() }}">
+                        <hr class="my-4">
+                        <!-- Description -->
+                        <h6 class="heading-small text-muted mb-4">About me</h6>
+                        <div class="pl-lg-4">
+                            <div class="form-group focused">
+                                <label>About Me</label>
+                                <textarea rows="4" class="form-control form-control-alternative"
+                                          placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-
     </div>
 
-</div>
+
+
+
 @endsection
 
 
