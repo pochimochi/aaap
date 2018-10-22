@@ -152,7 +152,7 @@ return [
          */
 
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // Laravel IDE helper
-        Intervention\Image\ImageServiceProvider::class,
+
         ConsoleTVs\Charts\ChartsServiceProvider::class,
 
         /*
@@ -213,7 +213,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Picture' => Intervention\Image\Facades\Image::class,
+
         'Charts' => ConsoleTVs\Charts\ChartsServiceProvider::class,
 
 
