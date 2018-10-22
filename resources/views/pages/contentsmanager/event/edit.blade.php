@@ -3,7 +3,7 @@
     @include('layouts.master.nav')
 @endsection
 @section('pagetitle')
-    Articles
+    Events
 @endsection
 @section('header')
     <div class="header bg-gradient-info pb-8 pt-5 pt-md-8">

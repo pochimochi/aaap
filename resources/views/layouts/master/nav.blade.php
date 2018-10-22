@@ -100,6 +100,7 @@
             </form>
             <!-- Navigation -->
             <ul class="navbar-nav">
+
                 @if(session('role') == 1)
                     <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/adminMaintenance')}}"><i
                                     class="menu-icon fa fa-users"></i>Administrators</a>

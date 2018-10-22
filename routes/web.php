@@ -13,6 +13,7 @@
 
 Route::group(['middleware' => ['web']], function () {
     //main pages
+
     Route::get('/home', 'HomeController@Home');
     Route::get('/profile', 'UserController@profile');
     //---------------------------------------------------------------------------------
@@ -28,9 +29,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('announcements/search', 'AnnouncementsController@searching'); // HERE
         //EventMembers
         Route::resource('events', 'EventController')->only(['index', 'show']);
-//        Route::get('/event/joined', 'EventController@joined');
         Route::get('/search', 'EventController@searching');
-        Route::get('/userjoin', 'EventController@userjoin');
+        Route::post('/join', 'AttendanceController@join');
 
     });
     //-------------------------------------------------------------------------------------

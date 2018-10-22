@@ -13,7 +13,7 @@ class Event extends Model
     protected $table = 'events';
 
     protected $fillable = [
-        'id', 'name', 'description', 'category_id', 'start_date', 'end_date',  'venue',
+        'id', 'name', 'description', 'category_id', 'start_date', 'end_date',  'venue', 'image_id',
         'address_id', 'status', 'paid', 'rate', 'created_at', 'updated_at',
         'modified_by', 'posted_by'
 

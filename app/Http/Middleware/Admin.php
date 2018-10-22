@@ -21,7 +21,7 @@ class Admin
         } else {
             if (Auth::user()->role_id != 1) {
                 // user value cannot be found in session
-                alert()->warning('Oops!', 'You need to be a Writer to access this page.');
+                alert()->warning('Oops!', 'You need to be an Admin to access this page.');
                 return redirect('/home');
 
             }

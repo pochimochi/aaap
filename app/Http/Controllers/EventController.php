@@ -37,12 +37,7 @@ class EventController extends Controller
 //        Event::where('id', $attend->events->id)->find($eventId);
 //        return view('pages.member.event.joined', ['events' => $attend]);
 //    }
-    public function userjoin($attendId, $eventId)
-    {
-        $attend = EventAttendance::find($attendId);
-        Event::where('id', $attend->events->id)->find($eventId);
-        return view('pages.member.event.userjoin', ['events' => $attend]);
-    }
+
 
     public function show($id)
     {
@@ -94,7 +89,7 @@ class EventController extends Controller
             } else {
                 $eventinfo['image_id'] = 0;
             }
-            dd($eventinfo);
+
             $eventinfo['event_id'] = Event::create($eventinfo)->id;
             /*EventImages::create(['image_id' => $eventinfo['image_id'], 'event_id' => $eventinfo['event_id']]);*/
             $log = new logs();
@@ -166,28 +161,6 @@ class EventController extends Controller
         }
     }
 
-    public function userjoins(Request $request, $eventId)
-    {
-        $attend = $request->except(['_token']);
-        $attendance['user_id'] = Auth::user()->id;
-        $attendance['event_id'] = $eventId;
-        $attendance['status'] = 1;
-        EventAttendance::create($attendance);
-        alert()->success('Event', 'Joined');
-        return redirect()->back();
-    }
-
-    public function usercancels($id)
-    {
-        $attend = EventAttendance::find($id);
-        if ($attend->status == 1) {
-            $attend->status = 0;
-        } else {
-            $attend->status = 1;
-        }
-        alert()->success('Event', 'Cancelled');
-        return redirect()->back();
-    }
 
     public function searching(Request $request)
     {

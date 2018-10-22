@@ -28,6 +28,7 @@
                 </div>
                 <ul class="navbar-nav navbar-nav-hover align-items-lg-center ml-lg-auto">
                     @if(session('user'))
+
                         <li class="nav-item dropdown">
                             <a href="" class="nav-link" data-toggle="dropdown" href="" role="button">
                                 <i class="ni ni-collection d-lg-none"></i>
