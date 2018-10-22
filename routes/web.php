@@ -14,14 +14,14 @@
 Route::group(['middleware' => ['web']], function () {
     //main pages
 
-    Route::get('/home', 'HomeController@Home');
-    Route::get('/profile', 'UserController@profile');
+    Route::get('home', 'HomeController@Home');
+    Route::get('profile', 'UserController@profile');
     //---------------------------------------------------------------------------------
     Route::group(['middleware' => 'member', 'prefix' => 'member'], function () {
         //member
 
-        Route::post('/member/articles/find', 'ArticleController@searching');
-        Route::get('/member/articles/find', 'ArticleController@searching');
+        Route::post('articles/find', 'ArticleController@searching');
+        Route::get('articles/find', 'ArticleController@searching');
         Route::get('articles/archived', 'ArticleController@archived');
         Route::resource('articles', 'ArticleController')->only(['index', 'show']);
         Route::get('announcements/type/{type}', 'AnnouncementsController@indexSelect');
@@ -54,7 +54,7 @@ Route::group(['middleware' => ['web']], function () {
              Route::post('edit/eventedit/{eventId}', 'EventController@update');
              Route::get('event/changeStatus/{eventId}/{status}', 'EventController@changeStatus');*/
 
-            Route::get('/logs', 'AuditLogController@index');
+            Route::get('logs', 'AuditLogController@index');
 
         });
         //---------------------------------------------------------------------------------
@@ -66,10 +66,10 @@ Route::group(['middleware' => ['web']], function () {
         });
         //---------------------------------------------------------------------------------
         Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
-            Route::get('/changeStatus/{userId}/{status}', 'AdminsController@changeStatus');
+            Route::get('changeStatus/{userId}/{status}', 'AdminsController@changeStatus');
             Route::resource('adminMaintenance', 'AdminsController')->only(['index', 'store']);
-            Route::get('/memberchangeStatus/{userId}/{status}', 'AdminsController@changeStatus');
-            Route::get('/members', 'MembersController@index');
+            Route::get('memberchangeStatus/{userId}/{status}', 'AdminsController@changeStatus');
+            Route::get('members', 'MembersController@index');
 
         });
     });
