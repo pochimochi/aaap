@@ -29,8 +29,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('announcements/search', 'AnnouncementsController@searching'); // HERE
         //EventMembers
         Route::resource('events', 'EventController')->only(['index', 'show']);
-        Route::get('/search', 'EventController@searching');
-        Route::post('/join', 'AttendanceController@join');
+        Route::get('search', 'EventController@searching');
+        Route::post('join', 'AttendanceController@join');
+        Route::post('cancel', 'AttendanceController@cancel');
 
     });
     //-------------------------------------------------------------------------------------

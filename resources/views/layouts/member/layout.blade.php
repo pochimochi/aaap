@@ -64,7 +64,7 @@
 <script src="{{asset('argonmember/assets/vendor/onscreen/onscreen.min.js')}}"></script>
 <script src="{{asset('argonmember/assets/vendor/nouislider/js/nouislider.min.js')}}"></script>
 <script src="{{asset('argonmember/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
-<!-- Argon JS -->
+<script src="{{asset('argonmember/assets/vendor/headroom/headroom.min.js')}}"></script> JS -->
 <script src="{{asset('argonmember/assets/js/argon.js?v=1.0.1')}}"></script>
 </body>
 

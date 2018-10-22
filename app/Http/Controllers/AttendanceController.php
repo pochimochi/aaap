@@ -18,16 +18,18 @@ class AttendanceController extends Controller
         return redirect()->back();
     }
 
-    public function cancel($id)
+    public function cancel(Request $request)
     {
-        $attend = EventAttendance::find($id);
+        $attend = EventAttendance::where('user_id', session('user')['id'])->where('event_id', $request->eventid)->where('status', 1)->first();
+
         if ($attend->status == 1) {
             $attend->status = 0;
-        } else {
-            $attend->status = 1;
+            $attend->save();
+            alert()->success('Event', 'Cancelled');
+            return redirect()->back();
         }
-        alert()->success('Event', 'Cancelled');
-        return redirect()->back();
+
+
     }
 
     /**
@@ -37,9 +39,9 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $attend = EventAttendance::find($attendId);
+      /*  $attend = EventAttendance::find($attendId);
         Event::where('id', $attend->events->id)->find($eventId);
-        return view('pages.member.event.userjoin', ['events' => $attend]);
+        return view('pages.member.event.userjoin', ['events' => $attend]);*/
     }
 
     /**
