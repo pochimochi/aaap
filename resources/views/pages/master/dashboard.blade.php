@@ -1,107 +1,135 @@
+@extends('layouts.master.admin')
+@section('sidenav')
+    @include('layouts.master.nav')
+@endsection
+@section('header')
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body">
+                <!-- Card stats -->
 
-
-@extends('layouts.master.master')
-
-
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
-    <div class="content">
-
+    @if (session('user')['role_id'] == 3)
         <!-- Widgets  -->
-        <div class="row">
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-five">
-                            <div class="stat-icon dib flat-color-1">
-                                <i class="pe-7f-cash"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">{{\App\Announcements::count()}}</span></div>
-                                    <div class="stat-heading"># of Announcements</div>
+        <div class="container pb-4">
+            <div class="row">
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
+                                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </div>
                                 </div>
                             </div>
+                            <p class="mt-3 mb-0 text-muted text-sm">
+                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-five">
-                            <div class="stat-icon dib flat-color-2">
-                                <i class="pe-7f-cart"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">{{\App\Event::count()}}</span></div>
-                                    <div class="stat-heading"># of Events</div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
+                                    <span class="h2 font-weight-bold mb-0">2,356</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                                        <i class="fas fa-chart-pie"></i>
+                                    </div>
                                 </div>
                             </div>
+                            <p class="mt-3 mb-0 text-muted text-sm">
+                                            <span class="text-danger mr-2"><i
+                                                        class="fas fa-arrow-down"></i> 3.48%</span>
+                                <span class="text-nowrap">Since last week</span>
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-five">
-                            <div class="stat-icon dib flat-color-3">
-                                <i class="pe-7f-browser"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">{{\App\Articles::count()}}</span></div>
-                                    <div class="stat-heading"># of Articles</div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
+                                    <span class="h2 font-weight-bold mb-0">924</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                                        <i class="fas fa-users"></i>
+                                    </div>
                                 </div>
                             </div>
+                            <p class="mt-3 mb-0 text-muted text-sm">
+                                            <span class="text-warning mr-2"><i
+                                                        class="fas fa-arrow-down"></i> 1.10%</span>
+                                <span class="text-nowrap">Since yesterday</span>
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-five">
-                            <div class="stat-icon dib flat-color-4">
-                                <i class="pe-7f-users"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">{{\App\User::count()}}</span></div>
-                                    <div class="stat-heading">Total Users</div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
+                                    <span class="h2 font-weight-bold mb-0">49,65%</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                                        <i class="fas fa-percent"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-five">
-                            <div class="stat-icon dib flat-color-4">
-                                <i class="pe-7f-users"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">{{\App\AuditLog::all()->where('description', 'Logged In')->count()}}</span></div>
-                                    <div class="stat-heading">No. of Logins</div>
-                                </div>
-                            </div>
+                            <p class="mt-3 mb-0 text-muted text-sm">
+                                <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Widgets End -->
+        <div class="container">
+            <div id="app">
+                <div class="card bg-white">
+                    <div class="card-body">
+                        <div class="tab-pane tab-example-result fade show active">
+                            <div class="chart">
+                                {!! $chart->container() !!}
+                            </div>
+                        </div>
 
-    </div><!-- .content -->
+                    </div>
+                </div>
+            </div>
+            <script src="https://unpkg.com/vue"></script>
+            <script>
+                var app = new Vue({
+                    el: '#app',
+                });
+            </script>
 
-
-
+            {!! $chart->script() !!}
+        </div>
+    @endif
 @endsection
 
 

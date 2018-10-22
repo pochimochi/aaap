@@ -1,19 +1,19 @@
 <header class="header-global">
-    <nav id="navbar-main" class="navbar navbar-success navbar-expand-lg navbar-transparent navbar-light headroom  ">
+    <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
         <div class="container">
-            <a class="navbar-brand mr-lg-5" href="./index.html">
+            <a class="navbar-brand mr-lg-5" href="{{url('/home')}}">
                 <img src="{{asset('images/logos/logowhite.png')}}">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-success"
-                    aria-controls="navbar-success" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global"
+                    aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse" id="navbar-success">
+            <div class="navbar-collapse collapse" id="navbar_global">
                 <div class="navbar-collapse-header">
                     <div class="row">
                         <div class="col-6 collapse-brand">
-                            <a href="{{asset('argonmember/index.html')}}">
-                                <img src="{{asset('argonmember/assets/img/brand/blue.png')}}">
+                            <a href="{{url('/home')}}">
+                                <img src="{{asset('images/logos/logo.png')}}">
                             </a>
                         </div>
                         <div class="col-6 collapse-close">

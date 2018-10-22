@@ -31,4 +31,8 @@ class Event extends Model
         return $this->belongsTo('\App\Images', 'image_id');
     }
 
+    public function user(){
+        return $this->belongsTo('\App\User', 'posted_by');
+    }
+
 }

@@ -1,4 +1,20 @@
-@extends('layouts.master.master')
+@extends('layouts.master.admin')
+@section('sidenav')
+    @include('layouts.master.nav')
+@endsection
+@section('pagetitle')
+    Articles
+@endsection
+@section('header')
+    <div class="header bg-gradient-info pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body">
+                <!-- Card stats -->
+
+            </div>
+        </div>
+    </div>
+@endsection
 @section('content')
     <div class="content">
         <div class="container-fluid">
@@ -6,17 +22,10 @@
                 <div class="col-lg-12">
                     <div class="card card-outline-primary">
                         <div class="card-header">
-                            <h4>Edit an Announcement</h4>
+                            <h4>Edit Announcement</h4>
                         </div>
                         </br>
                         <div class="card-body">
-                            @if($errors->any())
-                                <div class="alert alert-danger">
-                                    @foreach($errors->all() as $error)
-                                        <p>{{ $error }}</p>
-                                    @endforeach
-                                </div>
-                            @endif
                             <div class="basic-elements">
                                 <form method="post"
                                       action="{{action('AnnouncementsController@update', $announcement->id)}}"
@@ -27,7 +36,7 @@
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <h6>Announcement ID</h6>
+                                                    <label>Announcement ID</label>
                                                     <input type="text" name="id" id="id"
                                                            class="form-control input-default"
                                                            value="{{$announcement->id}}" disabled>
@@ -35,15 +44,16 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <h6>Title</h6>
+                                                    <label>Title</label>
                                                     <input type="text" name="title" id="title"
                                                            class=" form-control input-default"
                                                            value="{{$announcement->title}}">
+                                                    <span class="text-danger">{{ $errors->first('title') }}</span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <h6>Announcement Type</h6>
+                                                    <label>Announcement Type</label>
                                                     <select class="form-control custom-select input-default"
                                                             name="type_id" id="type_id">
                                                         <option value="1"
@@ -55,6 +65,7 @@
                                                             Special
                                                         </option>
                                                     </select>
+                                                    <span class="text-danger">{{ $errors->first('type_id') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -79,40 +90,32 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <h6>Description</h6>
+                                                    <label>Description</label>
                                                     <input class="form-control input-default"
                                                            rows="3"
                                                            name="description" id="description"
                                                            value="{{$announcement->description}}">
+                                                    <span class="text-danger">{{ $errors->first('description') }}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        {{--<div class=" row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <h6>Posted By</h6>
-                                                    <input type="text" name="posted_by" id="posted_by"
-                                                           class=" form-control input-default"
-                                                           value="{{$announcement->posted_by}}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <h6>Modified By</h6>
-                                                    <input type="text" name="modified_by" id="modified_by"
-                                                           class=" form-control input-default"
-                                                           value="{{$announcement->modified_by}}">
-                                                </div>
-                                            </div>
-                                        </div>--}}
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <h6>Due Date</h6>
-                                                    <input type="date" name="due_date" id="due_date"
-                                                           class="form-control input-default"
-                                                           value="{{ \Carbon\Carbon::parse($announcement->due_date)->format('Y-m-d')}}">
+                                                    <label>Due Date</label>
+                                                    <div class="input-group input-group-alternative">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                        class="ni ni-calendar-grid-58"></i></span>
+                                                        </div>
+                                                        <input class="form-control datepicker datepicker-orient-right"
+                                                               name="due_date" id="due_date" placeholder="Select date"
+                                                               type="date"
+                                                               value="{{ \Carbon\Carbon::parse($announcement->due_date)->format('Y-m-d')}}">
+                                                    </div>
+                                                    <span class="text-danger">{{ $errors->first('due_date') }}</span>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -130,4 +133,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection

@@ -34,56 +34,58 @@
                     </form>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card shadow">
-                        @foreach ($announcements as $announcement)
-                            <div class="card-body">
-                                <a class="display-4 mb-0"
-                                   href="{{URL::to('/member/announcements/'. $announcement->id.'')}}">
-                                    {{ $announcement->title}}
-                                </a>
-                                <br>
-                                <small class="text-muted"><b> Posted
-                                        By: </b> {{ $announcement->user->firstname . ' ' . $announcement->user->lastname}}
-                                    on {{ \Carbon\Carbon::parse($announcement->created_at)->format('d/m/Y')}}
-                                </small>
-                                </br>
-                                @if($announcement->modified_by != 0)
-                                    <small class="text-muted"><b>Modified
-                                            By: </b> {{ App\User::find($announcement->modified_by)->firstname . ' ' . $announcement->user->lastname}}
-                                        on {{ \Carbon\Carbon::parse($announcement->updated_at)->format('d/m/Y')}}
-                                    </small>
-                                    &nbsp;@endif
-                                <div class="lg-space"></div>
-                                @if($announcement->image_id != 0)
-                                    <div class="row">
-                                        <div class="col-lg-6"><img
-                                                    src="{{asset('/storage/'.$announcement->image->location)}}"
-                                                    class="avatar img-circle img-thumbnail"
-                                                    alt="avatar"></div>
-                                        <div class="col-lg-6">
-                                            <p>@php echo $announcement->description @endphp</p>
+            <div class="container justify-content-center">
+                <div class="row">
+                    @if($announcements->count() < 1)
+                        <div class="col-12">
+                            <div class="alert alert-default">No announcements found<br>
+                            </div>
+                            @else
+                                @foreach ($announcements as $announcement)
+                                    <div class="card mt-5 col-12 shadow">
+                                        <div class="card-body">
+                                            <a class="display-4 mb-0"
+                                               href="{{URL::to('/member/announcements/'. $announcement->id.'')}}">
+                                                {{ $announcement->title}}
+                                            </a>
+                                            <br>
+                                            <br>
+                                            @if($announcement->image_id != 0)
+                                                <div class="row">
+                                                    <div class="col-6"><img
+                                                                src="{{asset('/storage/'.$announcement->image->location)}}"
+                                                                class="img-fluid"
+                                                                alt="avatar"></div>
+                                                    <div class="col-6">
+                                                        <p> {{$announcement->description}}</p>
+                                                    </div>
+                                                </div>
+                                            @else()
+                                                <p class="card-text">{{$announcement->description}}</p>
+                                            @endif
+                                            <hr>
+                                            <small class="text-muted"><b> Posted
+                                                    By: </b> {{ $announcement->user->firstname . ' ' . $announcement->user->lastname}}
+                                                on {{ \Carbon\Carbon::parse($announcement->created_at)->format('d/m/Y')}}
+                                            </small>
+                                            </br>
+                                            @if($announcement->modified_by != 0)
+                                                <small class="text-muted"><b>Modified
+                                                        By: </b> {{ App\User::find($announcement->modified_by)->firstname . ' ' . $announcement->user->lastname}}
+                                                    on {{ \Carbon\Carbon::parse($announcement->updated_at)->format('d/m/Y')}}
+                                                </small>
+                                                &nbsp;@endif
                                         </div>
                                     </div>
-                                    &nbsp;
-                                @else()
-                                    <p class="card-text">@php echo $announcement->description @endphp</p>
-                                @endif
+                                @endforeach
+                            @endif
+                            <br>
+                        </div>
+                        <div class="row">
+                            <div class="col justify-content-center">
+                                {{ $announcements->links() }}
                             </div>
-                        @endforeach
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-5">
-                            <p class="text-white">
-                                There are {{\App\Announcements::count()}} announcements.
-                            </p>
                         </div>
-                        <div class="col-5 justify-content-center">
-                            {{ $announcements->links() }}
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

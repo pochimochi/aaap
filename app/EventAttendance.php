@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 class EventAttendance extends Model
 {
-    protected $table = 'eventattendance';
+    protected $table = 'event_attendance';
 
     public $timestamps =false;
 

@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Design System for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
-    <title>Argon Design System - Free Design System for Bootstrap 4</title>
+    <title>{{env('APP_NAME')}}</title>
     <!-- Favicon -->
-    <link href="{{asset('argonmember/assets/img/brand/favicon.png')}}" rel="icon" type="image/png">
+    <link href="{{asset('images/logos/logoicontest.png')}}" rel="icon" type="image/png">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Icons -->
@@ -23,15 +23,15 @@
 <body>
 <!-- Navbar -->
 @yield('navbar')
-<main>
-</main>
+
 <footer class="footer has-cards">
     <div class="container">
         <div class="row align-items-center justify-content-md-between">
             <div class="col-md-6">
-                <div class="copyright">
-                    &copy; 2018
-                    <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+                <div class="copyright text-center text-xl-left text-muted">
+                    <a href="" class="font-weight-bold ml-1"><img src="{{asset('images/logos/logo.png')}}"
+                                                                  width="200" class="navbar-brand-img"
+                                                                  alt="..."></a>
                 </div>
             </div>
             <div class="col-md-6">

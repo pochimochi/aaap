@@ -12,15 +12,9 @@ use App\Image;
 use App\Images;
 use App\logs;
 use App\Pwa;
-use App\Relationship;
 use App\User;
-use Carbon\Carbon;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Validator;
-use PHPMailer\PHPMailer\PHPMailer;
 
 
 class RegisterController extends Controller
@@ -61,14 +55,14 @@ class RegisterController extends Controller
             'middlename' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'lastname' => 'required|max:30|:regex/^[a-z ,.\'-]+$/i',
             'gender' => 'required',
-            //'userProfPic' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
-            'password' => 'required|max:64',
-            //'idVerification' => 'required|max:300|mimes:jpeg,jpg,png|image',
+            'profile_id' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
+            'password' => 'required|max:64|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/\'',
+            'idverification_id' => 'required|max:300|mimes:jpeg,jpg,png|image',
             //'membershipStatus' => 'required|integer',
             //'statusDate' => 'required|date',
             'approvedBy' => 'nullable|string',
             'emailCode' => 'nullable',
-            /*'email' => 'required|unique:users,email|email',*/
+            'email' => 'required|unique:users,email|email',
             'unitno' => 'required|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'bldg' => 'nullable|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'street' => 'required|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
@@ -91,16 +85,15 @@ class RegisterController extends Controller
             'pwaLastName' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaFirstName' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaMiddleName' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
-            'pwaGenderId' => 'nullable|integer',
+            'pwaGender' => 'nullable|integer',
             'pwaOccupation' => 'nullable|string',
-            'landlineNumber' => 'nullable',
-            'mobileNumber' => 'nullable|string'
-
-
+            'landline_number' => 'nullable',
+            'mobile_number' => 'nullable|string'
+        ], [
+            'password.regex' => 'Your password must be 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character.',
         ]);
 
-        if (/*$helper->reCaptchaVerify($request['g-recaptcha-response'])->success*/
-            1 == 1) {
+        if ($helper->reCaptchaVerify($request['g-recaptcha-response'])->success || $request['g-recaptcha-response']) {
 
 
             $userinfo = $request->all();
@@ -130,11 +123,11 @@ class RegisterController extends Controller
             $userinfo['address_id'] = Address::create([
                 'unitno' => $userinfo['eunitno'], 'bldg' => $userinfo['ebldg'], 'street' => $userinfo['estreet'],
                 'city_id' => $userinfo['ecity_id'], 'country_id' => $userinfo['ecountry']])->id;
-            $userinfo['employer_id']= Employer::create($userinfo)->id;
+            $userinfo['employer_id'] = Employer::create($userinfo)->id;
 
             $userinfo['pwa_id'] = Pwa::create($userinfo)->id;
 
-dd($userinfo);
+
             $log = new logs();
             $log->savelog($userinfo['user_id'], 'User has registered');
             alert()->success('Registration Successful!!', 'Welcome to AAAP');

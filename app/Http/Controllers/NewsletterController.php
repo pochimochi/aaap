@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -25,53 +26,27 @@ class NewsletterController extends Controller
     {
 
         $valid = Validator::make($request->all(), [
-            'emailAddress' => 'required|max:255|exists:users',
+            'email' => 'required|max:255|exists:users',
             'subject' => 'required',
             'body' => 'required',
         ]);
-        if ($valid->passes()){
-            $bodyhtml = $request['body'];
-            //https://stackoverflow.com/questions/38309422/phpmailer-server-smtp-error-password-command-failed-smtp-connect-failed
+        $receiver = $request['email'];
+        $body = $request['body'];
+        $subject = $request['subject'];
 
-            $mail = new PHPMailer(true);
-
-            $mail->isSMTP();                       // telling the class to use SMTP
-            $mail->SMTPDebug = 2;
-            // 0 = no output, 1 = errors and messages, 2 = messages only.
-
-            $mail->SMTPAuth = true;                // enable SMTP authentication
-            $mail->SMTPSecure = "tls";              // sets the prefix to the servier
-            $mail->Host = "smtp.gmail.com";        // sets Gmail as the SMTP server
-            $mail->Port = 587;                     // set the SMTP port for the GMAIL
-
-            $mail->Username = "AAAPToday@gmail.com";  // Gmail username
-            $mail->Password = "AAAP4lyf";      // Gmail password
-
-            $mail->CharSet = 'windows-1250';
-            $mail->SetFrom($request['emailAddress']); // send to mail
-            /*   $mail->AddBCC(); // send to mail*/
-            $mail->Subject = $request['subject'];
-            $mail->ContentType = 'text/plain';
-            $mail->isHTML(true);
-
-            $mail->Body = $bodyhtml;
-            // you may also use $mail->Body =       file_get_contents('your_mail_template.html');
-            $mail->AddAddress($request['emailAddress']);
-            // you may also use this format $mail->AddAddress ($recipient);
-
-            if (!$mail->Send()) {
+        if ($valid->passes()) {
+            $helper = new helper();
+            $result = $helper->emailSend($receiver, $body, $subject);
+            if ($result == false) {
                 \alert()->error('Email was not sent!', 'Try Again Later');
-                return redirect('/login')->withErrors($mail->ErrorInfo);
+                return redirect('/login')->withErrors($result->ErrorInfo);
             } else {
                 \alert()->success('Email Sent!', 'You have successfully sent the Newsletter!');
                 return redirect()->back();
             }
-        }else{
+        } else {
             return redirect()->back()->withErrors($valid)->withInput();
         }
-
-
-
 
 
     }

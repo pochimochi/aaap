@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Announcements;
 
 use App\Images;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\logs;
+use Illuminate\Support\Facades\Validator;
 
 class AnnouncementsController extends Controller
 {
@@ -15,6 +17,14 @@ class AnnouncementsController extends Controller
 
     public function index()
     {
+        $announcements = Announcements::all();
+        foreach ($announcements as $announcement) {
+            if (Carbon::parse($announcement->due_date)->lt(Carbon::now())) {
+                $announcement->status_id = 0;
+                $announcement->save();
+            }
+
+        }
         if (session('user')) {
             if (session('role') == 3) {
                 $announcements = Announcements::paginate(10);
@@ -61,38 +71,53 @@ class AnnouncementsController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'title' => 'required',
+        $valid = Validator::make($request->all(), [
+            'title' => 'required|max:100',
             'description' => 'required',
+            'type_id' => 'required',
+            'due_date' => 'nullable|after:today',
+        ], [
+            'type_id.required' => 'The type of the announcement must be specified.',
         ]);
 
-        $announcementInfo = $request->all();
-        $announcementInfo['status_id'] = 1;
-        $file1 = $request->file('announcementImage')->getClientOriginalName();
-        $request->file('announcementImage')->storeAs('public', $file1);
-        $announcementInfo['image_id'] = Images::create(['location' => $file1])->id;
-        $announcementInfo['posted_by'] = session('user')['id'];
-        Announcements::create($announcementInfo);
-        /*AnnouncementImage::create(['image_id' => $imageId->id, 'announcement_id' => $announcementId->id]);*/
+        if ($valid->passes()) {
+            $announcementInfo = $request->all();
+            $announcementInfo['status_id'] = 1;
+            $file1 = $request->file('announcementImage')->getClientOriginalName();
+            $request->file('announcementImage')->storeAs('public', $file1);
+            $announcementInfo['image_id'] = Images::create(['location' => $file1])->id;
+            $announcementInfo['posted_by'] = session('user')['id'];
+            Announcements::create($announcementInfo);
+            /*AnnouncementImage::create(['image_id' => $imageId->id, 'announcement_id' => $announcementId->id]);*/
 
-        $log = new logs();
-        $log->savelog(session('user')['id'], 'Added an Announcement');
-        alert()->success('Announcement', 'Added');
-        return redirect('contentmanager/announcements/create');
+            $log = new logs();
+            $log->savelog(session('user')['id'], 'Added an Announcement');
+            alert()->success('Announcement Added!', 'You have successfully added an announcement!');
+            return redirect('contentmanager/announcements/create');
+        } else {
+            alert()->error('Add Failed!', 'Some fields are missing.');
+            return redirect('contentmanager/announcements/create')->withErrors($valid);
+        }
     }
 
-    public function edit($id)
+    public
+    function edit($id)
     {
         $announcement = Announcements::find($id);
         return view('pages.contentsmanager.announcement.edit', ['announcement' => $announcement]);
     }
 
 
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|max:100',
             'description' => 'required',
+            'type_id' => 'required',
+            'due_date' => 'nullable|after:today',
+        ], [
+            'type_id.required' => 'The type of the announcement must be specified.',
         ]);
 
         $announcement = Announcements::find($id);
@@ -113,12 +138,13 @@ class AnnouncementsController extends Controller
 
         $log = new logs();
         $log->savelog(session('user')['id'], 'Updated an Announcement');
-        alert()->success('Announcement', 'Updated');
+        alert()->success('Announcement Updated!', 'You have successfully updated an announcement!');
         return redirect('/contentmanager/announcements/create');
     }
 
 
-    public function indexSelect($type)
+    public
+    function indexSelect($type)
     {
         if ($type == 1) {
             $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(10);
@@ -130,10 +156,16 @@ class AnnouncementsController extends Controller
         return view('pages.member.announcement.index', ['announcements' => $announcements]);
     }
 
-    public function changeStatus($id, $status)
+    public
+    function changeStatus($id, $status)
     {
         $announcements = Announcements::find($id);
-        $announcements->status_id = $status;
+        if ($announcements->status_id == 0) {
+            $announcements->due_date = Carbon::now()->addYear(1);
+            $announcements->status_id = 1;
+        } else {
+            $announcements->status_id = 0;
+        }
         if ($announcements->save()) {
             $log = new logs();
             $log->savelog(session('user')['id'], 'Changed an Announcement Status');

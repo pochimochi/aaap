@@ -12,23 +12,18 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class ForgotPasswordController extends Controller
 {
-
-
     public function create()
     {
         return view('pages.master.resetform');
     }
 
-
     public function store(Request $request)
     {
-
         $emailAddress = $request['email'];
         $check = User::all()->where('email', '=', $emailAddress)->first();
-
         if ($check != null) {
             $password = $check->password;
-            $link = "http://localhost/aaap/public/forgotpassword?key=" . $emailAddress . "&reset=" . $password . "&time=" . Carbon::now() . "";
+            $link = "http://localhost/forgotpassword?key=" . $emailAddress . "&reset=" . $password . "&time=" . Carbon::now() . "";
             $body = '<html>
         <body>
         <h1>Password Reset</h1>
@@ -52,13 +47,11 @@ class ForgotPasswordController extends Controller
                 \alert()->success('Email Sent!', 'You have successfully sent an Email!');
                 return redirect('/login');
             }
-
         } else {
             \alert()->error('Your Email does not exist!', 'Try Again.');
             return redirect('/forgotpassword');
         }
     }
-
 
     public function getKeys(Request $request)
     {
@@ -79,20 +72,16 @@ class ForgotPasswordController extends Controller
         }
     }
 
-
     public function saveNewPassword(Request $request)
     {
         $valid = Validator::make($request->all(), [
-
-            'password' => 'required|confirmed',
+            'password' => 'required|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/\'',
             'password_confirmation' => 'required'
-
-
         ]);
         if ($valid->passes()) {
             $query = DB::table('users')
                 ->where('email', '=', $request['emailAddress'])
-                ->update(['password' => bcrypt($request['password'])]);
+                ->update(['password' => bcrypt($request['password']), 'active' => '1']);
             if ($query == 1) {
                 alert()->success('Success!!', 'Your password has been saved!');
                 return redirect('/login');
@@ -104,6 +93,4 @@ class ForgotPasswordController extends Controller
             return back()->withErrors($valid);
         }
     }
-
-
 }

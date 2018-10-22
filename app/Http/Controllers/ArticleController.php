@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Articles;
 use App\logs;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,21 +17,36 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        if(session('user')){
-            if(session('role') == 2){
+        $articles = Articles::all();
+        foreach ($articles as $article) {
+            if (Carbon::parse($article->due_date)->lt(Carbon::now())) {
+                $article->status_id = 0;
+                $article->save();
+            }
+        }
+        if (session('user')) {
+            if (session('role') == 2) {
                 $articles = Articles::all();
                 return view('pages.writer.create', ['articles' => $articles]);
-            }else{
-                $articles = Articles::all()->where('status_id', '=', '1');
+            } else {
+                $articles = Articles::where('status_id', '=', '1')->paginate(6);
                 return view('pages.member.article.index', ['articles' => $articles]);
             }
-        }else{
+        } else {
             return redirect('/home');
         }
+    }
 
+    public function archived()
+    {
+        $articles = Articles::where('status_id', 0)->orderBy('created_at')->paginate(6);
+        return view('pages.member.article.index', ['articles' => $articles]);
+    }
 
-
-
+    public function searching(Request $request)
+    {
+        $articles = Articles::where('title', 'LIKE', '%' . $request->search . '%')->paginate(6);
+        return view('pages.member.article.index', ['articles' => $articles]);
     }
 
     /**
@@ -58,21 +74,21 @@ class ArticleController extends Controller
             'body' => 'required',
             'modified_by' => 'nullable|max:70',
             'status_id' => 'nullable|integer',
-
-
+        ], [
+            'articletype_id' => 'The article type must be specified.'
         ]);
         if ($valid->passes()) {
             $articleinfo = $request->all();
             $articleinfo['posted_by'] = session('user')['id'];
             $articleinfo['modified_by'] = 0;
-
+            $articleinfo['due_date'] = Carbon::now()->addYear(1);
             Articles::create($articleinfo);
             $log = new logs();
             $log->savelog(session('user')['id'], 'Added an Article');
             alert()->success('Article Added!', 'You have successfully added an article!');
             return redirect('/writer/articles/create');
         } else {
-            alert()->error('Add Failed!', 'There were errors in your form.');
+            alert()->error('Add Failed!', 'Some fields are missing.');
             return redirect('/writer/articles/create')->withErrors($valid);
         }
     }
@@ -85,9 +101,36 @@ class ArticleController extends Controller
      */
     public function show($articleId)
     {
-        $article = Articles::all()->where('id', $articleId)->first();
+        $article = Articles::find($articleId);
+        if (session('user')) {
+            if (session('role') == 2) {
+                return view('pages.writer.show', ['article' => $article]);
+            } else {
+                return view('pages.member.article.show', ['article' => $article]);
+            }
+        } else {
+            return redirect('/home');
+        }
+    }
 
-        return view('pages.member.article.show', compact('article', 'id'));
+    public function changeStatus(Request $request)
+    {
+        $articles = Articles::find($request->id);
+        if ($request->status_id == 0) {
+            $articles->due_date = Carbon::now()->addYear(1);
+            $articles->status_id = 1;
+        } else {
+            $articles->status_id = 0;
+        }
+        if ($articles->save()) {
+            $log = new logs();
+            $log->savelog(session('user')['id'], 'Changed an Article Status');
+            toast('Status Changed!', 'success', 'bottom-right');
+            return redirect()->back();
+        } else {
+            alert()->error('Oops!', 'something went wrong 😞');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -99,7 +142,6 @@ class ArticleController extends Controller
     public function edit($articleId)
     {
         $article = Articles::all()->where('id', $articleId)->first();
-
         return view('pages.writer.edit', compact('article', 'id'));
     }
 
@@ -116,7 +158,6 @@ class ArticleController extends Controller
             'title' => 'required',
             'status_id' => 'required'
         ]);
-
         $articleId = $request->get('id');
         $article = Articles::all()->where('id', '=', $articleId)->first();
         $article->title = $request->get('title');
@@ -140,16 +181,14 @@ class ArticleController extends Controller
     public function destroy($articleId)
     {
         $article = Articles::find($articleId);
-
-        if ($article->statusId == 1) {
-            $article->statusId = 0;
+        if ($article->status_id == 1) {
+            $article->status_id = 0;
         } else {
-            $article->statusId = 1;
+            $article->status_id = 1;
         }
-
         if ($article->save()) {
             $log = new logs();
-            $log->savelog(session('user_id'), 'Changed an article status');
+            $log->savelog(session('user')['id'], 'Changed an article status');
             toast('Status Changed!', 'success', 'bottom-right');
             return redirect()->back();
         } else {
@@ -157,5 +196,4 @@ class ArticleController extends Controller
             return redirect()->back();
         }
     }
-
 }

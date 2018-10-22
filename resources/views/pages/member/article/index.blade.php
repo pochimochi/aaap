@@ -39,7 +39,7 @@
                     <div class="card-columns">
                         @if($articles->count() < 1)
                             <div class="col-12">
-                                <div class="alert alert-danger">No articles found<br>
+                                <div class="alert alert-default">No articles found<br>
                                     <a href="{{url('/member/articles')}}">Go back</a></div>
                             </div>
                         @else
@@ -51,7 +51,7 @@
                                              alt="Card image cap">
                                         <div class="card-body">
                                             <h3 class="card-title">
-                                                <a class="text-black"
+                                                <a class="display-4 mb-0"
                                                    href="{{URL::to('member/articles/'. $article->id .'')}}">
                                                     {{ $article->title}}
                                                 </a>
@@ -69,14 +69,18 @@
                                             <p class="card-text">{!! $article->body !!}</p>
                                         </div>
                                         <div class="card-footer">
-                                            <small>Posted by: {{ App\User::find($article->posted_by)->firstname}} on
-                                                - {{ \Carbon\Carbon::parse($article->created_at)->format('d/m/Y')}}</small>
+                                            <small class="text-muted"><b> Posted
+                                                    by: </b> {{ App\User::find($article->posted_by)->firstname . ' ' . $article->user->lastname}}
+                                                on
+                                                {{ \Carbon\Carbon::parse($article->created_at)->format('d/m/Y')}}
+                                            </small>
 
-                                            @if($article->modifiedBy != 0)
-                                                <small>Modified
-                                                    By: {{ App\User::find($article->modifiedBy)->userFirstName  }}
+                                            @if($article->modified_by != 0)
+                                                <small class="text-muted"><b> Modified
+                                                        By: </b>{{ App\User::find($article->modified_by)->firstname . ' ' . $article->user->lastname }}
                                                     on
-                                                    - {{ \Carbon\Carbon::parse($article->updated_at)->format('d/m/Y')}}</small>
+                                                    {{ \Carbon\Carbon::parse($article->updated_at)->format('d/m/Y')}}
+                                                </small>
                                             @endif
                                         </div>
                                     </div>

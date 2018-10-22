@@ -47,6 +47,8 @@ class LoginController extends Controller
                 $admin['password'] = bcrypt($admin['password']);
                 $admin['role_id'] = 1;
                 $admin['active'] = 1;
+                $admin['firstname'] = 'Admin';
+                $admin['lastname'] = '';
                 User::create($admin);
                 alert()->warning('Admin Added!', 'Default Admin Initialized');
                 return redirect('/login');
