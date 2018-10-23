@@ -13,7 +13,7 @@
 
 Route::group(['middleware' => ['web']], function () {
     //main pages
-
+    Route::get('/', 'HomeController@Home');
     Route::get('home', 'HomeController@Home');
     Route::get('profile', 'UserController@profile');
     //---------------------------------------------------------------------------------
