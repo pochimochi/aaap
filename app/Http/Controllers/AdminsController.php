@@ -80,13 +80,13 @@ class AdminsController extends Controller
             'city_id' => $userinfo['ecity_id'], 'country_id' => '174'])->id;
         $userinfo['employer_id'] = Employer::create($userinfo)->id;
         $userinfo['pwa_id'] = Pwa::create($userinfo)->id;
-        $link = "http://localhost/aaap/public/setPassword?key=" . $userinfo['email'] . "&time=" . Carbon::now()->format('Y-m-d%20H:i:s') . "";
+        $link = "https://isproj2b.benilde.edu.ph/aaap/public/setPassword?key=" . $userinfo['email'] . "&time=" . Carbon::now()->format('Y-m-d%20H:i:s') . "";
         $body = "<h1>Welcome to the Association for Adults with Autism, Philippines!</h1>
 <hr />
 <h3>Hello!</h3>
 <p>You are now a part of the content team! and&nbsp;for your account,&nbsp;Use the button below to activate your account by entering your new password.&nbsp;</p>
 <p>&nbsp;</p>
-<p><a href=" . $link . ">Activate Account</a></p>
+<p><a href=" . url('setPassword')."?key=" . $userinfo['email'] . "&time=" . Carbon::now()->format('Y-m-d%20H:i:s') . "" .">Activate Account</a></p>
 <p>&nbsp;</p>
 <hr />
 <p>Welcome to the team,&nbsp;<br />

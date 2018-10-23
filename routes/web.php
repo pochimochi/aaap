@@ -76,11 +76,11 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     //admin new password
-    Route::get('/setPassword', 'AdminsController@setPassword');
+    Route::get('setPassword', 'AdminsController@setPassword');
     //forgotpassword
-    Route::get('/forgotpassword', 'ForgotPasswordController@getKeys');
-    Route::post('/forgotpassword/save', 'ForgotPasswordController@saveNewPassword');
-    Route::resource('/forgotpassword', 'ForgotPasswordController')->except(['index', 'destroy', 'show', 'update']);
+    Route::get('forgotpassword', 'ForgotPasswordController@getKeys');
+    Route::post('forgotpassword/save', 'ForgotPasswordController@saveNewPassword');
+    Route::resource('forgotpassword', 'ForgotPasswordController')->except(['index', 'destroy', 'show', 'update']);
 
 
     //register
