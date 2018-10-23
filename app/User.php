@@ -61,20 +61,30 @@ class User extends Model implements Authenticatable
     {
         return $this->belongsTo('\App\Images');
     }
+
     public function pwa()
     {
         return $this->hasOne('\App\Pwa');
     }
+
     public function event()
     {
         return $this->hasOne('\App\Event', 'posted_by');
     }
-    public function announcement(){
+
+    public function announcement()
+    {
         return $this->hasOne('\App\Announcements', 'posted_by');
     }
+
     public function articles()
     {
-        return $this->hasOne('\App\Article',  'posted_by');
+        return $this->hasOne('\App\Article', 'posted_by');
+    }
+
+    public function attendance()
+    {
+        return $this->hasMany('\App\EventAttendance', 'user_id');
     }
 
 

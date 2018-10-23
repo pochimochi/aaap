@@ -32,6 +32,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('search', 'EventController@searching');
         Route::post('join', 'AttendanceController@join');
         Route::post('cancel', 'AttendanceController@cancel');
+        Route::get('joined', 'AttendanceController@index');
 
     });
     //-------------------------------------------------------------------------------------

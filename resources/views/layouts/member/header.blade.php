@@ -37,7 +37,7 @@
                             <div class="dropdown-menu">
                                 <a href="{{URL::to('/member/events')}}"
                                    class="dropdown-item">List</a>
-                                <a href="{{URL::to('member/userjoin')}}"
+                                <a href="{{action('AttendanceController@index')}}"
                                    class="dropdown-item">Joined Events</a>
                             </div>
                         </li>
