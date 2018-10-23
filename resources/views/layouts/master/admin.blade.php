@@ -19,7 +19,9 @@
     <link type="text/css" href="{{asset('argon/assets/css/argon.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/media/css/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Responsive/css/responsive.bootstrap4.css')}}">
     <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Responsive/css/responsive.dataTables.min.css')}}">
+
 </head>
 
 <body>
@@ -96,7 +98,7 @@
      </div>
  </div>--}}
 <!-- Page content -->
-    <div class="container-fluid mt--8">
+    <div class="container-fluid mt--9">
         @yield('content')
         <footer class="footer">
             <div class="row align-items-center justify-content-xl-between">
@@ -143,11 +145,13 @@
 <script src="{{asset('argon/assets/js/argon.js')}}"></script>
 
 <script src="{{asset('argon/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-{{--<script src="{{asset('argon/assets/vendor/chart.js/dist/Chart.min.js')}}" charset="utf-8"></script>
-<script src="{{asset('argon/assets/vendor/chart.js/dist/Chart.extension.min.js')}}" charset="utf-8"></script>--}}
+
+
 <script type="text/javascript" charset="utf8" src="{{asset('argon/DataTables-1.10.19/media/js/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" charset="utf8" src="{{asset('argon/DataTables-1.10.19/media/js/dataTables.bootstrap4.min.js')}}"></script>
 <script type="text/javascript" language="javascript" src="{{asset('argon/DataTables-1.10.19/extensions/Responsive/js/dataTables.responsive.js')}}"></script>
+<script type="text/javascript" charset="utf8" src="{{asset('argon/DataTables-1.10.19/extensions/Responsive/js/responsive.bootstrap4.min.js')}}"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('table').DataTable( {
@@ -167,35 +171,12 @@
             order: [ 1, 'asc' ]
         } );
     } );
+
 </script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 @include('sweetalert::alert')
-{{--<script type="text/javascript">
-    $('table').DataTable({
-        /* "dom": '<"container"<"card"<"table-responsive"<lf<t>ip>>>>',*/
-        "pagingType": "numbers",
-        responsive: true
 
-    });
-</script>--}}
-{{--<script type="text/javascript">
-    $(document).ready(function() {
-        $('table').DataTable( {
-            responsive: {
-                details: {
-                    type: 'column',
-                    target: 'tr'
-                }
-            },
-            columnDefs: [ {
-                className: 'control',
-                orderable: false,
-                targets:   0
-            } ],
-            order: [ 1, 'asc' ]
-        } );
-    } );
-</script>--}}
+
 
 </body>
 

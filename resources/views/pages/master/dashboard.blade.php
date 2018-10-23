@@ -15,7 +15,7 @@
 @section('content')
     @if (session('user')['role_id'] == 3)
         <!-- Widgets  -->
-        <div class="container pb-4">
+        <div class="container mb-5">
             <div class="row">
                 <div class="col-xl-3 col-lg-6">
                     <div class="card card-stats mb-4 mb-xl-0">
@@ -107,9 +107,9 @@
         </div>
 
         <!-- Widgets End -->
-        <div class="container">
+        <div class="container-fluid">
             <div id="app">
-                <div class="card bg-white">
+                <div class="card shadow bg-white">
                     <div class="card-body">
                         <div class="tab-pane tab-example-result fade show active">
                             <div class="chart">
@@ -128,7 +128,93 @@
             </script>
 
             {!! $chart->script() !!}
+
+            <div class="card mt-5 bg-translucent-white shadow">
+                <div class="card-body">
+                    <div class="card-title display-4">
+                        Members of AAAP
+                    </div>
+
+                    <table id="myTable" class="table bg-white table-bordered table-condensed">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>Active</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <td></td>
+                                <td>{{$user->id}}</td>
+                                <td>{{$user->firstname}}</td>
+                                <td>{{$user->middlename}}</td>
+                                <td>{{$user->lastname}}</td>
+                                <td>{{($user->gender == 1) ? 'Male' : 'Female'}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>
+                                    <div class="badge {{($user->active == 1) ? 'badge-success' : 'badge-danger'}}">{{($user->active == 1) ? 'Active' : 'Inactive'}}</div>
+                                </td>
+
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card mt-5 border-0 text-white bg-gradient-info">
+                <div class="card-body">
+                    <div class="card-title display-4 ">
+                        Event Signups
+                    </div>
+
+
+                    @foreach($events as $event)
+                        <div class="card m-2 text-dark shadow">
+
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    {{$event->name}}
+                                    <div class="badge {{($event->status == 1) ? 'badge-success' : 'badge-danger'}}">
+                                        {{($event->status == 1) ? 'Active' : 'Inactive'}}</div>
+                                </h3>
+
+
+                                @foreach ($attendances = $event->attendance()->paginate(5, ['*'],'event'.$event->id.'') as $attendance)
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            {{$attendance->user->firstname .' '. $attendance->user->lastname}}
+                                            <div class="badge {{($attendance->status == 1) ? 'badge-success' : 'badge-danger'}}">
+                                                {{($attendance->status == 1) ? 'Attending' : 'Cancelled'}}</div>
+
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                @endforeach
+
+                                    {{$attendances->links()}}
+
+
+                            </div>
+                        </div>
+
+                    @endforeach
+                </div>
+            </div>
         </div>
+
     @endif
 @endsection
 
