@@ -99,6 +99,16 @@
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-body px-lg-5 py-lg-5">
                         <form method="post" action="{{URL::to('/forgotpassword/save')}}" id="form">
+                            @if($errors->any())
+                                <div class="alert alert-warning">
+                                    @foreach($errors->all() as $error)
+
+                                        {{$error}}
+
+                                    @endforeach
+
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <input type="password" placeholder="New Password" name="password"
                                        class="form-control input-rounded">

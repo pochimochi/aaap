@@ -23,7 +23,7 @@ class ForgotPasswordController extends Controller
         $check = User::all()->where('email', '=', $emailAddress)->first();
         if ($check != null) {
             $password = $check->password;
-            $link = "http://localhost/forgotpassword?key=" . $emailAddress . "&reset=" . $password . "&time=" . Carbon::now() . "";
+            $link =  url('forgotpassword')."?key=" . $emailAddress . "&reset=" . $password . "&time=" . Carbon::now() . "";
             $body = '<html>
         <body>
         <h1>Password Reset</h1>
@@ -75,7 +75,7 @@ class ForgotPasswordController extends Controller
     public function saveNewPassword(Request $request)
     {
         $valid = Validator::make($request->all(), [
-            'password' => 'required|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/\'',
+            'password' => 'required|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'password_confirmation' => 'required'
         ]);
         if ($valid->passes()) {
@@ -90,6 +90,7 @@ class ForgotPasswordController extends Controller
                 return redirect('/login');
             }
         } else {
+
             return back()->withErrors($valid);
         }
     }
