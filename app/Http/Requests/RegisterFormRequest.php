@@ -60,7 +60,8 @@ class RegisterFormRequest extends FormRequest
             'pwaGender' => 'nullable|integer',
             'pwaOccupation' => 'nullable|string',
             'landline_number' => 'nullable',
-            'mobile_number' => 'required|string'
+            'mobile_number' => 'required|string',
+            'terms' => 'required'
         ];
     }
     public function messages()
@@ -108,7 +109,8 @@ class RegisterFormRequest extends FormRequest
 
             'profile_id' => 'The profile picture must be an image.',
             'idverification_id.required' => 'The ID Verification field is required. Please upload a photo or file of your ID.',
-            'password.regex' => 'The password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 Special Character.'
+            'password.regex' => 'The password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 Special Character.',
+            'terms.required' => 'You must agree to the terms and conditions before creating an account.'
         ];
     }
 

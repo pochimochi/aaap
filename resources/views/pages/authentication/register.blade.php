@@ -197,9 +197,10 @@
                                             <select class="form-control custom-select input-default"
                                                     name="gender" id="gender">
                                                 <option value="">Select Gender</option>
-                                                <option value="1">Male
+                                                <option value="1" {{ old('gender') == 1 ? 'selected' : '' }}>
+                                                    Male
                                                 </option>
-                                                <option value="0">
+                                                <option value="2" {{ old('gender') == 2 ? 'selected' : '' }}>
                                                     Female
                                                 </option>
                                             </select>
@@ -216,7 +217,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Mobile Number</label>
                                             <input value="{{ old('mobile_number') }}" type="text"
                                                    name="mobile_number" id="mobile_number"
@@ -411,9 +412,10 @@
                                                 <select class="form-control custom-select input-default"
                                                         name="pwaGender" id="pwaGender">
                                                     <option value="">Select Gender</option>
-                                                    <option value="1" @if(old('gender') == 1) selected @endif>Male
+                                                    <option value="1" {{ old('pwaGender') == 1 ? 'selected' : '' }}>
+                                                        Male
                                                     </option>
-                                                    <option value="0" @if(old('gender') == 0) selected @endif>
+                                                    <option value="2" {{ old('pwaGender') == 2 ? 'selected' : '' }}>
                                                         Female
                                                     </option>
                                                 </select>
@@ -455,8 +457,12 @@
                                                 <select class="form-control custom-select input-default"
                                                         name="withintervention" id="withintervention">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">Yes</option>
-                                                    <option value="0">No</option>
+                                                    <option value="1" {{ old('withintervention') == 1 ? 'selected' : '' }}>
+                                                        Yes
+                                                    </option>
+                                                    <option value="2" {{ old('withintervention') == 2 ? 'selected' : '' }}>
+                                                        No
+                                                    </option>
                                                 </select>
                                                 <span class="text-danger">{{ $errors->first('withintervention') }}</span>
                                             </div>
@@ -569,11 +575,25 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input class="custom-control-input" name="terms" id="terms"
+                                                           type="checkbox"
+                                                           value="true" {{ !old('terms') ?: 'checked' }}>
+                                                    <label class="custom-control-label" for="terms">
+                                                        <span>I agree to the terms and conditions.</span>
+                                                    </label>
+                                                </div>
+                                                <span class="text-danger">{{ $errors->first('terms') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="g-recaptcha" align="center"
                                          data-sitekey="6Lfj6XAUAAAAAP9Mkg2ajxaSAZy0LaV-TS_BcnlK" style="display: block">
-
                                     </div>
                                 </div>
                             </div>
@@ -602,7 +622,6 @@
                         <div class="register-link m-t-15 text-center">
                             <p>Already have account ? <a href="{{URL::to('/login')}}"> Sign in</a></p>
                         </div>
-
                         </form>
                     </div>
                 </div>
