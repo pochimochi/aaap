@@ -29,7 +29,7 @@ class RegisterFormRequest extends FormRequest
             'gender' => 'required',
             'profile_id' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
             'password' => 'required|max:64|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-            'idverification_id' => 'required|mimes:jpeg,jpg,png,pdf,docx|max:300',
+            'idverification_id' => 'required|mimes:jpg,png,pdf,docx|max:300',
             //'membershipStatus' => 'required|integer',
             //'statusDate' => 'required|date',
             'approvedBy' => 'nullable|string',
