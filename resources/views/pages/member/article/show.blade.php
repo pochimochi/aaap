@@ -1,0 +1,94 @@
+@extends('layouts.member.layout')
+@section('navbar')
+    @include('layouts.member.header')
+    <div class="position-relative">
+        <section class="section section-lg section-shaped pb-250">
+            <div class="shape shape-style-1 shape-default">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="lg-space"></div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10">
+                                    <div class="card shadow">
+                                        <div class="card-body">
+                                            <a class="display-4 mb-0"
+                                               href="{{URL::to('member/articles/'. $article->id .'')}}">{{$article->title}}</a>
+                                            <br>
+                                            @if(session('user')->role_id == 2)
+                                                <hr>
+                                                @if($article->status_id == 0)
+                                                    <div class="alert alert-danger" role="alert">
+                                                        This is article is currently archived
+                                                    </div>
+                                                @else
+                                                    <div class="alert alert-info" role="alert">
+                                                        This is article is currently active
+                                                    </div>
+                                                @endif
+                                            @endif
+                                            <p class="card-text">{!! $article->body !!}</p>
+                                            @if(session('user')->userTypeId == 2)
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <a href="{{URL::to('/writer/articles/'.$article->id .'/edit ')}}"
+                                                           class="btn btn-outline-info">Edit</a>&nbsp;
+                                                        <form action="{{URL::action('ArticleController@destroy', ['articleId' => $article->id])}}"
+                                                              method="post">
+                                                            @method('DELETE')
+                                                            @csrf
+
+                                                            @if ($article->statusId != 0)
+                                                                <button type="submit"
+                                                                        class="btn btn-outline-danger">Archive
+                                                                </button>
+                                                            @else
+                                                                <button type="submit"
+                                                                        class="btn btn-outline-success">Restore
+                                                                </button>
+                                                            @endif
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            <hr>
+                                            <small class="text-muted"><b>Posted
+                                                    by: </b>{{ App\User::find($article->posted_by)->firstname . ' ' . $article->user->lastname}}
+                                                on {{ \Carbon\Carbon::parse($article->created_at)->format('F d, Y')}}
+                                            </small>
+                                            @if($article->modifiedBy != 0)
+                                                <small class="text-muted"><b>Modified
+                                                        By: </b> {{ App\User::find($article->modified_by)->firstname . ' ' . $article->user->lastname }}
+                                                    on: {{ \Carbon\Carbon::parse($article->updated_at)->format('F d, Y')}}
+                                                </small>
+                                                &nbsp;@endif
+                                            <div class="row justify-content-end">
+                                                <a class="btn btn-rounded btn-primary"
+                                                   href="{{URL::to('/member/articles')}}">Back</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+
+@endsection

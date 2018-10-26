@@ -1,0 +1,182 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Announcements;
+
+use App\Images;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\logs;
+use Illuminate\Support\Facades\Validator;
+
+class AnnouncementsController extends Controller
+{
+
+
+    public function index()
+    {
+        $announcements = Announcements::all();
+        foreach ($announcements as $announcement) {
+            if (Carbon::parse($announcement->due_date)->lt(Carbon::now())) {
+                $announcement->status_id = 0;
+                $announcement->save();
+            }
+
+        }
+        if (session('user')) {
+            if (session('role') == 3) {
+                $announcements = Announcements::paginate(10);
+                return view('pages.contentsmanager.announcement.index', ['announcements' => $announcements]);
+            } else if (session('role') == 4) {
+                $announcements = Announcements::where('status_id', '=', '1')->paginate(10);;
+                return view('pages.member.announcement.index', ['announcements' => $announcements]);
+            }
+        } else {
+            return redirect('/home');
+        }
+    }
+
+    public function show($id)
+    {
+
+        if (session('user')) {
+            if (session('role') == 3) {
+                $announcement = Announcements::where('id', $id)->first();
+                return view('pages.contentsmanager.announcement.show', compact('announcement', 'id'));
+            } else if (session('role') == 4) {
+                $announcement = Announcements::where('id', $id)->first();
+                return view('pages.member.announcement.show', compact('announcement', 'id'));
+            }
+        } else {
+            return redirect('/home');
+        }
+
+    }
+
+    public function searching(Request $request)
+    {
+        $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status_id', '=', '1')->paginate(5);
+        return view('pages.member.announcement.index', ['announcements' => $announcements]);
+    }
+
+    public function create()
+    {
+        $announcements = Announcements::all();
+        return view('pages.contentsmanager.announcement.create', ['announcements' => $announcements]);
+    }
+
+
+    public function store(Request $request)
+    {
+
+        $valid = Validator::make($request->all(), [
+            'title' => 'required|max:100|regex:[A-Za-z1-9]',
+            'description' => 'required|regex:[A-Za-z1-9]',
+            'type_id' => 'required',
+            'due_date' => 'nullable|after:today',
+        ], [
+            'type_id.required' => 'The type of the announcement must be specified.',
+        ]);
+
+        if ($valid->passes()) {
+            $announcementInfo = $request->all();
+            $announcementInfo['title'] = strip_tags($announcementInfo['title']);
+            $announcementInfo['description'] = strip_tags($announcementInfo['description']);
+
+            if ($request->file('eventImage') != null) {
+                $announcementInfo['image_name'] = $request->file('announcementImage')->getClientOriginalName();
+                $request->file('announcementImage')->storeAs('public', $announcementInfo['image_name']);
+                $announcementInfo['image_id'] = Images::create(['location' => $announcementInfo['image_name']])->id;
+            }
+            $announcementInfo['posted_by'] = session('user')['id'];
+            Announcements::create($announcementInfo);
+            /*AnnouncementImage::create(['image_id' => $imageId->id, 'announcement_id' => $announcementId->id]);*/
+
+            $log = new logs();
+            $log->savelog(session('user')['id'], 'Added an Announcement');
+            alert()->success('Announcement Added!', 'You have successfully added an announcement!');
+            return redirect('contentmanager/announcements/create');
+        } else {
+            alert()->error('Add Failed!', 'Some fields are missing or is invalid.');
+            return redirect('contentmanager/announcements/create')->withErrors($valid)->withInput();
+        }
+    }
+
+    public function edit($id)
+    {
+        $announcement = Announcements::find($id);
+        return view('pages.contentsmanager.announcement.edit', ['announcement' => $announcement]);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'title' => 'required|max:100',
+            'description' => 'required',
+            'type_id' => 'required',
+            'due_date' => 'nullable|after:today',
+        ], [
+            'type_id.required' => 'The type of the announcement must be specified.',
+        ]);
+
+
+        $announcement = Announcements::find($id);
+
+        if ($request->file('announcementImage') != null) {
+            $file = $request->file('announcementImage')->getClientOriginalName();
+            $request->file('announcementImage')->storeAs('public', $file);
+
+            Images::where('id', $announcement->image->id)->update(['location' => $file]);
+        }
+
+        $announcement->title = $request->get('title');
+        $announcement->description = $request->get('description');
+        $announcement->modified_by = session('user')['id'];
+        $announcement->type_id = $request->get('type_id');
+        $announcement->due_date = $request->get('due_date');
+        $announcement->save();
+
+        $log = new logs();
+        $log->savelog(session('user')['id'], 'Updated an Announcement');
+        alert()->success('Announcement Updated!', 'You have successfully updated an announcement!');
+        return redirect('/contentmanager/announcements/create');
+    }
+
+
+    public
+    function indexSelect($type)
+    {
+        if ($type == 1) {
+            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(10);
+        } elseif ($type == 0) {
+            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 0)->paginate(10);
+        } else {
+            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(10);
+        }
+        return view('pages.member.announcement.index', ['announcements' => $announcements]);
+    }
+
+    public
+    function changeStatus($id, $status)
+    {
+        $announcements = Announcements::find($id);
+        if ($announcements->status_id == 0) {
+            $announcements->due_date = Carbon::now()->addYear(1);
+            $announcements->status_id = 1;
+        } else {
+            $announcements->status_id = 0;
+        }
+        if ($announcements->save()) {
+            $log = new logs();
+            $log->savelog(session('user')['id'], 'Changed an Announcement Status');
+            toast('Status Changed!', 'success', 'bottom-right');
+            return redirect()->back();
+        } else {
+            alert()->error('Oops!', 'something went wrong 😞');
+            return redirect()->back();
+        }
+    }
+}
