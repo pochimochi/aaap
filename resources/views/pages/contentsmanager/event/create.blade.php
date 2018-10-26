@@ -266,17 +266,17 @@
                                            class="btn btn-rounded btn-primary ">View</a>
                                         <a href="{{URL::to('contentmanager/events/' . $event->id .'/edit')}}"
                                            class="btn btn-warning btn-rounded">Edit</a>
-                                        <div class="col">
+                                    {{--    <div class="col">
                                             <button type="button" class="btn btn-block btn-default" onclick="$( 'textarea' ).ckeditor();" data-toggle="modal"
                                                     data-target="#modal-form{{$event->id}}">Form
                                             </button>
 
-                                        </div>
+                                        </div>--}}
 
 
                                 </td>
                             </tr>
-                            <div class="modal fade" id="modal-form{{$event->id}}"
+                           {{-- <div class="modal fade" id="modal-form{{$event->id}}"
                                  role="dialog"
                                  aria-labelledby="modal-form" aria-hidden="true">
                                 <div class="modal-dialog modal- modal-dialog-centered modal-sm"
@@ -288,7 +288,7 @@
                                                     <div class="text-center text-muted mb-4">
                                                         <small>Write the following information below</small>
                                                     </div>
-                                                    {{--<form role="form"  name="form{{$event->id}}">--}}
+                                                    --}}{{--<form role="form"  name="form{{$event->id}}">--}}{{--
 
                                                     <div class="form-group">
                                                         <div class="input-group input-group-alternative">
@@ -305,13 +305,13 @@
                                                                 class="btn btn-primary my-4">Send
                                                         </button>
                                                     </div>
-                                                    {{--</form>--}}
+                                                    --}}{{--</form>--}}{{--
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--}}
                         @endforeach
                         </tbody>
                     </table>
