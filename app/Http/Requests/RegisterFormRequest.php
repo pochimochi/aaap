@@ -12,7 +12,6 @@ use JsValidator;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-
 class RegisterFormRequest extends FormRequest
 {
     public function authorize()
@@ -29,9 +28,7 @@ class RegisterFormRequest extends FormRequest
             'gender' => 'required',
             'profile_id' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
             'password' => 'required|max:64|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-            'idverification_id' => 'required|mimes:jpg,png,pdf,docx|max:300',
-            //'membershipStatus' => 'required|integer',
-            //'statusDate' => 'required|date',
+            'idverification_id' => 'required|mimes:jpg,png|max:300',
             'approvedBy' => 'nullable|string',
             'emailCode' => 'nullable',
             'email' => 'required|unique:users,email|email',
@@ -64,43 +61,44 @@ class RegisterFormRequest extends FormRequest
             'terms' => 'required'
         ];
     }
+
     public function messages()
     {
         return [
             //names
-            'firstname.required'=> 'The first name field is required.',
-            'firstname.max'=> 'The first name may not be greater than 30 characters.',
-            'firstname.regex'=> 'The first name format is invalid.',
-            'middlename.regex'=> 'The middle name format is invalid',
-            'middlename.max'=> 'The middle name may not be greater than 30 characters.',
-            'lastname.required'=> 'The last name field is required',
-            'lastname.max'=> 'The last name may not be greater than 30 characters.',
-            'lastname.regex'=> 'The last name format is invalid.',
-            'pwaFirstName.max'=> 'The first name may not be greater than 30 characters.',
-            'pwaFirstName.regex'=> 'The first name format is invalid.',
-            'pwaMiddleName.max'=> 'The middle name may not be greater than 30 characters.',
-            'pwaMiddleName.regex'=> 'The middle name format is invalid.',
-            'pwaLastName.regex'=> 'The last name format is invalid',
-            'pwaLastName.max'=> 'The last name may not be greater than 30 characters.',
+            'firstname.required' => 'The first name field is required.',
+            'firstname.max' => 'The first name may not be greater than 30 characters.',
+            'firstname.regex' => 'The first name format is invalid.',
+            'middlename.regex' => 'The middle name format is invalid',
+            'middlename.max' => 'The middle name may not be greater than 30 characters.',
+            'lastname.required' => 'The last name field is required',
+            'lastname.max' => 'The last name may not be greater than 30 characters.',
+            'lastname.regex' => 'The last name format is invalid.',
+            'pwaFirstName.max' => 'The first name may not be greater than 30 characters.',
+            'pwaFirstName.regex' => 'The first name format is invalid.',
+            'pwaMiddleName.max' => 'The middle name may not be greater than 30 characters.',
+            'pwaMiddleName.regex' => 'The middle name format is invalid.',
+            'pwaLastName.regex' => 'The last name format is invalid',
+            'pwaLastName.max' => 'The last name may not be greater than 30 characters.',
 
             //address
-            'unitno.required'=> 'The house/apartment/unit number is required.',
-            'unitno.regex'=> 'The house/apartment/unit number format is invalid.',
-            'bldg.regex'=> 'The building format is invalid.',
-            'street.regex'=> 'The street format is invalid.',
-            'city.regex'=> 'The city format is invalid.',
-            'country_id.required'=> 'The country field is required.',
+            'unitno.required' => 'The house/apartment/unit number is required.',
+            'unitno.regex' => 'The house/apartment/unit number format is invalid.',
+            'bldg.regex' => 'The building format is invalid.',
+            'street.regex' => 'The street format is invalid.',
+            'city.regex' => 'The city format is invalid.',
+            'country_id.required' => 'The country field is required.',
 
-            'tunitno.regex'=> 'The house/apartment/unit number format is invalid.',
-            'tbldg.regex'=> 'The building format is invalid.',
-            'tstreet.regex'=> 'The street format is invalid.',
-            'tcity.regex'=> 'The city format is invalid.',
+            'tunitno.regex' => 'The house/apartment/unit number format is invalid.',
+            'tbldg.regex' => 'The building format is invalid.',
+            'tstreet.regex' => 'The street format is invalid.',
+            'tcity.regex' => 'The city format is invalid.',
 //            'tcountry.required'=> 'The country field is required.',
 
-            'eunitno.regex'=> 'The house/apartment/unit number format is invalid.',
-            'ebldg.regex'=> 'The building format is invalid.',
-            'estreet.regex'=> 'The street format is invalid.',
-            'ecity.regex'=> 'The city format is invalid.',
+            'eunitno.regex' => 'The house/apartment/unit number format is invalid.',
+            'ebldg.regex' => 'The building format is invalid.',
+            'estreet.regex' => 'The street format is invalid.',
+            'ecity.regex' => 'The city format is invalid.',
 //            'ecountry.required'=> 'The country field is required.',
 
             'email.required' => 'The email address field is required.',
