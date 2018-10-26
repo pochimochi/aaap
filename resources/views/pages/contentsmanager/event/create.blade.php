@@ -261,14 +261,57 @@
                                        class="btn {{$event->status == 1 ? 'btn btn-rounded btn-success' : 'btn btn-rounded btn-danger'}}">{{$event->status == 1 ? 'Active' : 'Inactive' }}</a>
                                 </td>
                                 <td>
-                                    <nobr>
+
                                         <a href="{{URL::to('/contentmanager/events/'. $event->id.'')}}"
                                            class="btn btn-rounded btn-primary ">View</a>
                                         <a href="{{URL::to('contentmanager/events/' . $event->id .'/edit')}}"
                                            class="btn btn-warning btn-rounded">Edit</a>
-                                    </nobr>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-block btn-default" onclick="$( 'textarea' ).ckeditor();" data-toggle="modal"
+                                                    data-target="#modal-form{{$event->id}}">Form
+                                            </button>
+
+                                        </div>
+
+
                                 </td>
                             </tr>
+                            <div class="modal fade" id="modal-form{{$event->id}}"
+                                 role="dialog"
+                                 aria-labelledby="modal-form" aria-hidden="true">
+                                <div class="modal-dialog modal- modal-dialog-centered modal-sm"
+                                     role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body p-0">
+                                            <div class="card bg-secondary shadow border-0">
+                                                <div class="card-body">
+                                                    <div class="text-center text-muted mb-4">
+                                                        <small>Write the following information below</small>
+                                                    </div>
+                                                    {{--<form role="form"  name="form{{$event->id}}">--}}
+
+                                                    <div class="form-group">
+                                                        <div class="input-group input-group-alternative">
+                                                            <div class="input-group-prepend">
+                                                                                    <span class="input-group-text"><i
+                                                                                                class="ni ni-lock-circle-open"></i></span>
+                                                            </div>
+                                                            <textarea class="ckeditor"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="text-center">
+                                                        <button type="button"
+                                                                class="btn btn-primary my-4">Send
+                                                        </button>
+                                                    </div>
+                                                    {{--</form>--}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                         </tbody>
                     </table>
@@ -293,6 +336,7 @@
                 $('#ratelabel').show();
             }
         });
+
     </script>
 
 @endsection

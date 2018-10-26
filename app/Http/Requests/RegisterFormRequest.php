@@ -28,7 +28,7 @@ class RegisterFormRequest extends FormRequest
             'gender' => 'required',
             'profile_id' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
             'password' => 'required|max:64|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-            'idverification_id' => 'required|mimes:jpg,png|max:300',
+            'idverification_id' => 'required|mimes:jpg,jpeg,png|max:300',
             'approvedBy' => 'nullable|string',
             'emailCode' => 'nullable',
             'email' => 'required|unique:users,email|email',
