@@ -75,7 +75,7 @@
 <div class="main-content">
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
         <div class="container px-4">
-            <a class="navbar-brand" href="../index.html">
+            <a class="navbar-brand" href="{{url('/home')}}">
                 <img src="{{asset('images/logos/logowhite.png')}}" class="navbar-brand-img" alt="...">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main"
@@ -87,7 +87,7 @@
                 <div class="navbar-collapse-header d-md-none">
                     <div class="row">
                         <div class="col-6 collapse-brand">
-                            <a href="../index.html">
+                            <a href="{{url('/home')}}">
                                 <img src="{{asset('images/logos/logo.png')}}" class="navbar-brand-img" alt="...">
                             </a>
                         </div>

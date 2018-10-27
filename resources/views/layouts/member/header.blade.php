@@ -90,12 +90,18 @@
                                 <a href="{{url('articles')}}" class="dropdown-item">Articles</a>
                             </div>
                         </li>
-                        <li class="nav-item d-none d-lg-block ml-lg-4">
-                            <a href="{{URL::to('/login')}}" class="btn btn-neutral btn-icon">
-                                <span class="btn-inner--icon"><i class="ni ni-key-25"></i></span>
-                                <span class="nav-link-inner--text">Login</span>
-                            </a>
-                        </li>
+                        {{--<li class="nav-item d-none d-lg-block ml-lg-4">--}}
+                            {{--<a href="{{URL::to('/login')}}" class="btn btn-neutral btn-icon">--}}
+                                {{--<span class="btn-inner--icon"><i class="ni ni-key-25"></i></span>--}}
+                                {{--<span class="nav-link-inner--text">Login</span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                            <li class="nav-item">
+                                <a href="{{URL::to('/login')}}" class="nav-link">
+                                    <span class="btn-inner--icon"><i class="ni ni-key-25"></i></span>
+                                    <span class="nav-link-inner--text">Login</span>
+                                </a>
+                            </li>
                         <li class="nav-item">
                             <a href="{{URL::to('/register')}}" class="nav-link">
                                 <i class="ni ni-ui-04 d-lg-none"></i>

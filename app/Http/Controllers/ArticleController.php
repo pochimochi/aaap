@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Articles;
+use App\Helper;
 use App\logs;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -80,10 +82,14 @@ class ArticleController extends Controller
         ]);
         if ($valid->passes()) {
             $articleinfo = $request->all();
+            $users = User::all()->where('active', 1)->where('role_id', 4);
             $articleinfo['posted_by'] = session('user')['id'];
             $articleinfo['modified_by'] = 0;
             $articleinfo['due_date'] = Carbon::now()->addYear(1);
             Articles::create($articleinfo);
+
+            $helper = new Helper();
+            $helper->emailBulk($users, 'Read our new article entitled "'.$articleinfo['title'].'". Visit our <a href='.url('home').'>website</a> for more details.', 'New Article!');
             $log = new logs();
             $log->savelog(session('user')['id'], 'Added an Article');
             alert()->success('Article Added!', 'You have successfully added an article!');

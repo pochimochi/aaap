@@ -6,8 +6,10 @@ use App\Address;
 use App\City;
 use App\Event;
 use App\EventAttendance;
+use App\Helper;
 use App\Images;
 use App\logs;
+use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -27,8 +29,10 @@ class EventController extends Controller
                 $events = Event::where('status', '=', '1')->paginate(10);;
                 return view('pages.member.event.index', ['events' => $events]);
             }
-        } else {$events = Event::where('status', '=', '1')->paginate(10);;
-            return view('pages.member.event.index', ['events' => $events]);return redirect('/home');
+        } else {
+            $events = Event::where('status', '=', '1')->paginate(10);;
+            return view('pages.member.event.index', ['events' => $events]);
+            return redirect('/home');
         }
     }
 //    public function joined($attendId, $eventId)
@@ -79,6 +83,7 @@ class EventController extends Controller
         if ($valid->passes()) {
             $eventinfo = $request->all();
             $event = new Event($eventinfo);
+            $users = User::all()->where('active', 1)->where('role_id', 4);
             $eventinfo['city_id'] = City::create(['name' => $eventinfo['city']])->id;
             $eventinfo['address_id'] = Address::create($eventinfo)->id;
             $eventinfo['posted_by'] = session('user')['id'];
@@ -92,6 +97,8 @@ class EventController extends Controller
 
             $eventinfo['event_id'] = Event::create($eventinfo)->id;
             /*EventImages::create(['image_id' => $eventinfo['image_id'], 'event_id' => $eventinfo['event_id']]);*/
+            $helper = new Helper();
+            $helper->emailBulk($users, 'Join us in '.$eventinfo['name'].' on '.$eventinfo['start_date']. ' to '. $eventinfo['end_date'] .' at ' . $eventinfo['venue'] .'<br>Visit our <a href='.url('home').'>website</a> for more details', $eventinfo['name']);
             $log = new logs();
             $log->savelog(session('user')['id'], 'Added an Event');
             alert()->success('Event Added!', 'You have successfully added an event!');
@@ -161,6 +168,26 @@ class EventController extends Controller
         }
     }
 
+    public function reminder(Request $request)
+    {
+        $user = User::all()->where('active', 1)->where('role_id', 4);
+        $request->validate([
+            'subject' => 'required|max:70',
+            'body' => 'required'
+        ]);
+        $helper = new Helper();
+
+
+        foreach ($user as $receiver) {
+            $helper->emailSend($receiver->email, $request->body, $request->subject);
+            $log = new logs();
+            $log->savelog(session('user')['id'], 'Sent an Event Reminder [' . $request->subject . ']');
+            alert()->success('Success!', 'Event Reminders has been sent!');
+            return back();
+        }
+
+
+    }
 
     public function searching(Request $request)
     {

@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Announcements;
 
+use App\Helper;
 use App\Images;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\logs;
 use Illuminate\Support\Facades\Validator;
+use App\User;
 
 class AnnouncementsController extends Controller
 {
@@ -72,8 +74,8 @@ class AnnouncementsController extends Controller
     {
 
         $valid = Validator::make($request->all(), [
-            'title' => 'required|max:100|regex:[A-Za-z1-9]',
-            'description' => 'required|regex:[A-Za-z1-9]',
+            'title' => 'required|max:100',
+            'description' => 'required',
             'type_id' => 'required',
             'due_date' => 'nullable|after:today',
         ], [
@@ -82,6 +84,7 @@ class AnnouncementsController extends Controller
 
         if ($valid->passes()) {
             $announcementInfo = $request->all();
+            $users = User::all()->where('active', 1)->where('role_id', 4);
             $announcementInfo['title'] = strip_tags($announcementInfo['title']);
             $announcementInfo['description'] = strip_tags($announcementInfo['description']);
 
@@ -93,6 +96,9 @@ class AnnouncementsController extends Controller
             $announcementInfo['posted_by'] = session('user')['id'];
             Announcements::create($announcementInfo);
             /*AnnouncementImage::create(['image_id' => $imageId->id, 'announcement_id' => $announcementId->id]);*/
+
+            $helper = new Helper();
+            $helper->emailBulk($users, 'We just posted a new announcement entitled "'.$announcementInfo['title'].'". Visit our <a href='.url('home').'>website</a> for more details.', 'New Announcement!');
 
             $log = new logs();
             $log->savelog(session('user')['id'], 'Added an Announcement');

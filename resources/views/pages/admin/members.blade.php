@@ -52,7 +52,7 @@
                                 <td>{{ $member->lastname }}</td>
                                 <td>{{ $member->email}}</td>
                                 @if($member->idverification_id != 0)
-                                    <td>{{ Response::download(asset('/storage/'.$member->idverification->location, $member->idverification->locatiion)) }}</td>
+{{--                                    <td>{{ Response::download(asset('/storage/'.$member->idverification->location, $member->idverification->locatiion)) }}</td>--}}
                                     @else
                                     <td></td>
                                 @endif
