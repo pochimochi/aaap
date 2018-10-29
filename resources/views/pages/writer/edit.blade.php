@@ -26,7 +26,7 @@
                         </div>
                     @endif
                     <div class="basic-elements">
-                        <form method="post" action="{{URL::to('/writer/articles', $article->id)}}">
+                        <form method="post" action="{{URL::to('/writer/articles', $article->id)}}" enctype="multipart/form-data">
                             @csrf
                             @method('Put')
                             <div class="form-body">
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col">
                                     <div class="form-group">
                                         <label class="control-label">Title</label>
                                         <input type="text" name="title" id="title"
@@ -102,7 +102,33 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-actions">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="btn btn-success btn-block" for="articleImage">Upload Image</label>
+                                        <input name="articleImage[]" hidden id="articleImage" multiple type="file"/>
+                                        <div class="card border-0">
+                                            <div class="card-body">
+                                                <div class="card-title">Gallery</div>
+                                                <div class="row">
+                                                    @foreach($article->image as $image)
+                                                        <div class="col-2">
+                                                            <div class="card shadow border-0">
+
+                                                                <img id="blah" class="card-img"
+                                                                     src="{{asset('/storage/'.$image->location.'')}}"/>
+
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions mt-5">
                                 <input class="btn btn-success" type="submit" id="btnSubmit"
                                        value="Update">
                                 <a href="{{URL::to('/writer/articles/create')}}" class="btn btn-danger">Back</a>

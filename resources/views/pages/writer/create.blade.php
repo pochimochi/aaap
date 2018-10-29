@@ -24,7 +24,7 @@
                 <div class="alert alert-primary" role="alert">
                     <b>Fields with asterisk (*) are required.</b>
                 </div>
-                <form action="{{url('/writer/articles')}}" method="post">
+                <form action="{{url('/writer/articles')}}" method="post" enctype="multipart/form-data">
                     @method('Post')
                     @csrf
                     <div class="form-body">
@@ -86,8 +86,14 @@
                                 <!--Insert Rich Text Editor Here-->
                                 <textarea class="ckeditor" name="body"></textarea>
                             </div>
-
-
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="btn btn-success btn-block" for="articleImage">Upload Image</label>
+                                    <input name="articleImage[]" hidden id="articleImage" multiple type="file"/>
+                                </div>
+                            </div>
                         </div>
                         <div class="mt-5 justify-content-start">
                             <div class="form-actions">

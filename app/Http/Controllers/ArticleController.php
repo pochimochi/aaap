@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\ArticleImages;
 use App\Articles;
 use App\Helper;
+use App\Images;
 use App\logs;
 use App\User;
 use Carbon\Carbon;
@@ -86,10 +88,21 @@ class ArticleController extends Controller
             $articleinfo['posted_by'] = session('user')['id'];
             $articleinfo['modified_by'] = 0;
             $articleinfo['due_date'] = Carbon::now()->addYear(1);
-            Articles::create($articleinfo);
+            $articleinfo['article_id'] = Articles::create($articleinfo)->id;
+
+            if ($request->file('articleImage') != null) {
+                foreach($request->file('articleImage') as $name){
+                    $articleinfo['image_name'] = $name->getClientOriginalName();
+                    $name->storeAs('public', $articleinfo['image_name']);
+                    $articleinfo['image_id'] = Images::create(['location' => $articleinfo['image_name']])->id;
+                    ArticleImages::create(['image_id' => $articleinfo['image_id'], 'article_id' => $articleinfo['article_id']]);
+                }
+
+            }
+
 
             $helper = new Helper();
-            $helper->emailBulk($users, 'Read our new article entitled "'.$articleinfo['title'].'". Visit our <a href='.url('home').'>website</a> for more details.', 'New Article!');
+            $helper->emailBulk($users, 'Read our new article entitled '.$articleinfo['title'].' Visit our <a href='.url('home').'>website</a> for more details.', 'New Article!');
             $log = new logs();
             $log->savelog(session('user')['id'], 'Added an Article');
             alert()->success('Article Added!', 'You have successfully added an article!');
@@ -161,6 +174,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $articleId)
     {
+
         $this->validate($request, [
             'title' => 'required',
             'status_id' => 'required'
@@ -172,6 +186,18 @@ class ArticleController extends Controller
         $article->modified_by = session('user')['id'];
         $article->articletype_id = $request->get('articletype_id');
         $article->status_id = $request->get('status_id');
+
+        if ($request->file('articleImage') != null) {
+            $article->image()->detach();
+            foreach($request->file('articleImage') as $name){
+                $articleinfo['image_name'] = $name->getClientOriginalName();
+                $name->storeAs('public', $articleinfo['image_name']);
+                $articleinfo['image_id'] = Images::create(['location' => $articleinfo['image_name']])->id;
+                ArticleImages::create(['image_id' => $articleinfo['image_id'], 'article_id' => $article->id]);
+            }
+
+        }
+
         $article->save();
         $log = new logs();
         $log->savelog(session('user')['id'], 'Updated an Article');

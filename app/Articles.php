@@ -19,7 +19,16 @@ class Articles extends Model
         'created_at', 'updated_at',
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('\App\User', 'posted_by');
+
+    }
+
+    public function image()
+    {
+        return $this->belongsToMany('\App\Images', 'article_images', 'article_id', 'image_id');
     }
 }
+
+
