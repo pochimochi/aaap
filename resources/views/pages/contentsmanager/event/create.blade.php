@@ -1,31 +1,5 @@
 @extends('layouts.master.admin')
 
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-    function submitForm() {
-        $('#submit').trigger("click");
-    }
-</script>
-<script type="text/javascript">
-
-    $('#btnSubmit').on('click', function (e) {
-        e.preventDefault();
-        var form = $(this).parents('form');
-        swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, save it!'
-        }).then((result) => {
-            if (result.value) {
-                form.submit();
-            }
-        })
-    });
-</script>
 @section('sidenav')
     @include('layouts.master.nav')
 @endsection

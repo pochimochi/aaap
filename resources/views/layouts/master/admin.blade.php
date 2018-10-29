@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Responsive/css/responsive.dataTables.min.css')}}">
     <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Buttons/css/buttons.bootstrap4.css')}}">
     {{--<link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/media/css/dataTables.bootstrap4.min.css')}}">--}}
-
+    <script src="{{asset('argon/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
     <script type="text/javascript">
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -167,9 +167,10 @@
 
 <!-- Argon Scripts -->
 <!-- Core -->
+<script src="{{asset('argon/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
 
-<script src="{{asset('argon/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+
 <script src="{{asset('argon/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Optional JS -->
 <script src="{{asset('argon/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
