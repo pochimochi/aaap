@@ -211,34 +211,55 @@
                                         {{($event->status == 1) ? 'Active' : 'Inactive'}}</div>
                                 </h3>
 
+                                <div class="accordion" id="accordionExample{{$event->id}}">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne{{$event->id}}" aria-expanded="true" aria-controls="collapseOne">
+                                                    View Attendance
+                                                </button>
+                                            </h5>
+                                        </div>
 
-                                @foreach ($attendances = $event->attendance()->paginate(5, ['*'],'event'.$event->id.'') as $attendance)
-                                    <div class="card shadow-lg--hover">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <img style="object-fit: cover;"
-                                                         class="shadow avatar avatar-lg rounded-circle"
-                                                         src="{{asset('/storage/'.$attendance->user->profilepic->location)}}"
-                                                         alt="">
-                                                    &nbsp;
-                                                    {{$attendance->user->firstname .' '. $attendance->user->lastname}}
+                                        <div id="collapseOne{{$event->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample{{$event->id}}">
+                                            <div class="card-body">
+                                                @foreach ($attendances = $event->attendance()->paginate(5, ['*'],'event'.$event->id.'') as $attendance)
+                                                    <div class="card shadow-lg--hover">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-10">
+                                                                    <img style="object-fit: cover;"
+                                                                         class="shadow avatar avatar-lg rounded-circle"
+                                                                         src="{{asset('/storage/'.$attendance->user->profilepic->location)}}"
+                                                                         alt="">
+                                                                    &nbsp;
+                                                                    {{$attendance->user->firstname .' '. $attendance->user->lastname}}
 
-                                                </div>
-                                                <div class="col-2 text-right">
-                                                    <div class="badge {{($attendance->status == 1) ? 'badge-success' : 'badge-danger'}}">
-                                                        {{($attendance->status == 1) ? 'Attending' : 'Cancelled'}}</div>
-                                                </div>
+                                                                </div>
+                                                                <div class="col-2 text-right">
+                                                                    <div class="badge {{($attendance->status == 1) ? 'badge-success' : 'badge-danger'}}">
+                                                                        {{($attendance->status == 1) ? 'Attending' : 'Cancelled'}}</div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
-
+                                            <div class="card-footer">
+                                                {{$attendances->fragment('card'.$event->id.'')->links()}}
+                                            </div>
 
                                         </div>
                                     </div>
-                                @endforeach
+
+                                </div>
+
                             </div>
-                            <div class="card-footer float-right">
-                                {{$attendances->fragment('card'.$event->id.'')->links()}}
-                            </div>
+
+
+
                         </div>
                     @endforeach
                 </div>

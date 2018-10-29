@@ -165,11 +165,13 @@ class EventController extends Controller
         return redirect('/contentmanager/events/create');
     }
 
-    public function changeStatus($eventId, $status)
+    public function changeStatus(Request $request)
     {
-        $event = Event::find($eventId);
-        $event->status = $status;
+        $event = Event::find($request->id);
+        $event->remarks = $request->remarks;
+        $event->status = 0;
         if ($event->save()) {
+
             $log = new logs();
             $log->savelog(session('user')['id'], 'Changed an Event Status');
             toast('Status Changed!', 'success', 'bottom-left');

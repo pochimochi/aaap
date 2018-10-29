@@ -238,7 +238,7 @@
                             <th>Posted By</th>
                             <th>Date Created</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -250,26 +250,29 @@
                                 <td>{{ $event->description }}</td>
                                 <td>{{ $event->user->firstname . ' ' . $event->user->lastname}}</td>
                                 <td>{{ \Carbon\Carbon::parse($event->created_at)->format('d/m/Y')}}</td>
-                                <td><a onclick="confirm('Are you sure?')"
-                                       href="{{URL::to('contentmanager/event/changeStatus/'. $event->id. '/'.  ($event->status == 1 ? '0' : '1')  .'')}}"
-                                       class="btn {{$event->status == 1 ? 'btn btn-rounded btn-success' : 'btn btn-rounded btn-danger'}}">{{$event->status == 1 ? 'Active' : 'Inactive' }}</a>
+                                <td>
+                                    @if($event->status == 1)
+                                        <label class="badge badge-success">Active Event</label>
+                                        @else
+                                        <label class="badge badge-danger">Inactive Event</label>
+                                    @endif
                                 </td>
                                 <td>
                                     <nobr>
                                         <a href="{{URL::to('/contentmanager/events/'. $event->id.'')}}"
                                            class="btn btn-rounded btn-primary ">View</a>
                                         <a href="{{URL::to('contentmanager/events/' . $event->id .'/edit')}}"
-                                           class="btn btn-warning btn-rounded">Edit</a>
-
+                                           class="btn btn-info btn-rounded">Edit</a>
+                                        @if($event->status == 1)
                                         <a class="btn text-white btn-default"
                                            onclick="$( 'textarea' ).ckeditor();" data-toggle="modal"
                                            data-target="#modal-form{{$event->id}}">Send Reminder
                                         </a>
-
-
+                                        <a data-toggle="modal"
+                                           data-target="#status-form{{$event->id}}"
+                                           class="btn text-white btn btn-rounded btn-warning">Cancel Event</a>
+                                        @endif
                                     </nobr>
-
-
                                 </td>
                             </tr>
                             <div class="modal fade" id="modal-form{{$event->id}}"
@@ -314,6 +317,52 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal fade" id="status-form{{$event->id}}"
+                                 role="dialog"
+                                 aria-labelledby="status-form" aria-hidden="true">
+                                <div class="modal-dialog modal modal-lg modal-dialog-centered modal-sm"
+                                     role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body p-0">
+                                            <div class="card bg-secondary shadow border-0">
+                                                <div class="card-body">
+                                                    <div class="text-center text-muted mb-4">
+                                                        <small>Please State the reason of cancellation below</small>
+                                                    </div>
+                                                    <form action="{{url('contentmanager/change_status')}}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{$event->id}}">
+                                                        <div class="col">
+                                                            <select class="form-control form-control-alternative"
+                                                                    type="text" name="remarksddl" id="remarksddl">
+                                                                <option value="Due to unforseen circumstances">Due to
+                                                                    unforseen circumstances
+                                                                </option>
+                                                                <option value="Due to heavy rains/weather">Due to heavy
+                                                                    rains/weather
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-12 mt-5">
+                                                            <label for="remarks">Other Remarks</label>
+                                                            <textarea name="remarks" rows="5" id="remarks"
+                                                                      class="form-control form-control-alternative"></textarea>
+                                                            <span class="text-danger">{{ $errors->first('remarks') }}</span>
+                                                        </div>
+                                                        <div class="text-center mt-5">
+                                                            <button type="submit" onclick="confirm('Are you sure?')"
+                                                                    class="btn btn-rounded btn-danger">Cancel Event
+                                                            </button>
+                                                        </div>
+                                                    </form>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                         </tbody>
                     </table>
@@ -326,6 +375,19 @@
 
     <script type="text/javascript">
         $('#paid').on('input', function (event) {
+            var text = $(this).val();
+
+            if (text === '1') { // If email is empty
+                $('#rate').prop('disabled', true);
+                $('#rate').hide();
+                $('#ratelabel').hide();
+            } else {
+                $('#rate').prop('disabled', false);
+                $('#rate').show();
+                $('#ratelabel').show();
+            }
+        });
+        $('#remarksddl').on('input', function (event) {
             var text = $(this).val();
 
             if (text === '1') { // If email is empty

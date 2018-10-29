@@ -51,7 +51,7 @@ Route::group(['middleware' => ['web']], function () {
             //events
             Route::resource('events', 'EventController');
             Route::resource('events', 'EventController')->only(['index', 'show']);
-            Route::get('event/changeStatus/{eventId}/{status}', 'EventController@changeStatus');
+            Route::post('change_status', 'EventController@changeStatus');
             Route::post('reminder', 'EventController@reminder');
 
             /* Route::post('/eventsubmit', 'EventController@store');
