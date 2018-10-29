@@ -108,17 +108,11 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <label class="btn btn-outline-success" for="eventImage">Upload
+                                                    <label class="btn btn-success" for="eventImage">Upload
                                                         Image
                                                         Here</label>
-                                                    <input type='file' hidden="true" name="eventImage"
-                                                           id="eventImage"
-                                                           onchange="readURL(this);"/>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="card shadow">
-                                                        <img id="blah" src="#"/>
-                                                    </div>
+                                                    <input type='file' hidden="true" name="eventImage[]"
+                                                           id="eventImage" multiple/>
                                                 </div>
                                             </div>
                                         </div>

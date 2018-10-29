@@ -12,7 +12,7 @@ class Event extends Model
     protected $table = 'events';
 
     protected $fillable = [
-        'id', 'name', 'description', 'category_id', 'start_date', 'end_date', 'venue', 'image_id',
+        'id', 'name', 'description', 'category_id', 'start_date', 'end_date', 'venue',
         'address_id', 'status', 'paid', 'rate', 'created_at', 'updated_at',
         'modified_by', 'posted_by'
 
@@ -36,7 +36,7 @@ class Event extends Model
 
     public function image()
     {
-        return $this->belongsTo('\App\Images', 'image_id');
+        return $this->belongsToMany('\App\Images', 'event_images', 'event_id', 'image_id');
     }
 
     public function user()

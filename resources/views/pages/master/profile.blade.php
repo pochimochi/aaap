@@ -32,7 +32,7 @@
                     <div class="col-lg-3 order-lg-2">
                         <div class="card-profile-image">
                             <a href="#">
-                                <img src="{{asset('/storage/'. $users->profilepic->location)}}" class="rounded-circle">
+                                <img src="{{asset('/storage/'. $users->profilepic->location)}}" width="150" height="150" style="object-fit:scale-down;background-color: white" class="rounded-circle" >
                             </a>
                         </div>
                     </div>

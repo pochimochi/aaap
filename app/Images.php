@@ -29,7 +29,7 @@ class Images extends Model
 
     public function event()
     {
-        return $this->hasOne('\App\Event', 'image_id');
+        return $this->belongsToMany('\App\Event', 'event_images');
     }
 
     public function announcement()

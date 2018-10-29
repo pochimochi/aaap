@@ -6,6 +6,7 @@ use App\Address;
 use App\City;
 use App\Event;
 use App\EventAttendance;
+use App\EventImages;
 use App\Helper;
 use App\Images;
 use App\logs;
@@ -66,12 +67,14 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+
         $valid = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
             'description' => 'required|max:500',
             'venue' => 'required|max:50',
             'city' => 'required',
             'unitno' => 'required|max:5',
+
             'bldg' => 'required|max:50',
             'street' => 'required|max:50',
             'start_date' => 'date|after:today',
@@ -87,16 +90,19 @@ class EventController extends Controller
             $eventinfo['city_id'] = City::create(['name' => $eventinfo['city']])->id;
             $eventinfo['address_id'] = Address::create($eventinfo)->id;
             $eventinfo['posted_by'] = session('user')['id'];
-            if ($request->file('eventImage') != null) {
-                $eventinfo['image_name'] = $request->file('eventImage')->getClientOriginalName();
-                $request->file('eventImage')->storeAs('public', $eventinfo['image_name']);
-                $eventinfo['image_id'] = Images::create(['location' => $eventinfo['image_name']])->id;
-            } else {
-                $eventinfo['image_id'] = 0;
-            }
 
             $eventinfo['event_id'] = Event::create($eventinfo)->id;
-            /*EventImages::create(['image_id' => $eventinfo['image_id'], 'event_id' => $eventinfo['event_id']]);*/
+
+            if ($request->file('eventImage') != null) {
+                foreach($request->file('eventImage') as $name){
+                    $eventinfo['image_name'] = $name->getClientOriginalName();
+                    $name->storeAs('public', $eventinfo['image_name']);
+                    $eventinfo['image_id'] = Images::create(['location' => $eventinfo['image_name']])->id;
+                    EventImages::create(['image_id' => $eventinfo['image_id'], 'event_id' => $eventinfo['event_id']]);
+                }
+
+            }
+
             $helper = new Helper();
             $helper->emailBulk($users, 'Join us in '.$eventinfo['name'].' on '.$eventinfo['start_date']. ' to '. $eventinfo['end_date'] .' at ' . $eventinfo['venue'] .'<br>Visit our <a href='.url('home').'>website</a> for more details', $eventinfo['name']);
             $log = new logs();
@@ -132,19 +138,25 @@ class EventController extends Controller
             'unitno.required' => 'The house/apartment/unit number is required.',
             'bldg.required' => 'The building field is required.'
         ]);
-        $eventinfo = $request->except(['_token']);
+        $eventinfo = $request->except(['_token', '_method']);
         $event = Event::find($eventId);
         if ($request->file('eventImage') != null) {
-            $eventinfo['image_name'] = $request->file('eventImage')->getClientOriginalName();
-            $request->file('eventImage')->storeAs('public', $eventinfo['image_name']);
-            $eventinfo['image_id'] = Images::create(['location' => $eventinfo['image_name']])->id;
+            $event->image()->detach();
+            foreach($request->file('eventImage') as $name){
+                $eventinfo['image_name'] = $name->getClientOriginalName();
+                $name->storeAs('public', $eventinfo['image_name']);
+                $eventinfo['image_id'] = Images::create(['location' => $eventinfo['image_name']])->id;
+                EventImages::create(['image_id' => $eventinfo['image_id'], 'event_id' => $event->id]);
+            }
+
+
         }
         City::where('id', $event->address->city->id)
             ->update(['name' => $eventinfo['city']]);
         Address::where('id', $event->address->id)
             ->update(['street' => $eventinfo['street'], 'bldg' => $eventinfo['bldg'], 'unitno' => $eventinfo['unitno']]);
         $eventinfo['modified_by'] = session('user')['id'];
-        $eventinfo = $request->except(['_token', 'street', 'bldg', 'eventImage', 'unitno', 'city', 'city_id', 'fileToUpload', 'event_image']);
+        $eventinfo = $request->except(['_token','_method', 'street', 'bldg', 'eventImage', 'unitno', 'city', 'city_id', 'fileToUpload', 'event_image']);
         Event::where('id', $eventId)
             ->update($eventinfo);
         $log = new logs();
