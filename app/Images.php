@@ -34,6 +34,6 @@ class Images extends Model
 
     public function announcement()
     {
-        return $this->hasOne('\App\Announcements', 'image_id');
+        return $this->belongsToMany('\App\Announcements', 'announcement_images', 'announcement_id', 'image_id');
     }
 }

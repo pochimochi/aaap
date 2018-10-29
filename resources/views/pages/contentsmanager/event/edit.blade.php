@@ -104,7 +104,7 @@
                                                         <label class="btn btn-success btn-block" for="eventImage">Upload
                                                             Image
                                                             Here</label>
-                                                        <input type='file' hidden="true" name="eventImage[]"
+                                                        <input type='file' name="eventImage[]"
                                                                id="eventImage" multiple
                                                                onchange="readURL(this);"/>
 

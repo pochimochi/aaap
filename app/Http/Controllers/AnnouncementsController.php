@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AnnouncementImages;
 use App\Announcements;
 
 use App\Helper;
@@ -88,13 +89,19 @@ class AnnouncementsController extends Controller
             $announcementInfo['title'] = strip_tags($announcementInfo['title']);
             $announcementInfo['description'] = strip_tags($announcementInfo['description']);
 
-            if ($request->file('eventImage') != null) {
-                $announcementInfo['image_name'] = $request->file('announcementImage')->getClientOriginalName();
-                $request->file('announcementImage')->storeAs('public', $announcementInfo['image_name']);
-                $announcementInfo['image_id'] = Images::create(['location' => $announcementInfo['image_name']])->id;
-            }
+
             $announcementInfo['posted_by'] = session('user')['id'];
-            Announcements::create($announcementInfo);
+            $announcementInfo['announcemnent_id'] = Announcements::create($announcementInfo)->id;
+
+            if ($request->file('announcementImage') != null) {
+                foreach($request->file('announcementImage') as $name){
+                    $announcementInfo['image_name'] = $name->getClientOriginalName();
+                    $name->storeAs('public', $announcementInfo['image_name']);
+                    $announcementInfo['image_id'] = Images::create(['location' => $announcementInfo['image_name']])->id;
+                    AnnouncementImages::create(['image_id' => $announcementInfo['image_id'], 'announcement_id' => $announcementInfo['announcemnent_id']]);
+                }
+
+            }
             /*AnnouncementImage::create(['image_id' => $imageId->id, 'announcement_id' => $announcementId->id]);*/
 
             $helper = new Helper();
@@ -132,10 +139,15 @@ class AnnouncementsController extends Controller
         $announcement = Announcements::find($id);
 
         if ($request->file('announcementImage') != null) {
-            $file = $request->file('announcementImage')->getClientOriginalName();
-            $request->file('announcementImage')->storeAs('public', $file);
+            $announcement->image()->detach();
+            foreach($request->file('announcementImage') as $name){
+                $announcementinfo['image_name'] = $name->getClientOriginalName();
+                $name->storeAs('public', $announcementinfo['image_name']);
+                $announcementinfo['image_id'] = Images::create(['location' => $announcementinfo['image_name']])->id;
+                AnnouncementImages::create(['image_id' => $announcementinfo['image_id'], 'announcement_id' => $announcement->id]);
+            }
 
-            Images::where('id', $announcement->image->id)->update(['location' => $file]);
+
         }
 
         $announcement->title = $request->get('title');

@@ -71,21 +71,34 @@
                                         </div>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="form-group">
-                                                    <label>Image</label>
-                                                    <input class="form-control-file" name="announcementImage"
-                                                           type="file"/>
+
+                                            <div class="form-group">
+                                                <div class="col">
+                                                    <label class="btn btn-success btn-block" for="announcementImage">Upload
+                                                        Images</label>
+                                                    <input type="file" hidden multiple name="announcementImage[]" id="announcementImage"/>
                                                 </div>
-                                            </div>
-                                            @if($announcement->image_id != 0)
-                                                <div class="col-lg-4">
-                                                    <div class="card shadow">
-                                                        <img src="{{asset('/storage/'.$announcement->image->location.'')}}"
-                                                             class="img-fluid">
+
+
+                                                <div class="card bg-gradient-teal border-0">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            @foreach($announcement->image as $image)
+                                                                <div class="col-2">
+                                                                    <div class="card shadow border-0">
+
+                                                                        <img id="blah" class="card-img"
+                                                                             src="{{asset('/storage/'.$image->location.'')}}"/>
+
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            @endif
+
+
+                                            </div>
                                         </div>
                                         <hr>
 
@@ -106,28 +119,31 @@
                                                 <div class="form-group">
                                                     <label>Due Date</label>
                                                     @if ($announcement->due_date != null)
-                                                    <div class="input-group input-group-alternative">
-                                                        <div class="input-group-prepend">
+                                                        <div class="input-group input-group-alternative">
+                                                            <div class="input-group-prepend">
                                                             <span class="input-group-text"><i
                                                                         class="ni ni-calendar-grid-58"></i></span>
+                                                            </div>
+                                                            <input class="form-control datepicker datepicker-orient-right"
+                                                                   name="due_date" id="due_date"
+                                                                   placeholder="Select date"
+                                                                   type="date"
+                                                                   value="{{ \Carbon\Carbon::parse($announcement->due_date)->format('Y-m-d')}}">
                                                         </div>
-                                                        <input class="form-control datepicker datepicker-orient-right"
-                                                               name="due_date" id="due_date" placeholder="Select date"
-                                                               type="date"
-                                                               value="{{ \Carbon\Carbon::parse($announcement->due_date)->format('Y-m-d')}}">
-                                                    </div>
-                                                    <span class="text-danger">{{ $errors->first('due_date') }}</span>
-                                                        @else <div class="input-group input-group-alternative">
-                                                        <div class="input-group-prepend">
+                                                        <span class="text-danger">{{ $errors->first('due_date') }}</span>
+                                                    @else
+                                                        <div class="input-group input-group-alternative">
+                                                            <div class="input-group-prepend">
                                                             <span class="input-group-text"><i
                                                                         class="ni ni-calendar-grid-58"></i></span>
+                                                            </div>
+                                                            <input class="form-control datepicker datepicker-orient-right"
+                                                                   name="due_date" id="due_date"
+                                                                   placeholder="Select date"
+                                                                   type="date"
+                                                                   value="">
                                                         </div>
-                                                        <input class="form-control datepicker datepicker-orient-right"
-                                                               name="due_date" id="due_date" placeholder="Select date"
-                                                               type="date"
-                                                               value="">
-                                                    </div>
-                                                        @endif
+                                                    @endif
                                                 </div>
 
                                             </div>

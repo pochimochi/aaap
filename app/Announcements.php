@@ -24,7 +24,7 @@ class announcements extends Model
 
     public function image()
     {
-        return $this->belongsTo('\App\Images', 'image_id');
+        return $this->belongsToMany('\App\Images', 'announcement_images', 'announcement_id', 'image_id');
     }
 
     public function user()

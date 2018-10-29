@@ -100,7 +100,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Image</label>
-                                            <input name="announcementImage" type="file"/>
+                                            <input name="announcementImage[]" multiple type="file"/>
                                         </div>
                                     </div>
                                 </div>
