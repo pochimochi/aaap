@@ -1,6 +1,6 @@
 @php
     $today = $counts->whereDate('created_at', today())->count();
-    $totalvisit = ((($today -  $yesterday = $counts->whereDate('created_at', today()->subDays(1))->count()) / ($yesterday == 0) ? 0 : $yesterday) * 100);
+    $totalvisit = ((($today -  $yesterday = $counts->whereDate('created_at', today()->subDays(1))->count()) / ($yesterday == 0) ? 1 : $yesterday) * 100);
 @endphp
 @extends('layouts.master.admin')
 @section('sidenav')
