@@ -24,6 +24,38 @@
     <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Buttons/css/buttons.bootstrap4.css')}}">
     {{--<link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/media/css/dataTables.bootstrap4.min.css')}}">--}}
 
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        $('#btnSubmit, #btnChange').on('click', function (e) {
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, save it!'
+            }).then((result) => {
+                if (result.value) {
+                    form.submit();
+                }
+            })
+        });
+
+    </script>
+
 </head>
 
 <body>

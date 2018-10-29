@@ -329,18 +329,21 @@
                                                     <div class="text-center text-muted mb-4">
                                                         <small>Please State the reason of cancellation below</small>
                                                     </div>
-                                                    <form action="{{url('contentmanager/change_status')}}" method="post">
+                                                    <form action="{{url('contentmanager/change_status')}}" id="form{{$event->id}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$event->id}}">
                                                         <div class="col">
                                                             <select class="form-control form-control-alternative"
                                                                     type="text" name="remarksddl" id="remarksddl">
-                                                                <option value="Due to unforseen circumstances">Due to
-                                                                    unforseen circumstances
+                                                                <option value="1">Others
                                                                 </option>
+                                                              {{--  <option value="Due to unforseen circumstances">Due to
+                                                                    unforseen circumstances
+                                                                </option>--}}
                                                                 <option value="Due to heavy rains/weather">Due to heavy
                                                                     rains/weather
                                                                 </option>
+
                                                             </select>
                                                         </div>
                                                         <div class="col-12 mt-5">
@@ -350,7 +353,7 @@
                                                             <span class="text-danger">{{ $errors->first('remarks') }}</span>
                                                         </div>
                                                         <div class="text-center mt-5">
-                                                            <button type="submit" onclick="confirm('Are you sure?')"
+                                                            <button type="submit" id="btnSubmit"
                                                                     class="btn btn-rounded btn-danger">Cancel Event
                                                             </button>
                                                         </div>
@@ -363,6 +366,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <script type="text/javascript">
+                                $('#form{{$event->id}}').submit(function(e){
+                                    e.preventDefault();
+                                    var form = $('#form{{$event->id}}');
+                                    swal({
+                                        title: 'Are you sure?',
+                                        text: "You won't be able to revert this!",
+                                        type: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Yes, save it!'
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            form.submit()
+                                        }
+                                    })
+                                });
+                            </script>
                         @endforeach
                         </tbody>
                     </table>
@@ -390,16 +412,34 @@
         $('#remarksddl').on('input', function (event) {
             var text = $(this).val();
 
-            if (text === '1') { // If email is empty
-                $('#rate').prop('disabled', true);
-                $('#rate').hide();
-                $('#ratelabel').hide();
+            if (text === '0') { // If email is empty
+                $('#remarks').prop('disabled', true);
+                $('#remarks').hide();
+                $('#remarks').hide();
             } else {
-                $('#rate').prop('disabled', false);
-                $('#rate').show();
-                $('#ratelabel').show();
+                $('#remarks').prop('disabled', false);
+                $('#remarks').show();
+                $('#remarks').show();
             }
         });
+
+        /*function confirmation(e) {
+            this.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, save it!'
+            }).then((result) => {
+                if (result.value) {
+                    form.submit();
+                }
+            })
+        };*/
 
     </script>
 

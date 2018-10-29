@@ -71,23 +71,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-3">
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <select class="form-control custom-select input-default"
-                                                        name="status" id="status">
-                                                    <option readonly="true">Select Status</option>
-                                                    <option value="1"
-                                                            @if($event->status=="1" || old('status') == 1) selected @endif>
-                                                        Active
-                                                    </option>
-                                                    <option value="0"
-                                                            @if($event->status=="0" || old('status') == 0) selected @endif>
-                                                        Inactive
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
+
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>Event Description</label>
