@@ -1,31 +1,4 @@
 @extends('layouts.master.admin')
-
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-    function submitForm() {
-        $('#submit').trigger("click");
-    }
-</script>
-<script type="text/javascript">
-
-    $('#btnSubmit').on('click', function (e) {
-        e.preventDefault();
-        var form = $(this).parents('form');
-        swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, save it!'
-        }).then((result) => {
-            if (result.value) {
-                form.submit();
-            }
-        })
-    });
-</script>
 @section('sidenav')
     @include('layouts.master.nav')
 @endsection
@@ -100,7 +73,8 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Image</label>
-                                            <input name="announcementImage[]" id="announcementImage" multiple type="file"/>
+                                            <input name="announcementImage[]" id="announcementImage" multiple
+                                                   type="file"/>
                                             <span class="text-danger">{{ $errors->first('announcementImage.*') }}</span>
                                         </div>
                                     </div>
@@ -136,69 +110,146 @@
                                            value="Reset ">
                                 </div>
                             </div>
-
-
-
-
-
                         </form>
                     </div>
                 </div>
             </div>
-            <form id="status" action="{{URL::to('/changeStatus')}}" method="post">
-                @csrf
-                <div class="card mt-5 col-12 shadow">
-                    <div class="card-header border-0">
-                        List of Announcements
-                    </div>
-                    <div class="card-body">
-                        <table id="myTable" class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Expand</th>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Posted By</th>
-                                <th>Date Created</th>
-                                <th>Type</th>
-                                <th>Due Date</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($announcements as $announcement)
-                                <tr>
-                                    <td></td>
-                                    <td>{{ $announcement->id }}</td>
-                                    <td>{{ $announcement->title }}</td>
-                                    <td>{{ $announcement->user->firstname . ' ' . $announcement->user->lastname }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($announcement->created_at)->format('d/m/Y')}}</td>
-                                    {{--<td>{{ \Carbon\Carbon::parse($announcement->updated_at)->format('d/m/Y')}}</td>--}}
-                                    <td>{{ $announcement->type_id == 1 ? 'General' : 'Special'}}</td>
-                                    <td>{{ $announcement->due_date}}</td>
-                                    <td><a onclick="confirm('Are you sure?')"
-                                           href="{{URL::to('contentmanager/announcements/changeStatus/'. $announcement->id. '/'.  ($announcement->status_id == 1 ? '0' : '1')  .'')}}"
-                                           class="{{$announcement->status_id == 1 ? 'btn btn-rounded btn-success' : 'btn btn-rounded btn-danger'}}">{{$announcement->status_id == 1 ? 'Active' : 'Inactive' }}</a>
-                                    </td>
-                                    <td>
-                                        <nobr>
-                                            <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id.'')}}"
-                                               class="btn btn-rounded btn-primary ">View</a>
-                                            <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id .'/edit')}}"
-                                               class="btn btn-rounded btn-warning ">Edit</a>
-                                        </nobr>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <br>
-                    <button type="submit" class="positive" name="submit" id="submit" hidden="hidden">save
-                    </button>
+
+            @csrf
+            <div class="card mt-5 col-12 shadow">
+                <div class="card-header border-0">
+                    List of Announcements
                 </div>
-            </form>
+                <div class="card-body">
+                    <table id="myTable" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Expand</th>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Posted By</th>
+                            <th>Date Created</th>
+                            <th>Type</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($announcements as $announcement)
+                            <tr>
+                                <td></td>
+                                <td>{{ $announcement->id }}</td>
+                                <td>{{ $announcement->title }}</td>
+                                <td>{{ $announcement->user->firstname . ' ' . $announcement->user->lastname }}</td>
+                                <td>{{ \Carbon\Carbon::parse($announcement->created_at)->format('d/m/Y')}}</td>
+                                {{--<td>{{ \Carbon\Carbon::parse($announcement->updated_at)->format('d/m/Y')}}</td>--}}
+                                <td>{{ $announcement->type_id == 1 ? 'General' : 'Special'}}</td>
+                                <td>{{ $announcement->due_date}}</td>
+                                <td>
+                                    @if($announcement->status_id == 1)
+                                        <label class="badge badge-success">Active</label>
+                                    @else
+                                        <label class="badge badge-danger">Archived</label>
+                                    @endif
+
+                                </td>
+                                <td>
+                                    <nobr>
+                                        <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id.'')}}"
+                                           class="btn btn-rounded btn-success ">View</a>
+                                        <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id .'/edit')}}"
+                                           class="btn btn-rounded btn-info ">Edit</a>
+                                        @if($announcement->status_id == 1)
+                                            <a data-toggle="modal"
+                                               data-target="#status-form{{$announcement->id}}"
+                                               class="btn text-white btn btn-rounded btn-warning">Archive
+                                                Announcement</a>
+
+
+                                        @endif
+                                    </nobr>
+                                </td>
+                            </tr>
+                            @if($announcement->status_id == 1)
+                                <div class="modal fade" id="status-form{{$announcement->id}}"
+                                     role="dialog"
+                                     aria-labelledby="status-form" aria-hidden="true">
+                                    <div class="modal-dialog modal modal-lg modal-dialog-centered modal-sm"
+                                         role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body p-0">
+                                                <div class="card bg-secondary shadow border-0">
+                                                    <div class="card-body">
+                                                        <div class="text-center text-muted mb-4">
+                                                            <small>Please state the reason below</small>
+                                                        </div>
+                                                        <form action="{{url('contentmanager/announcement/change_status')}}"
+                                                              id="form{{$announcement->id}}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="id"
+                                                                   value="{{$announcement->id}}">
+                                                            {{--<div class="col">
+                                                                <select class="form-control form-control-alternative"
+                                                                        type="text" name="remarksddl" id="remarksddl">
+                                                                    <option value="1">Others
+                                                                    </option>
+                                                                    --}}{{--  <option value="Due to unforseen circumstances">Due to
+                                                                          unforseen circumstances
+                                                                      </option>--}}{{--
+                                                                    <option value="Due to heavy rains/weather">Due to heavy
+                                                                        rains/weather
+                                                                    </option>
+
+                                                                </select>
+                                                            </div>--}}
+                                                            <div class="col-12 mt-5">
+                                                                <label for="remarks">Remarks</label>
+                                                                <textarea name="remarks" rows="5" id="remarks"
+                                                                          class="form-control form-control-alternative"></textarea>
+                                                                <span class="text-danger">{{ $errors->first('remarks') }}</span>
+                                                            </div>
+                                                            <div class="text-center mt-5">
+                                                                <button type="submit" id="btnSubmit"
+                                                                        class="btn btn-rounded btn-danger">Archive
+                                                                    Announcement
+                                                                </button>
+                                                            </div>
+                                                        </form>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script type="text/javascript">
+                                    $('#form{{$announcement->id}}').submit(function (e) {
+                                        e.preventDefault();
+                                        var form = $('#form{{$announcement->id}}');
+                                        swal({
+                                            title: 'Are you sure?',
+                                            text: "You won't be able to revert this!",
+                                            type: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Yes, save it!'
+                                        }).then((result) => {
+                                            if (result.value) {
+                                                form.submit()
+                                            }
+                                        })
+                                    });
+                                </script>
+                            @endif
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 

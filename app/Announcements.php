@@ -11,7 +11,7 @@ class announcements extends Model
 
     protected $table = 'announcements';
     protected $fillable = [
-        'image_id', 'title', 'description', 'posted_by', 'modified_by', 'type_id', 'status_id', 'due_date', 'created_at', 'updated_at'
+        'image_id', 'title', 'description', 'remarks', 'posted_by', 'modified_by', 'type_id', 'status_id', 'due_date', 'created_at', 'updated_at'
     ];
 
     protected $hidden = [

@@ -179,20 +179,16 @@ class AnnouncementsController extends Controller
         return view('pages.member.announcement.index', ['announcements' => $announcements]);
     }
 
-    public
-    function changeStatus($id, $status)
+    public function changeStatus(Request $request)
     {
-        $announcements = Announcements::find($id);
-        if ($announcements->status_id == 0) {
-            $announcements->due_date = Carbon::now()->addYear(1);
-            $announcements->status_id = 1;
-        } else {
-            $announcements->status_id = 0;
-        }
+        $announcements = Announcements::find($request->id);
+        $announcements->remarks = $request->remarks;
+        $announcements->status_id = 0;
         if ($announcements->save()) {
+
             $log = new logs();
             $log->savelog(session('user')['id'], 'Changed an Announcement Status');
-            toast('Status Changed!', 'success', 'bottom-right');
+            toast('Status Changed!', 'success', 'bottom-left');
             return redirect()->back();
         } else {
             alert()->error('Oops!', 'something went wrong 😞');

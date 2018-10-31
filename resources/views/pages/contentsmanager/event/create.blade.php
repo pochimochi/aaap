@@ -303,23 +303,23 @@
                                                     <div class="text-center text-muted mb-4">
                                                         <small>Please State the reason of cancellation below</small>
                                                     </div>
-                                                    <form action="{{url('contentmanager/change_status')}}" id="form{{$event->id}}" method="post">
+                                                    <form action="{{url('contentmanager/event/change_status')}}" id="form{{$event->id}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$event->id}}">
-                                                        <div class="col">
+                                                        {{--<div class="col">
                                                             <select class="form-control form-control-alternative"
                                                                     type="text" name="remarksddl" id="remarksddl">
                                                                 <option value="1">Others
                                                                 </option>
-                                                              {{--  <option value="Due to unforseen circumstances">Due to
+                                                              --}}{{--  <option value="Due to unforseen circumstances">Due to
                                                                     unforseen circumstances
-                                                                </option>--}}
+                                                                </option>--}}{{--
                                                                 <option value="Due to heavy rains/weather">Due to heavy
                                                                     rains/weather
                                                                 </option>
 
                                                             </select>
-                                                        </div>
+                                                        </div>--}}
                                                         <div class="col-12 mt-5">
                                                             <label for="remarks">Other Remarks</label>
                                                             <textarea name="remarks" rows="5" id="remarks"
