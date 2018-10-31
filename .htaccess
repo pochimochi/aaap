@@ -1,7 +1,8 @@
-# IfModule prevents the server error if the app is moved in an environment which doesn’t support mod_rewrite
+# IfModule prevents the server error if the app is moved in an environment which doesnï¿½t support mod_rewrite
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
     RewriteRule ^(.*)$ public/$1 [L]
+
 
 </IfModule>

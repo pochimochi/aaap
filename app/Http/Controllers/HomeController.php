@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\announcements;
+use App\Articles;
 use App\AuditLog;
 use App\Event;
 use App\HitCounter;
@@ -37,8 +39,11 @@ class HomeController extends Controller
 
                 if (session('role') == 3) {
 
+
                     $users = User::where('role_id', 4)->get();
                     $events = new Event();
+                    $articles = new Articles();
+                    $announcements = new Announcements();
                     $counts = new HitCounter();
 
                     $audittoday = AuditLog::whereDate('created_at', today())->count();
@@ -56,7 +61,7 @@ class HomeController extends Controller
                     $chart->labels([today()->toDateString(), today()->subDays(1)->toDateString(), today()->subDays(2)->toDateString()
                         , today()->subDays(3)->toDateString()]);
                     $chart->dataset('Activities', 'bar', [$audittoday, $auditminus1, $auditminus2, $auditminus3])->backgroundColor('#448cff')->color('#448cff')->lineTension('0.4');
-                    return view('pages.master.dashboard', compact(['chart', 'users', 'events', 'counts']));
+                    return view('pages.master.dashboard', compact(['chart', 'users', 'events', 'counts', 'articles', 'announcements']));
                 } elseif (session('role') == 2) {
                     return redirect('writer/articles/create');
                 } elseif (session('role') == 1) {

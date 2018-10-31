@@ -100,7 +100,8 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Image</label>
-                                            <input name="announcementImage[]" multiple type="file"/>
+                                            <input name="announcementImage[]" id="announcementImage" multiple type="file"/>
+                                            <span class="text-danger">{{ $errors->first('announcementImage.*') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -135,6 +136,11 @@
                                            value="Reset ">
                                 </div>
                             </div>
+
+
+
+
+
                         </form>
                     </div>
                 </div>

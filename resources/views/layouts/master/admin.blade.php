@@ -19,8 +19,10 @@
     <link type="text/css" href="{{asset('argon/assets/css/argon.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/media/css/dataTables.bootstrap4.css')}}">
-    <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Responsive/css/responsive.bootstrap4.css')}}">
-    <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Responsive/css/responsive.dataTables.min.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('argon/DataTables-1.10.19/extensions/Responsive/css/responsive.bootstrap4.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('argon/DataTables-1.10.19/extensions/Responsive/css/responsive.dataTables.min.css')}}">
     <link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/extensions/Buttons/css/buttons.bootstrap4.css')}}">
     {{--<link rel="stylesheet" href="{{asset('argon/DataTables-1.10.19/media/css/dataTables.bootstrap4.min.css')}}">--}}
     <script src="{{asset('argon/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
@@ -74,46 +76,15 @@
                     <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
                         @if(session('role_id') == 4)
-                        <div class="media align-items-center">
+                            <div class="media align-items-center">
 
-                            <div class="media-body ml-2 d-none d-lg-block">
-                                <span class="mb-0 text-sm  font-weight-bold">{{session('user')['firstname'] .' ' . session('user')['lastname']}}</span>
+                                <div class="media-body ml-2 d-none d-lg-block">
+                                    <span class="mb-0 text-sm  font-weight-bold">{{session('user')['firstname'] .' ' . session('user')['lastname']}}</span>
+                                </div>
                             </div>
-                        </div>
-                            @else
-
-                            <button class="rounded-circle icon icon-shape bg-warning text-white dropdown-toggle border-0" >
-                                <span class="btn-inner--icon"><i class="fa fa-user  "></i></span>
-
-
-                            </button>
-                            @endif
+                        @endif
                     </a>
-                    <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                        <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome!</h6>
-                        </div>
-                        @if(session('user')['email'] != 'admin@aaap.com')
-                            <a href="{{url('profile')}}" class="dropdown-item">
-                                <i class="ni ni-single-02"></i>
-                                <span>My profile</span>
-                            </a>
-                        @endif
 
-                        <div class="dropdown-divider"></div>
-                        @if(!session()->exists('user'))
-                            <a class="dropdown-item" href="{{URL::to('/login')}}"><i
-                                        class="menu-icon fa fa-sign-in"></i>Login</a>
-
-                            <a class="dropdown-item" href="{{URL::to('/register')}}"><i
-                                        class="menu-icon fa fa-registered"></i>Register</a>
-                        @else
-
-                            {{--<li><a href="{{URL::to('/profile')}}"><i class="menu-icon fa fa-laptop"></i>Profile</a></li>--}}
-                            <a class="dropdown-item" href="{{URL::to('/logout')}}"><i
-                                        class="ni ni-button-power text-red"></i>Logout</a>
-                        @endif
-                    </div>
                 </li>
             </ul>
         </div>
@@ -181,7 +152,8 @@
 <script src="{{asset('argon/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 
 
-<script type="text/javascript" charset="utf8" src="{{asset('argon/DataTables-1.10.19/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" charset="utf8"
+        src="{{asset('argon/DataTables-1.10.19/media/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/data-table/dataTables.buttons.min.js')}}"></script>
 <script src="{{asset('argon/DataTables-1.10.19/extensions/Buttons/js/buttons.print.js')}}"></script>
 <script src="{{asset('argon/DataTables-1.10.19/extensions/Buttons/css/buttons.bootstrap4.css')}}"></script>
@@ -194,46 +166,106 @@
 <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js')}}"></script>
 
 
-
-
-
-<script type="text/javascript" charset="utf8" src="{{asset('argon/DataTables-1.10.19/media/js/dataTables.bootstrap4.min.js')}}"></script>
-<script type="text/javascript" language="javascript" src="{{asset('argon/DataTables-1.10.19/extensions/Responsive/js/dataTables.responsive.js')}}"></script>
-<script type="text/javascript" charset="utf8" src="{{asset('argon/DataTables-1.10.19/extensions/Responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script type="text/javascript" charset="utf8"
+        src="{{asset('argon/DataTables-1.10.19/media/js/dataTables.bootstrap4.min.js')}}"></script>
+<script type="text/javascript" language="javascript"
+        src="{{asset('argon/DataTables-1.10.19/extensions/Responsive/js/dataTables.responsive.js')}}"></script>
+<script type="text/javascript" charset="utf8"
+        src="{{asset('argon/DataTables-1.10.19/extensions/Responsive/js/responsive.bootstrap4.min.js')}}"></script>
 
 <script type="text/javascript">
-/*
-    $(document).ready(function() {
-        $('table').DataTable( {
-            pagingType: 'numbers',
-            dom: 'Bfrtip',
-            buttons: [
-                'print'
-            ],
-            responsive: {
-                details: {
-                    type: 'column',
-                    target: 'tr'
-                }
-            },
-            columnDefs: [ {
-                className: 'control',
-                orderable: false,
-                targets:   0
-            } ],
-            order: [ 1, 'asc' ]
-        } );
-    } );
-*/
+    $(document).ready(function(){
+        $('#announcementImage').change(function(){
+            var fp = $("#announcementImage");
+            var lg = fp[0].files.length; // get length
+            var items = fp[0].files;
+            var fileSize = 0;
 
-    $(document).ready(function() {
-        var table = $('table').DataTable( {
+            if (lg > 0) {
+                for (var i = 0; i < lg; i++) {
+                    fileSize = fileSize+items[i].size; // get file size
+                }
+                if(fileSize > 8388608) {
+                    alert('File size must not be more than 8 MB');
+                    $('#announcementImage').val('');
+                }
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#eventImage').change(function(){
+            var fp = $("#eventImage");
+            var lg = fp[0].files.length; // get length
+            var items = fp[0].files;
+            var fileSize = 0;
+
+            if (lg > 0) {
+                for (var i = 0; i < lg; i++) {
+                    fileSize = fileSize+items[i].size; // get file size
+                }
+                if(fileSize > 8388608) {
+                    alert('File size must not be more than 8 MB');
+                    $('#eventImage').val('');
+                }
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#articleImage').change(function(){
+            var fp = $("#articleImage");
+            var lg = fp[0].files.length; // get length
+            var items = fp[0].files;
+            var fileSize = 0;
+
+            if (lg > 0) {
+                for (var i = 0; i < lg; i++) {
+                    fileSize = fileSize+items[i].size; // get file size
+                }
+                if(fileSize > 8388608) {
+                    alert('File size must not be more than 8 MB');
+                    $('#articleImage').val('');
+                }
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    /*
+        $(document).ready(function() {
+            $('table').DataTable( {
+                pagingType: 'numbers',
+                dom: 'Bfrtip',
+                buttons: [
+                    'print'
+                ],
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: 'tr'
+                    }
+                },
+                columnDefs: [ {
+                    className: 'control',
+                    orderable: false,
+                    targets:   0
+                } ],
+                order: [ 1, 'asc' ]
+            } );
+        } );
+    */
+
+    $(document).ready(function () {
+        var table = $('table').DataTable({
             pagingType: 'numbers',
             lengthChange: false,
             buttons: {
                 buttons: [
-                    { extend: 'print', className: 'btn btn-info' },
-                    { extend: 'pdf', className: 'btn btn-success ' }
+                    {extend: 'print', className: 'btn btn-info'},
+                    {extend: 'pdf', className: 'btn btn-success '}
                 ]
             },
             responsive: {
@@ -242,22 +274,21 @@
                     target: 'tr'
                 }
             },
-            columnDefs: [ {
+            columnDefs: [{
                 className: 'control',
                 orderable: false,
-                targets:   0
-            } ],
-            order: [ 1, 'asc' ]
-        } );
+                targets: 0
+            }],
+            order: [1, 'asc']
+        });
 
         table.buttons().container()
-            .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-    } );
+            .appendTo('#example_wrapper .col-md-6:eq(0)');
+    });
 
 </script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 @include('sweetalert::alert')
-
 
 
 </body>

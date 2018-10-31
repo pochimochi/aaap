@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 
-
 class LoginController extends Controller
 {
 
@@ -57,40 +56,35 @@ class LoginController extends Controller
         }
 
         $log = new logs();
-        $helper = new Helper();
-        $valid = Validator::make($request->all(), [
+        $request->validate([
             'email' => 'required|max:255|exists:users',
             'password' => 'required|max:64',
-            /*'g-recaptcha-response' => 'required|captcha'*/
+            'g-recaptcha-response' => 'required'
         ]);
-        if (/*$helper->reCaptchaVerify($request['g-recaptcha-response'])->success &&*/
-        $valid->passes()) {
-            $attempt = Auth::attempt(['email' => $request['email'], 'password' => $request['password']]);
-            if ($attempt == true) {
-                if (Auth::user()->active == 1) {
-                    $user = Auth::user();
-                    \session(['user' => $user]);
-                    \session(['userId' => $user->id]);
-                    \session(['role' => $user->role_id]);
 
-                    $log->savelog($user->id, 'Logged In');
-                    alert()->success('Login Successful!', 'Welcome ' . $user->firstname);
-                    return redirect('home');
-                } else {
-                    alert()->warning('Login Failed', 'Your account is inactive.');
+        $attempt = Auth::attempt(['email' => $request['email'], 'password' => $request['password']]);
+        if ($attempt == true) {
+            if (Auth::user()->active == 1) {
+                $user = Auth::user();
+                session(['user' => $user]);
+                session(['userId' => $user->id]);
+                session(['role' => $user->role_id]);
 
-                    return redirect('/login');
-                }
-
-
+                $log->savelog($user->id, 'Logged In');
+                alert()->success('Login Successful!', 'Welcome ' . $user->firstname);
+                return redirect('home');
             } else {
-                alert()->error('Login Failed', 'Email Address or Password is incorrect.');
+                alert()->warning('Login Failed', 'Your account is inactive.');
+
                 return redirect('/login');
             }
+
+
         } else {
-            alert()->warning('Login Failed', 'Please retry your ReCaptcha');
-            return redirect('/login')->withErrors($valid->errors());
+            alert()->error('Login Failed', 'Email Address or Password is incorrect.');
+            return redirect('/login');
         }
+
     }
 
     public function logout()

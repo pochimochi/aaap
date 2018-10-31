@@ -42,7 +42,8 @@
                         </div>
                         <div class="col-6 collapse-close">
                             <button type="button" class="navbar-toggler" data-toggle="collapse"
-                                    data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false"
+                                    data-target="#navbar-collapse-main" aria-controls="sidenav-main"
+                                    aria-expanded="false"
                                     aria-label="Toggle sidenav">
                                 <span></span>
                                 <span></span>
@@ -103,15 +104,23 @@
                         <div class="text-center text-muted mb-4">
                             <small>Sign in with credentials</small>
                         </div>
+                        @if($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                @foreach($errors->all() as $error)
+                                    {{$error}}<br>
+                                @endforeach
+                            </div>
+                        @endif
                         <form action="{{URL::to('/login')}}" id="my-form" method="post">
                             @csrf
-                            <div class="form-group mb-3">
+                            <div class="form-group">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                     </div>
                                     <input type="email" placeholder="Email" name="email"
-                                           class="form-control input-rounded">
+                                           class="form-control input-rounded"><br>
+
                                 </div>
                             </div>
                             <div class="form-group">
@@ -121,20 +130,8 @@
                                     </div>
                                     <input type="password" placeholder="Password" name="password"
                                            class="form-control input-rounded">
+
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="custom-control custom-control-alternative custom-checkbox">
-                                        <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-                                        <label class="custom-control-label" for=" customCheckLogin">
-                                            <span class="text-muted">Remember me</span>
-                                        </label>
-
-                                    </div>
-                                </div>
-
-
                             </div>
                             <br>
                             <div class="form-group">
@@ -142,6 +139,7 @@
                                      data-sitekey="6Lfj6XAUAAAAAP9Mkg2ajxaSAZy0LaV-TS_BcnlK" style="display: block">
 
                                 </div>
+
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary btn-rounded">Sign in
@@ -176,7 +174,9 @@
         <div class="row align-items-center justify-content-xl-between">
             <div class="col-xl-6">
                 <div class="copyright text-center text-xl-left text-muted">
-                    <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank"><img src="{{asset('images/logos/logowhite.png')}}" width="200" class="navbar-brand-img" alt="..."></a>
+                    <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank"><img
+                                src="{{asset('images/logos/logowhite.png')}}" width="200" class="navbar-brand-img"
+                                alt="..."></a>
                 </div>
             </div>
             <div class="col-xl-6">
@@ -185,13 +185,15 @@
                         <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+                        <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About
+                            Us</a>
                     </li>
                     <li class="nav-item">
                         <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+                        <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
+                           class="nav-link" target="_blank">MIT License</a>
                     </li>
                 </ul>
             </div>

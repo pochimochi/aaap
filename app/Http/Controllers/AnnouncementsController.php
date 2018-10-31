@@ -74,47 +74,47 @@ class AnnouncementsController extends Controller
     public function store(Request $request)
     {
 
-        $valid = Validator::make($request->all(), [
-            'title' => 'required|max:100',
+        $request->validate([
+            'title' => 'required|max:50',
             'description' => 'required',
             'type_id' => 'required',
             'due_date' => 'nullable|after:today',
+            'announcementImage' => 'nullable',
+            'announcementImage.*' => 'image|mimes:jpeg,png,jpg|max:8000'
         ], [
             'type_id.required' => 'The type of the announcement must be specified.',
+            'announcementImage.*.image' => 'Uploads must be in image form',
         ]);
 
-        if ($valid->passes()) {
-            $announcementInfo = $request->all();
-            $users = User::all()->where('active', 1)->where('role_id', 4);
-            $announcementInfo['title'] = strip_tags($announcementInfo['title']);
-            $announcementInfo['description'] = strip_tags($announcementInfo['description']);
+
+        $announcementInfo = $request->all();
+        $users = User::all()->where('active', 1)->where('role_id', 4);
+        $announcementInfo['title'] = strip_tags($announcementInfo['title']);
+        $announcementInfo['description'] = strip_tags($announcementInfo['description']);
 
 
-            $announcementInfo['posted_by'] = session('user')['id'];
-            $announcementInfo['announcemnent_id'] = Announcements::create($announcementInfo)->id;
+        $announcementInfo['posted_by'] = session('user')['id'];
+        $announcementInfo['announcemnent_id'] = Announcements::create($announcementInfo)->id;
 
-            if ($request->file('announcementImage') != null) {
-                foreach($request->file('announcementImage') as $name){
-                    $announcementInfo['image_name'] = $name->getClientOriginalName();
-                    $name->storeAs('public', $announcementInfo['image_name']);
-                    $announcementInfo['image_id'] = Images::create(['location' => $announcementInfo['image_name']])->id;
-                    AnnouncementImages::create(['image_id' => $announcementInfo['image_id'], 'announcement_id' => $announcementInfo['announcemnent_id']]);
-                }
-
+        if ($request->file('announcementImage') != null) {
+            foreach ($request->file('announcementImage') as $name) {
+                $announcementInfo['image_name'] = $name->getClientOriginalName();
+                $name->storeAs('public', $announcementInfo['image_name']);
+                $announcementInfo['image_id'] = Images::create(['location' => $announcementInfo['image_name']])->id;
+                AnnouncementImages::create(['image_id' => $announcementInfo['image_id'], 'announcement_id' => $announcementInfo['announcemnent_id']]);
             }
-            /*AnnouncementImage::create(['image_id' => $imageId->id, 'announcement_id' => $announcementId->id]);*/
 
-            $helper = new Helper();
-            $helper->emailBulk($users, 'We just posted a new announcement entitled "'.$announcementInfo['title'].'". Visit our <a href='.url('home').'>website</a> for more details.', 'New Announcement!');
-
-            $log = new logs();
-            $log->savelog(session('user')['id'], 'Added an Announcement');
-            alert()->success('Announcement Added!', 'You have successfully added an announcement!');
-            return redirect('contentmanager/announcements/create');
-        } else {
-            alert()->error('Add Failed!', 'Some fields are missing or is invalid.');
-            return redirect('contentmanager/announcements/create')->withErrors($valid)->withInput();
         }
+        /*AnnouncementImage::create(['image_id' => $imageId->id, 'announcement_id' => $announcementId->id]);*/
+
+        $helper = new Helper();
+        $helper->emailBulk($users, 'We just posted a new announcement entitled "' . $announcementInfo['title'] . '". Visit our <a href=' . url('home') . '>website</a> for more details.', 'New Announcement!');
+
+        $log = new logs();
+        $log->savelog(session('user')['id'], 'Added an Announcement');
+        alert()->success('Announcement Added!', 'You have successfully added an announcement!');
+        return redirect('contentmanager/announcements/create');
+
     }
 
     public function edit($id)
@@ -127,10 +127,12 @@ class AnnouncementsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required|max:100',
+            'title' => 'required|max:50',
             'description' => 'required',
             'type_id' => 'required',
-            'due_date' => 'nullable|after:today',
+            'due_date' => 'required|after:today',
+            'announcementImage' => 'nullable',
+            'announcementImage.*' => 'image|mimes:jpeg,png,jpg|size:2048'
         ], [
             'type_id.required' => 'The type of the announcement must be specified.',
         ]);
@@ -140,7 +142,7 @@ class AnnouncementsController extends Controller
 
         if ($request->file('announcementImage') != null) {
             $announcement->image()->detach();
-            foreach($request->file('announcementImage') as $name){
+            foreach ($request->file('announcementImage') as $name) {
                 $announcementinfo['image_name'] = $name->getClientOriginalName();
                 $name->storeAs('public', $announcementinfo['image_name']);
                 $announcementinfo['image_id'] = Images::create(['location' => $announcementinfo['image_name']])->id;
