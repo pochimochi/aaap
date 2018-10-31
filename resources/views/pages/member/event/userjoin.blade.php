@@ -27,6 +27,9 @@
                     </div>
                 </form>
             </div>
+            <div class="container" align="left">
+                <a class="btn btn-default" href="{{action('AttendanceController@index')}}">Joined Events</a>
+            </div>
             <div class="container justify-content-center">
                 @if($users->count() != 0)
                     @foreach ($users as $user)

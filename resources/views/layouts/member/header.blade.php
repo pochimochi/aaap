@@ -28,19 +28,24 @@
                 </div>
                 <ul class="navbar-nav navbar-nav-hover align-items-lg-center ml-lg-auto">
                     @if(session('user'))
-
-                        <li class="nav-item dropdown">
-                            <a href="" class="nav-link" data-toggle="dropdown" href="" role="button">
-                                <i class="ni ni-collection d-lg-none"></i>
+                        <li class="nav-item">
+                            <a href="{{URL::to('/member/events')}}" class="nav-link">
+                                <i class="ni ni-ui-04 d-lg-none"></i>
                                 <span class="nav-link-inner--text">Events</span>
                             </a>
-                            <div class="dropdown-menu">
-                                <a href="{{URL::to('/member/events')}}"
-                                   class="dropdown-item">List</a>
-                                <a href="{{action('AttendanceController@index')}}"
-                                   class="dropdown-item">Joined Events</a>
-                            </div>
                         </li>
+                        {{--<li class="nav-item dropdown">--}}
+                            {{--<a href="" class="nav-link" data-toggle="dropdown" href="" role="button">--}}
+                                {{--<i class="ni ni-collection d-lg-none"></i>--}}
+                                {{--<span class="nav-link-inner--text">Events</span>--}}
+                            {{--</a>--}}
+                            {{--<div class="dropdown-menu">--}}
+                                {{--<a href="{{URL::to('/member/events')}}"--}}
+                                   {{--class="dropdown-item">List</a>--}}
+                                {{--<a href="{{action('AttendanceController@index')}}"--}}
+                                   {{--class="dropdown-item">Joined Events</a>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown" href="#" role="button">
                                 <i class="ni ni-collection d-lg-none"></i>
@@ -48,9 +53,9 @@
                             </a>
                             <div class="dropdown-menu">
                                 <a href="{{URL::to('/member/announcements/type', '1')}}"
-                                   class="dropdown-item">General</a>
+                                   class="dropdown-item">General Announcements</a>
                                 <a href="{{URL::to('/member/announcements/type', '0')}}"
-                                   class="dropdown-item">Special</a>
+                                   class="dropdown-item">Special Announcements</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -74,7 +79,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#faqs" class="nav-link">
+                            <a href="{{url('/faqs')}}" class="nav-link">
                                 <i class="ni ni-ui-04 d-lg-none"></i>
                                 <span class="nav-link-inner--text">FAQs</span>
                             </a>

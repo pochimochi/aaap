@@ -70,6 +70,12 @@ class HomeController extends Controller
         }
     }
 
+    public function faqs()
+    {
+        return view('pages.master.faqs');
+    }
+
+
 
 
 }

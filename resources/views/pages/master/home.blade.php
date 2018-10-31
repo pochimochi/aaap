@@ -30,7 +30,7 @@
                             @if(!session('user') || !Auth::user())
                                 <a href="{{URL::to('/register')}}"
                                    class="btn btn-lg btn-success mt-4 mb-3 mb-sm-0">
-                                    <span class="btn-inner--text">Become a Member</span>
+                                    <span class="btn-inner--text"></i>Become a Member</span>
                                 </a>
                             @endif
                         </div>

@@ -16,6 +16,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@Home');
     Route::get('member/status', 'PrintController@MemberStatus');
     Route::get('home', 'HomeController@Home');
+    Route::get('faqs', 'HomeController@faqs');
     Route::get('profile', 'UserController@profile');
     Route::resource('events', 'EventController')->only(['index']);
     Route::resource('articles', 'ArticleController')->only(['index']);
