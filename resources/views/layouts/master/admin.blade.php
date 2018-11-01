@@ -174,8 +174,8 @@
         src="{{asset('argon/DataTables-1.10.19/extensions/Responsive/js/responsive.bootstrap4.min.js')}}"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#announcementImage').change(function(){
+    $(document).ready(function () {
+        $('#announcementImage').change(function () {
             var fp = $("#announcementImage");
             var lg = fp[0].files.length; // get length
             var items = fp[0].files;
@@ -183,9 +183,9 @@
 
             if (lg > 0) {
                 for (var i = 0; i < lg; i++) {
-                    fileSize = fileSize+items[i].size; // get file size
+                    fileSize = fileSize + items[i].size; // get file size
                 }
-                if(fileSize > 8388608) {
+                if (fileSize > 8388608) {
                     alert('File size must not be more than 8 MB');
                     $('#announcementImage').val('');
                 }
@@ -194,8 +194,8 @@
     });
 </script>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#eventImage').change(function(){
+    $(document).ready(function () {
+        $('#eventImage').change(function () {
             var fp = $("#eventImage");
             var lg = fp[0].files.length; // get length
             var items = fp[0].files;
@@ -203,9 +203,9 @@
 
             if (lg > 0) {
                 for (var i = 0; i < lg; i++) {
-                    fileSize = fileSize+items[i].size; // get file size
+                    fileSize = fileSize + items[i].size; // get file size
                 }
-                if(fileSize > 8388608) {
+                if (fileSize > 8388608) {
                     alert('File size must not be more than 8 MB');
                     $('#eventImage').val('');
                 }
@@ -214,8 +214,8 @@
     });
 </script>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#articleImage').change(function(){
+    $(document).ready(function () {
+        $('#articleImage').change(function () {
             var fp = $("#articleImage");
             var lg = fp[0].files.length; // get length
             var items = fp[0].files;
@@ -223,9 +223,9 @@
 
             if (lg > 0) {
                 for (var i = 0; i < lg; i++) {
-                    fileSize = fileSize+items[i].size; // get file size
+                    fileSize = fileSize + items[i].size; // get file size
                 }
-                if(fileSize > 8388608) {
+                if (fileSize > 8388608) {
                     alert('File size must not be more than 8 MB');
                     $('#articleImage').val('');
                 }
@@ -260,6 +260,27 @@
 
     $(document).ready(function () {
         var table = $('table').DataTable({
+            initComplete: function () {
+                this.api().columns([6,7]).every(function () {
+                    var column = this;
+                    var select = $('<select><option value="">Show all</option></select>')
+
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            },
             pagingType: 'numbers',
             lengthChange: false,
             buttons: {
@@ -285,6 +306,7 @@
         table.buttons().container()
             .appendTo('#example_wrapper .col-md-6:eq(0)');
     });
+
 
 </script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
