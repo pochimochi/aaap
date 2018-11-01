@@ -182,14 +182,20 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-12 col-md-6">
                         <span>Date From: </span><input class="form-control form-control-sm" type="text" id="min"/>
 
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-12 col-md-6">
                         <span>Date To:</span><input class="form-control form-control-sm" type="text"
                                                     id="max"/>
 
+                    </div>
+                    <div class="col-lg-3 col-sm-12 col-md-6">
+                        <span id="siblingfilter"></span>
+                    </div>
+                    <div class="col-lg-3 col-sm-12 col-md-6">
+                        <span id="interventionfilter"></span>
                     </div>
                 </div>
 
@@ -206,6 +212,8 @@
                         <th>Country</th>
                         <th>Status</th>
                         <th>Gender</th>
+                        <th>Has Siblings</th>
+                        <th>With Intervention</th>
                         <th>Date Created</th>
                         <th>Email</th>
                         <th>Active</th>
@@ -226,6 +234,8 @@
                             <td>{{($user->permanentaddress && $user->permanentaddress->country) ? $user->permanentaddress->country->name : 'N/A'}}
                             <td>{{$user->active == 1 ? 'Paid' : 'Unpaid'}}</td>
                             <td>{{($user->gender == 1) ? 'Male' : 'Female'}}</td>
+                            <td>{{($user->pwa->siblingcount > 0) ? 'Yes' : 'No'}}</td>
+                            <td>{{($user->pwa->withintervention == 1) ? 'Yes' : 'No'}}</td>
                             <td>{{$user->created_at}}</td>
 
                             <td>{{$user->email}}</td>
@@ -496,7 +506,7 @@
                 function (settings, data, dataIndex) {
                     var min = $('#min').datepicker("getDate");
                     var max = $('#max').datepicker("getDate");
-                    var startDate = new Date(data[3])
+                    var startDate = new Date(data[10])
                     if (min == null && max == null) {
                         return true;
                     }
@@ -572,7 +582,8 @@
 
                         });
                     column3.data().unique().sort().each(function (d, j) {
-                        select3.append('<option value="' + d + '">' + d + '</option>');
+                        select3.append('<option value="Paid">Paid</option>');
+                        select3.append('<option value="Unpaid">Unpaid</option>');
                     });
                     var column4 = this.api().column(7);
                     var select4 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
@@ -590,7 +601,40 @@
                         select4.append('<option value="Male">Male</option>');
                         select4.append('<option value="Female">Female</option>');
                     });
+                    var column5 = this.api().column(8);
+                    var select5 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
+                        .appendTo($('#siblingfilter').empty().text('Has Siblings: '))
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column5
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+
+                        });
+                    column5.data().unique().sort().each(function (d, j) {
+                        select5.append('<option value="Yes">Yes</option>');
+                        select5.append('<option value="No">No</option>');
+                    });
+                    var column6 = this.api().column(9);
+                    var select6 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
+                        .appendTo($('#interventionfilter').empty().text('With Intervention: '))
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column6
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+
+                        });
+                    column6.data().unique().sort().each(function (d, j) {
+                        select6.append('<option value="Yes">Yes</option>');
+                        select6.append('<option value="No">No</option>');
+                    });
                 },
+
                 pagingType: 'numbers',
                 lengthChange: false,
                 buttons: {
