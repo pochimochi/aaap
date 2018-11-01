@@ -135,20 +135,19 @@ class ArticleController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $articles = Articles::find($request->id);
-        if ($request->status_id == 0) {
-            $articles->due_date = Carbon::now()->addYear(1);
-            $articles->status_id = 1;
-        } else {
-            $articles->status_id = 0;
-        }
-        if ($articles->save()) {
+
+        $article = Articles::find($request->id);
+
+        $article->remarks = $request->remarks;
+        $article->status = 0;
+        if ($article->save()) {
+
             $log = new logs();
             $log->savelog(session('user')['id'], 'Changed an Article Status');
-            toast('Status Changed!', 'success', 'bottom-right');
+            toast('Status Changed!', 'success', 'bottom-left');
             return redirect()->back();
         } else {
-            alert()->error('Oops!', 'something went wrong 😞');
+            alert()->error('Oops!', 'Something went wrong 😞');
             return redirect()->back();
         }
     }
@@ -185,7 +184,7 @@ class ArticleController extends Controller
         $article->body = $request->get('body');
         $article->modified_by = session('user')['id'];
         $article->articletype_id = $request->get('articletype_id');
-        $article->status_id = $request->get('status_id');
+        $article->status_id = $request->get('status');
 
         if ($request->file('articleImage') != null) {
             $article->image()->detach();
@@ -205,28 +204,5 @@ class ArticleController extends Controller
         return redirect('writer/articles/create');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($articleId)
-    {
-        $article = Articles::find($articleId);
-        if ($article->status_id == 1) {
-            $article->status_id = 0;
-        } else {
-            $article->status_id = 1;
-        }
-        if ($article->save()) {
-            $log = new logs();
-            $log->savelog(session('user')['id'], 'Changed an article status');
-            toast('Status Changed!', 'success', 'bottom-right');
-            return redirect()->back();
-        } else {
-            alert()->error('Oops!', 'something went wrong :(');
-            return redirect()->back();
-        }
-    }
+
 }

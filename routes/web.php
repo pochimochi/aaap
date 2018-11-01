@@ -46,7 +46,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['middleware' => 'contentmanager', 'prefix' => 'contentmanager'], function () {
             //announcements
 
-            Route::get('announcements/changeStatus/{announcementId}/{status}', 'AnnouncementsController@changeStatus');
             Route::resource('announcements', 'AnnouncementsController');
             Route::post('announcement/change_status', 'AnnouncementsController@changeStatus');
 
@@ -69,7 +68,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['middleware' => 'writer', 'prefix' => 'writer'], function () {
             //articles
             Route::resource('newsletter', 'NewsletterController');
-            Route::post('articles/change', 'ArticleController@changeStatus');
+            Route::post('articles/change_status', 'ArticleController@changeStatus');
             Route::resource('articles', 'ArticleController');
         });
         //---------------------------------------------------------------------------------

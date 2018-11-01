@@ -69,12 +69,12 @@
                                 <div class="form-group">
                                     <label class="control-label">Status</label>
                                     <select class="form-control custom-select input-default"
-                                            name="status_id" id="status_id">
+                                            name="status" id="status">
                                         <option value="">Select Status</option>
-                                        <option value="1" {{ old('status_id') == 1 ? 'selected' : '' }}>
+                                        <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>
                                             Active
                                         </option>
-                                        <option value="0" {{ old('status_id') == 1 ? 'selected' : '' }}>
+                                        <option value="0" {{ old('status') == 1 ? 'selected' : '' }}>
                                             Inactive
                                         </option>
                                     </select>
@@ -113,14 +113,17 @@
             <div class="card-header border-0">
                 List of Articles
             </div>
-            <div class="card-body">
+            <nobr class="card-body">
                 <table id="myTable" class="table table-bordered">
                     <thead>
                     <tr>
+                        <th></th>
                         <th>ID</th>
                         <th>Title</th>
                         <th>Date Published</th>
                         <th>Published By</th>
+                        <th>Date Modified</th>
+                        <th>Modified By</th>
                         <th>Article Type</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -133,35 +136,109 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{$article->id}}">
                                 <input type="hidden" name="status_id" value="{{$article->status_id }}">
+                                <td></td>
                                 <td>{{ $article->id}}</td>
                                 <td>{{ $article->title}}</td>
                                 <td>{{ $article->created_at}}</td>
                                 <td>{{ $article->user->firstname . ' ' .$article->user->lastname }}</td>
-                                <td>{{ $article->modified_by}}</td>
-                                <td>{{ $article->articletype_id /*== 6 ?'Case Studies' : 'Commentaries' : 'Methodologies' : 'Reports' : 'Research' : 'Review'*/ }}</td>
-                                <td align="center">
-                                    <button type="submit" id="changestatus" onclick="confirm('are you sure?')"
-                                            class="btn-sm {{$article->status_id == 1 ? 'btn btn-success' : 'btn btn-rounded btn-danger'}}">{{$article->status_id == 1 ? 'Active' : 'Inactive' }}</button>
-                                </td>
+                                <td>{{ $article->updated_at ? $article->updated_at : 'N/A'}}</td>
+
+                                <td>{{ $article->modifieduser ? $article->modifieduser->firstname . ' ' . $article->modifieduser->lastname : 'N/A'}}</td>
+                                <td>{{ $article->articletype->name}}</td>
                                 <td>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <a href="{{URL::to('/writer/articles/'.$article->id)}}"
-                                               class="btn btn-primary btn-sm " role="button">View</a>
-                                        </div>
-                                        <div class="col-6">
-                                            <a href="{{URL::to('/writer/articles/'.$article->id.'/edit')}}"
-                                               class="btn btn-warning btn-sm " role="button">Edit</a>
-                                        </div>
-                                    </div>
+                                    @if($article->status == 1)
+                                        <label class="badge badge-success">Active Article</label>
+                                    @else
+                                        <label class="badge badge-danger">Archived Article</label>
+                                @endif
+                                <td>
+                                    <nobr>
+                                        <a href="{{URL::to('/writer/articles/'.$article->id)}}"
+                                           class="btn btn-success" role="button">View</a>
+                                        <a href="{{URL::to('/writer/articles/'.$article->id.'/edit')}}"
+                                           class="btn btn-info" role="button">Edit</a>
+                                        @if($article->status == 1)
+                                            <a data-toggle="modal"
+                                               data-target="#status-form{{$article->id}}"
+                                               class="btn text-white btn-rounded btn-warning">Archive Article</a>
+                                        @endif
+                                    </nobr>
                                 </td>
                             </form>
                         </tr>
+                        <div class="modal fade" id="status-form{{$article->id}}"
+                             role="dialog"
+                             aria-labelledby="status-form" aria-hidden="true">
+                            <div class="modal-dialog modal modal-lg modal-dialog-centered modal-sm"
+                                 role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body p-0">
+                                        <div class="card bg-secondary shadow border-0">
+                                            <div class="card-body">
+                                                <div class="text-center text-muted mb-4">
+                                                    <small>Please State the reason below</small>
+                                                </div>
+                                                <form action="{{url('writer/articles/change_status')}}" id="form{{$article->id}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{$article->id}}">
+                                                    {{--<div class="col">
+                                                        <select class="form-control form-control-alternative"
+                                                                type="text" name="remarksddl" id="remarksddl">
+                                                            <option value="1">Others
+                                                            </option>
+                                                          --}}{{--  <option value="Due to unforseen circumstances">Due to
+                                                                unforseen circumstances
+                                                            </option>--}}{{--
+                                                            <option value="Due to heavy rains/weather">Due to heavy
+                                                                rains/weather
+                                                            </option>
+
+                                                        </select>
+                                                    </div>--}}
+                                                    <div class="col-12 mt-5">
+                                                        <label for="remarks">Other Remarks</label>
+                                                        <textarea name="remarks" rows="5" id="remarks"
+                                                                  class="form-control form-control-alternative"></textarea>
+                                                        <span class="text-danger">{{ $errors->first('remarks') }}</span>
+                                                    </div>
+                                                    <div class="text-center mt-5">
+                                                        <button type="submit" id="btnSubmit"
+                                                                class="btn btn-rounded btn-danger">Archive Article
+                                                        </button>
+                                                    </div>
+                                                </form>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $('#form{{$article->id}}').submit(function(e){
+                                e.preventDefault();
+                                var form = $('#form{{$article->id}}');
+                                swal({
+                                    title: 'Are you sure?',
+                                    text: "You won't be able to revert this!",
+                                    type: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Yes, save it!'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        form.submit()
+                                    }
+                                })
+                            });
+                        </script>
                     @endforeach
                     </tbody>
                 </table>
-            </div>
         </div>
+    </div>
     </div>
 
 

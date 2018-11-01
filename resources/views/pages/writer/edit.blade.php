@@ -69,14 +69,14 @@
                                         <div class="form-group">
                                             <label class="control-label">Status</label>
                                             <select class="form-control custom-select  input-default"
-                                                    name="status_id">
+                                                    name="status">
                                                 <option>Select Status</option>
                                                 <option value="1"
-                                                        @if($article->status_id=="1") selected @endif>
+                                                        @if($article->status=="1") selected @endif>
                                                     Active
                                                 </option>
                                                 <option value="0"
-                                                        @if($article->status_id=="0") selected @endif>
+                                                        @if($article->status=="0") selected @endif>
                                                     Inactive
                                                 </option>
 
