@@ -261,7 +261,7 @@
     $(document).ready(function () {
         var table = $('table').DataTable({
             initComplete: function () {
-                this.api().columns([6,7]).every(function () {
+                this.api().columns([6,7,8]).every(function () {
                     var column = this;
                     var select = $('<select><option value="">Show all</option></select>')
 
