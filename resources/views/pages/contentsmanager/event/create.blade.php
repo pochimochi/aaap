@@ -201,11 +201,12 @@
                 <div class="card-body">
                     <div class="card-title">
                         <h4>List of Events</h4>
+
                     </div>
                     <table id="myTable" class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>Expand</th>
+                            <th></th>
                             <th>ID</th>
                             <th>Title</th>
                             <th>Description</th>
@@ -219,11 +220,11 @@
                         @foreach ($events as $event)
                             <tr>
                                 <td></td>
-                                <td>{{ $event->id }}</td>
-                                <td>{{ $event->name }}</td>
-                                <td>{{ $event->description }}</td>
-                                <td>{{ $event->user->firstname . ' ' . $event->user->lastname}}</td>
-                                <td>{{ \Carbon\Carbon::parse($event->created_at)->format('d/m/Y')}}</td>
+                                <td>{{$event->id}}</td>
+                                <td>{{$event->name}}</td>
+                                <td>{{$event->description}}</td>
+                                <td>{{$event->user->firstname . ' ' . $event->user->lastname}}</td>
+                                <td>{{\Carbon\Carbon::parse($event->created_at)->format('d/m/Y')}}</td>
                                 <td>
                                     @if($event->status == 1)
                                         <label class="badge badge-success">Active Event</label>
