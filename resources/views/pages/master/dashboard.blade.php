@@ -152,28 +152,60 @@
         <div class="card mt-5 bg-translucent-white shadow">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-9 card-title display-4">
+                    <div class="col text-center card-title display-4">
                         Members of AAAP
                     </div>
-                    <div class="col-2 pull-right">
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 col-sm-12 col-md-6 m-1">
                         <a class="btn btn-warning" target="_blank" href="{{action('PrintController@MemberStatus')}}">Paid/Unpaid
                             Members <span class="fas fa-print"></span></a>
+                    </div>
+
+
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12 col-md-6">
+                        <span id="statusfilter"></span>
+                    </div>
+                    <div class="col-lg-3 col-sm-12 col-md-6">
+                        <span id="countryfilter"></span>
+                    </div>
+                    <div class="col-lg-3 col-sm-12 col-md-6">
+                        <span id="cityfilter"></span>
+                    </div>
+                    <div class="col-lg-3 col-sm-12 col-md-6">
+                        <span id="genderfilter"></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-3">
+                        <span>Date From: </span><input class="form-control form-control-sm" type="text" id="min"/>
+
+                    </div>
+                    <div class="col-3">
+                        <span>Date To:</span><input class="form-control form-control-sm" type="text"
+                                                    id="max"/>
 
                     </div>
                 </div>
 
+                <hr>
 
-                <table id="example" class="table bg-white table-bordered table-condensed shadow">
+                <table id="memberdashboard" class="table bg-white table-bordered table-condensed shadow">
                     <thead>
                     <tr>
                         <th></th>
                         <th>Actions</th>
                         <th>ID</th>
-                        <th>First Name</th>
-                        <th>Middle Name</th>
-                        <th>Last Name</th>
+                        <th>Date Created</th>
+                        <th>Name</th>
                         <th>City</th>
                         <th>Country</th>
+                        <th>Status</th>
                         <th>Gender</th>
                         <th>Email</th>
                         <th>Active</th>
@@ -188,12 +220,12 @@
                                    data-target="#status-form{{$user->id}}"
                                    class="btn text-white btn-rounded btn-warning">View Details</a></td>
                             <td>{{$user->id}}</td>
-                            <td>{{$user->firstname}}</td>
-                            <td>{{$user->middlename}}</td>
-                            <td>{{$user->lastname}}</td>
+                            <td>{{$user->created_at}}</td>
+                            <td>{{$user->firstname}}&nbsp;{{$user->lastname}}</td>
+
                             <td>{{($user->permanentaddress && $user->permanentaddress->city) ? $user->permanentaddress->city->name : 'N/A'}}
                             <td>{{($user->permanentaddress && $user->permanentaddress->country) ? $user->permanentaddress->country->name : 'N/A'}}
-
+                            <td>{{$user->active == 1 ? 'Paid' : 'Unpaid'}}</td>
                             <td>{{($user->gender == 1) ? 'Male' : 'Female'}}</td>
                             <td>{{$user->email}}</td>
                             <td>
@@ -221,7 +253,10 @@
                                                     <div class="col-lg-3 order-lg-2">
                                                         <div class="card-profile-image">
                                                             <a href="#">
-                                                                <img src="{{$user->profilepic ? asset('/storage/'. $user->profilepic->location) : ''}}" alt="" width="150" height="150" style="object-fit:scale-down;background-color: white" class="bg-gradient-teal rounded-circle" >
+                                                                <img src="{{$user->profilepic ? asset('/storage/'. $user->profilepic->location) : ''}}"
+                                                                     alt="" width="150" height="150"
+                                                                     style="object-fit:scale-down;background-color: white"
+                                                                     class="bg-gradient-teal rounded-circle">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -240,10 +275,12 @@
                                                             {{$user['firstname'].' '.$user['lastname']}}
                                                         </h3>
                                                         <div class="h5 font-weight-300">
-                                                            <i class="ni location_pin mr-2"></i>{{$user->permanentaddress->city->name}}<br>{{ $user->permanentaddress->country->name}}
+                                                            <i class="ni location_pin mr-2"></i>{{$user->permanentaddress->city->name}}
+                                                            <br>{{ $user->permanentaddress->country->name}}
                                                         </div>
                                                         <div class="h5 mt-4">
-                                                            <i class="ni business_briefcase-24 mr-2"></i>{{$user->usertype->name}} - AAAP
+                                                            <i class="ni business_briefcase-24 mr-2"></i>{{$user->usertype->name}}
+                                                            - AAAP
                                                         </div>
 
                                                     </div>
@@ -252,40 +289,55 @@
                                                         <div class="row">
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-username">First Name</label>
-                                                                    <input value="{{ $user['firstname'] }}" type="text" readonly
-                                                                           name="userFirstName" class="form-control-plaintext">
+                                                                    <label class="form-control-label"
+                                                                           for="input-username">First Name</label>
+                                                                    <input value="{{ $user['firstname'] }}" type="text"
+                                                                           readonly
+                                                                           name="userFirstName"
+                                                                           class="form-control-plaintext">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-username">Middle Name</label>
-                                                                    <input value="{{ $user['middlename'] }}" type="text" readonly
-                                                                           name="middlename" class="form-control-plaintext">
+                                                                    <label class="form-control-label"
+                                                                           for="input-username">Middle Name</label>
+                                                                    <input value="{{ $user['middlename'] }}" type="text"
+                                                                           readonly
+                                                                           name="middlename"
+                                                                           class="form-control-plaintext">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
-                                                                    <label class="form-control-label" for="input-email">Last Name</label>
-                                                                    <input value="{{ $user['lastname'] }}" type="text" readonly
-                                                                           name="userFirstName" class="form-control-plaintext">
+                                                                    <label class="form-control-label" for="input-email">Last
+                                                                        Name</label>
+                                                                    <input value="{{ $user['lastname'] }}" type="text"
+                                                                           readonly
+                                                                           name="userFirstName"
+                                                                           class="form-control-plaintext">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-first-name">Email Address</label>
-                                                                    <input value="{{ $user['email'] }}" type="text" readonly
-                                                                           name="userFirstName" class="form-control-plaintext">
+                                                                    <label class="form-control-label"
+                                                                           for="input-first-name">Email Address</label>
+                                                                    <input value="{{ $user['email'] }}" type="text"
+                                                                           readonly
+                                                                           name="userFirstName"
+                                                                           class="form-control-plaintext">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-last-name">Gender</label>
-                                                                    <input value="{{ ($user['gender'] == 1 ? 'Male' : 'Female') }}" type="text"
+                                                                    <label class="form-control-label"
+                                                                           for="input-last-name">Gender</label>
+                                                                    <input value="{{ ($user['gender'] == 1 ? 'Male' : 'Female') }}"
+                                                                           type="text"
                                                                            readonly
-                                                                           name="userFirstName" class="form-control-plaintext">
+                                                                           name="userFirstName"
+                                                                           class="form-control-plaintext">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -297,10 +349,13 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-address">Address</label>
-                                                                    <input id="input-address" class="form-control form-control-alternative"
+                                                                    <label class="form-control-label"
+                                                                           for="input-address">Address</label>
+                                                                    <input id="input-address"
+                                                                           class="form-control form-control-alternative"
                                                                            placeholder="Home Address"
-                                                                           value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                                                                           value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                                                                           type="text">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -308,23 +363,28 @@
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label" for="input-city">City</label>
-                                                                    <input type="text" id="input-city" class="form-control form-control-alternative"
+                                                                    <input type="text" id="input-city"
+                                                                           class="form-control form-control-alternative"
                                                                            placeholder="City" value="New York">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-country">Country</label>
+                                                                    <label class="form-control-label"
+                                                                           for="input-country">Country</label>
                                                                     <input type="text" id="input-country"
-                                                                           class="form-control form-control-alternative" placeholder="Country"
+                                                                           class="form-control form-control-alternative"
+                                                                           placeholder="Country"
                                                                            value="United States">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
-                                                                    <label class="form-control-label" for="input-country">Postal code</label>
+                                                                    <label class="form-control-label"
+                                                                           for="input-country">Postal code</label>
                                                                     <input type="number" id="input-postal-code"
-                                                                           class="form-control form-control-alternative" placeholder="Postal code">
+                                                                           class="form-control form-control-alternative"
+                                                                           placeholder="Postal code">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -335,7 +395,8 @@
                                                     <div class="pl-lg-4">
                                                         <div class="form-group focused">
                                                             <label>About Me</label>
-                                                            <textarea rows="4" class="form-control form-control-alternative"
+                                                            <textarea rows="4"
+                                                                      class="form-control form-control-alternative"
                                                                       placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
                                                         </div>
                                                     </div>
@@ -349,21 +410,7 @@
                         </div>
                     @endforeach
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </tfoot>
+
                 </table>
             </div>
         </div>

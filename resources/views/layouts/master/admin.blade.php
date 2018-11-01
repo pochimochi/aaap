@@ -234,78 +234,139 @@
     });
 </script>
 <script type="text/javascript">
-    /*
-        $(document).ready(function() {
-            $('table').DataTable( {
+
+
+    $(document).ready(function () {
+
+
+            $.fn.dataTable.ext.search.push(
+                function (settings, data, dataIndex) {
+                    var min = $('#min').datepicker("getDate");
+                    var max = $('#max').datepicker("getDate");
+                    var startDate = new Date(data[3])
+                    if (min == null && max == null) {
+                        return true;
+                    }
+                    if (min == null && startDate <= max) {
+                        return true;
+                    }
+                    if (max == null && startDate >= min) {
+                        return true;
+                    }
+                    if (startDate <= max && startDate >= min) {
+                        return true;
+                    }
+                    return false;
+                }
+            );
+
+
+            $("#min").datepicker({
+                onSelect: function () {
+                    table.draw();
+                }, changeMonth: true, changeYear: true, dateFormat: "dd/mm/yy"
+            });
+            $("#max").datepicker({
+                onSelect: function () {
+                    table.draw();
+                }, changeMonth: true, changeYear: true, dateFormat: "dd/mm/yy"
+            });
+
+            var table = $('#memberdashboard').DataTable({
+                initComplete: function () {
+                    var column = this.api().column(4);
+                    var select = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
+                        .appendTo($('#cityfilter').empty().text('City: '))
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+
+                        });
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>');
+                    });
+
+                    var column2 = this.api().column(5);
+                    var select2 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
+                        .appendTo($('#countryfilter').empty().text('Country: '))
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column2
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+
+                        });
+                    column2.data().unique().sort().each(function (d, j) {
+                        select2.append('<option value="' + d + '">' + d + '</option>');
+                    });
+
+                    var column3 = this.api().column(6);
+                    var select3 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
+                        .appendTo($('#statusfilter').empty().text('Status: '))
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column3
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+
+                        });
+                    column3.data().unique().sort().each(function (d, j) {
+                        select3.append('<option value="' + d + '">' + d + '</option>');
+                    });
+                    var column4 = this.api().column(7);
+                    var select4 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
+                        .appendTo($('#genderfilter').empty().text('Gender: '))
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column4
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+
+                        });
+                    column4.data().unique().sort().each(function (d, j) {
+                        select4.append('<option value="Male">Male</option>');
+                        select4.append('<option value="Female">Female</option>');
+                    });
+                },
                 pagingType: 'numbers',
-                dom: 'Bfrtip',
-                buttons: [
-                    'print'
-                ],
+                lengthChange: false,
+                buttons: {
+                    buttons: [
+                        {extend: 'print', className: 'btn btn-info'},
+                        {extend: 'pdf', className: 'btn btn-success '}
+                    ]
+                },
                 responsive: {
                     details: {
                         type: 'column',
                         target: 'tr'
                     }
                 },
-                columnDefs: [ {
+                columnDefs: [{
                     className: 'control',
                     orderable: false,
-                    targets:   0
-                } ],
-                order: [ 1, 'asc' ]
-            } );
-        } );
-    */
+                    targets: 0
+                }],
+                order: [1, 'asc']
+            });
 
-    $(document).ready(function () {
-        var table = $('table').DataTable({
-            initComplete: function () {
-                this.api().columns([6,7,8]).every(function () {
-                    var column = this;
-                    var select = $('<select><option value="">Show all</option></select>')
+            table.buttons().container().appendTo('#memberdashboard_wrapper .col-md-6:eq(0)');
 
-                        .appendTo($(column.footer()).empty())
-                        .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-
-                            column
-                                .search(val ? '^' + val + '$' : '', true, false)
-                                .draw();
-                        });
-
-                    column.data().unique().sort().each(function (d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>')
-                    });
-                });
-            },
-            pagingType: 'numbers',
-            lengthChange: false,
-            buttons: {
-                buttons: [
-                    {extend: 'print', className: 'btn btn-info'},
-                    {extend: 'pdf', className: 'btn btn-success '}
-                ]
-            },
-            responsive: {
-                details: {
-                    type: 'column',
-                    target: 'tr'
-                }
-            },
-            columnDefs: [{
-                className: 'control',
-                orderable: false,
-                targets: 0
-            }],
-            order: [1, 'asc']
+            // Event listener to the two range filtering inputs to redraw on input
+            $('#min, #max').change(function () {
+                table.draw();
+            });
         });
-
-        table.buttons().container()
-            .appendTo('#example_wrapper .col-md-6:eq(0)');
-    });
 
 
 </script>
