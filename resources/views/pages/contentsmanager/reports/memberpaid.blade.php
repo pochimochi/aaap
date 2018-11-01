@@ -77,7 +77,7 @@
         <div class="col-xl-6">
             <div class="copyright text-right text-muted">
                 <a href="" class="font-weight-bold ml-1">
-                    Report Generated on {{today()->toDateString()}}
+                    Report Generated on {{today()->toDateString()}} by {{session('user')['firstname'] . ' ' . session('user')['lastname']}}
                 </a>
             </div>
         </div>
