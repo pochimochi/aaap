@@ -113,7 +113,7 @@
             <div class="card-header border-0">
                 List of Articles
             </div>
-            <nobr class="card-body">
+            <div class="card-body">
                 <table id="myTable" class="table table-bordered">
                     <thead>
                     <tr>
@@ -131,40 +131,38 @@
                     </thead>
                     <tbody>
                     @foreach ($articles as $article)
-                        <tr align="center">
-                            <form action="{{action('ArticleController@changeStatus')}}" method="post">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$article->id}}">
-                                <input type="hidden" name="status_id" value="{{$article->status_id }}">
-                                <td></td>
-                                <td>{{ $article->id}}</td>
-                                <td>{{ $article->title}}</td>
-                                <td>{{ $article->created_at}}</td>
-                                <td>{{ $article->user->firstname . ' ' .$article->user->lastname }}</td>
-                                <td>{{ $article->updated_at ? $article->updated_at : 'N/A'}}</td>
+                        <tr>
 
-                                <td>{{ $article->modifieduser ? $article->modifieduser->firstname . ' ' . $article->modifieduser->lastname : 'N/A'}}</td>
-                                <td>{{ $article->articletype->name}}</td>
-                                <td>
+                            <td></td>
+                            <td>{{ $article->id}}</td>
+                            <td>{{ $article->title}}</td>
+                            <td>{{ $article->created_at}}</td>
+                            <td>{{ $article->user->firstname . ' ' .$article->user->lastname }}</td>
+                            <td>{{ $article->updated_at ? $article->updated_at : 'N/A'}}</td>
+                            <td>{{ $article->modifieduser ? $article->modifieduser->firstname . ' ' . $article->modifieduser->lastname : 'N/A'}}</td>
+                            <td>{{ $article->articletype->name}}</td>
+                            <td>
+                                @if($article->status == 1)
+                                    <label class="badge badge-success">Active Article</label>
+                                @else
+                                    <label class="badge badge-danger">Archived Article</label>
+                            @endif
+                            </td>
+                            </td>
+                            <td>
+                                <nobr>
+                                    <a href="{{URL::to('/writer/articles/'.$article->id)}}"
+                                       class="btn btn-success" role="button">View</a>
+                                    <a href="{{URL::to('/writer/articles/'.$article->id.'/edit')}}"
+                                       class="btn btn-info" role="button">Edit</a>
                                     @if($article->status == 1)
-                                        <label class="badge badge-success">Active Article</label>
-                                    @else
-                                        <label class="badge badge-danger">Archived Article</label>
-                                @endif
-                                <td>
-                                    <nobr>
-                                        <a href="{{URL::to('/writer/articles/'.$article->id)}}"
-                                           class="btn btn-success" role="button">View</a>
-                                        <a href="{{URL::to('/writer/articles/'.$article->id.'/edit')}}"
-                                           class="btn btn-info" role="button">Edit</a>
-                                        @if($article->status == 1)
-                                            <a data-toggle="modal"
-                                               data-target="#status-form{{$article->id}}"
-                                               class="btn text-white btn-rounded btn-warning">Archive Article</a>
-                                        @endif
-                                    </nobr>
-                                </td>
-                            </form>
+                                        <a data-toggle="modal"
+                                           data-target="#status-form{{$article->id}}"
+                                           class="btn text-white btn-rounded btn-warning">Archive Article</a>
+                                    @endif
+                                </nobr>
+                            </td>
+
                         </tr>
                         <div class="modal fade" id="status-form{{$article->id}}"
                              role="dialog"
@@ -178,7 +176,8 @@
                                                 <div class="text-center text-muted mb-4">
                                                     <small>Please State the reason below</small>
                                                 </div>
-                                                <form action="{{url('writer/articles/change_status')}}" id="form{{$article->id}}" method="post">
+                                                <form action="{{url('writer/articles/change_status')}}"
+                                                      id="form{{$article->id}}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id" value="{{$article->id}}">
                                                     {{--<div class="col">
@@ -216,7 +215,7 @@
                             </div>
                         </div>
                         <script type="text/javascript">
-                            $('#form{{$article->id}}').submit(function(e){
+                            $('#form{{$article->id}}').submit(function (e) {
                                 e.preventDefault();
                                 var form = $('#form{{$article->id}}');
                                 swal({
@@ -237,9 +236,8 @@
                     @endforeach
                     </tbody>
                 </table>
+            </div>
         </div>
     </div>
-    </div>
-
 
 @endsection

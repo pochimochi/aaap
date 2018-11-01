@@ -203,7 +203,7 @@
                         <h4>List of Events</h4>
 
                     </div>
-                    <table id="myTable" class="table table-bordered">
+                    <table id="myTable" class="table bg-white table-bordered table-condensed shadow">
                         <thead>
                         <tr>
                             <th></th>
@@ -307,20 +307,20 @@
                                                     <form action="{{url('contentmanager/event/change_status')}}" id="form{{$event->id}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$event->id}}">
-                                                        {{--<div class="col">
+                                                        <div class="col">
                                                             <select class="form-control form-control-alternative"
                                                                     type="text" name="remarksddl" id="remarksddl">
                                                                 <option value="1">Others
                                                                 </option>
-                                                              --}}{{--  <option value="Due to unforseen circumstances">Due to
+                                                                <option value="Due to unforseen circumstances">Due to
                                                                     unforseen circumstances
-                                                                </option>--}}{{--
+                                                                </option>
                                                                 <option value="Due to heavy rains/weather">Due to heavy
                                                                     rains/weather
                                                                 </option>
 
                                                             </select>
-                                                        </div>--}}
+                                                        </div>
                                                         <div class="col-12 mt-5">
                                                             <label for="remarks">Other Remarks</label>
                                                             <textarea name="remarks" rows="5" id="remarks"
@@ -399,23 +399,6 @@
             }
         });
 
-        /*function confirmation(e) {
-            this.preventDefault();
-            var form = $(this).parents('form');
-            swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, save it!'
-            }).then((result) => {
-                if (result.value) {
-                    form.submit();
-                }
-            })
-        };*/
 
     </script>
 
