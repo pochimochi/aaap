@@ -49,15 +49,15 @@ class RegisterFormRequest extends FormRequest
             'ecountry' => 'nullable|integer|exists:countries,id',
             'employerName' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
             'employerAddress' => 'nullable|string|regex:/^[a-z ,.\'-]+$/i',
-            'employerContactNumber' => 'nullable',
+            'employerContactNumber' => 'nullable|numeric|min:7|max:14',
             'description' => 'nullable|string',
             'pwaLastName' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaFirstName' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaMiddleName' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaGender' => 'nullable|integer',
             'pwaOccupation' => 'nullable|string',
-            'landline_number' => 'nullable',
-            'mobile_number' => 'required|string',
+            'landline_number' => 'nullable|numeric|min:7|max:10',
+            'mobile_number' => 'required|numeric|min:11|max:14',
             'terms' => 'required'
         ];
     }

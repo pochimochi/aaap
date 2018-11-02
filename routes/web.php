@@ -55,11 +55,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('event/change_status', 'EventController@changeStatus');
             Route::post('reminder', 'EventController@reminder');
 
-            /* Route::post('/eventsubmit', 'EventController@store');
-             Route::get('/event', 'EventController@event');
-             Route::get('/eventedit/{eventId}', 'EventController@edit');
-             Route::post('edit/eventedit/{eventId}', 'EventController@update');
-             Route::get('event/changeStatus/{eventId}/{status}', 'EventController@changeStatus');*/
+
 
             Route::get('logs', 'AuditLogController@index');
 
@@ -75,7 +71,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
             Route::get('changeStatus/{userId}/{status}', 'AdminsController@changeStatus');
             Route::resource('adminMaintenance', 'AdminsController')->only(['index', 'store']);
-            Route::get('memberchangeStatus/{userId}/{status}', 'AdminsController@changeStatus');
+            Route::get('memberchangeStatus/{userId}/{status}', 'MembersController@changeStatus');
             Route::get('members', 'MembersController@index');
 
         });
