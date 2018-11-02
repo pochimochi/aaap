@@ -14,7 +14,6 @@
     <div class="header bg-gradient-info pb-8 pt-5 pt-md-8">
         <div class="container">
             <div class="header-body">
-                <!-- Card stats -->
                 <div class="container mb-5">
                     <div class="row">
                         <div class="col-xl-3 col-lg-6">
@@ -73,18 +72,19 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">Total Articles</h5>
-                                            <span class="h2 font-weight-bold mb-0">{{$articles->count()}}</span>
+                                            <h6 class="card-title text-uppercase text-muted mb-0">Total
+                                                Announcements</h6>
+                                            <span class="h2 font-weight-bold mb-0">{{$announcements->count()}}</span>
                                         </div>
-                                        <div class="col-auto">
-                                            <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                                                <i class="fa fa-bullhorn"></i>
+                                        <div class="col">
+                                            <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                                                <i class="fas fa-bullhorn"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <p class="mt-3 mb-0 text-muted text-sm">
-                                            <span class="text-warning mr-2"><i
-                                                        class="fa fa-location-arrow"></i> {{$articles->whereMonth('created_at', today()->month)->count()}}</span>
+                                        <span class="text-success mr-2"><i
+                                                    class="fa fa-location-arrow"></i> {{$announcements->whereMonth('created_at', today()->month)->count()}}</span>
                                         <span class="text-nowrap">For this month</span>
                                     </p>
                                 </div>
@@ -95,19 +95,18 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h6 class="card-title text-uppercase text-muted mb-0">Total
-                                                Announcements</h6>
-                                            <span class="h2 font-weight-bold mb-0">{{$announcements->count()}}</span>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Total Articles</h5>
+                                            <span class="h2 font-weight-bold mb-0">{{$articles->count()}}</span>
                                         </div>
-                                        <div class="col">
-                                            <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                                                <i class="fas fa-book"></i>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                                                <i class="fa fa-newspaper"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <p class="mt-3 mb-0 text-muted text-sm">
-                                        <span class="text-success mr-2"><i
-                                                    class="fa fa-location-arrow"></i> {{$announcements->whereMonth('created_at', today()->month)->count()}}</span>
+                                            <span class="text-warning mr-2"><i
+                                                        class="fa fa-location-arrow"></i> {{$articles->whereMonth('created_at', today()->month)->count()}}</span>
                                         <span class="text-nowrap">For this month</span>
                                     </p>
                                 </div>
@@ -120,14 +119,7 @@
     </div>
 @endsection
 @section('content')
-
     @if (session('user')['role_id'] == 3)
-        <!-- Widgets  -->
-
-
-        <!-- Widgets End -->
-
-
         <div id="app">
             <div class="card shadow bg-white">
                 <div class="card-body">
@@ -198,9 +190,7 @@
                         <span id="interventionfilter"></span>
                     </div>
                 </div>
-
                 <hr>
-
                 <table id="memberdashboard" class="table bg-white table-bordered table-condensed shadow">
                     <thead>
                     <tr>
@@ -217,7 +207,6 @@
                         <th>Date Created</th>
                         <th>Email</th>
                         <th>Active</th>
-
                     </tr>
                     </thead>
                     <tbody>
@@ -293,9 +282,8 @@
                                                             <i class="ni business_briefcase-24 mr-2"></i>{{$user->usertype->name}}
                                                             - AAAP
                                                         </div>
-
                                                     </div>
-                                                    <h6 class="heading-small text-muted mb-4">User information</h6>
+                                                    <h6 class="heading-small text-muted mb-4">Personal information</h6>
                                                     <div class="pl-lg-4">
                                                         <div class="row">
                                                             <div class="col-lg-4">
@@ -304,8 +292,7 @@
                                                                            for="input-username">First Name</label>
                                                                     <input value="{{ $user['firstname'] }}" type="text"
                                                                            readonly
-                                                                           name="userFirstName"
-                                                                           class="form-control-plaintext">
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
@@ -314,8 +301,7 @@
                                                                            for="input-username">Middle Name</label>
                                                                     <input value="{{ $user['middlename'] }}" type="text"
                                                                            readonly
-                                                                           name="middlename"
-                                                                           class="form-control-plaintext">
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
@@ -324,8 +310,7 @@
                                                                         Name</label>
                                                                     <input value="{{ $user['lastname'] }}" type="text"
                                                                            readonly
-                                                                           name="userFirstName"
-                                                                           class="form-control-plaintext">
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -336,8 +321,7 @@
                                                                            for="input-first-name">Email Address</label>
                                                                     <input value="{{ $user['email'] }}" type="text"
                                                                            readonly
-                                                                           name="userFirstName"
-                                                                           class="form-control-plaintext">
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
@@ -345,74 +329,279 @@
                                                                     <label class="form-control-label"
                                                                            for="input-last-name">Gender</label>
                                                                     <input value="{{ ($user['gender'] == 1 ? 'Male' : 'Female') }}"
-                                                                           type="text"
                                                                            readonly
-                                                                           name="userFirstName"
-                                                                           class="form-control-plaintext">
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <hr class="my-4">
                                                     <!-- Address -->
-                                                    <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                                                    <h6 class="heading-small text-muted mb-4">Permanent Address</h6>
                                                     <div class="pl-lg-4">
                                                         <div class="row">
-                                                            <div class="col-md-12">
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
-                                                                           for="input-address">Address</label>
-                                                                    <input id="input-address"
+                                                                           for="input-address">House/Apartment/Unit
+                                                                        No.</label>
+                                                                    <input class="form-control form-control-alternative"
+                                                                           value="{{ $user->permanentaddress->unitno}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-city">Building</label>
+                                                                    <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           placeholder="Home Address"
-                                                                           value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                                                                           type="text">
+                                                                           value="{{ $user->permanentaddress->bldg}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-city">Street</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->permanentaddress->street}}"
+                                                                           readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-lg-4">
+                                                            <div class="col-lg-6">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label" for="input-city">City</label>
-                                                                    <input type="text" id="input-city"
+                                                                    <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           placeholder="City" value="New York">
+                                                                           value="{{ $user->permanentaddress->city->name}}"
+                                                                           readonly>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-4">
+                                                            <div class="col-lg-6">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-country">Country</label>
-                                                                    <input type="text" id="input-country"
+                                                                    <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           placeholder="Country"
-                                                                           value="United States">
+                                                                           value="{{ $user->permanentaddress->country->name}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h6 class="heading-small text-muted mb-4">Temporary Address</h6>
+                                                    <div class="pl-lg-4">
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label"
+                                                                           for="input-address">House/Apartment/Unit
+                                                                        No.</label>
+                                                                    <input class="form-control form-control-alternative"
+                                                                           value="{{ $user->temporaryaddress->unitno}}"
+                                                                           type="text" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label class="form-control-label"
-                                                                           for="input-country">Postal code</label>
-                                                                    <input type="number" id="input-postal-code"
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-city">Building</label>
+                                                                    <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           placeholder="Postal code">
+                                                                           value="{{ $user->temporaryaddress->bldg}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-city">Street</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->temporaryaddress->street}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-city">City</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->temporaryaddress->city->name}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label"
+                                                                           for="input-country">Country</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <hr class="my-4">
-                                                    <!-- Description -->
-                                                    <h6 class="heading-small text-muted mb-4">About me</h6>
+                                                    <h6 class="heading-small text-muted mb-4">Person With Autism
+                                                        Information</h6>
                                                     <div class="pl-lg-4">
-                                                        <div class="form-group focused">
-                                                            <label>About Me</label>
-                                                            <textarea rows="4"
-                                                                      class="form-control form-control-alternative"
-                                                                      placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label"
+                                                                           for="input-address">First Name</label>
+                                                                    <input class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->pwaFirstName}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label">Middle
+                                                                        Name</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->pwaMiddleName}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label">Last Name</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->pwaLastName}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label">Gender</label>
+                                                                    <input class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->pwaGender == 1 ? 'Male' : 'Female'}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label">Relationship</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->pwaRelationship}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label">Siblings</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->siblingcount}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label">With
+                                                                        Intervention</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->withintervention == 1 ? 'Yes' : 'No'}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label">Occupation</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->pwaOccupation }}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h6 class="heading-small text-muted mb-4">About the Employer</h6>
+                                                    <div class="pl-lg-4">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label">Name</label>
+                                                                    <input class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->employer->employerName}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-city">Contact
+                                                                        Number</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->employer->employerContactNumber }}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label"
+                                                                           for="input-address">House/Apartment/Unit
+                                                                        No.</label>
+                                                                    <input class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->employer->address->unitno }}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-city">Building</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->employer->address->bldg }}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-city">Street</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->employer->address->street }}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-city">City</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->employer->address->city->name}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label"
+                                                                           for="input-country">Country</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="" readonly>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>

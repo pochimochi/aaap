@@ -64,6 +64,12 @@
                                 <span class="nav-link-inner--text">Articles</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{URL::to('/profile')}}" class="nav-link">
+                                <span class="btn-inner--icon"><i class="ni ni-circle-08"></i></span>
+                                <span class="nav-link-inner--text">Profile</span>
+                            </a>
+                        </li>
                     @endif
                     @if(!session('user'))
                         <li class="nav-item">
