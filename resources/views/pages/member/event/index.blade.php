@@ -167,10 +167,8 @@
 
                                                                             <div class="py-3 text-center">
                                                                                 <i class="ni ni-bell-55 ni-3x"></i>
-                                                                                <h4 class="heading mt-4">You should
-                                                                                    read
-                                                                                    this!</h4>
-                                                                                <p>Terms and Conditions.</p>
+                                                                                <h4 class="heading mt-4">Important Reminder!</h4>
+                                                                                <p>Deposit the event fee at any Bank of the Philippine Island branch or on-line on AAAP's account number: 0401.0099.49</p>
                                                                             </div>
 
                                                                         </div>

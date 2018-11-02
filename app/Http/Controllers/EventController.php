@@ -33,15 +33,10 @@ class EventController extends Controller
         } else {
             $events = Event::where('status', '=', '1')->paginate(10);;
             return view('pages.member.event.index', ['events' => $events]);
-            return redirect('/home');
+
         }
     }
-//    public function joined($attendId, $eventId)
-//    {
-//        $attend = EventAttendance::find($attendId);
-//        Event::where('id', $attend->events->id)->find($eventId);
-//        return view('pages.member.event.joined', ['events' => $attend]);
-//    }
+
 
 
     public function show($id)

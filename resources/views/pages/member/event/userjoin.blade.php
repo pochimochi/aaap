@@ -28,7 +28,9 @@
                 </form>
             </div>
             <div class="container" align="left">
+
                 <a class="btn btn-default" href="{{action('AttendanceController@index')}}">Joined Events</a>
+
             </div>
             <div class="container justify-content-center">
                 @if($users->count() != 0)
@@ -109,120 +111,117 @@
                                                 &nbsp;@endif
                                         </div>
                                         <div class="row justify-content-end">
-                                            @if(($user->count()) < 1)
-                                                <div class="col-md-4">
-                                                    <form action="{{action('AttendanceController@join')}}"
+
+                                            <div class="col-md-4">
+
+                                                <button type="button" class="btn btn-block btn-info mb-3"
+                                                        data-toggle="modal"
+                                                        data-target="#payment{{$user->event->id}}">Reminders
+                                                </button>
+                                                <div class="modal fade" id="payment{{$user->event->id}}"
+                                                     tabindex="-1" role="dialog"
+                                                     aria-labelledby="modal-notification"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog modal-danger modal-dialog-centered modal-"
+                                                         role="document">
+                                                        <div class="modal-content bg-gradient-info">
+
+                                                            <div class="modal-header">
+                                                                <h6 class="modal-title"
+                                                                    id="modal-title-notification">Your
+                                                                    attention is required</h6>
+                                                                <button type="button" class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+
+                                                            <div class="modal-body">
+
+                                                                <div class="py-3 text-center">
+                                                                    <i class="ni ni-bell-55 ni-3x"></i>
+                                                                    <h4 class="heading mt-4">You should read
+                                                                        this!</h4>
+                                                                    <b>Deposit the event fee at any Bank of the
+                                                                        Philippine Island branch or on-line on
+                                                                        AAAP's account number: 0401.0099.49</b>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="modal-footer">
+
+                                                                <button type="button"
+                                                                        class="btn btn-link text-white ml-auto"
+                                                                        data-dismiss="modal">Ok, Got it
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-block btn-danger mb-3"
+                                                        data-toggle="modal"
+                                                        data-target="#cancel{{$user->event->id}}">Cancel
+                                                    Participation
+                                                </button>
+                                                <div class="modal fade" id="cancel{{$user->event->id}}"
+                                                     tabindex="-1" role="dialog"
+                                                     aria-labelledby="modal-notification"
+                                                     aria-hidden="true">
+
+                                                    <form action="{{action('AttendanceController@cancel')}}"
                                                           method="post">
                                                         @csrf
-                                                        <input type="hidden" name="id" value="{{$user->event->id}}">
-                                                        <button type="button" class="btn btn-block btn-info mb-3"
-                                                                data-toggle="modal"
-                                                                data-target="#notification{{$user->event->id}}">Sign Up
-                                                        </button>
-                                                        <div class="modal fade" id="notification{{$user->event->id}}"
-                                                             tabindex="-1" role="dialog"
-                                                             aria-labelledby="modal-notification"
-                                                             aria-hidden="true">
-                                                            <div class="modal-dialog modal-danger modal-dialog-centered modal-"
-                                                                 role="document">
-                                                                <div class="modal-content bg-gradient-info">
+                                                        <input type="hidden" name="eventid"
+                                                               value="{{$user->event->id}}">
+                                                        <div class="modal-dialog modal-danger modal-dialog-centered modal-"
+                                                             role="document">
+                                                            <div class="modal-content bg-gradient-danger">
 
-                                                                    <div class="modal-header">
-                                                                        <h6 class="modal-title"
-                                                                            id="modal-title-notification">Your
-                                                                            attention is required</h6>
-                                                                        <button type="button" class="close"
-                                                                                data-dismiss="modal"
-                                                                                aria-label="Close">
-                                                                            <span aria-hidden="true">×</span>
-                                                                        </button>
-                                                                    </div>
+                                                                <div class="modal-header">
+                                                                    <h6 class="modal-title"
+                                                                        id="modal-title-notification">Your
+                                                                        attention is required</h6>
+                                                                    <button type="button" class="close"
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                        <span aria-hidden="true">×</span>
+                                                                    </button>
+                                                                </div>
 
-                                                                    <div class="modal-body">
+                                                                <div class="modal-body">
 
-                                                                        <div class="py-3 text-center">
-                                                                            <i class="ni ni-bell-55 ni-3x"></i>
-                                                                            <h4 class="heading mt-4">You should read
-                                                                                this!</h4>
-                                                                            <p>Terms and Conditions.</p>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-white">
-                                                                            Ok, Got it
-                                                                        </button>
-                                                                        <button type="button"
-                                                                                class="btn btn-link text-white ml-auto"
-                                                                                data-dismiss="modal">Close
-                                                                        </button>
+                                                                    <div class="py-3 text-center">
+                                                                        <i class="ni ni-bell-55 ni-3x"></i>
+                                                                        <h4 class="heading mt-4">Are you sure?</h4>
+                                                                        <p>Cancelling would remove your attendance
+                                                                            to this event.</p>
                                                                     </div>
 
                                                                 </div>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-white">
+                                                                        Yes, Cancel it
+                                                                    </button>
+                                                                    <button type="button"
+                                                                            class="btn btn-link text-white ml-auto"
+                                                                            data-dismiss="modal">Cancel
+                                                                    </button>
+                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </form>
+
                                                 </div>
-                                            @else
-                                                <div class="form-actions">
-                                                    <button type="button" class="btn btn-block btn-danger mb-3"
-                                                            data-toggle="modal"
-                                                            data-target="#cancel{{$user->event->id}}">Cancel Participation
-                                                    </button>
-                                                    <div class="modal fade" id="cancel{{$user->event->id}}"
-                                                         tabindex="-1" role="dialog"
-                                                         aria-labelledby="modal-notification"
-                                                         aria-hidden="true">
+                                            </div>
 
-                                                        <form action="{{action('AttendanceController@cancel')}}"
-                                                              method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="eventid"
-                                                                   value="{{$user->event->id}}">
-                                                            <div class="modal-dialog modal-danger modal-dialog-centered modal-"
-                                                                 role="document">
-                                                                <div class="modal-content bg-gradient-danger">
-
-                                                                    <div class="modal-header">
-                                                                        <h6 class="modal-title"
-                                                                            id="modal-title-notification">Your
-                                                                            attention is required</h6>
-                                                                        <button type="button" class="close"
-                                                                                data-dismiss="modal"
-                                                                                aria-label="Close">
-                                                                            <span aria-hidden="true">×</span>
-                                                                        </button>
-                                                                    </div>
-
-                                                                    <div class="modal-body">
-
-                                                                        <div class="py-3 text-center">
-                                                                            <i class="ni ni-bell-55 ni-3x"></i>
-                                                                            <h4 class="heading mt-4">Are you sure?</h4>
-                                                                            <p>Cancelling would remove your attendance
-                                                                                to this event.</p>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-white">
-                                                                            Yes, Cancel it
-                                                                        </button>
-                                                                        <button type="button"
-                                                                                class="btn btn-link text-white ml-auto"
-                                                                                data-dismiss="modal">Cancel
-                                                                        </button>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </form>
-
-                                                    </div>
-                                                </div>
-                                            @endif
                                         </div>
                                     </div>
                                 </div>
