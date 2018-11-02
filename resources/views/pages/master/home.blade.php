@@ -50,7 +50,7 @@
                     <h2 class="display-3">About Us
                     </h2>
                     <div>
-                        <p class="lead text-muted">
+                        <h5>
                             The Association for Adults with Autism, Philippines is an organization established by
                             parents of
                             individuals within the Autism Spectrum Disorder (ASD). The organization aims to provide
@@ -61,7 +61,7 @@
                             peers. AAAP is registered with the Philippine Securities and Exchange Commission as a
                             non-stock,
                             non-profit corporation.
-                        </p>
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -84,11 +84,11 @@
                                         </div>
                                         <div class="col-8">
                                             <h4 class="display-4 mb-0">DONATE</h4>
-                                            <p class="lead">
-                                                Make your deposit at any Bank of the Philippine Island branch or
-                                                on-line. Account Number 0401.0099.49. A method of on-line donations
+                                            <h6>
+                                                Make your deposit at any <b>Bank of the Philippine Island</b> branch or
+                                                on-line. Account Number <b>0401.0099.49</b>. A method of on-line donations
                                                 will be available shortly.
-                                            </p>
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>
@@ -107,11 +107,11 @@
                                         </div>
                                         <div class="col-8">
                                             <h4 class="display-4 mb-0">HELP</h4>
-                                            <p class="lead">
-                                                Send us an email at adultautismphil@gmail.com. Include your contact
+                                            <h6>
+                                                Send us an email at <b>adultautismphil@gmail.com</b>. Include your contact
                                                 details and a short introduction, and one of our members will be in
                                                 touch.
-                                            </p>
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@
             <div class="row row-grid justify-content-between align-items-center">
                 <div class="col-lg-6">
                     <h3 class="display-3 text-white">Contact Us
-                        <h4 class="text-white">Reach us through the following contact details</h4>
+                        <h5 class="text-white">Reach us through the following contact details</h5>
                     </h3>
                     <div class="card shadow shadow-lg--hover mt-5">
                         <div class="card-body">
