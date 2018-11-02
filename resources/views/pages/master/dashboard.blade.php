@@ -191,7 +191,7 @@
                     </div>
                 </div>
                 <hr>
-                <table id="memberdashboard" class="table bg-white table-bordered table-condensed shadow">
+                <table id="memberdashboard" class="table bg-white table-bordered table-condensed shadow dt-responsive">
                     <thead>
                     <tr>
                         <th></th>
@@ -829,7 +829,13 @@
                 buttons: {
                     buttons: [
                         {extend: 'print', className: 'btn btn-info'},
-                        {extend: 'pdf', className: 'btn btn-success '}
+                        {extend: 'pdfHtml5', title : function() {
+                                return "Member Report";
+                            },
+                            orientation : 'landscape',
+                            pageSize : 'LEGAL',
+                            titleAttr : 'PDF',
+                            className: 'btn btn-success '}
                     ]
                 },
                 responsive: {

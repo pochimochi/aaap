@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper;
 use App\User;
 use DB;
 
@@ -21,6 +22,12 @@ class MembersController extends Controller
 
 
     }
+
+    /**
+     * @param $userId
+     * @param $status
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function changeStatus($userId, $status)
     {
         $paid = "<h1>Welcome to AAAP</h1>

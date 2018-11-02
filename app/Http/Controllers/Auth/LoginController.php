@@ -41,19 +41,6 @@ class LoginController extends Controller
     public function store(Request $request)
     {
 
-        if (User::all()->where('role_id', 1)->count() == 0) {
-            if ($request['email'] == 'admin@aaap.com' && $request['password'] == 'admin') {
-                $admin = $request->all();
-                $admin['password'] = bcrypt($admin['password']);
-                $admin['role_id'] = 1;
-                $admin['active'] = 1;
-                $admin['firstname'] = 'Admin';
-                $admin['lastname'] = '';
-                User::create($admin);
-                alert()->warning('Admin Added!', 'Default Admin Initialized');
-                return redirect('/login');
-            }
-        }
 
         $log = new logs();
         $request->validate([

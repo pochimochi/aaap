@@ -42,10 +42,6 @@
                                    value="{{old('subject')}}">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Receiver Email" name="email"
-                                   value="{{old('email')}}">
-                        </div>
-                        <div class="form-group">
                             <textarea class="ckeditor" name="body">{{old('body')}}</textarea>
                         </div>
                         <div class="row justify-content-end">
