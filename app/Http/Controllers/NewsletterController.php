@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -26,17 +27,17 @@ class NewsletterController extends Controller
     {
 
         $valid = Validator::make($request->all(), [
-            'email' => 'required|max:255|exists:users',
             'subject' => 'required',
             'body' => 'required',
         ]);
-        $receiver = $request['email'];
+
         $body = $request['body'];
         $subject = $request['subject'];
+        $receiver = User::all()->where('role_id', 4)->where('active', 1);
 
         if ($valid->passes()) {
             $helper = new helper();
-            $result = $helper->emailSend($receiver, $body, $subject);
+            $result = $helper->emailBulk($receiver, $body, $subject);
             if ($result == false) {
                 \alert()->error('Email was not sent!', 'Try Again Later');
                 return redirect('/login')->withErrors($result->ErrorInfo);

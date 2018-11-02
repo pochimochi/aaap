@@ -36,6 +36,9 @@ class MembersController extends Controller
         $admins->active = $status;
         if ($admins->save()) {
             if($status == 1){
+                $user = User::find($userId);
+                $user->approvedby = session('user')['id'];
+                $user->save();
                 $helper->emailSend($admins->email, $paid, 'Welcome to AAAP!');
             }else{
                 $helper->emailSend($admins->email, $unpaid, 'You account has been deactivated');
