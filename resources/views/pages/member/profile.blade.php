@@ -17,16 +17,29 @@
             <div class="container">
                 <div class="card card-profile shadow mt--300">
                     <div class="px-4">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center pb-3">
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
-                                    <a href="#">
+
                                         <img src="{{asset('/storage/'.$users->profilepic->location)}}"
-                                             class="rounded-circle">
-                                    </a>
+                                             class="rounded-circle" width="180" height="180" style="background-color: white;object-fit: scale-down" alt="">
+
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
+                                <div class="card-profile-actions py-4 mt-lg-0">
+                                    <a href="#" class="btn btn-sm btn-info mr-4">Edit Profile</a>
+                                    <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 order-lg-1">
+                                <div class="card-profile-stats d-flex justify-content-center">
+
                                 </div>
                             </div>
                         </div>
+
                         <div class="text-center mt-5">
                             <h3>{{$users['firstname'].' '.$users['lastname']}}
                             </h3>
@@ -37,21 +50,31 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <ul class="nav nav-tabs customtab" role="tablist">
-                                                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span>
+                                                <li class="nav-item"><a class="nav-link active" data-toggle="tab"
+                                                                        href="#profile" role="tab"><span
+                                                                class="hidden-sm-up"><i class="ti-home"></i></span>
                                                         <span class="hidden-xs-down">User Information</span></a></li>
-                                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#address" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                        href="#address" role="tab"><span
+                                                                class="hidden-sm-up"><i class="ti-user"></i></span>
                                                         <span class="hidden-xs-down">Address</span></a></li>
-                                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#pwa" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#pwa"
+                                                                        role="tab"><span class="hidden-sm-up"><i
+                                                                    class="ti-user"></i></span>
                                                         <span class="hidden-xs-down">Person with Autism Information</span></a>
                                                 </li>
-                                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#credentials" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                        href="#credentials" role="tab"><span
+                                                                class="hidden-sm-up"><i class="ti-email"></i></span>
                                                         <span class="hidden-xs-down">Credentials</span></a></li>
                                             </ul>
-                                            <form class="form" action="{{URL::to('/')}}" method="post" id="registrationForm">
+                                            <form class="form" action="{{URL::to('/')}}" method="post"
+                                                  id="registrationForm">
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="profile">
                                                         <br>
-                                                        <h6 class="heading-small text-success mb-4">PERSONAL INFORMATION</h6>
+                                                        <h6 class="heading-small text-success mb-4">PERSONAL
+                                                            INFORMATION</h6>
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
@@ -113,7 +136,8 @@
                                                                 <div class="form-group">
                                                                     <label>Mobile Number</label>
                                                                     <input value="{{ $users->contact->mobile_number }}"
-                                                                           type="text" name="mobile_number" id="mobile_number"
+                                                                           type="text" name="mobile_number"
+                                                                           id="mobile_number"
                                                                            class="form-control input-default">
                                                                     <span class="text-danger">{{ $errors->first('mobile_number') }}</span>
                                                                 </div>
@@ -131,7 +155,8 @@
                                                                         <div class="form-group">
                                                                             <label>Unit Number</label>
                                                                             <input value="{{ $users->permanentaddress->unitno }}"
-                                                                                   type="text" name="unitno" id="unitno" class="form-control input-default">
+                                                                                   type="text" name="unitno" id="unitno"
+                                                                                   class="form-control input-default">
                                                                             <span class="text-danger">{{ $errors->first('unitno') }}</span>
                                                                         </div>
                                                                     </div>
@@ -139,7 +164,8 @@
                                                                         <div class="form-group">
                                                                             <label>Building</label>
                                                                             <input value="{{ $users->permanentaddress->bldg }}"
-                                                                                   type="text" name="bldg" id="bldg" class="form-control input-default">
+                                                                                   type="text" name="bldg" id="bldg"
+                                                                                   class="form-control input-default">
                                                                             <span class="text-danger">{{ $errors->first('bldg') }}</span>
                                                                         </div>
                                                                     </div>
@@ -159,7 +185,8 @@
                                                                         <div class="form-group">
                                                                             <label>City</label>
                                                                             <input value="{{ $users->permanentaddress->city->name }}"
-                                                                                   type="text" name="city" id="city" class="form-control input-default">
+                                                                                   type="text" name="city" id="city"
+                                                                                   class="form-control input-default">
                                                                         </div>
                                                                         <span class="text-danger">{{ $errors->first('city') }}</span>
                                                                     </div>
@@ -170,9 +197,9 @@
                                                                                     name="country_id" id="country_id">
                                                                                 <option value="">Select Country</option>
                                                                                 {{--@foreach($country as $countries)--}}
-                                                                                    {{--<option value="{{$countries->id}}"--}}
-                                                                                            {{--@if(old('country_id') == $countries->id)--}}
-                                                                                            {{--selected @endif>{{$countries->name}}</option>--}}
+                                                                                {{--<option value="{{$countries->id}}"--}}
+                                                                                {{--@if(old('country_id') == $countries->id)--}}
+                                                                                {{--selected @endif>{{$countries->name}}</option>--}}
                                                                                 {{--@endforeach--}}
                                                                             </select>
                                                                             <span class="text-danger">{{ $errors->first('country_id') }}</span>
@@ -189,7 +216,8 @@
                                                                         <div class="form-group">
                                                                             <label>Unit Number</label>
                                                                             <input value="{{ $users->temporaryaddress->unitno }}"
-                                                                                   type="text" name="tunitno" id="tunitno"
+                                                                                   type="text" name="tunitno"
+                                                                                   id="tunitno"
                                                                                    class="form-control input-default">
                                                                             <span class="text-danger">{{ $errors->first('tunitno') }}</span>
                                                                         </div>
@@ -306,7 +334,9 @@
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
                                                                         <label>Number of Siblings</label>
-                                                                        <input value="{{ $users->pwa->siblingcount }}" name="siblingcount" id="siblingcount" type="number"
+                                                                        <input value="{{ $users->pwa->siblingcount }}"
+                                                                               name="siblingcount" id="siblingcount"
+                                                                               type="number"
                                                                                class="form-control input-default">
                                                                         <span class="text-danger">{{ $errors->first('siblingcount') }}</span>
                                                                     </div>
@@ -315,7 +345,8 @@
                                                                     <div class="form-group">
                                                                         <label>With Intervention</label>
                                                                         <select class="form-control custom-select input-default"
-                                                                                name="withintervention" id="withintervention">
+                                                                                name="withintervention"
+                                                                                id="withintervention">
                                                                             <option value="">Select Option</option>
                                                                             <option value="1" {{ $users->pwa->withintervention == 1 ? 'selected' : '' }}>
                                                                                 Yes
