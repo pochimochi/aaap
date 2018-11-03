@@ -62,7 +62,7 @@
                                                     @endif
                                                     <small>
                                                         @if (session('role') != 4)
-                                                            @if($article->statusId == 0)
+                                                            @if($article->status == 0)
                                                                 <span class="badge badge-danger float-right mt-1">Archived</span>
                                                             @else
                                                                 <span class="badge badge-success float-right mt-1">Active</span>
