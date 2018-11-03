@@ -24,7 +24,7 @@ class ArticleController extends Controller
         $articles = Articles::all();
         foreach ($articles as $article) {
             if (Carbon::parse($article->due_date)->lt(Carbon::now())) {
-                $article->status_id = 0;
+                $article->status = 0;
                 $article->save();
             }
         }
@@ -33,18 +33,18 @@ class ArticleController extends Controller
                 $articles = Articles::all();
                 return view('pages.writer.create', ['articles' => $articles]);
             } else {
-                $articles = Articles::where('status_id', '=', '1')->paginate(6);
+                $articles = Articles::where('status', '=', '1')->paginate(6);
                 return view('pages.member.article.index', ['articles' => $articles]);
             }
         } else {
-            $articles = Articles::where('status_id', '=', '1')->paginate(6);
+            $articles = Articles::where('status', '=', '1')->paginate(6);
             return view('pages.member.article.index', ['articles' => $articles]);
         }
     }
 
     public function archived()
     {
-        $articles = Articles::where('status_id', 0)->orderBy('created_at')->paginate(6);
+        $articles = Articles::where('status', 0)->orderBy('created_at')->paginate(6);
         return view('pages.member.article.index', ['articles' => $articles]);
     }
 
@@ -78,7 +78,7 @@ class ArticleController extends Controller
             'articletype_id' => 'required',
             'body' => 'required',
             'modified_by' => 'nullable|max:70',
-            'status_id' => 'nullable|integer',
+            'status' => 'nullable|integer',
         ], [
             'articletype_id' => 'The article type must be specified.'
         ]);
@@ -176,7 +176,7 @@ class ArticleController extends Controller
 
         $this->validate($request, [
             'title' => 'required',
-            'status_id' => 'required'
+            'status' => 'required'
         ]);
         $articleId = $request->get('id');
         $article = Articles::all()->where('id', '=', $articleId)->first();
@@ -184,7 +184,7 @@ class ArticleController extends Controller
         $article->body = $request->get('body');
         $article->modified_by = session('user')['id'];
         $article->articletype_id = $request->get('articletype_id');
-        $article->status_id = $request->get('status');
+        $article->status = $request->get('status');
 
         if ($request->file('articleImage') != null) {
             $article->image()->detach();
