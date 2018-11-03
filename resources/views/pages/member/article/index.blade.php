@@ -44,32 +44,66 @@
 
                                 @else
                                     @foreach ($articles as $article)
-                                        <div class="col">
-                                            <div class="card box-shadow">
-                                                <img class="card-img-top"
-                                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ-qSKUAn_Wrf2ual1MutbimsksDls9P-cEhqudvlWTLtaxtGrwg"
-                                                     alt="Card image cap">
+                                        <div class="col mt-5">
+                                            <div class="card shadow">
+
                                                 <div class="card-body">
-                                                    @if(session('user') && Auth::user())
-                                                        <a class="display-4 mb-0"
-                                                           href="{{URL::to('member/articles/'. $article->id .'')}}">
-                                                            {{ $article->title}}
-                                                        </a>
-                                                    @else
-                                                        <div class="display-4">
-                                                            {{ $article->title}}
-                                                        </div>
-                                                    @endif
-                                                    <small>
-                                                        @if (session('role') != 4)
-                                                            @if($article->status == 0)
-                                                                <span class="badge badge-danger float-right mt-1">Archived</span>
-                                                            @else
-                                                                <span class="badge badge-success float-right mt-1">Active</span>
+                                                    <div class="row">
+                                                        @if(!$article->image->isEmpty())
+                                                        <div class="col-lg-6 col-12">
+                                                            @if(!$article->image->isEmpty())
+                                                                <div id="carouselExampleFade{{$article->id}}" class="border carousel slide carousel-fade"
+                                                                     data-ride="carousel">
+                                                                    <div class="carousel-inner">
+                                                                        @php $i = 0 @endphp
+                                                                        @foreach($article->image as $name)
+
+                                                                            <div class="carousel-item @if($i == 0) active @endif">
+                                                                                <img src="{{asset('/storage/'.$name->location)}}" style="object-fit: scale-down"
+                                                                                     class="d-block w-100" height="250" alt="no-image">
+                                                                            </div>
+                                                                            @php $i++ @endphp
+                                                                        @endforeach
+                                                                    </div>
+                                                                    <a class="carousel-control-prev" href="#carouselExampleFade{{$article->id}}" role="button"
+                                                                       data-slide="prev">
+                                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                        <span class="sr-only">Previous</span>
+                                                                    </a>
+                                                                    <a class="carousel-control-next" href="#carouselExampleFade{{$article->id}}" role="button"
+                                                                       data-slide="next">
+                                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                        <span class="sr-only">Next</span>
+                                                                    </a>
+                                                                </div>
                                                             @endif
+                                                        </div>
                                                         @endif
-                                                    </small>
-                                                    <p class="card-text">{!! $article->body !!}</p>
+                                                        <div class="col-lg-6 col-12">
+                                                            @if(session('user') && Auth::user())
+                                                                <a class="display-4 mb-0"
+                                                                   href="{{URL::to('member/articles/'. $article->id .'')}}">
+                                                                    {{ $article->title}}
+                                                                </a>
+                                                            @else
+                                                                <div class="display-4">
+                                                                    {{ $article->title}}
+                                                                </div>
+                                                            @endif
+                                                            <small>
+                                                                @if (session('role') != 4)
+                                                                    @if($article->status == 0)
+                                                                        <span class="badge badge-danger float-right mt-1">Archived</span>
+                                                                    @else
+                                                                        <span class="badge badge-success float-right mt-1">Active</span>
+                                                                    @endif
+                                                                @endif
+                                                            </small>
+                                                            <p class="card-text">{!! $article->body !!}</p>
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
                                                 <div class="card-footer">
                                                     <small class="text-muted"><b> Posted
