@@ -146,7 +146,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Proengsoft\JsValidation\JsValidationServiceProvider::class,
+
 
 
         /*
@@ -154,9 +154,9 @@ return [
          */
 
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // Laravel IDE helper
-        Proengsoft\JsValidation\JsValidationServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
 
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Proengsoft\JsValidation\JsValidationServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
 
         /*
@@ -217,7 +217,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
         'Charts' => ConsoleTVs\Charts\ChartsServiceProvider::class,
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,

@@ -13,8 +13,8 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "phpmailer/phpmailer": "^6.0",
-        "proengsoft/laravel-jsvalidation": ">2.2.0",
-        "realrashid/sweet-alert": "^1.1"
+        "realrashid/sweet-alert": "^1.1",
+        "proengsoft/laravel-jsvalidation": ">2.2.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -62,6 +62,7 @@
 
             "php artisan vendor:publish --provider=\"Proengsoft\\JsValidation\\JsValidationServiceProvider\" --tag=public --force"
         ]
+
     },
     "config": {
         "preferred-install": "dist",

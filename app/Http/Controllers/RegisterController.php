@@ -13,7 +13,6 @@ use App\Images;
 use App\logs;
 use App\Pwa;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RegisterFormRequest;
 
@@ -48,10 +47,9 @@ class RegisterController extends Controller
 
     public function store(RegisterFormRequest $request)
     {
-        $helper = new Helper();
 
-        ($request->all());
-        if (/*$helper->reCaptchaVerify($request['g-recaptcha-response'])->success ||*/ $request['g-recaptcha-response']) {
+
+        if ($request['g-recaptcha-response']) {
 
 
             $userinfo = $request->all();

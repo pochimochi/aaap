@@ -23,7 +23,7 @@ class AnnouncementsController extends Controller
         $announcements = Announcements::all();
         foreach ($announcements as $announcement) {
             if (Carbon::parse($announcement->due_date)->lt(Carbon::now())) {
-                $announcement->status_id = 0;
+                $announcement->status = 0;
                 $announcement->save();
             }
 
@@ -33,7 +33,7 @@ class AnnouncementsController extends Controller
                 $announcements = Announcements::paginate(10);
                 return view('pages.contentsmanager.announcement.index', ['announcements' => $announcements]);
             } else if (session('role') == 4) {
-                $announcements = Announcements::where('status_id', '=', '1')->paginate(10);;
+                $announcements = Announcements::where('status', '=', '1')->paginate(10);;
                 return view('pages.member.announcement.index', ['announcements' => $announcements]);
             }
         } else {
@@ -60,7 +60,7 @@ class AnnouncementsController extends Controller
 
     public function searching(Request $request)
     {
-        $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status_id', '=', '1')->paginate(5);
+        $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status', '=', '1')->paginate(5);
         return view('pages.member.announcement.index', ['announcements' => $announcements]);
     }
 
@@ -170,11 +170,11 @@ class AnnouncementsController extends Controller
     function indexSelect($type)
     {
         if ($type == 1) {
-            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(10);
+            $announcements = Announcements::where('status', '=', 1)->where('type_id', '=', 1)->paginate(10);
         } elseif ($type == 0) {
-            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 0)->paginate(10);
+            $announcements = Announcements::where('status', '=', 1)->where('type_id', '=', 0)->paginate(10);
         } else {
-            $announcements = Announcements::where('status_id', '=', 1)->where('type_id', '=', 1)->paginate(10);
+            $announcements = Announcements::where('status', '=', 1)->where('type_id', '=', 1)->paginate(10);
         }
         return view('pages.member.announcement.index', ['announcements' => $announcements]);
     }
@@ -183,7 +183,7 @@ class AnnouncementsController extends Controller
     {
         $announcements = Announcements::find($request->id);
         $announcements->remarks = $request->remarks;
-        $announcements->status_id = 0;
+        $announcements->status = 0;
         if ($announcements->save()) {
 
             $log = new logs();

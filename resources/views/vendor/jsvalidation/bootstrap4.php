@@ -6,6 +6,8 @@
                 errorElement: 'span',
                 errorClass: 'invalid-feedback',
 
+
+
                 errorPlacement: function (error, element) {
                     if (element.parent('.input-group').length ||
                         element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {

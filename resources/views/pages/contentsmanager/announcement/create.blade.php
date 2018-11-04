@@ -59,12 +59,12 @@
                                         <div class="form-group">
                                             <label>Status</label>
                                             <select class="form-control custom-select input-default"
-                                                    name="status_id" id="status_id">
+                                                    name="status" id="status">
                                                 <option value="">Select Status</option>
-                                                <option value="1" {{ old('status_id') == 1 ? 'selected' : '' }}>
+                                                <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>
                                                     Active
                                                 </option>
-                                                <option value="0" {{ old('status_id') == 1 ? 'selected' : '' }}>
+                                                <option value="0" {{ old('status') == 1 ? 'selected' : '' }}>
                                                     Inactive
                                                 </option>
                                             </select>
@@ -147,7 +147,7 @@
                                 <td>{{ $announcement->type_id == 1 ? 'General' : 'Special'}}</td>
                                 <td>{{ $announcement->due_date}}</td>
                                 <td>
-                                    @if($announcement->status_id == 1)
+                                    @if($announcement->status == 1)
                                         <label class="badge badge-success">Active</label>
                                     @else
                                         <label class="badge badge-danger">Archived</label>
@@ -160,7 +160,7 @@
                                            class="btn btn-rounded btn-success ">View</a>
                                         <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id .'/edit')}}"
                                            class="btn btn-rounded btn-info ">Edit</a>
-                                        @if($announcement->status_id == 1)
+                                        @if($announcement->status == 1)
                                             <a data-toggle="modal"
                                                data-target="#status-form{{$announcement->id}}"
                                                class="btn text-white btn btn-rounded btn-warning">Archive
@@ -171,7 +171,7 @@
                                     </nobr>
                                 </td>
                             </tr>
-                            @if($announcement->status_id == 1)
+                            @if($announcement->status == 1)
                                 <div class="modal fade" id="status-form{{$announcement->id}}"
                                      role="dialog"
                                      aria-labelledby="status-form" aria-hidden="true">

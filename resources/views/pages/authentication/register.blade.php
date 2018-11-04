@@ -22,8 +22,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-    {!! JsValidator::formRequest('App\Http\Requests\RegisterFormRequest', '#regForm'); !!}
+
     <style>
         #regForm {
 
@@ -164,11 +163,11 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group required">
-                                            <label>First Name</label>
+                                            <label for="firstname">First Name</label>
                                             <input value="{{ old('firstname') }}" type="text"
                                                    name="firstname" id="firstname"
                                                    class="form-control input-default ">
-                                            <span class="text-danger">{{ $errors->first('firstname') }}</span>
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -211,7 +210,7 @@
                                         <div class="form-group">
                                             <label>Landline Number</label>
                                             <input value="{{ old('landline_number') }}" type="text"
-                                                   name="landline_number" id="landline_number"
+                                                   name="landline_number" id="landline_number" MAXLENGTH="7" placeholder="#######"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('landline_number') }}</span>
                                         </div>
@@ -220,7 +219,7 @@
                                         <div class="form-group required">
                                             <label>Mobile Number</label>
                                             <input value="{{ old('mobile_number') }}" type="text"
-                                                   name="mobile_number" id="mobile_number"
+                                                   name="mobile_number" id="mobile_number" MAXLENGTH="11"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('mobile_number') }}</span>
                                         </div>
@@ -487,7 +486,7 @@
                                                 <input value="{{ old('employerContactNumber') }}"
                                                        type="text"
                                                        name="employerContactNumber"
-                                                       id="employerContactNumber"
+                                                       id="employerContactNumber" MAXLENGTH="11"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('employerContactNumber') }}</span>
                                             </div>
@@ -720,8 +719,9 @@
 
 <!-- Argon Scripts -->
 <!-- Core -->
-<script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('argon/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
+
 <script src="{{asset('argon/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Optional JS -->
 <script src="{{asset('argon/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
@@ -729,20 +729,14 @@
 <!-- Argon JS -->
 <script src="{{asset('argon/assets/js/argon.js')}}"></script>
 
+<!-- Laravel Javascript Validation -->
 <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! JsValidator::formRequest('App\Http\Requests\RegisterFormRequest', '#regForm'); !!}
 
-
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 @include('sweetalert::alert')
-<script type="text/javascript">
-    $('table').DataTable({
-        /* "dom": '<"container"<"card"<"table-responsive"<lf<t>ip>>>>',*/
-        "pagingType": "numbers",
-        responsive: true
 
-    });
-</script>
 <script>
     var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the current tab
