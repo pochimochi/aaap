@@ -86,7 +86,6 @@ class ArticleController extends Controller
             $articleinfo = $request->all();
             $users = User::all()->where('active', 1)->where('role_id', 4);
             $articleinfo['posted_by'] = session('user')['id'];
-            $articleinfo['modified_by'] = 0;
             $articleinfo['due_date'] = Carbon::now()->addYear(1);
             $articleinfo['article_id'] = Articles::create($articleinfo)->id;
 
