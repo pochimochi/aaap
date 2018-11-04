@@ -24,7 +24,7 @@
                         &nbsp;@endif
                     @if(session('user')->role_id == 2)
                         <hr class="my-3">
-                        @if($article->status_id == 0)
+                        @if($article->status == 0)
                             <div class="alert alert-danger" role="alert">
                                 <b>This is article is currently archived</b>
                             </div>
@@ -69,7 +69,7 @@
                                   method="post">
                                 @method('DELETE')
                                 @csrf
-                                @if ($article->status_id != 0)
+                                @if ($article->status != 0)
                                     <button type="submit" class="btn btn-danger">Archive</button>
                                 @else
                                     <button type="submit" class="btn btn-success">Restore</button>
