@@ -61,18 +61,13 @@ class RegisterController extends Controller
                 $file1 = $request->file('profile_id')->getClientOriginalName();
                 $request->file('profile_id')->storeAs('public', $file1);
                 $userinfo['profile_id'] = Images::create(['location' => $file1])->id;
-            }else{
-                $userinfo['profile_id'] = 0;
             }
-            if ($request->file('idverification_id') == null){
+            if ($request->file('idverification_id') != null){
                 $file2 = $request->file('idverification_id')->getClientOriginalName();
                 $request->file('idverification_id')->storeAs('public', $file2);
                 $userinfo['idverification_id'] = Images::create(['location' => $file2])->id;
 
-            }else{
-                $userinfo['idverification_id'] = 0;
             }
-
 
 
             $userinfo['tcity_id'] = City::create(['name' => $userinfo['tcity']])->id;
