@@ -126,7 +126,6 @@ class EventController extends Controller
             'name' => 'required|max:100',
             'description' => 'required|max: 500',
             'venue' => 'required|max:50',
-            'status' => 'required',
             'city' => 'required',
             'unitno' => 'required|max:5',
             'bldg' => 'required|max:50',

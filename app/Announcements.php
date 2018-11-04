@@ -18,9 +18,6 @@ class announcements extends Model
         'created_at', 'updated_at'
     ];
 
-    protected $primaryKey = 'id';
-
-    public $timestamps = false;
 
     public function image()
     {
