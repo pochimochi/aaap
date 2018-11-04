@@ -6,6 +6,7 @@ use App\Address;
 use App\City;
 use App\Event;
 use App\EventAttendance;
+use App\EventCategories;
 use App\EventImages;
 use App\Helper;
 use App\Images;
@@ -25,7 +26,8 @@ class EventController extends Controller
         if (session('user')) {
             if (session('role') == 3) {
                 $events = Event::paginate(10);
-                return view('pages.contentsmanager.event.create', ['events' => $events]);
+                $categories = EventCategories::all();
+                return view('pages.contentsmanager.event.create', compact(['events', 'categories']));
             } else if (session('role') == 4) {
                 $events = Event::where('status', '=', '1')->paginate(10);;
                 return view('pages.member.event.index', ['events' => $events]);
@@ -57,7 +59,9 @@ class EventController extends Controller
     public function create()
     {
         $events = Event::all();
-        return view('pages.contentsmanager.event.create', ['events' => $events]);
+        $categories = EventCategories::all();
+        dd($events);
+        return view('pages.contentsmanager.event.create', compact(['events', 'categories']));
     }
 
     public function store(Request $request)

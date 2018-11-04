@@ -45,12 +45,12 @@
                                             <select class="form-control custom-select input-default"
                                                     name="category_id" id="category_id">
                                                 <option readonly="true">Select Event Category</option>
-                                                <option value="0" {{ old('category_id') == 1 ? 'selected' : '' }}>
-                                                    Public
-                                                </option>
-                                                <option value="1" {{ old('category_id') == 1 ? 'selected' : '' }}>
-                                                    Seminar
-                                                </option>
+                                                @foreach($categories as $category)
+
+                                                    <option value="{{$category->id}}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                                        {{$category->name}}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -228,7 +228,7 @@
                                 <td>
                                     @if($event->status == 1)
                                         <label class="badge badge-success">Active Event</label>
-                                        @else
+                                    @else
                                         <label class="badge badge-danger">Inactive Event</label>
                                     @endif
                                 </td>
@@ -239,13 +239,13 @@
                                         <a href="{{URL::to('contentmanager/events/' . $event->id .'/edit')}}"
                                            class="btn btn-info btn-rounded">Edit</a>
                                         @if($event->status == 1)
-                                        <a class="btn text-white btn-default"
-                                           onclick="$( 'textarea' ).ckeditor();" data-toggle="modal"
-                                           data-target="#modal-form{{$event->id}}">Send Reminder
-                                        </a>
-                                        <a data-toggle="modal"
-                                           data-target="#status-form{{$event->id}}"
-                                           class="btn text-white btn btn-rounded btn-warning">Cancel Event</a>
+                                            <a class="btn text-white btn-default"
+                                               onclick="$( 'textarea' ).ckeditor();" data-toggle="modal"
+                                               data-target="#modal-form{{$event->id}}">Send Reminder
+                                            </a>
+                                            <a data-toggle="modal"
+                                               data-target="#status-form{{$event->id}}"
+                                               class="btn text-white btn btn-rounded btn-warning">Cancel Event</a>
                                         @endif
                                     </nobr>
                                 </td>
@@ -304,7 +304,8 @@
                                                     <div class="text-center text-muted mb-4">
                                                         <small>Please State the reason of cancellation below</small>
                                                     </div>
-                                                    <form action="{{url('contentmanager/event/change_status')}}" id="form{{$event->id}}" method="post">
+                                                    <form action="{{url('contentmanager/event/change_status')}}"
+                                                          id="form{{$event->id}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$event->id}}">
                                                         <div class="col">
@@ -342,7 +343,7 @@
                                 </div>
                             </div>
                             <script type="text/javascript">
-                                $('#form{{$event->id}}').submit(function(e){
+                                $('#form{{$event->id}}').submit(function (e) {
                                     e.preventDefault();
                                     var form = $('#form{{$event->id}}');
                                     swal({
