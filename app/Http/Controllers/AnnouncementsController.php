@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AnnouncementCategories;
 use App\AnnouncementImages;
 use App\Announcements;
 
@@ -67,7 +68,8 @@ class AnnouncementsController extends Controller
     public function create()
     {
         $announcements = Announcements::all();
-        return view('pages.contentsmanager.announcement.create', ['announcements' => $announcements]);
+        $categories = AnnouncementCategories::all();
+        return view('pages.contentsmanager.announcement.create', compact(['announcements', 'categories']));
     }
 
 
