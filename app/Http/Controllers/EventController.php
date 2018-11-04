@@ -60,7 +60,7 @@ class EventController extends Controller
     {
         $events = Event::all();
         $categories = EventCategories::all();
-        dd($events);
+
         return view('pages.contentsmanager.event.create', compact(['events', 'categories']));
     }
 
