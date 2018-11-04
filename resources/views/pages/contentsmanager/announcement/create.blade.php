@@ -45,12 +45,11 @@
                                             <select class="form-control custom-select input-default"
                                                     name="type_id" id="type_id">
                                                 <option value="">Select Type</option>
-                                                <option value="1" {{ old('type_id') == 1 ? 'selected' : '' }}>
-                                                    General
+                                                @foreach($categories as $category)
+                                                <option value="{{$category->id}}" {{ old('type_id') == $category->id ? 'selected' : '' }}>
+                                                    {{$category->name}}
                                                 </option>
-                                                <option value="0" {{ old('type_id') == 1 ? 'selected' : '' }}>
-                                                    Special
-                                                </option>
+                                                @endforeach
                                             </select>
                                             <span class="text-danger">{{ $errors->first('type_id') }}</span>
                                         </div>
