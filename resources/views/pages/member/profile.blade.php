@@ -20,11 +20,12 @@
                         <div class="row justify-content-center pb-3">
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
-
+                                    @if($users->profilepic)
                                         <img src="{{asset('/storage/'.$users->profilepic->location)}}"
-                                             class="rounded-circle" width="180" height="180" style="background-color: white;object-fit: scale-down" alt="">
+                                             class="rounded-circle" width="180" height="180"
+                                             style="background-color: white;object-fit: scale-down" alt="">
 
-
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
@@ -446,13 +447,9 @@
                                                                         <select name="ecountry" id="ecountry"
                                                                                 class="form-control custom-select input-default">
                                                                             <option value="">Select Country</option>
-                                                                            <?php
-                                                                            $sql = mysqli_query(mysqli_connect("localhost", "root", "", "aaapdb"), "SELECT * From countries");
-                                                                            $row = mysqli_num_rows($sql);
-                                                                            while ($row = mysqli_fetch_array($sql)) {
-                                                                                echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
-                                                                            }
-                                                                            ?>
+                                                                            @foreach($countries as $country)
+                                                                                <option value="{{$country->id}}">{{$country->name}}</option>
+                                                                            @endforeach
                                                                         </select>
                                                                         <span class="text-danger">{{ $errors->first('ecountry') }}</span>
                                                                     </div>
