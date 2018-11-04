@@ -92,7 +92,7 @@ class RegisterController extends Controller
 
             $log = new logs();
             $log->savelog($userinfo['user_id'], 'User has registered');
-            alert()->success('Registration Successful!!', 'Welcome to AAAP');
+            alert()->success('Account successfully created!', 'In order to activate your account please pay the ₱500.00 membership fee. For more details please visit our FAQs page.')->persistent('true');
             return redirect('/login');
         } else {
             return redirect('/register')->withInput();
