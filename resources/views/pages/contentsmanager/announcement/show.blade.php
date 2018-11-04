@@ -35,7 +35,7 @@
                 </h3>
                 @if(session('user')->role_id == 3)
                     <hr class="my-3">
-                    @if($announcement->status_id == 0)
+                    @if($announcement->status == 0)
                         <div class="alert alert-danger" role="alert">
                             <b>This announcement is currently archived</b>
                         </div>
