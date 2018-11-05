@@ -69,11 +69,11 @@
                                   method="post">
                                 @method('DELETE')
                                 @csrf
-                                @if ($article->status != 0)
-                                    <button type="submit" class="btn btn-danger">Archive</button>
-                                @else
-                                    <button type="submit" class="btn btn-success">Restore</button>
-                                @endif
+                                {{--@if ($article->status != 0)--}}
+                                    {{--<button type="submit" class="btn btn-danger">Archive</button>--}}
+                                {{--@else--}}
+                                    {{--<button type="submit" class="btn btn-success">Restore</button>--}}
+                                {{--@endif--}}
                             </form>
                         </div>
                     @endif
