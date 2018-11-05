@@ -87,7 +87,7 @@
 
                                                         <label class="btn btn-success btn-block" for="eventImage">Upload
                                                             Image
-                                                            Here</label>
+                                                        </label>
                                                         <input type='file' name="eventImage[]"
                                                                id="eventImage" multiple
                                                                onchange="readURL(this);"/>
@@ -208,6 +208,7 @@
                                     <span class="text-danger">{{ $errors->first('street') }}</span>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>City</label>

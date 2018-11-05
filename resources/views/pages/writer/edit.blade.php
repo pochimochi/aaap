@@ -88,7 +88,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="btn btn-success btn-block" for="articleImage">Upload Image</label>
+                                        <label class="btn btn-success btn-block" for="articleImage">Upload Images</label>
                                         <input name="articleImage[]" hidden id="articleImage" multiple type="file"/>
                                         <div class="card border-0">
                                             <div class="card-body">

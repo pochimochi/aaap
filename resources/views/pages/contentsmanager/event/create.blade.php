@@ -83,8 +83,8 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     <label class="btn btn-success" for="eventImage">Upload
-                                                        Image
-                                                        Here</label>
+                                                        Images
+                                                    </label>
                                                     <input type='file' hidden="true" name="eventImage[]"
                                                            id="eventImage" multiple/>
                                                 </div>
