@@ -131,6 +131,8 @@
                                 <p>{{$event->description }}</p>
                             @endif
                             <div class="row justify-content-end">
+                                <a href="{{URL::to('contentmanager/events/' . $event->id .'/edit')}}"
+                                   class="btn btn-info btn-rounded">Edit</a>
                                 <a class="btn btn-danger"
                                    href="{{URL::to('/contentmanager/events/create')}}">Back</a>
                             </div>
