@@ -654,7 +654,7 @@
                                                             <div class="col-10">
                                                                 <img style="object-fit: cover;"
                                                                      class="shadow avatar avatar-lg rounded-circle"
-                                                                     src="{{asset('/storage/'.$attendance->user->profilepic->location)}}"
+                                                                     src="{{asset('/storage/'.$attendance->user->profilepic ? $attendance->user->profilepic->location : '')}}"
                                                                      alt="">
                                                                 &nbsp;
                                                                 {{$attendance->user->firstname .' '. $attendance->user->lastname}}
