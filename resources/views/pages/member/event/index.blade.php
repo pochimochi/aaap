@@ -77,8 +77,8 @@
                                                     </small>
                                                     <br>
                                                     <small class="text-muted">
-                                                        <b>Duration: </b>{{  $event->start_date }}
-                                                        to {{  $event->end_date }}</small>
+                                                        <b>Duration: </b>{{\Carbon\Carbon::parse($event->start_date)->toDayDateTimeString()}}
+                                                        to {{\Carbon\Carbon::parse($event->end_date)->toDayDateTimeString() }}</small>
                                                     <br>
                                                     <small class="text-muted"><b> Venue:</b> {{ $event->venue}}
                                                     </small>
@@ -96,10 +96,9 @@
                                                 <b>Category: </b>{{ $event->category_id== 1 ? 'Public' : 'Seminar' }}
                                             </small>
                                             <br>
-                                            <small class="text-muted">
-                                                <b>Duration: </b>{{ $event->start_date }}
-                                                to {{$event->end_date}} @
-                                            </small>
+                                                <small class="text-muted">
+                                                    <b>Duration: </b>{{\Carbon\Carbon::parse($event->start_date)->toDayDateTimeString()}}
+                                                    to {{\Carbon\Carbon::parse($event->end_date)->toDayDateTimeString() }}</small>
                                             <br>
                                             <small class="text-muted"><b> Venue:</b> {{ $event->venue}}
                                             </small>
@@ -126,11 +125,6 @@
                                         <div class="row justify-content-end">
                                             @if(session('user') && Auth::user())
                                                 @if((\App\EventAttendance::all()->where('user_id','=', session('user')['id'])->where('event_id', $event->id)->where('status', 1)->count()) < 1)
-                                                    {{--<div class="form-actions">
-                                                        <button type="submit"
-                                                                class="btn btn-primary btn-rounded">Sign Up
-                                                        </button>
-                                                    </div>--}}
 
                                                     <div class="col-md-4">
                                                         <form action="{{action('AttendanceController@join')}}"
