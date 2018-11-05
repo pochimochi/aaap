@@ -29,7 +29,7 @@
                     @csrf
                     <div class="form-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group required">
                                     <label class="control-label">Title</label>
                                     <input type="text" name="title"
@@ -37,7 +37,7 @@
                                     <span class="text-danger">{{ $errors->first('title') }}</span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group required">
                                     <label class="control-label">Article Type</label>
                                     <select class="form-control custom-select input-default"
