@@ -122,7 +122,8 @@ class AnnouncementsController extends Controller
     public function edit($id)
     {
         $announcement = Announcements::find($id);
-        return view('pages.contentsmanager.announcement.edit', ['announcement' => $announcement]);
+        $categories = AnnouncementCategories::all();
+        return view('pages.contentsmanager.announcement.edit', compact(['announcement', 'categories']));
     }
 
 
