@@ -89,6 +89,7 @@ class EventController extends Controller
             $eventinfo['city_id'] = City::create(['name' => $eventinfo['city']])->id;
             $eventinfo['address_id'] = Address::create($eventinfo)->id;
             $eventinfo['posted_by'] = session('user')['id'];
+            $eventinfo['status'] = 1;
 
             $eventinfo['event_id'] = Event::create($eventinfo)->id;
 

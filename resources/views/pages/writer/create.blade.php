@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5 justify-content-start">
+                        <div class="mt-5 justify-content-end">
                             <div class="form-actions">
                                 <input class="btn btn-success" type="submit" id="btnsubmit" onclick=""
                                        value="Submit">

@@ -78,7 +78,7 @@ class ArticleController extends Controller
             'articletype_id' => 'required',
             'body' => 'required',
             'modified_by' => 'nullable|max:70',
-            'status' => 'nullable|integer',
+
         ], [
             'articletype_id' => 'The article type must be specified.'
         ]);
@@ -87,6 +87,7 @@ class ArticleController extends Controller
             $users = User::all()->where('active', 1)->where('role_id', 4);
             $articleinfo['posted_by'] = session('user')['id'];
             $articleinfo['due_date'] = Carbon::now()->addYear(1);
+            $articleinfo['status'] = 1;
             $articleinfo['article_id'] = Articles::create($articleinfo)->id;
 
             if ($request->file('articleImage') != null) {
