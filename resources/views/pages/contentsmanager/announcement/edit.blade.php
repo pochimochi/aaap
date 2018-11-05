@@ -60,7 +60,14 @@
                                                             Select Type
                                                         </option>
                                                         @foreach($categories as $category)
-                                                            <option readonly="true" @if($category->id == $announcement->type_id)selected@endif> {{$category->name}}</option>
+                                                            {{--<option readonly="true"--}}
+                                                                    {{--@if($category->id == $announcement->type_id)--}}
+                                                                    {{--selected--}}
+                                                                {{--@endif--}}
+                                                            {{--> {{$category->name}}</option>--}}
+                                                            <option value="{{$category->id}}" {{ $announcement->type_id == $category->id ? 'selected' : '' }}>
+                                                                {{$category->name}}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                     <span class="text-danger">{{ $errors->first('type_id') }}</span>
