@@ -16,11 +16,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-title"><h1>{{$article->title}}</h1></div>
-                    <small class="text-muted"><b>Posted by: </b>{{ $article->user->firstname}}
-                        on: {{ \Carbon\Carbon::parse($article->created_at)->format('d/m/Y')}}</small>
+                    <small class="text-muted"><b>Posted by: </b>{{ $article->user->firstname . ' ' . $article->user->lastname}}
+                        on: {{ \Carbon\Carbon::parse($article->created_at)->format('F d, Y')}}</small>
                     @if($article->modifiedBy != 0)
-                        <small class="text-muted"><b>Modified By: </b> {{ $article->user->firstname}}
-                            on: {{ \Carbon\Carbon::parse($article->updated_at)->format('d/m/Y')}}</small>
+                        <small class="text-muted"><b>Modified By: </b> {{ $article->user->firstname . ' ' . $article->user->lastname}}
+                            on: {{ \Carbon\Carbon::parse($article->updated_at)->format('F d, Y')}}</small>
                         &nbsp;@endif
                     @if(session('user')->role_id == 2)
                         <hr class="my-3">
