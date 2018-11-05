@@ -54,21 +54,21 @@
                                             <span class="text-danger">{{ $errors->first('type_id') }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select class="form-control custom-select input-default"
-                                                    name="status" id="status">
-                                                <option value="">Select Status</option>
-                                                <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>
-                                                    Active
-                                                </option>
-                                                <option value="0" {{ old('status') == 1 ? 'selected' : '' }}>
-                                                    Inactive
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    {{--<div class="col-lg-4">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<label>Status</label>--}}
+                                            {{--<select class="form-control custom-select input-default"--}}
+                                                    {{--name="status" id="status">--}}
+                                                {{--<option value="">Select Status</option>--}}
+                                                {{--<option value="1" {{ old('status') == 1 ? 'selected' : '' }}>--}}
+                                                    {{--Active--}}
+                                                {{--</option>--}}
+                                                {{--<option value="0" {{ old('status') == 1 ? 'selected' : '' }}>--}}
+                                                    {{--Inactive--}}
+                                                {{--</option>--}}
+                                            {{--</select>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Image</label>
