@@ -83,6 +83,8 @@
                 <div class="row justify-content-end">
                     <a class="btn btn-danger"
                        href="{{URL::to('/contentmanager/announcements/create')}}">Back</a>
+                    <a href="{{URL::to('/contentmanager/announcements/'. $announcement->id .'/edit')}}"
+                       class="btn btn-rounded btn-info ">Edit</a>
                 </div>
             </div>
         </div>
