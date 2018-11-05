@@ -71,7 +71,7 @@
                                     {{--</div>--}}
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="announcementImage" class="btn btn-success">Upload Images</label>
+                                            <label for="announcementImage" class="btn btn-success">Uplo Images</label>
                                             <input name="announcementImage[]" hidden id="announcementImage" multiple
                                                    type="file"/>
                                             <span class="text-danger">{{ $errors->first('announcementImage.*') }}</span>
