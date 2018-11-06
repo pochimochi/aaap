@@ -43,7 +43,7 @@ class UserController extends Controller
 
         ]);*/
         $array = $request->all();
-dd($request->file('profile.location'));
+
         if ($request->file('profile.location')) {
             $profile = Images::find($array['profileid']);
             $array['location'] = $request->file('profile.location')->getClientOriginalName();
