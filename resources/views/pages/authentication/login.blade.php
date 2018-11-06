@@ -215,16 +215,8 @@
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 @include('sweetalert::alert')
 
-<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js', '#my-form')}}"></script>
-{!!  $jsValidator = 1 !!}
-<script type="text/javascript">
-    $('table').DataTable({
-        /* "dom": '<"container"<"card"<"table-responsive"<lf<t>ip>>>>',*/
-        "pagingType": "numbers",
-        responsive: true
 
-    });
-</script>
+
 </body>
 </html>
 

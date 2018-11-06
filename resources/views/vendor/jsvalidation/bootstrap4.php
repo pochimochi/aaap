@@ -6,8 +6,6 @@
                 errorElement: 'span',
                 errorClass: 'invalid-feedback',
 
-
-
                 errorPlacement: function (error, element) {
                     if (element.parent('.input-group').length ||
                         element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
@@ -18,7 +16,8 @@
                     }
                 },
                 highlight: function (element) {
-                    $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid'); // add the Bootstrap error class to the control group
+                    $(element).closest('.form-group').removeClass('focused').removeClass('has-success').addClass('has-danger /');
+                    $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');// add the Bootstrap error class to the control group
                 },
 
                 <?php if (isset($validator['ignore']) && is_string($validator['ignore'])): ?>

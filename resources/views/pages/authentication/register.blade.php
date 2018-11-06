@@ -162,17 +162,17 @@
                                 <h3 class="box-title m-t-40">Personal Information</h3>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="form-group required">
-                                            <label for="firstname">First Name</label>
+                                        <label class="" for="firstname">First Name</label>
+                                        <div class="form-group">
                                             <input value="{{ old('firstname') }}" type="text"
-                                                   name="firstname" id="firstname"
-                                                   class="form-control input-default ">
-
+                                                   name="firstname" id="firstname" autofocus="false"
+                                                   class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <label>Middle Name</label>
                                         <div class="form-group">
-                                            <label>Middle Name</label>
+
                                             <input value="{{ old('middlename') }}" type="text"
                                                    name="middlename" id="middlename"
                                                    class="form-control input-default">
@@ -180,8 +180,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <label>Last Name</label>
                                         <div class="form-group required">
-                                            <label>Last Name</label>
+
                                             <input value="{{ old('lastname') }}" type="text"
                                                    name="lastname" id="lastname"
                                                    class="form-control input-default">
@@ -191,8 +192,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <label class="control-label">Gender</label>
                                         <div class="form-group required">
-                                            <label class="control-label">Gender</label>
+
                                             <select class="form-control custom-select input-default"
                                                     name="gender" id="gender">
                                                 <option value="">Select Gender</option>
@@ -207,8 +209,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <label>Landline Number</label>
                                         <div class="form-group">
-                                            <label>Landline Number</label>
+
                                             <input value="{{ old('landline_number') }}" type="text"
                                                    name="landline_number" id="landline_number" MAXLENGTH="7" placeholder="#######"
                                                    class="form-control input-default">
@@ -216,8 +219,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <label>Mobile Number</label>
                                         <div class="form-group required">
-                                            <label>Mobile Number</label>
+
                                             <input value="{{ old('mobile_number') }}" type="text"
                                                    name="mobile_number" id="mobile_number" MAXLENGTH="11"
                                                    class="form-control input-default">
@@ -227,8 +231,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <label>Profile Picture</label>
                                         <div class="form-group">
-                                            <label>Profile Picture</label>
+
                                             <input value="{{ old('profile_id') }}" type="file"
                                                    name="profile_id" id="file-input"
                                                    class="form-control-file"/>
@@ -237,8 +242,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <label>ID Verification</label>
                                         <div class="form-group required">
-                                            <label>ID Verification</label>
+
                                             <input value="{{ old('idverification_id') }}" type="file"
                                                    name="idverification_id" id="id-input"
                                                    class="form-control-file"/>

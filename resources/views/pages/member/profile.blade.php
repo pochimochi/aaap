@@ -30,8 +30,10 @@
                             </div>
                             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                                 <div class="card-profile-actions py-4 mt-lg-0">
-                                    <a href="#" class="btn btn-sm btn-info mr-4">Edit Profile</a>
-                                    <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                                    <a href="{{url('member/profile/edit')}}" class="btn btn-sm btn-info mr-4">Edit
+                                        Profile</a>
+
+
                                 </div>
                             </div>
                             <div class="col-lg-4 order-lg-1">
@@ -69,8 +71,7 @@
                                                                 class="hidden-sm-up"><i class="ti-email"></i></span>
                                                         <span class="hidden-xs-down">Credentials</span></a></li>
                                             </ul>
-                                            <form class="form" action="{{URL::to('/')}}" method="post"
-                                                  id="registrationForm">
+
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="profile">
                                                         <br>
@@ -78,70 +79,32 @@
                                                             INFORMATION</h6>
                                                         <div class="row">
                                                             <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>First Name</label>
-                                                                    <input value="{{ $users['firstname'] }}" type="text"
-                                                                           name="firstname" id="firstname"
-                                                                           class="form-control input-default">
-                                                                    <span class="text-danger">{{ $errors->first('firstname') }}</span>
-                                                                </div>
+                                                                <label>First Name</label>
+                                                                <p>{{ $users['firstname'] }}</p>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>Middle Name</label>
-                                                                    <input value="{{ $users['middlename'] }}"
-                                                                           type="text"
-                                                                           name="middlename" id="middlename"
-                                                                           class="form-control input-default">
-                                                                    <span class="text-danger">{{ $errors->first('middlename') }}</span>
-                                                                </div>
+                                                                <label>Middle Name</label>
+                                                                <p>{{ $users['middlename'] }}</p>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>Last Name</label>
-                                                                    <input value="{{ $users['lastname'] }}" type="text"
-                                                                           name="lastname" id="lastname"
-                                                                           class="form-control input-default">
-                                                                    <span class="text-danger">{{ $errors->first('lastname') }}</span>
-                                                                </div>
+                                                                <label>Last Name</label>
+                                                                <p>{{ $users['lastname'] }}</p>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Gender</label>
-                                                                    <select class="form-control custom-select input-default"
-                                                                            name="gender" id="gender">
-                                                                        <option value="">Select Gender</option>
-                                                                        <option value="1" {{ $users->gender == 1 ? 'selected' : '' }}>
-                                                                            Male
-                                                                        </option>
-                                                                        <option value="2" {{ $users->gender == 2 ? 'selected' : '' }}>
-                                                                            Female
-                                                                        </option>
-                                                                    </select>
-                                                                    <span class="text-danger">{{ $errors->first('gender') }}</span>
-                                                                </div>
+                                                                <label>Gender</label>
+                                                                <p> @if($users['gender'] == '1')
+                                                                        Male @elseif($users['gender'] == '0')
+                                                                        Female @endif</p>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>Landline Number</label>
-                                                                    <input value="{{ $users->contact->landline_number }}"
-                                                                           type="text"
-                                                                           name="landline_number" id="landline_number"
-                                                                           class="form-control input-default">
-                                                                    <span class="text-danger">{{ $errors->first('landline_number') }}</span>
-                                                                </div>
+                                                                <label>Landline Number</label>
+                                                                <p>{{ $users->contact->landline_number }}</p>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label>Mobile Number</label>
-                                                                    <input value="{{ $users->contact->mobile_number }}"
-                                                                           type="text" name="mobile_number"
-                                                                           id="mobile_number"
-                                                                           class="form-control input-default">
-                                                                    <span class="text-danger">{{ $errors->first('mobile_number') }}</span>
-                                                                </div>
+                                                                <label>Mobile Number</label>
+                                                                <p>{{ $users->contact->mobile_number }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -153,58 +116,26 @@
                                                                     ADDRESS</h6>
                                                                 <div class="row">
                                                                     <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                            <label>Unit Number</label>
-                                                                            <input value="{{ $users->permanentaddress->unitno }}"
-                                                                                   type="text" name="unitno" id="unitno"
-                                                                                   class="form-control input-default">
-                                                                            <span class="text-danger">{{ $errors->first('unitno') }}</span>
-                                                                        </div>
+                                                                        <label>Unit Number</label>
+                                                                        <p>{{ $users->permanentaddress->unitno }}</p>
                                                                     </div>
                                                                     <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                            <label>Building</label>
-                                                                            <input value="{{ $users->permanentaddress->bldg }}"
-                                                                                   type="text" name="bldg" id="bldg"
-                                                                                   class="form-control input-default">
-                                                                            <span class="text-danger">{{ $errors->first('bldg') }}</span>
-                                                                        </div>
+                                                                        <label>Building</label>
+                                                                        <p>{{ $users->permanentaddress->bldg }}</p>
                                                                     </div>
                                                                     <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                            <label>Street</label>
-                                                                            <input value="{{ $users->permanentaddress->street }}"
-                                                                                   type="text"
-                                                                                   name="street" id="street"
-                                                                                   class="form-control input-default">
-                                                                            <span class="text-danger">{{ $errors->first('street') }}</span>
-                                                                        </div>
+                                                                        <label>Street</label>
+                                                                        <p>{{ $users->permanentaddress->street }}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label>City</label>
-                                                                            <input value="{{ $users->permanentaddress->city->name }}"
-                                                                                   type="text" name="city" id="city"
-                                                                                   class="form-control input-default">
-                                                                        </div>
-                                                                        <span class="text-danger">{{ $errors->first('city') }}</span>
+                                                                        <label>City</label>
+                                                                        <p>{{ $users->permanentaddress->city->name }}</p>
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label>Country</label>
-                                                                            <select class="form-control custom-select input-default"
-                                                                                    name="country_id" id="country_id">
-                                                                                <option value="">Select Country</option>
-                                                                                {{--@foreach($country as $countries)--}}
-                                                                                {{--<option value="{{$countries->id}}"--}}
-                                                                                {{--@if(old('country_id') == $countries->id)--}}
-                                                                                {{--selected @endif>{{$countries->name}}</option>--}}
-                                                                                {{--@endforeach--}}
-                                                                            </select>
-                                                                            <span class="text-danger">{{ $errors->first('country_id') }}</span>
-                                                                        </div>
+                                                                        <label>Country</label>
+                                                                        <p>{{ $users->permanentaddress->country->name }}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -214,55 +145,27 @@
                                                                     ADDRESS</h6>
                                                                 <div class="row">
                                                                     <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                            <label>Unit Number</label>
-                                                                            <input value="{{ $users->temporaryaddress->unitno }}"
-                                                                                   type="text" name="tunitno"
-                                                                                   id="tunitno"
-                                                                                   class="form-control input-default">
-                                                                            <span class="text-danger">{{ $errors->first('tunitno') }}</span>
-                                                                        </div>
+                                                                        <label>Unit Number</label>
+                                                                        <p>{{ $users->temporaryaddress->unitno }}</p>
                                                                     </div>
                                                                     <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                            <label>Building</label>
-                                                                            <input value="{{ $users->temporaryaddress->bldg }}"
-                                                                                   type="text" name="tbldg" id="tbldg"
-                                                                                   class="form-control input-default">
-                                                                            <span class="text-danger">{{ $errors->first('tbldg') }}</span>
-                                                                        </div>
+                                                                        <label>Building</label>
+                                                                        <p>{{ $users->temporaryaddress->bldg }}</p>
                                                                     </div>
                                                                     <div class="col-md-4">
-                                                                        <div class="form-group">
-                                                                            <label>Street</label>
-                                                                            <input value="{{ $users->temporaryaddress->street }}"
-                                                                                   type="text"
-                                                                                   name="tstreet" id="tstreet"
-                                                                                   class="form-control input-default">
-                                                                            <span class="text-danger">{{ $errors->first('tstreet') }}</span>
-                                                                        </div>
+                                                                        <label>Street</label>
+                                                                        <p>{{ $users->temporaryaddress->street }}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label>City</label>
-                                                                            <input value="{{ $users->temporaryaddress->city->name }}"
-                                                                                   type="text"
-                                                                                   name="tcity" id="tcity"
-                                                                                   class="form-control input-default">
-                                                                            <span class="text-danger">{{ $errors->first('tcity') }}</span>
-                                                                        </div>
+                                                                        <label>City</label>
+                                                                        <p>{{ $users->temporaryaddress->city->name }}</p>
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label>Country</label>
-                                                                            <select class="form-control custom-select input-default"
-                                                                                    name="tcountry" id="tcountry">
-                                                                                <option value="">Select Country</option>
-                                                                            </select>
-                                                                            <span class="text-danger">{{ $errors->first('tcountry') }}</span>
-                                                                        </div>
+                                                                        <label>Country</label>
+                                                                        <p>{{ $users->temporaryaddress->country
+                                                                        ? $users->temporaryaddress->country->name : ''}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -275,99 +178,54 @@
                                                                 AUTISM</h6>
                                                             <div class="row">
                                                                 <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>First Name</label>
-                                                                        <input value="{{ $users->pwa->pwaFirstName }}"
-                                                                               type="text"
-                                                                               name="pwaFirstName" id="pwaFirstName"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('pwaFirstName') }}</span>
-                                                                    </div>
+                                                                    <label>First Name</label>
+                                                                    <p>{{ $users->pwa->pwaFirstName }}</p>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Middle Name</label>
-                                                                        <input value="{{ $users->pwa->pwaMiddleName }}"
-                                                                               type="text"
-                                                                               name="pwaMiddleName" id="pwaMiddleName"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('pwaMiddleName') }}</span>
-                                                                    </div>
+                                                                    <label>Middle Name</label>
+                                                                    <p>{{ $users->pwa->pwaMiddleName }}</p>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Last Name</label>
-                                                                        <input value="{{ $users->pwa->pwaLastName }}"
-                                                                               type="text"
-                                                                               name="pwaLastName" id="pwaLastName"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('pwaLastName') }}</span>
-                                                                    </div>
+                                                                    <label>Last Name</label>
+                                                                    <p>{{ $users->pwa->pwaLastName }}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label class="control-label">Gender</label>
-                                                                        <select class="form-control custom-select input-default"
-                                                                                name="pwaGender" id="pwaGender">
-                                                                            <option value="">Select Gender</option>
-                                                                            <option value="1" {{ $users->pwa->pwaGender == 1 ? 'selected' : '' }}>
-                                                                                Male
-                                                                            </option>
-                                                                            <option value="2" {{ $users->pwa->pwaGender == 2 ? 'selected' : '' }}>
-                                                                                Female
-                                                                            </option>
-                                                                        </select>
-                                                                        <span class="text-danger">{{ $errors->first('pwaGender') }}</span>
-                                                                    </div>
+                                                                    <label>Gender</label>
+
+                                                                    <p> @if($users->pwa->pwaGender =='1')
+                                                                            Male
+                                                                        @elseif($users->pwa->pwaGender == '0')
+                                                                            Female
+                                                                        @else
+
+                                                                        @endif
+                                                                    </p>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Relationship to PWA</label>
-                                                                        <input value="{{ $users->pwa->pwaRelationship }}"
-                                                                               type="text"
-                                                                               name="description" id="description"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('pwaRelationship') }}</span>
-                                                                    </div>
+                                                                    <label>Relationship to PWA</label>
+                                                                    <p>{{ $users->pwa->pwaRelationship }}</p>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Number of Siblings</label>
-                                                                        <input value="{{ $users->pwa->siblingcount }}"
-                                                                               name="siblingcount" id="siblingcount"
-                                                                               type="number"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('siblingcount') }}</span>
-                                                                    </div>
+                                                                    <label>Sibling Count</label>
+                                                                    <p>{{ $users->pwa->siblingcount }}</p>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>With Intervention</label>
-                                                                        <select class="form-control custom-select input-default"
-                                                                                name="withintervention"
-                                                                                id="withintervention">
-                                                                            <option value="">Select Option</option>
-                                                                            <option value="1" {{ $users->pwa->withintervention == 1 ? 'selected' : '' }}>
-                                                                                Yes
-                                                                            </option>
-                                                                            <option value="2" {{ $users->pwa->withintervention == 2 ? 'selected' : '' }}>
-                                                                                No
-                                                                            </option>
-                                                                        </select>
-                                                                        <span class="text-danger">{{ $errors->first('withintervention') }}</span>
-                                                                    </div>
+                                                                    <label>With Intervention</label>
+                                                                    <p>
+                                                                        @if($users->pwa->withintervention =='1')
+                                                                            Male
+                                                                        @elseif($users->pwa->withintervention == '0')
+                                                                            Female
+                                                                        @else
+
+                                                                        @endif
+                                                                    </p>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Occupation</label>
-                                                                        <input value="{{ $users->pwa->pwaOccupation }}"
-                                                                               name="pwaOccupation"
-                                                                               id="pwaOccupation" type="text"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('pwaOccupation') }}</span>
-                                                                    </div>
+                                                                    <label>Occupation</label>
+                                                                    <p>{{ $users->pwa->pwaOccupation }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -377,82 +235,36 @@
                                                                 EMPLOYER</h6>
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Employer's Name</label>
-                                                                        <input value="{{ $users->pwa->employer->employerName}}"
-                                                                               type="text"
-                                                                               name="employerName" id="employerName"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('employerName') }}</span>
-                                                                    </div>
+                                                                    <label>Employer Name</label>
+                                                                    <p>{{ $users->pwa->employer->employerName }}</p>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Contact Number</label>
-                                                                        <input value="{{ $users->pwa->employer->employerContactNumber }}"
-                                                                               type="text"
-                                                                               name="employerContactNumber"
-                                                                               id="employerContactNumber"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('employerContactNumber') }}</span>
-                                                                    </div>
+                                                                    <label>Contact Number</label>
+                                                                    <p>{{ $users->pwa->employer->employerContactNumber }}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Unit Number</label>
-                                                                        <input value="{{ $users->pwa->employer->address->unitno }}"
-                                                                               type="text" name="eunitno"
-                                                                               id="eunitno"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('eunitno') }}</span>
-                                                                    </div>
+                                                                    <label>Unit Number</label>
+                                                                    <p>{{ $users->pwa->employer->address->unitno }}</p>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Building</label>
-                                                                        <input value="{{ $users->pwa->employer->address->bldg }}"
-                                                                               type="text" name="ebldg"
-                                                                               id="ebldg"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('ebldg') }}</span>
-                                                                    </div>
+                                                                    <label>Building</label>
+                                                                    <p>{{ $users->pwa->employer->address->bldg }}</p>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label>Street</label>
-                                                                        <input value="{{ $users->pwa->employer->address->street }}"
-                                                                               type="text" name="estreet"
-                                                                               id="estreet"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('estreet') }}</span>
-                                                                    </div>
+                                                                    <label>Street</label>
+                                                                    <p>{{ $users->pwa->employer->address->street }}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>City</label>
-                                                                        <input value="{{ $users->pwa->employer->address->city->name }}"
-                                                                               type="text" name="ecity"
-                                                                               id="ecity"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('ecity') }}</span>
-                                                                    </div>
+                                                                    <label>City</label>
+                                                                    <p>{{ $users->pwa->employer->address->city->name }}</p>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Country</label>
-                                                                        <select name="ecountry" id="ecountry"
-                                                                                class="form-control custom-select input-default">
-                                                                            <option value="">Select Country</option>
-                                                                            @foreach($countries as $country)
-                                                                                <option value="{{$country->id}}">{{$country->name}}</option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                        <span class="text-danger">{{ $errors->first('ecountry') }}</span>
-                                                                    </div>
+                                                                    <label>City</label>
+                                                                    <p>{{ $users->pwa->employer->address->country ? $users->pwa->employer->address->country->name : '' }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -464,14 +276,8 @@
                                                                 CREDENTIALS</h6>
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Email Address</label>
-                                                                        <input value="{{ $users['email'] }}"
-                                                                               type="email"
-                                                                               name="email" id="email"
-                                                                               class="form-control input-default">
-                                                                        <span class="text-danger">{{ $errors->first('email') }}</span>
-                                                                    </div>
+                                                                    <label>Email Address</label>
+                                                                    <p>{{ $users->email }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -487,12 +293,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row pull-right">
-                                                    <button type="button" class="btn btn-success" id="save">Save Changes
-                                                    </button>
-                                                </div>
-                                                <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                            </form>
+
+
+
                                         </div>
                                     </div>
                                 </div>

@@ -26,6 +26,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => 'member', 'prefix' => 'member'], function () {
         //member
         Route::get('profile', 'UserController@profile');
+        Route::get('profile/edit', 'UserController@edit');
+        Route::post('profile/save', 'UserController@update');
+
         Route::post('articles/find', 'ArticleController@searching');
         Route::get('articles/find', 'ArticleController@searching');
         Route::get('articles/archived', 'ArticleController@archived');
