@@ -61,7 +61,7 @@
                                     </div>
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                             <span class="text-info mr-2"><i
-                                                        class="fa fa-location-arrow"></i> {{$events->whereMonth('start_date', today()->month)->count()}}</span>
+                                                    class="fa fa-location-arrow"></i> {{$events->whereMonth('start_date', today()->month)->count()}}</span>
                                         <span class="text-nowrap">For this month</span>
                                     </p>
                                 </div>
@@ -84,7 +84,7 @@
                                     </div>
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                         <span class="text-success mr-2"><i
-                                                    class="fa fa-location-arrow"></i> {{$announcements->whereMonth('created_at', today()->month)->count()}}</span>
+                                                class="fa fa-location-arrow"></i> {{$announcements->whereMonth('created_at', today()->month)->count()}}</span>
                                         <span class="text-nowrap">For this month</span>
                                     </p>
                                 </div>
@@ -106,7 +106,7 @@
                                     </div>
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                             <span class="text-warning mr-2"><i
-                                                        class="fa fa-location-arrow"></i> {{$articles->whereMonth('created_at', today()->month)->count()}}</span>
+                                                    class="fa fa-location-arrow"></i> {{$articles->whereMonth('created_at', today()->month)->count()}}</span>
                                         <span class="text-nowrap">For this month</span>
                                     </p>
                                 </div>
@@ -229,7 +229,8 @@
 
                             <td>{{$user->email}}</td>
                             <td>
-                                <div class="badge {{($user->active == 1) ? 'badge-success' : 'badge-danger'}}">{{($user->active == 1) ? 'Active' : 'Inactive'}}</div>
+                                <div
+                                    class="badge {{($user->active == 1) ? 'badge-success' : 'badge-danger'}}">{{($user->active == 1) ? 'Active' : 'Inactive'}}</div>
                             </td>
 
                         </tr>
@@ -253,10 +254,11 @@
                                                     <div class="col-lg-3 order-lg-2">
                                                         <div class="card-profile-image">
                                                             <a href="#">
-                                                                <img src="{{$user->profilepic ? asset('/storage/'. $user->profilepic->location) : ''}}"
-                                                                     alt="" width="150" height="150"
-                                                                     style="object-fit:scale-down;background-color: white"
-                                                                     class="bg-gradient-teal rounded-circle">
+                                                                <img
+                                                                    src="{{$user->profilepic ? asset('/storage/'. $user->profilepic->location) : ''}}"
+                                                                    alt="" width="150" height="150"
+                                                                    style="object-fit:scale-down;background-color: white"
+                                                                    class="bg-gradient-teal rounded-circle">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -265,7 +267,8 @@
                                                 <div class="card-body pt-0 pt-md-4">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                                            <div
+                                                                class="card-profile-stats d-flex justify-content-center mt-md-5">
 
                                                             </div>
                                                         </div>
@@ -328,9 +331,10 @@
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-last-name">Gender</label>
-                                                                    <input value="{{ ($user['gender'] == 1 ? 'Male' : 'Female') }}"
-                                                                           readonly
-                                                                           class="form-control form-control-alternative">
+                                                                    <input
+                                                                        value="{{ ($user['gender'] == 1 ? 'Male' : 'Female') }}"
+                                                                        readonly
+                                                                        class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -489,7 +493,8 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label">Relationship</label>
+                                                                    <label
+                                                                        class="form-control-label">Relationship</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{ $user->pwa->pwaRelationship}}"
@@ -652,16 +657,18 @@
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-10">
-                                                                <img style="object-fit: cover;"
-                                                                     class="shadow avatar avatar-lg rounded-circle"
-                                                                     src="{{asset('/storage/'.$attendance->user->profilepic->location)}}"
-                                                                     alt="">
-                                                                &nbsp;
+                                                                @if($attendance->user->profilepic)
+                                                                    <img style="object-fit: cover;"
+                                                                         class="shadow avatar avatar-lg rounded-circle"
+                                                                         src="{{asset('/storage/'.$attendance->user->profilepic->location)}}"
+                                                                         alt="">
+                                                                    &nbsp;@endif
                                                                 {{$attendance->user->firstname .' '. $attendance->user->lastname}}
 
                                                             </div>
                                                             <div class="col-2 text-right">
-                                                                <div class="badge {{($attendance->status == 1) ? 'badge-success' : 'badge-danger'}}">
+                                                                <div
+                                                                    class="badge {{($attendance->status == 1) ? 'badge-success' : 'badge-danger'}}">
                                                                     {{($attendance->status == 1) ? 'Attending' : 'Cancelled'}}</div>
                                                             </div>
                                                         </div>
@@ -829,13 +836,15 @@
                 buttons: {
                     buttons: [
                         {extend: 'print', className: 'btn btn-info'},
-                        {extend: 'pdfHtml5', title : function() {
+                        {
+                            extend: 'pdfHtml5', title: function () {
                                 return "Member Report";
                             },
-                            orientation : 'landscape',
-                            pageSize : 'LEGAL',
-                            titleAttr : 'PDF',
-                            className: 'btn btn-success '}
+                            orientation: 'landscape',
+                            pageSize: 'LEGAL',
+                            titleAttr: 'PDF',
+                            className: 'btn btn-success '
+                        }
                     ]
                 },
                 responsive: {

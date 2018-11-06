@@ -29,7 +29,7 @@
                     @csrf
                     <div class="form-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group required">
                                     <label class="control-label">Title</label>
                                     <input type="text" name="title"
@@ -37,7 +37,7 @@
                                     <span class="text-danger">{{ $errors->first('title') }}</span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group required">
                                     <label class="control-label">Article Type</label>
                                     <select class="form-control custom-select input-default"
@@ -65,21 +65,6 @@
                                     <span class="text-danger">{{ $errors->first('articletype_id') }}</span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Status</label>
-                                    <select class="form-control custom-select input-default"
-                                            name="status" id="status">
-                                        <option value="">Select Status</option>
-                                        <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>
-                                            Active
-                                        </option>
-                                        <option value="0" {{ old('status') == 1 ? 'selected' : '' }}>
-                                            Inactive
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col">
@@ -90,12 +75,12 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <div class="form-group">
-                                    <label class="btn btn-success btn-block" for="articleImage">Upload Image</label>
+                                    <label class="btn btn-success btn-block" for="articleImage">Upload Images</label>
                                     <input name="articleImage[]" hidden id="articleImage" multiple type="file"/>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5 justify-content-start">
+                        <div class="mt-5 justify-content-end">
                             <div class="form-actions">
                                 <input class="btn btn-success" type="submit" id="btnsubmit" onclick=""
                                        value="Submit">

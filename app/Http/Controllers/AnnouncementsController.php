@@ -93,7 +93,7 @@ class AnnouncementsController extends Controller
         $users = User::all()->where('active', 1)->where('role_id', 4);
         $announcementInfo['title'] = strip_tags($announcementInfo['title']);
         $announcementInfo['description'] = strip_tags($announcementInfo['description']);
-
+        $announcementInfo['status'] = 1;
 
         $announcementInfo['posted_by'] = session('user')['id'];
         $announcementInfo['announcemnent_id'] = Announcements::create($announcementInfo)->id;
@@ -122,7 +122,8 @@ class AnnouncementsController extends Controller
     public function edit($id)
     {
         $announcement = Announcements::find($id);
-        return view('pages.contentsmanager.announcement.edit', ['announcement' => $announcement]);
+        $categories = AnnouncementCategories::all();
+        return view('pages.contentsmanager.announcement.edit', compact(['announcement', 'categories']));
     }
 
 

@@ -26,12 +26,13 @@
                         </div>
                     @endif
                     <div class="basic-elements">
-                        <form method="post" action="{{URL::to('/writer/articles', $article->id)}}" enctype="multipart/form-data">
+                        <form method="post" action="{{URL::to('/writer/articles', $article->id)}}"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('Put')
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Article ID</label>
                                             <input type="text" name="id" id="id"
@@ -39,7 +40,7 @@
                                                    value="{{$article->id}}" readonly="true">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Article Type</label>
                                             <select class="form-control custom-select input-default"
@@ -65,24 +66,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="control-label">Status</label>
-                                            <select class="form-control custom-select  input-default"
-                                                    name="status">
-                                                <option>Select Status</option>
-                                                <option value="1"
-                                                        @if($article->status=="1") selected @endif>
-                                                    Active
-                                                </option>
-                                                <option value="0"
-                                                        @if($article->status=="0") selected @endif>
-                                                    Inactive
-                                                </option>
-
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -105,7 +88,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="btn btn-success btn-block" for="articleImage">Upload Image</label>
+                                        <label class="btn btn-success btn-block" for="articleImage">Upload Images</label>
                                         <input name="articleImage[]" hidden id="articleImage" multiple type="file"/>
                                         <div class="card border-0">
                                             <div class="card-body">
@@ -127,11 +110,12 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="form-actions mt-5">
-                                <input class="btn btn-success" type="submit" id="btnSubmit"
-                                       value="Update">
-                                <a href="{{URL::to('/writer/articles/create')}}" class="btn btn-danger">Back</a>
+                            <div class="row justify-content-end">
+                                <div class="form-actions mt-5">
+                                    <input class="btn btn-success" type="submit" id="btnSubmit"
+                                           value="Update">
+                                    <a href="{{URL::to('/writer/articles/create')}}" class="btn btn-danger">Back</a>
+                                </div>
                             </div>
                         </form>
                     </div>

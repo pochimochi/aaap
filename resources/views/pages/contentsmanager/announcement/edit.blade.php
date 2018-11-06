@@ -56,14 +56,19 @@
                                                     <label>Announcement Type</label>
                                                     <select class="form-control custom-select input-default"
                                                             name="type_id" id="type_id">
-                                                        <option value="1"
-                                                                @if($announcement->type_id=="1") selected @endif>
-                                                            General
+                                                        <option readonly="true" selected>
+                                                            Select Type
                                                         </option>
-                                                        <option value="0"
-                                                                @if($announcement->type_id=="0") selected @endif>
-                                                            Special
-                                                        </option>
+                                                        @foreach($categories as $category)
+                                                            {{--<option readonly="true"--}}
+                                                                    {{--@if($category->id == $announcement->type_id)--}}
+                                                                    {{--selected--}}
+                                                                {{--@endif--}}
+                                                            {{--> {{$category->name}}</option>--}}
+                                                            <option value="{{$category->id}}" {{ $announcement->type_id == $category->id ? 'selected' : '' }}>
+                                                                {{$category->name}}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                     <span class="text-danger">{{ $errors->first('type_id') }}</span>
                                                 </div>
@@ -76,7 +81,8 @@
                                                 <div class="col">
                                                     <label class="btn btn-success btn-block" for="announcementImage">Upload
                                                         Images</label>
-                                                    <input type="file" hidden multiple name="announcementImage[]" id="announcementImage"/>
+                                                    <input type="file" hidden multiple name="announcementImage[]"
+                                                           id="announcementImage"/>
                                                 </div>
 
 
@@ -122,26 +128,29 @@
                                                         <div class="input-group input-group-alternative">
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text"><i
-                                                                        class="ni ni-calendar-grid-58"></i></span>
+                                                                    class="ni ni-calendar-grid-58"></i></span>
                                                             </div>
-                                                            <input class="form-control datepicker datepicker-orient-right"
-                                                                   name="due_date" id="due_date"
-                                                                   placeholder="Select date"
-                                                                   type="date"
-                                                                   value="{{ \Carbon\Carbon::parse($announcement->due_date)->format('Y-m-d')}}">
+                                                            <input
+                                                                class="form-control datepicker datepicker-orient-right"
+                                                                name="due_date" id="due_date"
+                                                                placeholder="Select date"
+                                                                type="date"
+                                                                value="{{ \Carbon\Carbon::parse($announcement->due_date)->format('Y-m-d')}}">
                                                         </div>
-                                                        <span class="text-danger">{{ $errors->first('due_date') }}</span>
+                                                        <span
+                                                            class="text-danger">{{ $errors->first('due_date') }}</span>
                                                     @else
                                                         <div class="input-group input-group-alternative">
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text"><i
-                                                                        class="ni ni-calendar-grid-58"></i></span>
+                                                                    class="ni ni-calendar-grid-58"></i></span>
                                                             </div>
-                                                            <input class="form-control datepicker datepicker-orient-right"
-                                                                   name="due_date" id="due_date"
-                                                                   placeholder="Select date"
-                                                                   type="date"
-                                                                   value="">
+                                                            <input
+                                                                class="form-control datepicker datepicker-orient-right"
+                                                                name="due_date" id="due_date"
+                                                                placeholder="Select date"
+                                                                type="date"
+                                                                value="">
                                                         </div>
                                                     @endif
                                                 </div>
