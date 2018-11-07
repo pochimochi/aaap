@@ -9,10 +9,6 @@
                 aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-
-
-
         <!-- Collapse -->
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
             <!-- Collapse header -->
@@ -39,10 +35,10 @@
 
                 @if(session('role') == 1)
                     <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/adminMaintenance')}}"><i
-                                    class="menu-icon fa fa-users"></i>Administrators</a>
+                                    class="fa fa-user-check text-success"></i>Administrators</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/members')}}"><i
-                                    class="menu-icon fa fa-user"></i>Members</a></li>
+                                    class="fa fa-users text-primary"></i>Members</a></li>
                 @elseif(session('role') == 2)
                     <li class="nav-item"><a class="nav-link" href="{{URL::to('writer/articles/create')}}"><i
                                     class="ni ni-book-bookmark text-teal"></i>Articles</a></li>

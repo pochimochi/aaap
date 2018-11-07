@@ -30,25 +30,32 @@
             <br>
             <div class="card-body">
                 <div class="basic-elements">
+                    <div class="alert alert-primary" role="alert">
+                        <b>Fields with asterisk (*) are required.</b>
+                    </div>
                     <form action="{{action('AdminsController@store')}}" method="POST"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <div class="form-group">
+                                    <div class="form-group required">
                                         <label>Administrator Type</label>
                                         <select class="form-control custom-select input-default"
                                                 name="role_id" id="role_id">
                                             <option value="">Select Type</option>
-                                            <option value="2">Writer</option>
-                                            <option value="3">Content Manager</option>
+                                            <option value="2" {{ old('role_id') == 2 ? 'selected' : '' }}>
+                                                Writer
+                                            </option>
+                                            <option value="3" {{ old('role_id') == 3 ? 'selected' : '' }}>
+                                                Content Manager
+                                            </option>
                                         </select>
                                         <span class="text-danger">{{ $errors->first('role_id') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="form-group">
+                                    <div class="form-group required">
                                         <label>Email Address</label>
                                         <input value="{{ old('email') }}" type="email"
                                                name="email" id="email"
@@ -57,13 +64,17 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group required">
                                         <label class="control-label">Gender</label>
                                         <select class="form-control custom-select input-default"
                                                 name="gender" id="gender">
                                             <option value="">Select Gender</option>
-                                            <option value="1">Male</option>
-                                            <option value="2">Female</option>
+                                            <option value="1" {{ old('gender') == 1 ? 'selected' : '' }}>
+                                                Male
+                                            </option>
+                                            <option value="2" {{ old('gender') == 2 ? 'selected' : '' }}>
+                                                Female
+                                            </option>
                                         </select>
                                         <span class="text-danger">{{ $errors->first('gender') }}</span>
                                     </div>
@@ -72,9 +83,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group required">
                                         <label>First Name</label>
-
                                         <input value="{{ old('firstname') }}" type="text"
                                                name="firstname" id="firstname"
                                                class="form-control input-default">
@@ -91,7 +101,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group required">
                                         <label>Last Name</label>
                                         <input value="{{ old('lastname') }}" type="text"
                                                name="lastname" id="lastname"
@@ -104,8 +114,8 @@
                                 <div class="form-actions">
                                     <input class="btn btn-success btn-rounded" type="submit"
                                            value="Submit">
-                                    <input class="btn btn-reset btn-rounded" type="reset"
-                                           value="Reset">
+                                    <button class="btn btn-reset btn-rounded" type="reset"
+                                            value="Reset">Reset</button>
                                 </div>
                             </div>
                         </div>

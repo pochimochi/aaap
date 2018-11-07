@@ -61,9 +61,9 @@
                                                         </option>
                                                         @foreach($categories as $category)
                                                             {{--<option readonly="true"--}}
-                                                                    {{--@if($category->id == $announcement->type_id)--}}
-                                                                    {{--selected--}}
-                                                                {{--@endif--}}
+                                                            {{--@if($category->id == $announcement->type_id)--}}
+                                                            {{--selected--}}
+                                                            {{--@endif--}}
                                                             {{--> {{$category->name}}</option>--}}
                                                             <option value="{{$category->id}}" {{ $announcement->type_id == $category->id ? 'selected' : '' }}>
                                                                 {{$category->name}}
@@ -74,40 +74,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <hr>
-                                        <div class="row">
-
-                                            <div class="form-group">
-                                                <div class="col">
-                                                    <label class="btn btn-success btn-block" for="announcementImage">Upload
-                                                        Images</label>
-                                                    <input type="file" hidden multiple name="announcementImage[]"
-                                                           id="announcementImage"/>
-                                                </div>
-
-
-                                                <div class="card bg-gradient-teal border-0">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            @foreach($announcement->image as $image)
-                                                                <div class="col-2">
-                                                                    <div class="card shadow border-0">
-
-                                                                        <img id="blah" class="card-img"
-                                                                             src="{{asset('/storage/'.$image->location.'')}}"/>
-
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                        <hr>
-
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
@@ -119,6 +85,28 @@
                                                     <span class="text-danger">{{ $errors->first('description') }}</span>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="btn btn-success btn-block" for="announcementImage">Upload
+                                                        Images</label>
+                                                    <input type="file" hidden multiple name="announcementImage[]"
+                                                           id="announcementImage"/>
+                                                </div>
+                                                <div class="card bg-gradient-teal border-0">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            @foreach($announcement->image as $image)
+                                                                <div class="col-2">
+                                                                    <div class="card shadow border-0">
+                                                                        <img id="blah" class="card-img"
+                                                                             src="{{asset('/storage/'.$image->location.'')}}"/>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-4">
@@ -128,33 +116,32 @@
                                                         <div class="input-group input-group-alternative">
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text"><i
-                                                                    class="ni ni-calendar-grid-58"></i></span>
+                                                                        class="ni ni-calendar-grid-58"></i></span>
                                                             </div>
                                                             <input
-                                                                class="form-control datepicker datepicker-orient-right"
-                                                                name="due_date" id="due_date"
-                                                                placeholder="Select date"
-                                                                type="date"
-                                                                value="{{ \Carbon\Carbon::parse($announcement->due_date)->format('Y-m-d')}}">
+                                                                    class="form-control datepicker datepicker-orient-right"
+                                                                    name="due_date" id="due_date"
+                                                                    placeholder="Select date"
+                                                                    type="date"
+                                                                    value="{{ \Carbon\Carbon::parse($announcement->due_date)->format('Y-m-d')}}">
                                                         </div>
                                                         <span
-                                                            class="text-danger">{{ $errors->first('due_date') }}</span>
+                                                                class="text-danger">{{ $errors->first('due_date') }}</span>
                                                     @else
                                                         <div class="input-group input-group-alternative">
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text"><i
-                                                                    class="ni ni-calendar-grid-58"></i></span>
+                                                                        class="ni ni-calendar-grid-58"></i></span>
                                                             </div>
                                                             <input
-                                                                class="form-control datepicker datepicker-orient-right"
-                                                                name="due_date" id="due_date"
-                                                                placeholder="Select date"
-                                                                type="date"
-                                                                value="">
+                                                                    class="form-control datepicker datepicker-orient-right"
+                                                                    name="due_date" id="due_date"
+                                                                    placeholder="Select date"
+                                                                    type="date"
+                                                                    value="">
                                                         </div>
                                                     @endif
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>

@@ -31,7 +31,7 @@
                             @csrf
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="form-group required">
                                             <label>Title</label>
                                             <input type="text" name="title" id="title"
@@ -39,7 +39,7 @@
                                             <span class="text-danger">{{ $errors->first('title') }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="form-group required">
                                             <label>Announcement Type</label>
                                             <select class="form-control custom-select input-default"
@@ -69,14 +69,6 @@
                                             {{--</select>--}}
                                         {{--</div>--}}
                                     {{--</div>--}}
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label for="announcementImage" class="btn btn-success">Upload Images</label>
-                                            <input name="announcementImage[]" hidden id="announcementImage" multiple
-                                                   type="file"/>
-                                            <span class="text-danger">{{ $errors->first('announcementImage.*') }}</span>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -86,6 +78,16 @@
                                                       rows="3"
                                                       name="description">{{ old('description') }}</textarea>
                                             <span class="text-danger">{{ $errors->first('description') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="announcementImage" class="btn btn-success">Upload Images</label>
+                                            <input name="announcementImage[]" hidden id="announcementImage" multiple
+                                                   type="file"/>
+                                            <span class="text-danger">{{ $errors->first('announcementImage.*') }}</span>
                                         </div>
                                     </div>
                                 </div>

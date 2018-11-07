@@ -31,7 +31,7 @@
                             @csrf
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <div class="form-group required">
                                             <label>Event Name</label>
                                             <input type="text" name="name" id="name" value="{{old('name')}}"
@@ -39,14 +39,13 @@
                                             <span class="text-danger">{{ $errors->first('name') }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <div class="form-group">
                                             <label>Event Category</label>
                                             <select class="form-control custom-select input-default"
                                                     name="category_id" id="category_id">
                                                 <option readonly="true">Select Event Category</option>
                                                 @foreach($categories as $category)
-
                                                     <option value="{{$category->id}}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                                         {{$category->name}}
                                                     </option>
@@ -55,21 +54,21 @@
                                         </div>
                                     </div>
                                     {{--<div class="col-4">--}}
-                                        {{--<div class="form-group">--}}
-                                            {{--<label>Status</label>--}}
-                                            {{--<select class="form-control custom-select input-default"--}}
-                                                    {{--name="status" id="status">--}}
-                                                {{--<option value="">Select Status</option>--}}
-                                                {{--<option value="1" {{ old('status') == 1 ? 'selected' : '' }}>--}}
-                                                    {{--Active--}}
-                                                {{--</option>--}}
-                                                {{--<option value="0" {{ old('status') == 1 ? 'selected' : '' }}>--}}
-                                                    {{--Inactive--}}
-                                                {{--</option>--}}
-                                            {{--</select>--}}
-                                        {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                    {{--<label>Status</label>--}}
+                                    {{--<select class="form-control custom-select input-default"--}}
+                                    {{--name="status" id="status">--}}
+                                    {{--<option value="">Select Status</option>--}}
+                                    {{--<option value="1" {{ old('status') == 1 ? 'selected' : '' }}>--}}
+                                    {{--Active--}}
+                                    {{--</option>--}}
+                                    {{--<option value="0" {{ old('status') == 1 ? 'selected' : '' }}>--}}
+                                    {{--Inactive--}}
+                                    {{--</option>--}}
+                                    {{--</select>--}}
                                     {{--</div>--}}
-                                    <div class="col-6">
+                                    {{--</div>--}}
+                                    <div class="col-12">
                                         <div class="form-group required">
                                             <label>Event Description</label>
                                             <textarea class="form-control input-default" rows="5"
@@ -78,7 +77,7 @@
                                             <span class="text-danger">{{ $errors->first('description') }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-6">
@@ -102,7 +101,6 @@
                                             </select>
                                         </div>
                                     </div>
-
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label id="ratelabel">Event Rate</label>
@@ -110,7 +108,6 @@
                                                    class="form-control input-default">
                                         </div>
                                     </div>
-
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Start Date</label>
@@ -140,7 +137,6 @@
                                             <span class="text-danger">{{ $errors->first('venue') }}</span>
                                         </div>
                                     </div>
-
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>House/Apartment/Unit Number</label>
@@ -150,8 +146,6 @@
                                             <span class="text-danger">{{ $errors->first('unitno') }}</span>
                                         </div>
                                     </div>
-
-
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Building</label>
@@ -201,7 +195,6 @@
                 <div class="card-body">
                     <div class="card-title">
                         <h4>List of Events</h4>
-
                     </div>
                     <table id="myTable" class="table bg-white table-bordered table-condensed shadow">
                         <thead>
@@ -369,9 +362,6 @@
             </div>
         </div>
     </div>
-
-
-
     <script type="text/javascript">
         $('#paid').on('input', function (event) {
             var text = $(this).val();
