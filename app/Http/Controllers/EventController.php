@@ -72,15 +72,21 @@ class EventController extends Controller
             'description' => 'required|max:500',
             'venue' => 'required|max:50',
             'city' => 'required|max:50',
-            'unitno' => 'required|max:5',
-
-            'bldg' => 'required|max:50',
-            'street' => 'required|max:50',
+            'unitno' => 'required|max:5|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
+            'bldg' => 'nullable|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
+            'street' => 'required|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'start_date' => 'date|after:today',
             'end_date' => 'nullable|date|after:start_date',
         ], [
             'unitno.required' => 'The house/apartment/unit number is required.',
-            'bldg.required' => 'The building field is required.'
+            'unitno.max' => 'The house/apartment/unit number may not be greater than 5 characters.',
+            'unitno.regex' => 'The house/apartment/unit number format is invalid.',
+            'bldg.regex' => 'The building format is invalid.',
+            'bldg.max' => 'The building may not be greater than 50 characters.',
+            'street.regex' => 'The street format is invalid.',
+            'street.max' => 'The street may not be greater than 50 characters.',
+            'city.regex' => 'The city format is invalid.',
+            'city.max' => 'The city may not be greater than 50 characters.',
         ]);
         if ($valid->passes()) {
             $eventinfo = $request->all();
@@ -127,15 +133,22 @@ class EventController extends Controller
             'name' => 'required|max:100',
             'description' => 'required|max: 500',
             'venue' => 'required|max:50',
-            'city' => 'required',
-            'unitno' => 'required|max:5',
-            'bldg' => 'required|max:50',
-            'street' => 'required|max:50',
+            'unitno' => 'required|max:5|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
+            'bldg' => 'nullable|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
+            'street' => 'required|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
+            'city' => 'required|string|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'start_date' => 'date',
             'end_date' => 'nullable|date',
         ], [
             'unitno.required' => 'The house/apartment/unit number is required.',
-            'bldg.required' => 'The building field is required.'
+            'unitno.max' => 'The house/apartment/unit number may not be greater than 5 characters.',
+            'unitno.regex' => 'The house/apartment/unit number format is invalid.',
+            'bldg.regex' => 'The building format is invalid.',
+            'bldg.max' => 'The building may not be greater than 50 characters.',
+            'street.regex' => 'The street format is invalid.',
+            'street.max' => 'The street may not be greater than 50 characters.',
+            'city.regex' => 'The city format is invalid.',
+            'city.max' => 'The city may not be greater than 50 characters.',
         ]);
         $eventinfo = $request->except(['_token', '_method']);
         $event = Event::find($eventId);

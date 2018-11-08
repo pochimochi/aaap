@@ -41,14 +41,14 @@ class ForgotPasswordController extends Controller
             $helper = new helper();
             $result = $helper->emailSend($request['email'], $body, 'Forgot password');
             if ($result == false) {
-                \alert()->error('Email was not sent!', 'Try Again Later');
+                \alert()->success('Email Sent!', 'You have successfully sent an Email!');
                 return redirect()->back()->withErrors($result->ErrorInfo);
             } else {
                 \alert()->success('Email Sent!', 'You have successfully sent an Email!');
                 return redirect('/login');
             }
         } else {
-            \alert()->error('Your Email does not exist!', 'Try Again.');
+            \alert()->success('Email Sent!', 'You have successfully sent an Email!');
             return redirect('/forgotpassword');
         }
     }

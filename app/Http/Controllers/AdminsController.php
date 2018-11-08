@@ -35,16 +35,21 @@ class AdminsController extends Controller
             'role_id' => 'required|integer',
             'firstname' => 'required|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'middlename' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
-            'lastname' => 'required|max:30|:regex/^[a-z ,.\'-]+$/i',
+            'lastname' => 'required|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'gender' => 'required',
-//            'userProfPic' => 'nullable|image|mimes:jpeg,jpg,png|max:300',
             'approvedBy' => 'nullable|string',
             'emailCode' => 'nullable',
             'email' => 'required|email|unique:users',
         ], [
             'role_id.required' => 'The administrator type must be specified.',
             'firstname.required' => 'The first name field is required.',
-            'lastname.required' => 'The first name field is required.',
+            'firstname.max' => 'The first name may not be greater than 30 characters.',
+            'firstname.regex' => 'The first name format is invalid.',
+            'middlename.regex' => 'The middle name format is invalid',
+            'middlename.max' => 'The middle name may not be greater than 30 characters.',
+            'lastname.required' => 'The last name field is required',
+            'lastname.max' => 'The last name may not be greater than 30 characters.',
+            'lastname.regex' => 'The last name format is invalid.',
         ]);
         $userinfo = $request->all();
         $userinfo['status'] = 1;

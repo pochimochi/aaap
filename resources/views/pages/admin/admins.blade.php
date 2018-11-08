@@ -114,8 +114,8 @@
                                 <div class="form-actions">
                                     <input class="btn btn-success btn-rounded" type="submit"
                                            value="Submit">
-                                    <button class="btn btn-reset btn-rounded" type="reset"
-                                            value="Reset">Reset</button>
+                                    <input class="btn btn-inverse" type="reset"
+                                           value="Reset">
                                 </div>
                             </div>
                         </div>

@@ -101,7 +101,6 @@
                                                 </div>
                                             @endif
                                             <div class="col">
-
                                                 <small class="text-muted">
                                                     <b>Category: </b>{{ $event->category_id== 1 ? 'Public' : 'Seminar' }}
                                                 </small>
@@ -174,9 +173,7 @@
                                                                                             aria-hidden="true">×</span>
                                                                                     </button>
                                                                                 </div>
-
                                                                                 <div class="modal-body">
-
                                                                                     <div class="py-3 text-center">
                                                                                         <i class="ni ni-bell-55 ni-3x"></i>
                                                                                         <h4 class="heading mt-4">
@@ -191,9 +188,7 @@
                                                                                             number:
                                                                                             0401.0099.49</p>
                                                                                     </div>
-
                                                                                 </div>
-
                                                                                 <div class="modal-footer">
                                                                                     <button type="submit"
                                                                                             class="btn btn-white">
@@ -209,10 +204,7 @@
                                                                     </div>
                                                                 </form>
                                                             </div>
-
-
                                                         @else
-
                                                             <div class="form-actions">
                                                                 <button type="button"
                                                                         class="btn btn-block btn-danger mb-3"

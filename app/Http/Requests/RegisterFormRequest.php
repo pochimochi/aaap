@@ -27,7 +27,7 @@ class RegisterFormRequest extends FormRequest
             'lastname' => 'required|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'gender' => 'required',
             'profile_id' => 'nullable|image|mimes:jpeg,jpg,png|max:8000',
-            'password' => 'required|max:64|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'password' => 'required|max:64|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'idverification_id' => 'required|mimes:jpg,jpeg,png,docx,doc,pdf|max:8000',
             'email' => 'required|unique:users,email|email',
             'unitno' => 'required|max:5|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
@@ -55,7 +55,7 @@ class RegisterFormRequest extends FormRequest
             'pwaGender' => 'nullable|integer',
             'pwaRelationship' => 'nullable|max:50|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaOccupation' => 'nullable|max:50|string|regex:/^[a-z ,.\'-]+$/i',
-            'landline_number' => 'nullable|numeric|digits_between:7',
+            'landline_number' => 'nullable|numeric|digits:7',
             'mobile_number' => 'required|numeric|digits_between:11,13',
             'terms' => 'required'
         ];

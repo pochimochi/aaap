@@ -49,7 +49,6 @@
                                                     <div class="row">
                                                         @if(!$article->image->isEmpty())
                                                             <div class="col-lg-6 col-12">
-
                                                                 <div id="carouselExampleFade{{$article->id}}"
                                                                      class="border carousel slide carousel-fade"
                                                                      data-ride="carousel">
