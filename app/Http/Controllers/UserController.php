@@ -7,6 +7,7 @@ use App\City;
 use App\Contact;
 use App\Country;
 use App\Employer;
+use App\Http\Requests\EditProfileRequest;
 use App\Images;
 use App\Pwa;
 use App\User;
@@ -37,7 +38,7 @@ class UserController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function update(EditProfileRequest $request)
     {
         /*$request->validate([
 
