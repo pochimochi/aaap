@@ -131,8 +131,8 @@ class EventController extends Controller
             'unitno' => 'required|max:5',
             'bldg' => 'required|max:50',
             'street' => 'required|max:50',
-            'start_date' => 'after:today',
-            'end_date' => 'nullable|after:today',
+            'start_date' => 'date',
+            'end_date' => 'nullable|date',
         ], [
             'unitno.required' => 'The house/apartment/unit number is required.',
             'bldg.required' => 'The building field is required.'

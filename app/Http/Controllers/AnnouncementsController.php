@@ -133,7 +133,7 @@ class AnnouncementsController extends Controller
             'title' => 'required|max:50',
             'description' => 'required',
             'type_id' => 'required',
-            'due_date' => 'required|after:today',
+            'due_date' => 'required|date',
             'announcementImage' => 'nullable',
             'announcementImage.*' => 'image|mimes:jpeg,png,jpg|size:2048'
         ], [

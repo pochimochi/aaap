@@ -44,6 +44,7 @@ class UserController extends Controller
 
         ]);*/
         $array = $request->all();
+        dd($array);
 
         if ($request->file('profile.location')) {
             $profile = Images::find($array['profileid']);

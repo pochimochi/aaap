@@ -68,9 +68,9 @@
                                                                 class="hidden-sm-up"><i class="ti-email"></i></span>
                                                         <span class="hidden-xs-down">Credentials</span></a></li>
                                             </ul>
-                                            <form class="form" action="{{url('member/profile/save')}}" id="editForm" method="post"
+                                            <form class="form" action="{{url('member/profile/save')}}" role="form"  method="post"
                                                   enctype="multipart/form-data"
-                                                  id="registrationForm">
+                                                  id="editForm">
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="profile">
                                                         <br>
@@ -78,8 +78,8 @@
                                                             INFORMATION</h6>
                                                         <div class="row">
                                                             <div class="col-md-4">
+                                                                <label>First Name</label>
                                                                 <div class="form-group">
-                                                                    <label>First Name</label>
                                                                     <input value="{{ $users['firstname'] }}" type="text"
                                                                            name="firstname" id="firstname"
                                                                            class="form-control">
@@ -87,8 +87,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
+                                                                <label>Middle Name</label>
                                                                 <div class="form-group">
-                                                                    <label>Middle Name</label>
                                                                     <input value="{{ $users['middlename'] }}"
                                                                            type="text"
                                                                            name="middlename" id="middlename"
@@ -97,8 +97,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
+                                                                <label>Last Name</label>
                                                                 <div class="form-group">
-                                                                    <label>Last Name</label>
                                                                     <input value="{{ $users['lastname'] }}" type="text"
                                                                            name="lastname" id="lastname"
                                                                            class="form-control input-default">
@@ -108,8 +108,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-4">
+                                                                <label class="control-label">Gender</label>
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Gender</label>
                                                                     <select class="form-control custom-select input-default"
                                                                             name="gender" id="gender">
                                                                         <option value="">Select Gender</option>
@@ -124,8 +124,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
+                                                                <label>Landline Number</label>
                                                                 <div class="form-group">
-                                                                    <label>Landline Number</label>
                                                                     <input value="{{ $users->contact->landline_number }}"
                                                                            type="text"
                                                                            name="landline_number" id="landline_number"
@@ -134,8 +134,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
+                                                                <label>Mobile Number</label>
                                                                 <div class="form-group">
-                                                                    <label>Mobile Number</label>
                                                                     <input value="{{ $users->contact->mobile_number }}"
                                                                            type="text" name="mobile_number"
                                                                            id="mobile_number"
@@ -148,7 +148,6 @@
                                                             <div class="col-md-6">
                                                                 <label>Profile Picture</label>
                                                                 <div class="form-group">
-
                                                                     <input value="{{ old('profile_id') }}" type="file"
                                                                            name="profile[location]" id="file-input"
                                                                            class="form-control-file"/>
@@ -167,8 +166,8 @@
                                                                     ADDRESS</h6>
                                                                 <div class="row">
                                                                     <div class="col-md-4">
+                                                                        <label>House/Apartment/Unit No.</label>
                                                                         <div class="form-group">
-                                                                            <label>Unit Number</label>
                                                                             <input value="{{ $users->permanentaddress->unitno }}"
                                                                                    type="text" name="paddress[unitno]"
                                                                                    id="unitno"
@@ -177,8 +176,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-4">
+                                                                        <label>Building</label>
                                                                         <div class="form-group">
-                                                                            <label>Building</label>
                                                                             <input value="{{ $users->permanentaddress->bldg }}"
                                                                                    type="text" name="paddress[bldg]"
                                                                                    id="bldg"
@@ -187,8 +186,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-4">
+                                                                        <label>Street</label>
                                                                         <div class="form-group">
-                                                                            <label>Street</label>
                                                                             <input value="{{ $users->permanentaddress->street }}"
                                                                                    type="text"
                                                                                    name="paddress[street]" id="street"
@@ -199,8 +198,8 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
+                                                                        <label>City</label>
                                                                         <div class="form-group">
-                                                                            <label>City</label>
                                                                             <input value="{{ $users->permanentaddress->city->name }}"
                                                                                    type="text" name="paddress[name]"
                                                                                    id="city_id"
@@ -209,8 +208,8 @@
                                                                         <span class="text-danger">{{ $errors->first('city') }}</span>
                                                                     </div>
                                                                     <div class="col-md-6">
+                                                                        <label>Country</label>
                                                                         <div class="form-group">
-                                                                            <label>Country</label>
                                                                             <select class="form-control custom-select input-default"
                                                                                     name="paddress[country_id]"
                                                                                     id="country_id">
@@ -232,8 +231,8 @@
                                                                     ADDRESS</h6>
                                                                 <div class="row">
                                                                     <div class="col-md-4">
+                                                                        <label>House/Apartment/Unit No.</label>
                                                                         <div class="form-group">
-                                                                            <label>Unit Number</label>
                                                                             <input value="{{ $users->temporaryaddress->unitno }}"
                                                                                    type="text" name="taddress[unitno]"
                                                                                    id="tunitno"
@@ -242,8 +241,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-4">
+                                                                        <label>Building</label>
                                                                         <div class="form-group">
-                                                                            <label>Building</label>
                                                                             <input value="{{ $users->temporaryaddress->bldg }}"
                                                                                    type="text" name="taddress[bldg]"
                                                                                    id="tbldg"
@@ -252,8 +251,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-4">
+                                                                        <label>Street</label>
                                                                         <div class="form-group">
-                                                                            <label>Street</label>
                                                                             <input value="{{ $users->temporaryaddress->street }}"
                                                                                    type="text"
                                                                                    name="taddress[street]" id="tstreet"
@@ -264,8 +263,8 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
+                                                                        <label>City</label>
                                                                         <div class="form-group">
-                                                                            <label>City</label>
                                                                             <input value="{{ $users->temporaryaddress->city->name }}"
                                                                                    type="text"
                                                                                    name="taddress[name]" id="tcity"
@@ -274,8 +273,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
+                                                                        <label>Country</label>
                                                                         <div class="form-group">
-                                                                            <label>Country</label>
                                                                             <select class="form-control custom-select input-default"
                                                                                     name="taddress[country_id]"
                                                                                     id="tcountry">
@@ -300,8 +299,8 @@
                                                                 AUTISM</h6>
                                                             <div class="row">
                                                                 <div class="col-md-4">
+                                                                    <label>First Name</label>
                                                                     <div class="form-group">
-                                                                        <label>First Name</label>
                                                                         <input value="{{ $users->pwa->pwaFirstName }}"
                                                                                type="text"
                                                                                name="pwaFirstName" id="pwaFirstName"
@@ -310,8 +309,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
+                                                                    <label>Middle Name</label>
                                                                     <div class="form-group">
-                                                                        <label>Middle Name</label>
                                                                         <input value="{{ $users->pwa->pwaMiddleName }}"
                                                                                type="text"
                                                                                name="pwaMiddleName" id="pwaMiddleName"
@@ -320,8 +319,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
+                                                                    <label>Last Name</label>
                                                                     <div class="form-group">
-                                                                        <label>Last Name</label>
                                                                         <input value="{{ $users->pwa->pwaLastName }}"
                                                                                type="text"
                                                                                name="pwaLastName" id="pwaLastName"
@@ -332,8 +331,8 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-4">
+                                                                    <label class="control-label">Gender</label>
                                                                     <div class="form-group">
-                                                                        <label class="control-label">Gender</label>
                                                                         <select class="form-control custom-select input-default"
                                                                                 name="pwaGender" id="pwaGender">
                                                                             <option value="">Select Gender</option>
@@ -348,8 +347,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
+                                                                    <label>Relationship to PWA</label>
                                                                     <div class="form-group">
-                                                                        <label>Relationship to PWA</label>
                                                                         <input value="{{ $users->pwa->pwaRelationship }}"
                                                                                type="text"
                                                                                name="pwaRelationship" id="description"
@@ -358,8 +357,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
+                                                                    <label>Number of Siblings</label>
                                                                     <div class="form-group">
-                                                                        <label>Number of Siblings</label>
                                                                         <input value="{{ $users->pwa->siblingcount }}"
                                                                                name="siblingcount" id="siblingcount"
                                                                                type="number"
@@ -368,8 +367,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
+                                                                    <label>With Intervention</label>
                                                                     <div class="form-group">
-                                                                        <label>With Intervention</label>
                                                                         <select class="form-control custom-select input-default"
                                                                                 name="withintervention"
                                                                                 id="withintervention">
@@ -385,8 +384,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
+                                                                    <label>Occupation</label>
                                                                     <div class="form-group">
-                                                                        <label>Occupation</label>
                                                                         <input value="{{ $users->pwa->pwaOccupation }}"
                                                                                name="pwaOccupation"
                                                                                id="pwaOccupation" type="text"
@@ -402,8 +401,8 @@
                                                                 EMPLOYER</h6>
                                                             <div class="row">
                                                                 <div class="col-md-6">
+                                                                    <label>Employer's Name</label>
                                                                     <div class="form-group">
-                                                                        <label>Employer's Name</label>
                                                                         <input value="{{ $users->pwa->employer->employerName}}"
                                                                                type="text"
                                                                                name="employerName" id="employerName"
@@ -412,8 +411,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
+                                                                    <label>Contact Number</label>
                                                                     <div class="form-group">
-                                                                        <label>Contact Number</label>
                                                                         <input value="{{ $users->pwa->employer->employerContactNumber }}"
                                                                                type="text"
                                                                                name="employerContactNumber"
@@ -425,8 +424,8 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-4">
+                                                                    <label>House/Apartment/Unit No.</label>
                                                                     <div class="form-group">
-                                                                        <label>Unit Number</label>
                                                                         <input value="{{ $users->pwa->employer->address->unitno }}"
                                                                                type="text" name="eaddress[unitno]"
                                                                                id="eunitno"
@@ -435,8 +434,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
+                                                                    <label>Building</label>
                                                                     <div class="form-group">
-                                                                        <label>Building</label>
                                                                         <input value="{{ $users->pwa->employer->address->bldg }}"
                                                                                type="text" name="eaddress[bldg]"
                                                                                id="ebldg"
@@ -445,8 +444,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
+                                                                    <label>Street</label>
                                                                     <div class="form-group">
-                                                                        <label>Street</label>
                                                                         <input value="{{ $users->pwa->employer->address->street }}"
                                                                                type="text" name="eaddress[street]"
                                                                                id="estreet"
@@ -457,8 +456,8 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-6">
+                                                                    <label>City</label>
                                                                     <div class="form-group">
-                                                                        <label>City</label>
                                                                         <input value="{{ $users->pwa->employer->address->city->name }}"
                                                                                type="text" name="eaddress[name]"
                                                                                id="ecity"
@@ -467,8 +466,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
+                                                                    <label>Country</label>
                                                                     <div class="form-group">
-                                                                        <label>Country</label>
                                                                         <select name="eaddress[country_id]"
                                                                                 id="ecountry"
                                                                                 class="form-control custom-select input-default">
@@ -492,8 +491,8 @@
                                                                 CREDENTIALS</h6>
                                                             <div class="row">
                                                                 <div class="col-md-6">
+                                                                    <label>Email Address</label>
                                                                     <div class="form-group">
-                                                                        <label>Email Address</label>
                                                                         <input value="{{ $users['email'] }}"
                                                                                type="email"
                                                                                name="email" id="email"
@@ -559,8 +558,8 @@
             </div>
         </section>
     </main>
-    <!-- Laravel Javascript Validation -->
-    <script src="{{asset('argon/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
     {!! JsValidator::formRequest('App\Http\Requests\EditProfileRequest', '#editForm'); !!}
 @endsection

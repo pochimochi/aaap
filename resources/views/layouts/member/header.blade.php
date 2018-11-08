@@ -67,7 +67,7 @@
                         <li class="nav-item">
                             <a href="{{URL::to('member/profile')}}" class="nav-link">
                                 <span class="btn-inner--icon"><i class="ni ni-circle-08"></i></span>
-                                <span class="nav-link-inner--text">Profile</span>
+                                <span class="nav-link-inner--text">Account</span>
                             </a>
                         </li>
                     @endif

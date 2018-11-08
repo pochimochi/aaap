@@ -18,6 +18,7 @@
     <link type="text/css" href="{{asset('argonmember/assets/css/argon.css?v=1.0.1')}}" rel="stylesheet">
     <!-- Docs CSS -->
     <link type="text/css" href="{{asset('argonmember/assets/css/docs.min.css')}}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -61,6 +62,9 @@
 <script src="{{asset('argonmember/assets/vendor/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{asset('argonmember/assets/vendor/headroom/headroom.min.js')}}"></script>
 <!-- Optional JS -->
+
+<!-- Laravel Javascript Validation -->
+
 <script src="{{asset('argonmember/assets/vendor/onscreen/onscreen.min.js')}}"></script>
 <script src="{{asset('argonmember/assets/vendor/nouislider/js/nouislider.min.js')}}"></script>
 <script src="{{asset('argonmember/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>

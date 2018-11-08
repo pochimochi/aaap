@@ -18,7 +18,7 @@
                 <div class="container" align="right">
                     <form action="{{action('ArticleController@searching')}}" method="post">
                         @csrf
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend"><span class="input-group-text"><i
@@ -37,49 +37,58 @@
             <div class="row">
                 <div class="container">
                     @if($articles->count() < 1)
-                        <div class="col">
-                            <div class="alert alert-default">Records not available.<br>
+                        <div class="col-12">
+                            <div class="alert alert-default mt-5">Records not available.<br>
                             </div>
                             <div class="card-columns">
-
                                 @else
                                     @foreach ($articles as $article)
                                         <div class="col mt-5">
                                             <div class="card shadow">
-
                                                 <div class="card-body">
                                                     <div class="row">
                                                         @if(!$article->image->isEmpty())
-                                                        <div class="col-lg-6 col-12">
-                                                            @if(!$article->image->isEmpty())
-                                                                <div id="carouselExampleFade{{$article->id}}" class="border carousel slide carousel-fade"
+                                                            <div class="col-lg-6 col-12">
+
+                                                                <div id="carouselExampleFade{{$article->id}}"
+                                                                     class="border carousel slide carousel-fade"
                                                                      data-ride="carousel">
                                                                     <div class="carousel-inner">
                                                                         @php $i = 0 @endphp
                                                                         @foreach($article->image as $name)
 
-                                                                            <div class="carousel-item @if($i == 0) active @endif">
-                                                                                <img src="{{asset('/storage/'.$name->location)}}" style="object-fit: scale-down"
-                                                                                     class="d-block w-100" height="250" alt="no-image">
+                                                                            <div
+                                                                                class="carousel-item @if($i == 0) active @endif">
+                                                                                <img
+                                                                                    src="{{asset('/storage/'.$name->location)}}"
+                                                                                    style="object-fit: scale-down"
+                                                                                    class="d-block w-100" height="250"
+                                                                                    alt="no-image">
                                                                             </div>
                                                                             @php $i++ @endphp
                                                                         @endforeach
                                                                     </div>
-                                                                    <a class="carousel-control-prev" href="#carouselExampleFade{{$article->id}}" role="button"
+                                                                    <a class="carousel-control-prev"
+                                                                       href="#carouselExampleFade{{$article->id}}"
+                                                                       role="button"
                                                                        data-slide="prev">
-                                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                        <span class="carousel-control-prev-icon"
+                                                                              aria-hidden="true"></span>
                                                                         <span class="sr-only">Previous</span>
                                                                     </a>
-                                                                    <a class="carousel-control-next" href="#carouselExampleFade{{$article->id}}" role="button"
+                                                                    <a class="carousel-control-next"
+                                                                       href="#carouselExampleFade{{$article->id}}"
+                                                                       role="button"
                                                                        data-slide="next">
-                                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                        <span class="carousel-control-next-icon"
+                                                                              aria-hidden="true"></span>
                                                                         <span class="sr-only">Next</span>
                                                                     </a>
                                                                 </div>
-                                                            @endif
-                                                        </div>
+
+                                                            </div>
                                                         @endif
-                                                        <div class="col-lg-6 col-12">
+                                                        <div class="col">
                                                             @if(session('user') && Auth::user())
                                                                 <a class="display-4 mb-0"
                                                                    href="{{URL::to('member/articles/'. $article->id .'')}}">
@@ -93,17 +102,17 @@
                                                             <small>
                                                                 @if (session('role') != 4)
                                                                     @if($article->status == 0)
-                                                                        <span class="badge badge-danger float-right mt-1">Archived</span>
+                                                                        <span
+                                                                            class="badge badge-danger float-right mt-1">Archived</span>
                                                                     @else
-                                                                        <span class="badge badge-success float-right mt-1">Active</span>
+                                                                        <span
+                                                                            class="badge badge-success float-right mt-1">Active</span>
                                                                     @endif
                                                                 @endif
                                                             </small>
                                                             <p class="card-text">{!! $article->body !!}</p>
                                                         </div>
                                                     </div>
-
-
                                                 </div>
                                                 <div class="card-footer">
                                                     <small class="text-muted"><b> Posted
@@ -111,7 +120,7 @@
                                                         on
                                                         {{ \Carbon\Carbon::parse($article->created_at)->format('F d, Y')}}
                                                     </small>
-
+                                                    <br>
                                                     @if($article->modified_by != 0)
                                                         <small class="text-muted"><b> Modified
                                                                 By: </b>{{ App\User::find($article->modified_by)->firstname . ' ' . $article->user->lastname }}

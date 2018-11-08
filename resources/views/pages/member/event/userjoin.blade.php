@@ -50,51 +50,64 @@
                                             @endif
                                         </small>
                                         <br>
-                                        @if($user->event->image_id != 0)
-                                            <div class="row">
+                                        <div class="row">
+                                            @if($user->event->image->count() > 0)
                                                 <div class="col-lg-6">
-                                                    <img src="{{asset('/storage/'.$user->event->image->location)}}"
-                                                         class="img-fluid"
-                                                         alt="avatar"></div>
-                                                <div class="col-lg-6">
-                                                    <small class="text-muted">
-                                                        <b>Category: </b>{{$user->event->category_id== 1 ? 'Public' : 'Seminar' }}
-                                                    </small>
-                                                    <br>
-                                                    <small class="text-muted">
-                                                        <b>Duration: </b>{{$user->event->start_date }}
-                                                        to {{$user->event->end_date }}</small>
-                                                    <br>
-                                                    <small class="text-muted"><b> Venue:</b> {{ $user->event->venue}}
-                                                    </small>
-                                                    <br>
-                                                    @if($user->event->paid == 0)
-                                                        <small class="text-muted">
-                                                            <b>Rate: </b>{{$user->event->rate }}</small>
-                                                    @endif
-                                                    <br>
-                                                    <p>{{$user->event->description }}</p>
+                                                    <div id="carouselExampleFade"
+                                                         class="border carousel slide carousel-fade"
+                                                         data-ride="carousel">
+                                                        <div class="carousel-inner">
+                                                            @php $i = 0 @endphp
+                                                            @foreach($user->event->image as $name)
+
+                                                                <div class="carousel-item @if($i == 0) active @endif">
+                                                                    <img src="{{asset('/storage/'.$name->location)}}"
+                                                                         style="object-fit: scale-down"
+                                                                         class="d-block w-100" height="250" alt="">
+                                                                </div>
+                                                                @php $i++ @endphp
+                                                            @endforeach
+                                                        </div>
+                                                        <a class="carousel-control-prev" href="#carouselExampleFade"
+                                                           role="button"
+                                                           data-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                              aria-hidden="true"></span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                        <a class="carousel-control-next" href="#carouselExampleFade"
+                                                           role="button"
+                                                           data-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                              aria-hidden="true"></span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @else()
-                                            <small class="text-muted">
-                                                <b>Category: </b>{{$user->event->category_id== 1 ? 'Public' : 'Seminar' }}
-                                            </small>
-                                            <br>
-                                            <small class="text-muted">
-                                                <b>Duration: </b>{{$user->event->start_date }}
-                                                to{{$user->event->end_date }}</small>
-                                            <br>
-                                            <small class="text-muted"><b> Venue:</b> {{ $user->event->venue}}
-                                            </small>
-                                            @if($user->event->paid == 0)
-                                                <small class="text-muted">
-                                                    <b>Rate: </b>{{$user->event->rate}}</small>
-                                                <br>
                                             @endif
-                                            <br>
-                                            <p>{{$user->event->description }}</p>
-                                        @endif
+                                            <div class="col">
+                                                <small class="text-muted">
+                                                    <b>Category: </b>{{$user->event->category_id== 1 ? 'Public' : 'Seminar' }}
+                                                </small>
+                                                <br>
+                                                <small class="text-muted">
+                                                    <b>Duration: </b>{{$user->event->start_date }}
+                                                    to{{$user->event->end_date }}</small>
+                                                <br>
+                                                <small class="text-muted"><b> Venue:</b> {{ $user->event->venue}}
+                                                </small>
+                                                @if($user->event->paid == 0)
+                                                    <br>
+                                                    <small class="text-muted">
+                                                        <b>Rate: </b>{{$user->event->rate}}</small>
+                                                    <br>
+                                                @endif
+                                                <br>
+                                                <p>{{$user->event->description }}</p>
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                     <div class="card-footer">
                                         <div class="row justify-content-left">

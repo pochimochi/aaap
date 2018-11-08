@@ -18,7 +18,7 @@
                 <div class="container" align="right">
                     <form action="{{action('AnnouncementsController@searching')}}" method="post">
                         @csrf
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <div class="input-group input-group-alternative mb-4">
                                     <div class="input-group-prepend"><span class="input-group-text"><i
@@ -38,63 +38,99 @@
                 <div class="row">
                     @if($announcements->count() < 1)
                         <div class="col-12">
-                            <div class="alert alert-default">Records not available.<br>
+                            <div class="alert alert-default mt-5">Records not available.<br>
                             </div>
-                            @else
-                                @foreach ($announcements as $announcement)
-                                    <div class="card mt-5 col-12 shadow">
-                                        <div class="card-body">
-                                            @if(session('user') && Auth::user())
-                                                <a class="display-4 mb-0"
-                                                   href="{{URL::to('/member/announcements/'. $announcement->id.'')}}">
-                                                    {{ $announcement->title}}
-                                                </a>
-                                            @else
-                                                <div class="display-4">
-                                                    {{ $announcement->title}}
-                                                </div>
-                                            @endif
-                                            <br>
-                                            <br>
-                                            @if($announcement->image_id != 0)
-                                                <div class="row">
-                                                    <div class="col-6"><img
-                                                            src="{{asset('/storage/'.$announcement->image->location)}}"
-                                                            class="img-fluid"
-                                                            alt="avatar"></div>
-                                                    <div class="col-6">
-                                                        <p> {{$announcement->description}}</p>
+                        </div>
+                    @else
+                        @foreach ($announcements as $announcement)
+                            <div class="col-12">
+
+                                <div class="card mt-5 shadow">
+                                    <div class="card-body">
+                                        @if(session('user') && Auth::user())
+                                            <a class="display-4 mb-0"
+                                               href="{{URL::to('/member/announcements/'. $announcement->id.'')}}">
+                                                {{ $announcement->title}}
+                                            </a>
+                                        @else
+                                            <div class="display-4">
+                                                {{ $announcement->title}}
+                                            </div>
+                                        @endif
+                                        <br>
+                                        <br>
+
+                                        <div class="row">
+                                            @if($announcement->image->count() > 0)
+                                                <div class="col-lg-6">
+                                                    <div id="carouselExampleFade"
+                                                         class="border carousel slide carousel-fade"
+                                                         data-ride="carousel">
+                                                        <div class="carousel-inner">
+                                                            @php $i = 0 @endphp
+                                                            @foreach($announcement->image as $name)
+
+                                                                <div
+                                                                    class="carousel-item @if($i == 0) active @endif">
+                                                                    <img
+                                                                        src="{{asset('/storage/'.$name->location)}}"
+                                                                        style="object-fit: scale-down"
+                                                                        class="d-block w-100" height="250" alt="">
+                                                                </div>
+                                                                @php $i++ @endphp
+                                                            @endforeach
+                                                        </div>
+                                                        <a class="carousel-control-prev" href="#carouselExampleFade"
+                                                           role="button"
+                                                           data-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                              aria-hidden="true"></span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                        <a class="carousel-control-next" href="#carouselExampleFade"
+                                                           role="button"
+                                                           data-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                              aria-hidden="true"></span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
                                                     </div>
                                                 </div>
-                                            @else()
-                                                <p class="card-text">{{$announcement->description}}</p>
                                             @endif
-                                            <hr>
-                                            <small class="text-muted"><b> Posted
-                                                    By: </b> {{ $announcement->user->firstname . ' ' . $announcement->user->lastname}}
-                                                on {{ \Carbon\Carbon::parse($announcement->created_at)->format('F d, Y')}}
-                                            </small>
-                                            </br>
-                                            @if($announcement->modified_by != 0)
-                                                <small class="text-muted"><b>Modified
-                                                        By: </b> {{ App\User::find($announcement->modified_by)->firstname . ' ' . $announcement->user->lastname}}
-                                                    on {{ \Carbon\Carbon::parse($announcement->updated_at)->format('F d, Y')}}
-                                                </small>
-                                                &nbsp;@endif
+                                            <div class="col">
+                                                <p> {{$announcement->description}}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            @endif
-                            <br>
-                        </div>
-                        <div class="row">
-                            <div class="col justify-content-center">
-                                {{ $announcements->links() }}
+
+
+                                    <div class="card-footer">
+
+                                        <small class="text-muted"><b>Posted
+                                                By: </b> {{ $announcement->user->firstname . ' ' . $announcement->user->lastname}}
+                                            on {{ \Carbon\Carbon::parse($announcement->created_at)->format('F d, Y')}}
+                                        </small>
+                                        <br>
+                                        @if($announcement->modified_by != 0)
+                                            <small class="text-muted"><b>Modified By: </b>
+                                                {{App\User::find($announcement->modified_by)->firstname . ' ' . $announcement->user->lastname}}
+                                                on {{ \Carbon\Carbon::parse($announcement->updated_at)->format('F d, Y')}}
+                                            </small>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col justify-content-center">
+                    {{ $announcements->links() }}
                 </div>
             </div>
         </section>
     </div>
+
 
 @endsection

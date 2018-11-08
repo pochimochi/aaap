@@ -172,7 +172,6 @@
                                     <div class="col-md-4">
                                         <label>Middle Name</label>
                                         <div class="form-group">
-
                                             <input value="{{ old('middlename') }}" type="text"
                                                    name="middlename" id="middlename"
                                                    class="form-control input-default">
@@ -182,7 +181,6 @@
                                     <div class="col-md-4">
                                         <label>Last Name</label>
                                         <div class="form-group required">
-
                                             <input value="{{ old('lastname') }}" type="text"
                                                    name="lastname" id="lastname"
                                                    class="form-control input-default">
@@ -194,7 +192,6 @@
                                     <div class="col-md-4">
                                         <label class="control-label">Gender</label>
                                         <div class="form-group required">
-
                                             <select class="form-control custom-select input-default"
                                                     name="gender" id="gender">
                                                 <option value="">Select Gender</option>
@@ -211,7 +208,6 @@
                                     <div class="col-md-4">
                                         <label>Landline Number</label>
                                         <div class="form-group">
-
                                             <input value="{{ old('landline_number') }}" type="text"
                                                    name="landline_number" id="landline_number" MAXLENGTH="7" placeholder="#######"
                                                    class="form-control input-default">
@@ -221,7 +217,6 @@
                                     <div class="col-md-4">
                                         <label>Mobile Number</label>
                                         <div class="form-group required">
-
                                             <input value="{{ old('mobile_number') }}" type="text"
                                                    name="mobile_number" id="mobile_number" MAXLENGTH="11"
                                                    class="form-control input-default">
@@ -233,7 +228,6 @@
                                     <div class="col-md-6">
                                         <label>Profile Picture</label>
                                         <div class="form-group">
-
                                             <input value="{{ old('profile_id') }}" type="file"
                                                    name="profile_id" id="file-input"
                                                    class="form-control-file"/>
@@ -244,7 +238,6 @@
                                     <div class="col-md-6">
                                         <label>ID Verification</label>
                                         <div class="form-group required">
-
                                             <input value="{{ old('idverification_id') }}" type="file"
                                                    name="idverification_id" id="id-input"
                                                    class="form-control-file"/>
@@ -261,8 +254,8 @@
                                             <h3 class="box-title m-t-40">Permanent Address</h3>
                                             <div class="row">
                                                 <div class="col-md-4">
+                                                    <label>House/Apartment/Unit No.</label>
                                                     <div class="form-group required">
-                                                        <label>House/Apartment/Unit No.</label>
                                                         <input value="{{ old('unitno') }}" type="text"
                                                                name="unitno" id="unitno"
                                                                class="form-control input-default">
@@ -270,8 +263,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
+                                                    <label>Building</label>
                                                     <div class="form-group">
-                                                        <label>Building</label>
                                                         <input value="{{ old('bldg') }}" type="text"
                                                                name="bldg"
                                                                id="bldg"
@@ -280,8 +273,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
+                                                    <label>Street</label>
                                                     <div class="form-group required">
-                                                        <label>Street</label>
                                                         <input value="{{ old('street') }}" type="text"
                                                                name="street" id="street"
                                                                class="form-control input-default">
@@ -291,8 +284,8 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
+                                                    <label>City</label>
                                                     <div class="form-group required">
-                                                        <label>City</label>
                                                         <input value="{{ old('city') }}" type="text"
                                                                name="city"
                                                                id="city"
@@ -301,8 +294,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
+                                                    <label>Country</label>
                                                     <div class="form-group required">
-                                                        <label>Country</label>
                                                         <select class="form-control custom-select input-default"
                                                                 name="country_id" id="country_id">
                                                             <option value="">Select Country</option>
@@ -321,8 +314,8 @@
                                             <h3 class="box-title m-t-40">Temporary Address</h3>
                                             <div class="row">
                                                 <div class="col-md-4">
+                                                    <label>House/Apartment/Unit No.</label>
                                                     <div class="form-group">
-                                                        <label>House/Apartment/Unit No.</label>
                                                         <input value="{{ old('tunitno') }}" type="text"
                                                                name="tunitno" id="tunitno"
                                                                class="form-control input-default">
@@ -330,8 +323,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
+                                                    <label>Building</label>
                                                     <div class="form-group">
-                                                        <label>Building</label>
                                                         <input value="{{ old('tbldg') }}" type="text"
                                                                name="tbldg" id="tbldg"
                                                                class="form-control input-default">
@@ -339,8 +332,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
+                                                    <label>Street</label>
                                                     <div class="form-group">
-                                                        <label>Street</label>
                                                         <input value="{{ old('tstreet') }}" type="text"
                                                                name="tstreet" id="tstreet"
                                                                class="form-control input-default">
@@ -350,8 +343,8 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
+                                                    <label>City</label>
                                                     <div class="form-group">
-                                                        <label>City</label>
                                                         <input value="{{ old('tcity') }}" type="text"
                                                                name="tcity" id="tcity"
                                                                class="form-control input-default">
@@ -359,8 +352,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
+                                                    <label>Country</label>
                                                     <div class="form-group">
-                                                        <label>Country</label>
                                                         <select class="form-control custom-select input-default"
                                                                 name="tcountry" id="tcountry">
                                                             <option value="">Select Country</option>
@@ -383,8 +376,8 @@
                                     <h3 class="box-title m-t-40">Person with Autism Information</h3>
                                     <div class="row">
                                         <div class="col-md-4">
+                                            <label>First Name</label>
                                             <div class="form-group">
-                                                <label>First Name</label>
                                                 <input value="{{ old('pwaFirstName') }}" type="text"
                                                        name="pwaFirstName" id="pwaFirstName"
                                                        class="form-control input-default">
@@ -392,8 +385,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
+                                            <label>Middle Name</label>
                                             <div class="form-group">
-                                                <label>Middle Name</label>
                                                 <input value="{{ old('pwaMiddleName') }}" type="text"
                                                        name="pwaMiddleName" id="pwaMiddleName"
                                                        class="form-control input-default">
@@ -401,8 +394,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
+                                            <label>Last Name</label>
                                             <div class="form-group">
-                                                <label>Last Name</label>
                                                 <input value="{{ old('pwaLastName') }}" type="text"
                                                        name="pwaLastName" id="pwaLastName"
                                                        class="form-control input-default">
@@ -412,8 +405,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
+                                            <label class="control-label">Gender</label>
                                             <div class="form-group">
-                                                <label class="control-label">Gender</label>
                                                 <select class="form-control custom-select input-default"
                                                         name="pwaGender" id="pwaGender">
                                                     <option value="">Select Gender</option>
@@ -428,8 +421,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
+                                            <label>Relationship to PWA</label>
                                             <div class="form-group">
-                                                <label>Relationship to PWA</label>
                                                 <input value="{{ old('pwaRelationship') }}" type="text"
                                                        name="pwaRelationship" id="pwaRelationship"
                                                        class="form-control input-default">
@@ -437,8 +430,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
+                                            <label>Occupation</label>
                                             <div class="form-group">
-                                                <label>Occupation</label>
                                                 <input value="{{ old('pwaOccupation') }}"
                                                        name="pwaOccupation"
                                                        id="pwaOccupation" type="text"
@@ -447,8 +440,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
+                                            <label>Number of Siblings</label>
                                             <div class="form-group">
-                                                <label>Number of Siblings</label>
                                                 <input value="{{ old('siblingcount') }}"
                                                        name="siblingcount"
                                                        id="siblingcount" type="number"
@@ -457,8 +450,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
+                                            <label>With Intervention</label>
                                             <div class="form-group">
-                                                <label>With Intervention</label>
                                                 <select class="form-control custom-select input-default"
                                                         name="withintervention" id="withintervention">
                                                     <option value="">Select Option</option>
@@ -478,8 +471,8 @@
                                     <h3 class="box-title m-t-40">About the Employer</h3>
                                     <div class="row">
                                         <div class="col-md-6">
+                                            <label>Employer's Name</label>
                                             <div class="form-group">
-                                                <label>Employer's Name</label>
                                                 <input value="{{ old('employerName') }}" type="text"
                                                        name="employerName" id="employerName"
                                                        class="form-control input-default">
@@ -487,8 +480,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
+                                            <label>Contact Number</label>
                                             <div class="form-group">
-                                                <label>Contact Number</label>
                                                 <input value="{{ old('employerContactNumber') }}"
                                                        type="text"
                                                        name="employerContactNumber"
@@ -500,8 +493,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
+                                            <label>House/Apartment/Unit No.</label>
                                             <div class="form-group">
-                                                <label>House/Apartment/Unit No.</label>
                                                 <input value="{{ old('eunitno') }}" type="text"
                                                        name="eunitno"
                                                        id="eunitno"
@@ -510,8 +503,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
+                                            <label>Building</label>
                                             <div class="form-group">
-                                                <label>Building</label>
                                                 <input value="{{ old('ebldg') }}" type="text" name="ebldg"
                                                        id="ebldg"
                                                        class="form-control input-default">
@@ -519,8 +512,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
+                                            <label>Street</label>
                                             <div class="form-group">
-                                                <label>Street</label>
                                                 <input value="{{ old('estreet') }}" type="text"
                                                        name="estreet"
                                                        id="estreet"
@@ -531,8 +524,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
+                                            <label>City</label>
                                             <div class="form-group">
-                                                <label>City</label>
                                                 <input value="{{ old('ecity') }}" type="text" name="ecity"
                                                        id="ecity"
                                                        class="form-control input-default">
@@ -540,8 +533,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
+                                            <label>Country</label>
                                             <div class="form-group">
-                                                <label>Country</label>
                                                 <select name="ecountry" id="ecountry"
                                                         class="form-control custom-select input-default">
                                                     <option value="">Select Country</option>
@@ -562,8 +555,8 @@
                                     <h3 class="box-title m-t-40">Login Credentials</h3>
                                     <div class="row">
                                         <div class="col-md-6">
+                                            <label>Email Address</label>
                                             <div class="form-group required">
-                                                <label>Email Address</label>
                                                 <input value="{{ old('email') }}" type="email"
                                                        name="email" id="email"
                                                        class="form-control input-default">
@@ -571,8 +564,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
+                                            <label>Password</label>
                                             <div class="form-group required">
-                                                <label>Password</label>
                                                 <input value="{{ old('password') }}" type="password"
                                                        name="password" id="password"
                                                        class="form-control input-default">
