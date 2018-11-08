@@ -50,6 +50,13 @@ class Helper
         $mail->Subject = $subject;
         $mail->ContentType = 'text/plain';
         $mail->isHTML(true);
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
 
         $mail->Body = $bodyhtml;
         // you may also use $mail->Body =       file_get_contents('your_mail_template.html');

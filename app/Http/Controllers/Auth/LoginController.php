@@ -47,6 +47,8 @@ class LoginController extends Controller
             'email' => 'required|max:255|exists:users',
             'password' => 'required|max:64',
             'g-recaptcha-response' => 'required'
+        ], [
+            'g-recaptcha-response.required' => 'Please check the recaptcha box before logging in.'
         ]);
 
         $attempt = Auth::attempt(['email' => $request['email'], 'password' => $request['password']]);

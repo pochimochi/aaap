@@ -71,7 +71,7 @@ class EventController extends Controller
             'name' => 'required|string|max:100',
             'description' => 'required|max:500',
             'venue' => 'required|max:50',
-            'city' => 'required',
+            'city' => 'required|max:50',
             'unitno' => 'required|max:5',
 
             'bldg' => 'required|max:50',

@@ -52,6 +52,7 @@ class AdminsController extends Controller
         $userinfo['mobile_number'] = '';
         $userinfo['landline_number'] = '';
         $userinfo['ecity'] = '';
+        $userinfo['password'] = '';
         $userinfo['idverification_id'] = 1;
         $userinfo['permanentaddress_id'] = 0;
         $file1 = '';
