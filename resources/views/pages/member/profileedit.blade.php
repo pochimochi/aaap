@@ -68,7 +68,7 @@
                                                                 class="hidden-sm-up"><i class="ti-email"></i></span>
                                                         <span class="hidden-xs-down">Credentials</span></a></li>
                                             </ul>
-                                            <form class="form" action="{{url('member/profile/save')}}" method="post"
+                                            <form class="form" action="{{url('member/profile/save')}}" id="editForm" method="post"
                                                   enctype="multipart/form-data"
                                                   id="registrationForm">
                                                 <div class="tab-content">
@@ -156,18 +156,7 @@
                                                                     <span class="text-danger">{{ $errors->first('profile_id') }}</span>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <label>ID Verification</label>
-                                                                <div class="form-group required">
 
-                                                                    <input value="{{ old('idverification_id') }}"
-                                                                           type="file"
-                                                                           name="verification[location]" id="id-input"
-                                                                           class="form-control-file"/>
-                                                                    <div id="thumb1-output"></div>
-                                                                    <span class="text-danger">{{ $errors->first('idverification_id') }}</span>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane" id="address">
@@ -570,6 +559,9 @@
             </div>
         </section>
     </main>
+    <!-- Laravel Javascript Validation -->
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+    {!! JsValidator::formRequest('App\Http\Requests\RegisterFormRequest', '#editForm'); !!}
 @endsection
 
 
