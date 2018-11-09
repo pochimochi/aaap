@@ -113,8 +113,8 @@
                                         </small>
                                         <br>
                                         @if($announcement->modified_by != 0)
-                                            <small class="text-muted"><b>Modified By: </b>
-                                                {{App\User::find($announcement->modified_by)->firstname . ' ' . $announcement->user->lastname}}
+                                            <small class="text-muted"><b>Modified
+                                                    By: </b> {{ App\User::find($announcement->modified_by)->firstname . ' ' . App\User::find($announcement->modified_by)->lastname}}
                                                 on {{ \Carbon\Carbon::parse($announcement->updated_at)->format('F d, Y')}}
                                             </small>
                                         @endif
