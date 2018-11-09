@@ -294,20 +294,15 @@
                                         <div class="modal-body p-0">
                                             <div class="card bg-secondary shadow border-0">
                                                 <div class="card-body">
-                                                    <div class="text-center text-muted mb-4">
-                                                        <small>Please State the reason of cancellation below</small>
-                                                    </div>
                                                     <form action="{{url('contentmanager/event/change_status')}}"
                                                           id="form{{$event->id}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$event->id}}">
-
                                                         <div class="col-12 mt-5">
-                                                            <label for="remarks">Other Remarks</label>
+                                                            <label for="remarks">Please state the reason for cancelling this event below.</label>
                                                             <textarea name="remarks" rows="5" id="remarks"
                                                                       class="form-control form-control-alternative"></textarea>
-                                                            <span
-                                                                class="text-danger">{{ $errors->first('remarks') }}</span>
+                                                            <span class="text-danger">{{ $errors->first('remarks') }}</span>
                                                         </div>
                                                         <div class="text-center mt-5">
                                                             <button type="submit" id="btnSubmit"

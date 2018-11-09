@@ -141,9 +141,14 @@ class ArticleController extends Controller
 
     public function changeStatus(Request $request)
     {
-
+        $this->validate($request, [
+            'remarks' => 'required|max:500|string',
+        ], [
+            'remarks.required' => 'You should state a valid reason for archiving this article.',
+            'remarks.max' => 'The reason must not be greater than 500 characters.',
+            'remarks.string' => 'The reason format is invalid.'
+        ]);
         $article = Articles::find($request->id);
-
         $article->remarks = $request->remarks;
         $article->status = 0;
         if ($article->save()) {

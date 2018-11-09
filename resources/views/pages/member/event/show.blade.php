@@ -107,9 +107,9 @@
                             </br>
                             @if($event->modified_by != 0)
                                 <small class="text-muted"><b>Modified
-                                        By: </b> {{ App\User::find($event->modified_by)->firstname . ' ' . $event->user->lastname}}
+                                        By: </b> {{ App\User::find($eventt->modified_by)->firstname . ' ' . App\User::find($event->modified_by)->firstname}}
                                     on {{ \Carbon\Carbon::parse($event->updated_at)->format('F d, Y')}}
-                                </small>
+                                </small>a
                                 &nbsp;@endif
                             <div class="row justify-content-end">
                                 @if((\App\EventAttendance::all()->where('user_id','=', session('user')['id'])->where('status', 1)->count()) < 1)

@@ -46,28 +46,28 @@
                                                     name="type_id" id="type_id">
                                                 <option value="">Select Type</option>
                                                 @foreach($categories as $category)
-                                                <option value="{{$category->id}}" {{ old('type_id') == $category->id ? 'selected' : '' }}>
-                                                    {{$category->name}}
-                                                </option>
+                                                    <option value="{{$category->id}}" {{ old('type_id') == $category->id ? 'selected' : '' }}>
+                                                        {{$category->name}}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             <span class="text-danger">{{ $errors->first('type_id') }}</span>
                                         </div>
                                     </div>
                                     {{--<div class="col-lg-4">--}}
-                                        {{--<div class="form-group">--}}
-                                            {{--<label>Status</label>--}}
-                                            {{--<select class="form-control custom-select input-default"--}}
-                                                    {{--name="status" id="status">--}}
-                                                {{--<option value="">Select Status</option>--}}
-                                                {{--<option value="1" {{ old('status') == 1 ? 'selected' : '' }}>--}}
-                                                    {{--Active--}}
-                                                {{--</option>--}}
-                                                {{--<option value="0" {{ old('status') == 1 ? 'selected' : '' }}>--}}
-                                                    {{--Inactive--}}
-                                                {{--</option>--}}
-                                            {{--</select>--}}
-                                        {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                    {{--<label>Status</label>--}}
+                                    {{--<select class="form-control custom-select input-default"--}}
+                                    {{--name="status" id="status">--}}
+                                    {{--<option value="">Select Status</option>--}}
+                                    {{--<option value="1" {{ old('status') == 1 ? 'selected' : '' }}>--}}
+                                    {{--Active--}}
+                                    {{--</option>--}}
+                                    {{--<option value="0" {{ old('status') == 1 ? 'selected' : '' }}>--}}
+                                    {{--Inactive--}}
+                                    {{--</option>--}}
+                                    {{--</select>--}}
+                                    {{--</div>--}}
                                     {{--</div>--}}
                                 </div>
                                 <div class="row">
@@ -182,30 +182,13 @@
                                             <div class="modal-body p-0">
                                                 <div class="card bg-secondary shadow border-0">
                                                     <div class="card-body">
-                                                        <div class="text-center text-muted mb-4">
-                                                            <small>Please state the reason below</small>
-                                                        </div>
                                                         <form action="{{url('contentmanager/announcement/change_status')}}"
                                                               id="form{{$announcement->id}}" method="post">
                                                             @csrf
                                                             <input type="hidden" name="id"
                                                                    value="{{$announcement->id}}">
-                                                            {{--<div class="col">
-                                                                <select class="form-control form-control-alternative"
-                                                                        type="text" name="remarksddl" id="remarksddl">
-                                                                    <option value="1">Others
-                                                                    </option>
-                                                                    --}}{{--  <option value="Due to unforseen circumstances">Due to
-                                                                          unforseen circumstances
-                                                                      </option>--}}{{--
-                                                                    <option value="Due to heavy rains/weather">Due to heavy
-                                                                        rains/weather
-                                                                    </option>
-
-                                                                </select>
-                                                            </div>--}}
                                                             <div class="col-12 mt-5">
-                                                                <label for="remarks">Remarks</label>
+                                                                <label for="remarks">Please state the reason for archiving this announcement below.</label>
                                                                 <textarea name="remarks" rows="5" id="remarks"
                                                                           class="form-control form-control-alternative"></textarea>
                                                                 <span class="text-danger">{{ $errors->first('remarks') }}</span>

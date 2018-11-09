@@ -182,6 +182,13 @@ class EventController extends Controller
 
     public function changeStatus(Request $request)
     {
+        $this->validate($request, [
+            'remarks' => 'required|max:500|string',
+        ], [
+            'remarks.required' => 'You should state a valid reason for the cancellation of this event.',
+            'remarks.max' => 'The reason must not be greater than 500 characters.',
+            'remarks.string' => 'The reason format is invalid.'
+        ]);
         $event = Event::find($request->id);
         $event->remarks = $request->remarks;
         $event->status = 0;

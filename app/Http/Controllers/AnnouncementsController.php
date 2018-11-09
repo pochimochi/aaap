@@ -189,6 +189,13 @@ class AnnouncementsController extends Controller
 
     public function changeStatus(Request $request)
     {
+        $this->validate($request, [
+            'remarks' => 'required|max:500|string',
+        ], [
+            'remarks.required' => 'You should state a valid reason for archiving this announcement.',
+            'remarks.max' => 'The reason must not be greater than 500 characters.',
+            'remarks.string' => 'The reason format is invalid.'
+        ]);
         $announcements = Announcements::find($request->id);
         $announcements->remarks = $request->remarks;
         $announcements->status = 0;

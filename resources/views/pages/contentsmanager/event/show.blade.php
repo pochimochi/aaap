@@ -69,7 +69,6 @@
                                              <div class="carousel-inner">
                                                  @php $i = 0 @endphp
                                                  @foreach($event->image as $name)
-
                                                      <div class="carousel-item @if($i == 0) active @endif">
                                                          <img src="{{asset('/storage/'.$name->location)}}" style="object-fit: scale-down"
                                                               class="d-block w-100" height="250" alt="no-image">
@@ -93,7 +92,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <small class="text-muted">
-                                            <b>Category: </b>{{$event->category_id== 1 ? 'Public' : 'Seminar' }}
+                                            <b>Category: </b>{{$event->category_id== 1 ? 'Public' : 'Private' }}
                                         </small>
                                         <br>
                                         <small class="text-muted">

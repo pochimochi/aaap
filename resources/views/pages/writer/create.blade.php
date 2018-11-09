@@ -161,15 +161,12 @@
                                         <div class="modal-body p-0">
                                             <div class="card bg-secondary shadow border-0">
                                                 <div class="card-body">
-                                                    <div class="text-center text-muted mb-4">
-                                                        <small>Please State the reason below</small>
-                                                    </div>
                                                     <form action="{{url('writer/articles/change_status')}}"
                                                           id="form{{$article->id}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$article->id}}">
                                                         <div class="col-12 mt-5">
-                                                            <label for="remarks">Other Remarks</label>
+                                                            <label for="remarks">Please state the reason for archiving this article below.</label>
                                                             <textarea name="remarks" rows="5" id="remarks"
                                                                       class="form-control form-control-alternative"></textarea>
                                                             <span class="text-danger">{{ $errors->first('remarks') }}</span>
