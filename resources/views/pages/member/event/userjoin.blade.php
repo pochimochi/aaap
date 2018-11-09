@@ -110,132 +110,137 @@
 
                                     </div>
                                     <div class="card-footer">
-                                        <div class="row justify-content-left">
-                                            <small class="text-muted"><b> Posted
-                                                    By: </b> {{ $user->event->user->firstname . ' ' . $user->event->user->lastname}}
-                                                on {{ \Carbon\Carbon::parse($user->event->created_at)->format('F d, Y')}}
-                                            </small>
-                                            </br>
-                                            @if($user->event->modified_by != 0)
-                                                <small class="text-muted"><b>Modified
-                                                        By: </b> {{ App\User::find($user->event->modified_by)->firstname . ' ' . $user->event->user->lastname}}
-                                                    on {{ \Carbon\Carbon::parse($user->event->updated_at)->format('F d, Y')}}
+                                        <div class="row justify-content-between">
+                                            <div class="col">
+                                                <small class="text-muted"><b> Posted
+                                                        By: </b> {{ $user->event->user->firstname . ' ' . $user->event->user->lastname}}
+                                                    on {{ \Carbon\Carbon::parse($user->event->created_at)->format('F d, Y')}}
                                                 </small>
-                                                &nbsp;@endif
-                                        </div>
-                                        <div class="row justify-content-end">
-
-                                            <div class="col-md-4">
-
-                                                <button type="button" class="btn btn-block btn-info mb-3"
-                                                        data-toggle="modal"
-                                                        data-target="#payment{{$user->event->id}}">Reminders
-                                                </button>
-                                                <div class="modal fade" id="payment{{$user->event->id}}"
-                                                     tabindex="-1" role="dialog"
-                                                     aria-labelledby="modal-notification"
-                                                     aria-hidden="true">
-                                                    <div class="modal-dialog modal-danger modal-dialog-centered modal-"
-                                                         role="document">
-                                                        <div class="modal-content bg-gradient-info">
-
-                                                            <div class="modal-header">
-                                                                <h6 class="modal-title"
-                                                                    id="modal-title-notification">Your
-                                                                    attention is required</h6>
-                                                                <button type="button" class="close"
-                                                                        data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                    <span aria-hidden="true">×</span>
-                                                                </button>
-                                                            </div>
-
-                                                            <div class="modal-body">
-
-                                                                <div class="py-3 text-center">
-                                                                    <i class="ni ni-bell-55 ni-3x"></i>
-                                                                    <h4 class="heading mt-4">You should read
-                                                                        this!</h4>
-                                                                    <b>Deposit the event fee at any Bank of the
-                                                                        Philippine Island branch or on-line on
-                                                                        AAAP's account number: 0401.0099.49</b>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="modal-footer">
-
-                                                                <button type="button"
-                                                                        class="btn btn-link text-white ml-auto"
-                                                                        data-dismiss="modal">Ok, Got it
-                                                                </button>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
+                                                </br>
+                                                @if($user->event->modified_by != 0)
+                                                    <small class="text-muted"><b>Modified
+                                                            By: </b> {{ App\User::find($user->event->modified_by)->firstname . ' ' . $user->event->user->lastname}}
+                                                        on {{ \Carbon\Carbon::parse($user->event->updated_at)->format('F d, Y')}}
+                                                    </small>
+                                                    &nbsp;@endif
                                             </div>
-                                            <div class="col-md-4">
-                                                <button type="button" class="btn btn-block btn-danger mb-3"
-                                                        data-toggle="modal"
-                                                        data-target="#cancel{{$user->event->id}}">Cancel
-                                                    Participation
-                                                </button>
-                                                <div class="modal fade" id="cancel{{$user->event->id}}"
-                                                     tabindex="-1" role="dialog"
-                                                     aria-labelledby="modal-notification"
-                                                     aria-hidden="true">
+                                            <div class="col-4">
 
-                                                    <form action="{{action('AttendanceController@cancel')}}"
-                                                          method="post">
-                                                        @csrf
-                                                        <input type="hidden" name="eventid"
-                                                               value="{{$user->event->id}}">
-                                                        <div class="modal-dialog modal-danger modal-dialog-centered modal-"
-                                                             role="document">
-                                                            <div class="modal-content bg-gradient-danger">
 
-                                                                <div class="modal-header">
-                                                                    <h6 class="modal-title"
-                                                                        id="modal-title-notification">Your
-                                                                        attention is required</h6>
-                                                                    <button type="button" class="close"
-                                                                            data-dismiss="modal"
-                                                                            aria-label="Close">
-                                                                        <span aria-hidden="true">×</span>
-                                                                    </button>
-                                                                </div>
+                                                    @if($user->paid == '0')
+                                                        <button type="button" class="btn btn-block btn-info mb-1"
+                                                                data-toggle="modal"
+                                                                data-target="#payment{{$user->event->id}}">Reminders
+                                                        </button>
+                                                        <div class="modal fade" id="payment{{$user->event->id}}"
+                                                             tabindex="-1" role="dialog"
+                                                             aria-labelledby="modal-notification"
+                                                             aria-hidden="true">
+                                                            <div
+                                                                class="modal-dialog modal-danger modal-dialog-centered modal-"
+                                                                role="document">
+                                                                <div class="modal-content bg-gradient-info">
 
-                                                                <div class="modal-body">
+                                                                    <div class="modal-header">
+                                                                        <h6 class="modal-title"
+                                                                            id="modal-title-notification">Your
+                                                                            attention is required</h6>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal"
+                                                                                aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                    </div>
 
-                                                                    <div class="py-3 text-center">
-                                                                        <i class="ni ni-bell-55 ni-3x"></i>
-                                                                        <h4 class="heading mt-4">Are you sure?</h4>
-                                                                        <p>Cancelling would remove your attendance
-                                                                            to this event.</p>
+                                                                    <div class="modal-body">
+
+                                                                        <div class="py-3 text-center">
+                                                                            <i class="ni ni-bell-55 ni-3x"></i>
+                                                                            <h4 class="heading mt-4">You should read
+                                                                                this!</h4>
+                                                                            <b>Deposit the event fee at any Bank of the
+                                                                                Philippine Island branch or on-line on
+                                                                                AAAP's account number: 0401.0099.49</b>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+
+                                                                        <button type="button"
+                                                                                class="btn btn-link text-white ml-auto"
+                                                                                data-dismiss="modal">Ok, Got it
+                                                                        </button>
                                                                     </div>
 
                                                                 </div>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="submit" class="btn btn-white">
-                                                                        Yes, Cancel it
-                                                                    </button>
-                                                                    <button type="button"
-                                                                            class="btn btn-link text-white ml-auto"
-                                                                            data-dismiss="modal">Cancel
-                                                                    </button>
-                                                                </div>
-
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    @endif
 
-                                                </div>
+
+                                                    <button type="button" class="btn btn-block btn-danger mb-1"
+                                                            data-toggle="modal"
+                                                            data-target="#cancel{{$user->event->id}}">Cancel
+                                                        Participation
+                                                    </button>
+                                                    <div class="modal fade" id="cancel{{$user->event->id}}"
+                                                         tabindex="-1" role="dialog"
+                                                         aria-labelledby="modal-notification"
+                                                         aria-hidden="true">
+
+                                                        <form action="{{action('AttendanceController@cancel')}}"
+                                                              method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="eventid"
+                                                                   value="{{$user->event->id}}">
+                                                            <div
+                                                                class="modal-dialog modal-danger modal-dialog-centered modal-"
+                                                                role="document">
+                                                                <div class="modal-content bg-gradient-danger">
+
+                                                                    <div class="modal-header">
+                                                                        <h6 class="modal-title"
+                                                                            id="modal-title-notification">Your
+                                                                            attention is required</h6>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal"
+                                                                                aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+
+                                                                        <div class="py-3 text-center">
+                                                                            <i class="ni ni-bell-55 ni-3x"></i>
+                                                                            <h4 class="heading mt-4">Are you sure?</h4>
+                                                                            <p>Cancelling would remove your attendance
+                                                                                to this event.</p>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" class="btn btn-white">
+                                                                            Yes, Cancel it
+                                                                        </button>
+                                                                        <button type="button"
+                                                                                class="btn btn-link text-white ml-auto"
+                                                                                data-dismiss="modal">Cancel
+                                                                        </button>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+
+
                                             </div>
-
                                         </div>
+
                                     </div>
                                 </div>
                             @endif

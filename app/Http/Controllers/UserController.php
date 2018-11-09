@@ -40,9 +40,7 @@ class UserController extends Controller
 
     public function update(EditProfileRequest $request)
     {
-        /*$request->validate([
 
-        ]);*/
         $array = $request->all();
 
         if ($request->file('profile.location')) {

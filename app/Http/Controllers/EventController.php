@@ -67,8 +67,10 @@ class EventController extends Controller
     public function store(Request $request)
     {
 
+
+
         $valid = Validator::make($request->all(), [
-            'name' => 'required|string|max:100',
+            'name' => 'required|unique:events,name,'. '0' .',status|string|max:100',
             'description' => 'required|max:500',
             'venue' => 'required|max:50',
             'city' => 'required|max:50',

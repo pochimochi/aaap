@@ -518,6 +518,7 @@
                                                 <div class="row pull-right">
                                                     <button type="submit" class="btn btn-success" id="save">Save Changes
                                                     </button>
+                                                    <a href="{{url('/member/profile')}}" class="btn btn-light">Cancel</a>
                                                 </div>
                                                 <input type="hidden" name="userid" value="{{ $users->id }}">
                                                 <input type="hidden" name="taddressid"

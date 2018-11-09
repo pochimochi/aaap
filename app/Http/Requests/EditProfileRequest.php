@@ -53,7 +53,7 @@ class EditProfileRequest extends FormRequest
             'pwaGender' => 'nullable|integer',
             'pwaRelationship' => 'nullable|max:50|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaOccupation' => 'nullable|max:50|string|regex:/^[a-z ,.\'-]+$/i',
-            'landline_number' => 'nullable|numeric|digits_between:7',
+            'landline_number' => 'nullable|numeric|digits:7',
             'mobile_number' => 'required|numeric|digits_between:11,13',
         ];
     }

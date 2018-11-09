@@ -46,7 +46,8 @@
                                                     name="category_id" id="category_id">
                                                 <option readonly="true">Select Event Category</option>
                                                 @foreach($categories as $category)
-                                                    <option value="{{$category->id}}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                                    <option
+                                                        value="{{$category->id}}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                                         {{$category->name}}
                                                     </option>
                                                 @endforeach
@@ -103,8 +104,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label id="ratelabel">Event Rate</label>
-                                            <input type="text" name="rate" id="rate" value="{{old('rate')}}"
+                                            <label id="ratelabel" >Event Rate</label>
+                                            <input type="text"  name="rate" id="rate" value="{{old('rate')}}"
                                                    class="form-control input-default">
                                         </div>
                                     </div>
@@ -113,8 +114,7 @@
                                             <label>Start Date</label>
                                             <input type="datetime-local" name="start_date"
                                                    value="{{old('start_date')}}"
-                                                   class="form-control input-default"
-                                                   placeholder="yyyy/mm/dd">
+                                                   class="form-control ">
                                             <span class="text-danger">{{ $errors->first('start_date') }}</span>
                                         </div>
                                     </div>
@@ -263,12 +263,12 @@
                                                             <input type="text"
                                                                    class="form-control form-control-alternative"
                                                                    placeholder="Subject" name="subject"> <span
-                                                                    class="text-danger">{{ $errors->first('subject') }}</span>
+                                                                class="text-danger">{{ $errors->first('subject') }}</span>
                                                         </div>
                                                         <div class="col-12 mt-5">
                                                             <textarea name="body" class="ckeditor"
                                                                       style="width: 100%; height: 50%"></textarea> <span
-                                                                    class="text-danger">{{ $errors->first('body') }}</span>
+                                                                class="text-danger">{{ $errors->first('body') }}</span>
 
                                                         </div>
 
@@ -319,7 +319,8 @@
                                                             <label for="remarks">Other Remarks</label>
                                                             <textarea name="remarks" rows="5" id="remarks"
                                                                       class="form-control form-control-alternative"></textarea>
-                                                            <span class="text-danger">{{ $errors->first('remarks') }}</span>
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('remarks') }}</span>
                                                         </div>
                                                         <div class="text-center mt-5">
                                                             <button type="submit" id="btnSubmit"
@@ -363,33 +364,39 @@
         </div>
     </div>
     <script type="text/javascript">
-        $('#paid').on('input', function (event) {
-            var text = $(this).val();
+        $(document).ready(function () {
+            $('#rate').prop('disabled', true);
+            $('#rate').hide();
+            $('#ratelabel').hide();
 
-            if (text === '1') { // If email is empty
-                $('#rate').prop('disabled', true);
-                $('#rate').hide();
-                $('#ratelabel').hide();
-            } else {
-                $('#rate').prop('disabled', false);
-                $('#rate').show();
-                $('#ratelabel').show();
-            }
+            $('#paid').on('input', function (event) {
+                var text = $(this).val();
+
+                if (text === '0') { // If email is empty
+                    $('#rate').prop('disabled', false);
+                    $('#rate').show();
+                    $('#ratelabel').show();
+
+                } else {
+                    $('#rate').prop('disabled', true);
+                    $('#rate').hide();
+                    $('#ratelabel').hide();
+                }
+            });
+            $('#remarksddl').on('input', function (event) {
+                var text = $(this).val();
+
+                if (text === '0') { // If email is empty
+                    $('#remarks').prop('disabled', true);
+                    $('#remarks').hide();
+                    $('#remarks').hide();
+                } else {
+                    $('#remarks').prop('disabled', false);
+                    $('#remarks').show();
+                    $('#remarks').show();
+                }
+            });
         });
-        $('#remarksddl').on('input', function (event) {
-            var text = $(this).val();
-
-            if (text === '0') { // If email is empty
-                $('#remarks').prop('disabled', true);
-                $('#remarks').hide();
-                $('#remarks').hide();
-            } else {
-                $('#remarks').prop('disabled', false);
-                $('#remarks').show();
-                $('#remarks').show();
-            }
-        });
-
 
     </script>
 
