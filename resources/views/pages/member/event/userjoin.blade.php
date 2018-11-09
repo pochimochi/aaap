@@ -156,9 +156,10 @@
                                                                         <i class="ni ni-bell-55 ni-3x"></i>
                                                                         <h4 class="heading mt-4">You should read
                                                                             this!</h4>
-                                                                        <b>Deposit the event fee at any Bank of the
-                                                                            Philippine Island branch or on-line on
-                                                                            AAAP's account number: 0401.0099.49</b>
+                                                                        <b>Deposit payment to Association for Adults with Autism Philippines (Bank of the Philippine Island c/a #0401.0099.49).
+                                                                            For check payments, please spell out and write the complete name: Association for Adults with Autism, Philippines. Send scanned deposit
+                                                                            slip to aspecialplacealfonso@gmail.com or send a screenshot image of the online transfer confirmation of transaction to FB Messenger of AAAP
+                                                                            (@adultautismphil.com). An acknowledgment email will be sent to confirm receipt of payment.</b>
                                                                     </div>
 
                                                                 </div>

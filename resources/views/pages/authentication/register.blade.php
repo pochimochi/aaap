@@ -161,12 +161,13 @@
                             <div class="tab">
                                 <h3 class="box-title m-t-40">Personal Information</h3>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <label class="" for="firstname">First Name</label>
+                                    <div class="col-md-4 required">
+                                        <label for="firstname">First Name</label>
                                         <div class="form-group">
                                             <input value="{{ old('firstname') }}" type="text"
-                                                   name="firstname" id="firstname" autofocus="false"
+                                                   name="firstname" id="firstname"
                                                    class="form-control">
+                                            <span class="text-danger">{{ $errors->first('firstname') }}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -178,7 +179,7 @@
                                             <span class="text-danger">{{ $errors->first('middlename') }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 required">
                                         <label>Last Name</label>
                                         <div class="form-group required">
                                             <input value="{{ old('lastname') }}" type="text"
@@ -189,7 +190,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 required">
                                         <label class="control-label">Gender</label>
                                         <div class="form-group required">
                                             <select class="form-control custom-select input-default"
@@ -214,7 +215,7 @@
                                             <span class="text-danger">{{ $errors->first('landline_number') }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 required">
                                         <label>Mobile Number</label>
                                         <div class="form-group required">
                                             <input value="{{ old('mobile_number') }}" type="text"
@@ -235,7 +236,7 @@
                                             <span class="text-danger">{{ $errors->first('profile_id') }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 required">
                                         <label>ID Verification</label>
                                         <div class="form-group required">
                                             <input value="{{ old('idverification_id') }}" type="file"
@@ -253,7 +254,7 @@
                                         <div class="col-lg-12">
                                             <h3 class="box-title m-t-40">Permanent Address</h3>
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 required">
                                                     <label>House/Apartment/Unit No.</label>
                                                     <div class="form-group required">
                                                         <input value="{{ old('unitno') }}" type="text"
@@ -262,7 +263,7 @@
                                                         <span class="text-danger">{{ $errors->first('unitno') }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 ">
                                                     <label>Building</label>
                                                     <div class="form-group">
                                                         <input value="{{ old('bldg') }}" type="text"
@@ -272,7 +273,7 @@
                                                         <span class="text-danger">{{ $errors->first('bldg') }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 required">
                                                     <label>Street</label>
                                                     <div class="form-group required">
                                                         <input value="{{ old('street') }}" type="text"
@@ -283,7 +284,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 required">
                                                     <label>City</label>
                                                     <div class="form-group required">
                                                         <input value="{{ old('city') }}" type="text"
@@ -293,7 +294,7 @@
                                                         <span class="text-danger">{{ $errors->first('city') }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 required">
                                                     <label>Country</label>
                                                     <div class="form-group required">
                                                         <select class="form-control custom-select input-default"
@@ -554,7 +555,7 @@
                                 <div class="col-lg-12">
                                     <h3 class="box-title m-t-40">Login Credentials</h3>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 required">
                                             <label>Email Address</label>
                                             <div class="form-group required">
                                                 <input value="{{ old('email') }}" type="email"
@@ -563,7 +564,7 @@
                                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 required">
                                             <label>Password</label>
                                             <div class="form-group required">
                                                 <input value="{{ old('password') }}" type="password"

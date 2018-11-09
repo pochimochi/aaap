@@ -79,7 +79,7 @@ class LoginController extends Controller
     public function logout()
     {
         $log = new logs();
-        $log->savelog(session('userId'), 'Logged Out');
+        $log->savelog(session('user')['id'], 'Logged Out');
         Session::flush();
         session()->flush();
         Auth::logout();

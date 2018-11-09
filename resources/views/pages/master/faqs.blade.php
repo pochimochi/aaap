@@ -52,7 +52,7 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h6 class="mb-0">Deposit the <b>₱500.00</b> membership fee.</h6>
+                                                    <h6 class="mb-0">Deposit the <b>₱500.00</b> membership fee to Association for Adults with Autism Philippines (Bank of the Philippine Island c/a #0401.0099.49)</h6>
                                                 </div>
                                             </div>
                                         </li>
@@ -64,7 +64,7 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h6 class="mb-0">Email your deposit slip to <b>adultautismphil@gmail.com</b>.</h6>
+                                                    <h6 class="mb-0">Write your name on the deposit slip and send scanned copy to <b>aspecialplace.alfonso@gmail.com</b>.</h6>
                                                 </div>
                                             </div>
                                         </li>
