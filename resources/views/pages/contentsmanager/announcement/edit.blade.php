@@ -3,7 +3,7 @@
     @include('layouts.master.nav')
 @endsection
 @section('pagetitle')
-    Articles
+    Announcements
 @endsection
 @section('header')
     <div class="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -65,7 +65,10 @@
                                                             {{--selected--}}
                                                             {{--@endif--}}
                                                             {{--> {{$category->name}}</option>--}}
-                                                            <option value="{{$category->id}}" {{ $announcement->type_id == $category->id ? 'selected' : '' }}>
+                                                            <option
+                                                                    value="{{$category->id}}" {{
+                                                            old('category_id') == $category->id ? 'selected' : '' }}
+                                                                    {{$announcement->type_id == $category->id ? 'selected' : '' }}>
                                                                 {{$category->name}}
                                                             </option>
                                                         @endforeach
