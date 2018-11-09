@@ -82,8 +82,8 @@ class AnnouncementsController extends Controller
     {
 
         $request->validate([
-            'title' => 'required|max:50',
-            'description' => 'required',
+            'title' => 'required|unique:announcements,title,0,status|max:50',
+            'description' => 'required|max:1000',
             'type_id' => 'required',
             'due_date' => 'nullable|after:today',
             'announcementImage' => 'nullable',
@@ -136,7 +136,7 @@ class AnnouncementsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:50',
-            'description' => 'required',
+            'description' => 'required|max:1000',
             'type_id' => 'required',
             'due_date' => 'required|date',
             'announcementImage' => 'nullable',

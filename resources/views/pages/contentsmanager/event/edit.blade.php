@@ -60,14 +60,14 @@
                                                 <select class="form-control custom-select input-default"
                                                         name="category_id">
                                                     <option readonly="true">Select Event Category</option>
-                                                    <option value="1"
-                                                            @if($event->category_id=="1") selected @endif>
-                                                        Public
-                                                    </option>
-                                                    <option value="2"
-                                                            @if($event->category_id=="2") selected @endif>
-                                                        Seminar
-                                                    </option>
+                                                    @foreach($categories as $category)
+                                                        <option
+                                                            value="{{$category->id}}" {{
+                                                            old('category_id') == $category->id ? 'selected' : '' }}
+                                                            {{$event->category_id == $category->id ? 'selected' : '' }}>
+                                                            {{$category->name}}
+                                                        </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                                     Images
                                                 </label>
                                                 <input type='file' hidden multiple name="eventImage[]"
-                                                       id="eventImage" />
+                                                       id="eventImage"/>
                                                 <div class="card bg-gradient-teal border-0">
                                                     <div class="card-body">
                                                         <div class="row">

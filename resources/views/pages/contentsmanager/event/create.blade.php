@@ -301,20 +301,7 @@
                                                           id="form{{$event->id}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$event->id}}">
-                                                        <div class="col">
-                                                            <select class="form-control form-control-alternative"
-                                                                    type="text" name="remarksddl" id="remarksddl">
-                                                                <option value="1">Others
-                                                                </option>
-                                                                <option value="Due to unforseen circumstances">Due to
-                                                                    unforseen circumstances
-                                                                </option>
-                                                                <option value="Due to heavy rains/weather">Due to heavy
-                                                                    rains/weather
-                                                                </option>
 
-                                                            </select>
-                                                        </div>
                                                         <div class="col-12 mt-5">
                                                             <label for="remarks">Other Remarks</label>
                                                             <textarea name="remarks" rows="5" id="remarks"

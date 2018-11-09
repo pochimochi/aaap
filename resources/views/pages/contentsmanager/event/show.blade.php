@@ -97,8 +97,8 @@
                                         </small>
                                         <br>
                                         <small class="text-muted">
-                                            <b>Duration: </b>{{$event->start_date }}
-                                            to{{$event->end_date}}</small>
+                                            <b>Duration: </b>{{\Carbon\Carbon::parse($event->start_date)->toDayDateTimeString()}}
+                                            to {{\Carbon\Carbon::parse($event->end_date)->toDayDateTimeString()}}</small>
                                         <br>
                                         <small class="text-muted"><b> Venue:</b> {{ $event->venue}}
                                         </small>

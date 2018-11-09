@@ -81,10 +81,9 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $valid = Validator::make($request->all(), [
-            'title' => 'required|max:150',
+            'title' => 'required|unique:articles,title,0,status|max:150',
             'articletype_id' => 'required',
             'body' => 'required',
-            'modified_by' => 'nullable|max:70',
 
         ], [
             'articletype_id' => 'The article type must be specified.'
@@ -182,8 +181,9 @@ class ArticleController extends Controller
     {
 
         $this->validate($request, [
-            'title' => 'required',
-            'status' => 'required'
+            'title' => 'required|max:150',
+            'articletype_id' => 'required',
+            'body' => 'required',
         ]);
         $articleId = $request->get('id');
         $article = Articles::all()->where('id', '=', $articleId)->first();

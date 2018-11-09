@@ -126,7 +126,8 @@ class EventController extends Controller
     public function edit($eventId)
     {
         $event = Event::find($eventId);
-        return view('pages.contentsmanager.event.edit', ['event' => $event]);
+        $categories = EventCategories::all();
+        return view('pages.contentsmanager.event.edit', compact(['event', 'categories']));
     }
 
     public function update(Request $request, $eventId)
