@@ -21,6 +21,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('events', 'EventController')->only(['index']);
     Route::resource('articles', 'ArticleController')->only(['index']);
     Route::get('announcements/type/{type}', 'AnnouncementsController@indexSelect');
+    Route::post('events/search', 'EventController@searching');
+    Route::post('announcements/search', 'AnnouncementsController@searching');
+    Route::post('articles/search', 'ArticleController@searching');
 
     //---------------------------------------------------------------------------------
     Route::group(['middleware' => 'member', 'prefix' => 'member'], function () {
@@ -30,7 +33,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('profile/save', 'UserController@update');
 
         Route::post('articles/find', 'ArticleController@searching');
-        Route::get('articles/find', 'ArticleController@searching');
         Route::get('articles/archived', 'ArticleController@archived');
         Route::resource('articles', 'ArticleController')->only(['index', 'show']);
         Route::get('announcements/type/{type}', 'AnnouncementsController@indexSelect');

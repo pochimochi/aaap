@@ -11,6 +11,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class ArticleController extends Controller
 {
@@ -50,8 +51,14 @@ class ArticleController extends Controller
 
     public function searching(Request $request)
     {
-        $articles = Articles::where('title', 'LIKE', '%' . $request->search . '%')->paginate(6);
-        return view('pages.member.article.index', ['articles' => $articles]);
+        if(Auth::guest()){
+            $articles = Articles::where('title', 'LIKE', '%' . $request->search . '%')->where('status', 1)->paginate(6);
+            return view('pages.member.article.index', ['articles' => $articles]);
+        }else{
+            $articles = Articles::where('title', 'LIKE', '%' . $request->search . '%')->where('status', 1)->paginate(6);
+            return view('pages.member.article.index', ['articles' => $articles]);
+        }
+
     }
 
     /**

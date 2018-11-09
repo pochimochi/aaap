@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\AnnouncementCategories;
 use App\AnnouncementImages;
 use App\Announcements;
-
+use Auth;
 use App\Helper;
 use App\Images;
 use Carbon\Carbon;
@@ -61,8 +61,13 @@ class AnnouncementsController extends Controller
 
     public function searching(Request $request)
     {
-        $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status', '=', '1')->paginate(5);
-        return view('pages.member.announcement.index', ['announcements' => $announcements]);
+        if(Auth::guest()){
+            $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status', '=', '1')->paginate(5);
+            return view('pages.member.announcement.index', ['announcements' => $announcements]);
+        }else{
+            $announcements = Announcements::where('title', 'LIKE', '%' . $request->search . '%')->where('status', '=', '1')->paginate(5);
+            return view('pages.member.announcement.index', ['announcements' => $announcements]);
+        }
     }
 
     public function create()

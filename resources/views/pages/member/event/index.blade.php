@@ -16,28 +16,34 @@
             </div>
             <div class="col-lg-12">
                 <div class="container" align="right">
-                    <form action="{{action('EventController@searching')}}" method="post">
-                        @csrf
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
+                    @if(Auth::guest())
+                        <form action="{{url('events/search')}}" method="post">
+                            @else
+                                <form action="{{action('EventController@searching')}}" method="post">
+                                    @endif
+                                    @csrf
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <div class="input-group-prepend">
                                                     <span class="input-group-text"><i
                                                             class="ni ni-zoom-split-in"></i></span>
+                                                </div>
+                                                <input class="form-control" name="search" placeholder="Search Title"
+                                                       type="text">
+                                                <button type="submit" class="btn btn-success"><i
+                                                        class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <input class="form-control" name="search" placeholder="Search Title"
-                                           type="text">
-                                    <button type="submit" class="btn btn-success"><i
-                                            class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                                </form>
                 </div>
             </div>
+            @if(!Auth::guest())
             <div class="container" align="left">
                 <a class="btn btn-default" href="{{action('AttendanceController@index')}}">Joined Events</a>
             </div>
+            @endif
             <div class="container justify-content-center">
                 @if($events->count() < 1)
                     <div class="col-12">
@@ -64,7 +70,6 @@
                                             @endif
                                         </small>
                                         <br>
-
                                         <div class="row">
                                             @if($event->image->count() > 0)
                                                 <div class="col-lg-6">
@@ -112,7 +117,7 @@
                                                 <br>
                                                 <small class="text-muted"><b> Venue:</b> {{ $event->venue}}
                                                 </small>
-                                                @if($event->paid == 0)
+                                                @if($event->paid == '0')
                                                     <br>
                                                     <small class="text-muted">
                                                         <b>Rate: </b>{{ $event->rate }}
@@ -121,26 +126,21 @@
                                                 @endif
                                                 <br>
                                                 <p>{{$event->description }}</p>
-
-                                                <hr>
-                                                <small class="text-muted"><b> Posted
-                                                        By: </b> {{ $event->user->firstname . ' ' . $event->user->lastname}}
-                                                    on {{ \Carbon\Carbon::parse($event->created_at)->format('F d, Y')}}
-                                                </small>
-                                                </br>
-                                                @if($event->modified_by != 0)
-                                                    <small class="text-muted"><b>Modified
-                                                            By: </b> {{ App\User::find($event->modified_by)->firstname . ' ' . $event->user->lastname}}
-                                                        on {{ \Carbon\Carbon::parse($event->updated_at)->format('F d, Y')}}
-                                                    </small>
-                                                @endif
-
-
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="card-footer">
+                                        <small class="text-muted"><b> Posted
+                                                By: </b> {{ $event->user->firstname . ' ' . $event->user->lastname}}
+                                            on {{ \Carbon\Carbon::parse($event->created_at)->format('F d, Y')}}
+                                        </small>
+                                        </br>
+                                        @if($event->modified_by != 0)
+                                            <small class="text-muted"><b>Modified
+                                                    By: </b> {{ App\User::find($event->modified_by)->firstname . ' ' . $event->user->lastname}}
+                                                on {{ \Carbon\Carbon::parse($event->updated_at)->format('F d, Y')}}
+                                            </small>
+                                        @endif
                                         <div class="row justify-content-end">
                                             @if(session('user') && Auth::user())
                                                 @if((\App\EventAttendance::all()->where('user_id','=', session('user')['id'])->where('event_id', $event->id)->where('status', 1)->count()) < 1)
@@ -152,7 +152,7 @@
                                                             <input type="hidden" name="id"
                                                                    value="{{$event->id}}">
                                                             <button type="button"
-                                                                    class="btn btn-block btn-info mb-3"
+                                                                    class="btn btn-block btn-info mb-1"
                                                                     data-toggle="modal"
                                                                     data-target="#notification{{$event->id}}">
                                                                 Sign
@@ -214,9 +214,9 @@
                                                 @else
                                                     <div class="form-actions">
                                                         <button type="button"
-                                                                class="btn btn-block btn-danger mb-3"
+                                                                class="btn btn-block btn-danger mb-1"
                                                                 data-toggle="modal"
-                                                                data-target="#cancel{{$event->id}}">Cancel Event
+                                                                data-target="#cancel{{$event->id}}">Cancel Participation
                                                         </button>
                                                         <div class="modal fade" id="cancel{{$event->id}}"
                                                              tabindex="-1" role="dialog"

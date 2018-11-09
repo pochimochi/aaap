@@ -16,22 +16,26 @@
             </div>
             <div class="col-lg-12">
                 <div class="container" align="right">
-                    <form action="{{action('AnnouncementsController@searching')}}" method="post">
-                        @csrf
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend"><span class="input-group-text"><i
-                                                class="ni ni-zoom-split-in"></i></span>
+                    @if(Auth::guest())
+                        <form action="{{url('announcements/search')}}" method="post">
+                            @else
+                                <form action="{{action('AnnouncementsController@searching')}}" method="post">
+                                    @endif
+                                    @csrf
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <div class="input-group-prepend"><span class="input-group-text"><i
+                                                            class="ni ni-zoom-split-in"></i></span>
+                                                </div>
+                                                <input class="form-control" name="search" placeholder="Search Title"
+                                                       type="text">
+                                                <button type="submit" class="btn btn-success"><i
+                                                        class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <input class="form-control" name="search" placeholder="Search Title"
-                                           type="text">
-                                    <button type="submit" class="btn btn-success"><i
-                                            class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                                </form>
                 </div>
             </div>
             <div class="container justify-content-center">
@@ -102,10 +106,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div class="card-footer">
-
                                         <small class="text-muted"><b>Posted
                                                 By: </b> {{ $announcement->user->firstname . ' ' . $announcement->user->lastname}}
                                             on {{ \Carbon\Carbon::parse($announcement->created_at)->format('F d, Y')}}

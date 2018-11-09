@@ -18,7 +18,7 @@
     <link type="text/css" href="{{asset('argonmember/assets/css/argon.css?v=1.0.1')}}" rel="stylesheet">
     <!-- Docs CSS -->
     <link type="text/css" href="{{asset('argonmember/assets/css/docs.min.css')}}" rel="stylesheet">
-    <script>
+    {{--<script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.onkeypress = function (event) {
             event = (event || window.event);
@@ -38,7 +38,8 @@
                 return false;
             }
         }
-    </script>
+    </script>--}}
+
 </head>
 
 <body>
@@ -85,14 +86,15 @@
 <script src="{{asset('argon/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <!-- Laravel Javascript Validation -->
 
+@yield('editForm')
+
 <script src="{{asset('argonmember/assets/vendor/onscreen/onscreen.min.js')}}"></script>
 <script src="{{asset('argonmember/assets/vendor/nouislider/js/nouislider.min.js')}}"></script>
 <script src="{{asset('argonmember/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('argonmember/assets/vendor/headroom/headroom.min.js')}}"></script>
 <!-- JS -->
 <script src="{{asset('argonmember/assets/js/argon.js?v=1.0.1')}}"></script>
-
-<script language="javascript">
+{{--<script language="javascript">
     document.onmousedown = disableclick;
     status = "Right Click Disabled";
     Function
@@ -103,7 +105,7 @@
             return false;
         }
     }
-</script>
+</script>--}}
 </body>
 
 </html>

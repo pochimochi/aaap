@@ -29,11 +29,11 @@ class EventController extends Controller
                 $categories = EventCategories::all();
                 return view('pages.contentsmanager.event.create', compact(['events', 'categories']));
             } else if (session('role') == 4) {
-                $events = Event::where('status', '=', '1')->paginate(10);;
+                $events = Event::where('status', '=', '1')->paginate(10);
                 return view('pages.member.event.index', ['events' => $events]);
             }
         } else {
-            $events = Event::where('status', '=', '1')->paginate(10);;
+            $events = Event::where('status', '=', '1')->paginate(10);
             return view('pages.member.event.index', ['events' => $events]);
 
         }
@@ -219,8 +219,14 @@ class EventController extends Controller
 
     public function searching(Request $request)
     {
-        $events = Event::where('name', 'LIKE', '%' . $request->search . '%')->paginate(10);
-        return view('pages.member.event.index', ['events' => $events]);
+        if(Auth::guest()){
+            $events = Event::where('name', 'LIKE', '%' . $request->search . '%')->where('status', 1)->paginate(10);
+            return view('pages.member.event.index', ['events' => $events]);
+        }else{
+            $events = Event::where('name', 'LIKE', '%' . $request->search . '%')->where('status', 1)->paginate(10);
+            return view('pages.member.event.index', ['events' => $events]);
+        }
+
     }
 
     public function destroy($eventId)

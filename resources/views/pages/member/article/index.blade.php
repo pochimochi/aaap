@@ -16,7 +16,11 @@
             </div>
             <div class="col-lg-12">
                 <div class="container" align="right">
-                    <form action="{{action('ArticleController@searching')}}" method="post">
+                    @if(Auth::guest())
+                        <form action="{{url('articles/search')}}" method="post">
+                            @else
+                                <form action="{{action('ArticleController@searching')}}" method="post">
+                                    @endif
                         @csrf
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
@@ -84,7 +88,6 @@
                                                                         <span class="sr-only">Next</span>
                                                                     </a>
                                                                 </div>
-
                                                             </div>
                                                         @endif
                                                         <div class="col">
