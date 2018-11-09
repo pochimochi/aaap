@@ -46,15 +46,10 @@ class UserController extends Controller
         if ($request->file('profile.location')) {
             $profile = Images::find($array['profileid']);
             $array['location'] = $request->file('profile.location')->getClientOriginalName();
-            $request->file('profile.location')->storeAs('public', $array['location']);
+            $request->file('profile.location')->move('public', $array['location']);
             $profile->update($array);
         }
-        if ($request->file('verification.location')) {
-            $verification = Images::find($array['verificationid']);
-            $array['location'] = $request->file('verification.location')->getClientOriginalName();
-            $request->file('verification.location')->storeAs('public', $array['location']);
-            $verification->update($array);
-        }
+
 
 
         $userupdate = User::find($array['userid']);

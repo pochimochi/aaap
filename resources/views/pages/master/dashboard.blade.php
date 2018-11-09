@@ -149,15 +149,8 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-lg-3 col-sm-12 col-md-6 m-1">
-                        <a class="btn btn-warning" target="_blank" href="{{action('PrintController@MemberStatus')}}">Paid/Unpaid
-                            Members <span class="fas fa-print"></span></a>
-                    </div>
 
 
-                </div>
-                <hr>
                 <div class="row">
                     <div class="col-lg-3 col-sm-12 col-md-6">
                         <span id="statusfilter"></span>
@@ -255,7 +248,7 @@
                                                         <div class="card-profile-image">
                                                             <a href="#">
                                                                 <img
-                                                                    src="{{$user->profilepic ? asset('/storage/'. $user->profilepic->location) : ''}}"
+                                                                    src="{{$user->profilepic ? asset('/public/'. $user->profilepic->location) : ''}}"
                                                                     alt="" width="150" height="150"
                                                                     style="object-fit:scale-down;background-color: white"
                                                                     class="bg-gradient-teal rounded-circle">
@@ -660,7 +653,7 @@
                                                                 @if($attendance->user->profilepic)
                                                                     <img style="object-fit: cover;"
                                                                          class="shadow avatar avatar-lg rounded-circle"
-                                                                         src="{{asset('/storage/'.$attendance->user->profilepic->location)}}"
+                                                                         src="{{asset('/public/'.$attendance->user->profilepic->location)}}"
                                                                          alt="">
                                                                     &nbsp;@endif
                                                                 {{$attendance->user->firstname .' '. $attendance->user->lastname}}

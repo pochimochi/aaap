@@ -22,7 +22,7 @@
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
                                     @if($users->profilepic)
-                                        <img src="{{asset('/storage/'.$users->profilepic->location)}}"
+                                        <img src="{{asset('/public/'.$users->profilepic->location)}}"
                                              class="rounded-circle" width="180" height="180"
                                              style="background-color: white;object-fit: scale-down" alt="">
 
@@ -153,7 +153,7 @@
                                                                            name="profile[location]" id="file-input"
                                                                            class="form-control-file"/>
                                                                     <div id="thumb-output"></div>
-                                                                    <span class="text-danger">{{ $errors->first('profile_id') }}</span>
+                                                                    <span class="text-danger">{{ $errors->first('profile[location]') }}</span>
                                                                 </div>
                                                             </div>
 

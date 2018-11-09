@@ -104,7 +104,7 @@ class EventController extends Controller
             if ($request->file('eventImage') != null) {
                 foreach($request->file('eventImage') as $name){
                     $eventinfo['image_name'] = $name->getClientOriginalName();
-                    $name->storeAs('public', $eventinfo['image_name']);
+                    $name->move('public', $eventinfo['image_name']);
                     $eventinfo['image_id'] = Images::create(['location' => $eventinfo['image_name']])->id;
                     EventImages::create(['image_id' => $eventinfo['image_id'], 'event_id' => $eventinfo['event_id']]);
                 }
@@ -159,7 +159,7 @@ class EventController extends Controller
             $event->image()->detach();
             foreach($request->file('eventImage') as $name){
                 $eventinfo['image_name'] = $name->getClientOriginalName();
-                $name->storeAs('public', $eventinfo['image_name']);
+                $name->move('public', $eventinfo['image_name']);
                 $eventinfo['image_id'] = Images::create(['location' => $eventinfo['image_name']])->id;
                 EventImages::create(['image_id' => $eventinfo['image_id'], 'event_id' => $event->id]);
             }
@@ -239,22 +239,5 @@ class EventController extends Controller
 
     }
 
-    public function destroy($eventId)
-    {
-        $event = Event::find($eventId);
-        if ($event->status == 1) {
-            $event->status = 0;
-        } else {
-            $event->status = 1;
-        }
-        if ($event->save()) {
-            $log = new logs();
-            $log->savelog(session('user_id'), 'Changed an Event Status');
-            toast('Status Changed!', 'success', 'bottom-right');
-            return redirect()->back();
-        } else {
-            alert()->error('Oops!', 'something went wrong :(');
-            return redirect()->back();
-        }
-    }
+
 }

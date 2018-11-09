@@ -95,7 +95,7 @@
                                                                 <div class="col-2">
                                                                     <div class="card shadow border-0">
                                                                         <img id="blah" class="card-img"
-                                                                             src="{{asset('/storage/'.$image->location.'')}}"/>
+                                                                             src="{{asset('/public/'.$image->location.'')}}"/>
                                                                     </div>
                                                                 </div>
                                                             @endforeach

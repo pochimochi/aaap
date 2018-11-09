@@ -33,6 +33,13 @@
                                     @method('PUT')
                                     @csrf
                                     <div class="form-body">
+                                        @if($errors->any())
+                                            <div class="alert alert-danger" role="alert">
+                                                @foreach($errors->all() as $error)
+                                                    {{$error}}
+                                                @endforeach
+                                            </div>
+                                        @endif
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="form-group">
@@ -60,11 +67,7 @@
                                                             Select Type
                                                         </option>
                                                         @foreach($categories as $category)
-                                                            {{--<option readonly="true"--}}
-                                                            {{--@if($category->id == $announcement->type_id)--}}
-                                                            {{--selected--}}
-                                                            {{--@endif--}}
-                                                            {{--> {{$category->name}}</option>--}}
+
                                                             <option
                                                                     value="{{$category->id}}" {{
                                                             old('category_id') == $category->id ? 'selected' : '' }}
@@ -102,7 +105,7 @@
                                                                 <div class="col-2">
                                                                     <div class="card shadow border-0">
                                                                         <img id="blah" class="card-img"
-                                                                             src="{{asset('/storage/'.$image->location.'')}}"/>
+                                                                             src="{{asset('/public/'.$image->location.'')}}"/>
                                                                     </div>
                                                                 </div>
                                                             @endforeach

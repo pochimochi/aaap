@@ -20,10 +20,14 @@ class ForgotPasswordController extends Controller
     public function store(Request $request)
     {
         $emailAddress = $request['email'];
+        $salt = 'salted';
         $check = User::all()->where('email', '=', $emailAddress)->first();
         if ($check != null) {
             $password = $check->password;
-            $link =  url('forgotpassword')."?key=" . $emailAddress . "&reset=" . $password . "&time=" . Carbon::now() . "";
+            $emailcode = bcrypt($check->password . $salt);
+            $check->emailcode = $emailcode;
+            $check->save();
+            $link = url('forgotpassword') . "?key=" . $emailcode . "&time=" . Carbon::now() . "";
             $body = '<html>
         <body>
         <h1>Password Reset</h1>
@@ -57,15 +61,24 @@ class ForgotPasswordController extends Controller
     {
         if ($request->exists('time') == true) {
             $time1 = $request->query('time');
-            $email = $request['key'];
-            $carbontime = Carbon::parse($time1);
-            $minutespassed = $carbontime->diffInMinutes(Carbon::now());
-            if ($minutespassed <= 35) {
-                return view('pages.master.newpassword', compact('email', $email));
-            } else {
-                \alert()->error('Whoops!', 'The Link has expired! Please try again.');
+            $key = $request['key'];
+            $user = User::where('emailcode', $key)->first();
+
+            if ($user != null) {
+                $email = $user->email;
+                $carbontime = Carbon::parse($time1);
+                $minutespassed = $carbontime->diffInMinutes(Carbon::now());
+                if ($minutespassed <= 35) {
+                    return view('pages.master.newpassword', compact('email'));
+                } else {
+                    \alert()->error('Whoops!', 'The Link has expired! Please try again.');
+                    return redirect('/login');
+                }
+            }else{
+                alert()->error('Whoops!', 'Your link has Expired');
                 return redirect('/login');
             }
+
         } else {
             alert()->error('Whoops!', 'There was an error!');
             return redirect('/login');
@@ -81,7 +94,9 @@ class ForgotPasswordController extends Controller
         if ($valid->passes()) {
             $query = DB::table('users')
                 ->where('email', '=', $request['emailAddress'])
-                ->update(['password' => bcrypt($request['password']), 'active' => '1']);
+                ->update(['password' => bcrypt($request['password']), 'active' => '1', 'emailcode' => '']);
+
+
             if ($query == 1) {
                 alert()->success('Success!!', 'Your password has been saved!');
                 return redirect('/login');

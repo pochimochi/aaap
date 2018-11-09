@@ -77,7 +77,7 @@
                                                                 <div
                                                                     class="carousel-item @if($i == 0) active @endif">
                                                                     <img
-                                                                        src="{{asset('/storage/'.$name->location)}}"
+                                                                        src="{{asset('/public/'.$name->location)}}"
                                                                         style="object-fit: scale-down"
                                                                         class="d-block w-100" height="250" alt="">
                                                                 </div>

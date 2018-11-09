@@ -26,7 +26,7 @@ class EditProfileRequest extends FormRequest
             'middlename' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'lastname' => 'required|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'gender' => 'required',
-            'profile_id' => 'nullable|image|mimes:jpeg,jpg,png|max:8000',
+            'profile.location' => 'nullable|image|mimes:jpeg,jpg,png|max:2000',
             'email' => 'required|email',
             'paddress.unitno' => 'required|max:5|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'paddress.bldg' => 'nullable|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',

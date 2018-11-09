@@ -52,18 +52,19 @@
                                 <td>{{ $member->lastname }}</td>
                                 <td>{{ $member->email}}</td>
                                 <td>
-                                @if(file_exists(asset('/storage/'.$member->idverification->location)))
-                                    {{ Response::download(asset('/storage/'.$member->idverification->location)) }}
+
+                                    @if(file_exists(public_path('/public/'.$member->idverification->location)))
+                                        <a href="{{ asset('/public/'.$member->idverification->location) }}">Download</a>
                                     @else
-
+                                        No file
                                     @endif
-                                    </td>
+                                </td>
 
-                                    <td>{{ \Carbon\Carbon::parse($member->created_at)->format('d/m/Y')}}</td>
-                                    <td><a id="btn"
-                                           href="{{URL::to('/admin/memberchangeStatus/'. $member->id. '/'.  ($member->active == 1 ? '0' : '1')  .'')}}"
-                                           class="btn {{$member->active == 1 ? 'btn-success' : 'btn-danger'}}">{{$member->active == 1 ? 'Paid' : 'Unpaid' }}</a>
-                                    </td>
+                                <td>{{ \Carbon\Carbon::parse($member->created_at)->format('d/m/Y')}}</td>
+                                <td><a id="btn"
+                                       href="{{URL::to('/admin/memberchangeStatus/'. $member->id. '/'.  ($member->active == 1 ? '0' : '1')  .'')}}"
+                                       class="btn {{$member->active == 1 ? 'btn-success' : 'btn-danger'}}">{{$member->active == 1 ? 'Paid' : 'Unpaid' }}</a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
