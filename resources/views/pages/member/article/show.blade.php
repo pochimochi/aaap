@@ -67,10 +67,10 @@
                                                     by: </b>{{ App\User::find($article->posted_by)->firstname . ' ' . $article->user->lastname}}
                                                 on {{ \Carbon\Carbon::parse($article->created_at)->format('F d, Y')}}
                                             </small>
-                                            @if($article->modifiedBy != 0)
+                                            @if($article->modified_by != 0)
                                                 <small class="text-muted"><b>Modified
-                                                        By: </b> {{ App\User::find($article->modified_by)->firstname . ' ' . $article->user->lastname }}
-                                                    on: {{ \Carbon\Carbon::parse($article->updated_at)->format('F d, Y')}}
+                                                        By: </b> {{ App\User::find($article->modified_by)->firstname . ' ' . App\User::find($article->modified_by)->lastname}}
+                                                    on {{ \Carbon\Carbon::parse($article->updated_at)->format('F d, Y')}}
                                                 </small>
                                                 &nbsp;@endif
                                             <div class="row justify-content-end">

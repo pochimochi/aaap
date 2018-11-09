@@ -21,21 +21,21 @@
                             @else
                                 <form action="{{action('ArticleController@searching')}}" method="post">
                                     @endif
-                        @csrf
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend"><span class="input-group-text"><i
-                                                class="ni ni-zoom-split-in"></i></span>
+                                    @csrf
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <div class="input-group-prepend"><span class="input-group-text"><i
+                                                                class="ni ni-zoom-split-in"></i></span>
+                                                </div>
+                                                <input class="form-control" name="search" placeholder="Search Title"
+                                                       type="text">
+                                                <button type="submit" class="btn btn-success"><i
+                                                            class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <input class="form-control" name="search" placeholder="Search Title"
-                                           type="text">
-                                    <button type="submit" class="btn btn-success"><i
-                                            class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                                </form>
                 </div>
             </div>
             <div class="row">
@@ -61,12 +61,13 @@
                                                                         @foreach($article->image as $name)
 
                                                                             <div
-                                                                                class="carousel-item @if($i == 0) active @endif">
+                                                                                    class="carousel-item @if($i == 0) active @endif">
                                                                                 <img
-                                                                                    src="{{asset('/storage/'.$name->location)}}"
-                                                                                    style="object-fit: scale-down"
-                                                                                    class="d-block w-100" height="250"
-                                                                                    alt="no-image">
+                                                                                        src="{{asset('/storage/'.$name->location)}}"
+                                                                                        style="object-fit: scale-down"
+                                                                                        class="d-block w-100"
+                                                                                        height="250"
+                                                                                        alt="no-image">
                                                                             </div>
                                                                             @php $i++ @endphp
                                                                         @endforeach
@@ -105,10 +106,10 @@
                                                                 @if (session('role') != 4)
                                                                     @if($article->status == 0)
                                                                         <span
-                                                                            class="badge badge-danger float-right mt-1">Archived</span>
+                                                                                class="badge badge-danger float-right mt-1">Archived</span>
                                                                     @else
                                                                         <span
-                                                                            class="badge badge-success float-right mt-1">Active</span>
+                                                                                class="badge badge-success float-right mt-1">Active</span>
                                                                     @endif
                                                                 @endif
                                                             </small>
@@ -124,10 +125,9 @@
                                                     </small>
                                                     <br>
                                                     @if($article->modified_by != 0)
-                                                        <small class="text-muted"><b> Modified
-                                                                By: </b>{{ App\User::find($article->modified_by)->firstname . ' ' . $article->user->lastname }}
-                                                            on
-                                                            {{ \Carbon\Carbon::parse($article->updated_at)->format('F d, Y')}}
+                                                        <small class="text-muted"><b>Modified
+                                                                By: </b> {{ App\User::find($article->modified_by)->firstname . ' ' . App\User::find($article->modified_by)->lastname}}
+                                                            on {{ \Carbon\Carbon::parse($article->updated_at)->format('F d, Y')}}
                                                         </small>
                                                     @endif
                                                 </div>
