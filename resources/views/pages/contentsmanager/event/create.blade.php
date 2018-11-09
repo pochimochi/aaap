@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Start Date</label>
                                             <input type="datetime-local" name="start_date"
                                                    value="{{old('start_date')}}"
@@ -119,7 +119,7 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>End Date</label>
                                             <input type="datetime-local" name="end_date" value="{{old('end_date')}}"
                                                    class="form-control input-default"
@@ -129,7 +129,7 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Venue</label>
                                             <input type="text" name="venue" id="venue"
                                                    value="{{old('venue')}}"
