@@ -54,7 +54,7 @@
                             <div class="dropdown-menu">
                                 <a href="{{URL::to('/member/announcements/type', '1')}}"
                                    class="dropdown-item">General Announcements</a>
-                                <a href="{{URL::to('/member/announcements/type', '0')}}"
+                                <a href="{{URL::to('/member/announcements/type', '2')}}"
                                    class="dropdown-item">Special Announcements</a>
                             </div>
                         </li>

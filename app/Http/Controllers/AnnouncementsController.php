@@ -179,8 +179,8 @@ class AnnouncementsController extends Controller
     {
         if ($type == 1) {
             $announcements = Announcements::where('status', '=', 1)->where('type_id', '=', 1)->paginate(10);
-        } elseif ($type == 0) {
-            $announcements = Announcements::where('status', '=', 1)->where('type_id', '=', 0)->paginate(10);
+        } elseif ($type == 2) {
+            $announcements = Announcements::where('status', '=', 1)->where('type_id', '=', 2)->paginate(10);
         } else {
             $announcements = Announcements::where('status', '=', 1)->where('type_id', '=', 1)->paginate(10);
         }
