@@ -170,8 +170,10 @@ class EventController extends Controller
             ->update(['name' => $eventinfo['city']]);
         Address::where('id', $event->address->id)
             ->update(['street' => $eventinfo['street'], 'bldg' => $eventinfo['bldg'], 'unitno' => $eventinfo['unitno']]);
-        $eventinfo['modified_by'] = session('user')['id'];
+
         $eventinfo = $request->except(['_token','_method', 'street', 'bldg', 'eventImage', 'unitno', 'city', 'city_id', 'fileToUpload', 'event_image']);
+        $eventinfo['modified_by'] = session('user')['id'];
+
         Event::where('id', $eventId)
             ->update($eventinfo);
         $log = new logs();

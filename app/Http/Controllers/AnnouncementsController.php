@@ -101,7 +101,7 @@ class AnnouncementsController extends Controller
         $announcementInfo['status'] = 1;
 
         $announcementInfo['posted_by'] = session('user')['id'];
-        $announcementInfo['announcemnent_id'] = Announcements::create($announcementInfo)->id;
+        $announcementInfo['announcement_id'] = Announcements::create($announcementInfo)->id;
 
         if ($request->file('announcementImage') != null) {
             foreach ($request->file('announcementImage') as $name) {
