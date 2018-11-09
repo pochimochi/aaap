@@ -107,7 +107,7 @@
                             </br>
                             @if($event->modified_by != 0)
                                 <small class="text-muted"><b>Modified
-                                        By: </b> {{ App\User::find($eventt->modified_by)->firstname . ' ' . App\User::find($event->modified_by)->firstname}}
+                                        By: </b> {{ App\User::find($eventt->modified_by)->firstname . ' ' . App\User::find($event->modified_by)->lastname}}
                                     on {{ \Carbon\Carbon::parse($event->updated_at)->format('F d, Y')}}
                                 </small>a
                                 &nbsp;@endif

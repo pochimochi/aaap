@@ -17,15 +17,16 @@
                 <div class="card-body">
                     <div class="card-title"><h1>{{$article->title}}</h1></div>
                     <small class="text-muted"><b>Posted by: </b>{{ $article->user->firstname . ' ' . $article->user->lastname}}
-                        on: {{ \Carbon\Carbon::parse($article->created_at)->format('F d, Y')}}</small>
-                    @if($article->modifiedBy != 0)
-                        <small class="text-muted"><b>Modified By: </b> {{ $article->user->firstname . ' ' . $article->user->lastname}}
-                            on: {{ \Carbon\Carbon::parse($article->updated_at)->format('F d, Y')}}</small>
+                        on {{ \Carbon\Carbon::parse($article->created_at)->format('F d, Y')}}</small>
+                    @if($article->modified_by != 0)
+                        <br>
+                        <small class="text-muted"><b>Modified
+                                By: </b> {{ App\User::find($article->modified_by)->firstname . ' ' . App\User::find($article->modified_by)->lastname}}
+                            on {{ \Carbon\Carbon::parse($article->updated_at)->format('F d, Y')}}</small>
                         &nbsp;@endif
                     @if(session('user')->role_id == 2)
-                        <hr class="my-3">
                         @if($article->status == 0)
-                            <div class="alert alert-danger" role="alert">
+                            <div class="alert alert-danger mt-2" role="alert">
                                 <b>This is article is currently archived</b>
                             </div>
                         @else
