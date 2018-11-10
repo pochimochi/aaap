@@ -87,7 +87,7 @@ class AnnouncementsController extends Controller
             'type_id' => 'required',
             'due_date' => 'nullable|after:today',
             'announcementImage' => 'nullable',
-            'announcementImage.*' => 'image|mimes:jpeg,png,jpg|size:2000'
+            'announcementImage.*' => 'image|mimes:jpeg,png,jpg|size:5000'
         ], [
             'type_id.required' => 'The type of the announcement must be specified.',
             'announcementImage.*.image' => 'Uploads must be in image form',
