@@ -46,7 +46,7 @@ class UserController extends Controller
         if ($request->file('profile.location')) {
             $profile = Images::find($array['profileid']);
             $array['location'] = $request->file('profile.location')->getClientOriginalName();
-            $request->file('profile.location')->move('public', $array['location']);
+            $request->file('profile.location')->move('storage', $array['location']);
             $profile->update($array);
         }
 
