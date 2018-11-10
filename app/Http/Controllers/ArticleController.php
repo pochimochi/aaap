@@ -99,7 +99,7 @@ class ArticleController extends Controller
             if ($request->file('articleImage') != null) {
                 foreach($request->file('articleImage') as $name){
                     $articleinfo['image_name'] = $name->getClientOriginalName();
-                    $name->move('public', $articleinfo['image_name']);
+                    $name->move('storage', $articleinfo['image_name']);
                     $articleinfo['image_id'] = Images::create(['location' => $articleinfo['image_name']])->id;
                     ArticleImages::create(['image_id' => $articleinfo['image_id'], 'article_id' => $articleinfo['article_id']]);
                 }
@@ -202,7 +202,7 @@ class ArticleController extends Controller
             $article->image()->detach();
             foreach($request->file('articleImage') as $name){
                 $articleinfo['image_name'] = $name->getClientOriginalName();
-                $name->move('public', $articleinfo['image_name']);
+                $name->move('storage', $articleinfo['image_name']);
                 $articleinfo['image_id'] = Images::create(['location' => $articleinfo['image_name']])->id;
                 ArticleImages::create(['image_id' => $articleinfo['image_id'], 'article_id' => $article->id]);
             }
