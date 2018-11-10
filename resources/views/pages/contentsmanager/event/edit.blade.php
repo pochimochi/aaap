@@ -133,7 +133,7 @@
                                     <label>Event Duration</label>
                                     <div class="row">
                                         <div class="col-6">
-                                            <div class="form-group">
+                                            <div class="form-group required">
                                                 <label>Starting Date</label>
                                                 <input type="datetime-local" name="start_date"
                                                        class="form-control input-default"
@@ -143,7 +143,7 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <div class="form-group">
+                                            <div class="form-group required">
                                                 <label>End Date</label>
                                                 <input type="datetime-local" name="end_date"
                                                        class="form-control input-default"
@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Venue</label>
                                             <input type="text" name="venue" id="venue"
                                                    value="{{$event->venue}}"
@@ -168,7 +168,7 @@
                                 <h3>Address</h3>
                                 <div class="row">
                                     <div class="col-6">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Unit Number</label>
                                             <input type="text" name="unitno" id="unitno"
                                                    value="{{$event->address->unitno}}"
@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Street</label>
                                             <input type="text" name="street"
                                                    value="{{$event->address->street}}"
@@ -199,7 +199,7 @@
                                     </div>
 
                                     <div class="col-6">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>City</label>
                                             <input type="text" name="city" id="city"
                                                    value="{{$event->address->city->name}}"

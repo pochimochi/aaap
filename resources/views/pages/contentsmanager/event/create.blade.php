@@ -138,7 +138,7 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>House/Apartment/Unit Number</label>
                                             <input type="text" name="unitno" id="unitno"
                                                    value="{{old('unitno')}}"
@@ -158,7 +158,7 @@
 
 
                                     <div class="col-6">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Street</label>
                                             <input type="text" name="street" value="{{old('street')}}"
                                                    class="form-control input-default">
@@ -168,7 +168,7 @@
 
 
                                     <div class="col-6">
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>City</label>
                                             <input type="text" name="city" id="city" value="{{old('city')}}"
                                                    class="form-control input-default">
