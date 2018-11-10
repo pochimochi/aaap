@@ -106,7 +106,7 @@ class AnnouncementsController extends Controller
         if ($request->file('announcementImage') != null) {
             foreach ($request->file('announcementImage') as $name) {
                 $announcementInfo['image_name'] = $name->getClientOriginalName();
-                $name->move('public', $announcementInfo['image_name']);
+                $name->move('storage', $announcementInfo['image_name']);
                 $announcementInfo['image_id'] = Images::create(['location' => $announcementInfo['image_name']])->id;
                 AnnouncementImages::create(['image_id' => $announcementInfo['image_id'], 'announcement_id' => $announcementInfo['announcemnent_id']]);
             }
@@ -152,7 +152,7 @@ class AnnouncementsController extends Controller
             $announcement->image()->detach();
             foreach ($request->file('announcementImage') as $name) {
                 $announcementinfo['image_name'] = $name->getClientOriginalName();
-                $name->move('public', $announcementinfo['image_name']);
+                $name->move('storage', $announcementinfo['image_name']);
                 $announcementinfo['image_id'] = Images::create(['location' => $announcementinfo['image_name']])->id;
                 AnnouncementImages::create(['image_id' => $announcementinfo['image_id'], 'announcement_id' => $announcement->id]);
             }
