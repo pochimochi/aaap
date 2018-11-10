@@ -88,7 +88,7 @@ class ForgotPasswordController extends Controller
     public function saveNewPassword(Request $request)
     {
         $valid = Validator::make($request->all(), [
-            'password' => 'required|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'password' => 'required|confirmed|min:8|max:64|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'password_confirmation' => 'required'
         ]);
         if ($valid->passes()) {
