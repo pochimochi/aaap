@@ -81,7 +81,7 @@
                                                             @foreach($event->image as $name)
 
                                                                 <div class="carousel-item @if($i == 0) active @endif">
-                                                                    <img src="{{asset('/public/'.$name->location)}}"
+                                                                    <img src="{{asset('/storage/'.$name->location)}}"
                                                                          style="object-fit: scale-down"
                                                                          class="d-block w-100" height="250" alt="">
                                                                 </div>
@@ -107,7 +107,7 @@
                                             @endif
                                             <div class="col">
                                                 <small class="text-muted">
-                                                    <b>Category: </b>{{ $event->category_id== 1 ? 'Public' : 'Seminar' }}
+                                                    <b>Category: </b>{{ $event->category_id== 1 ? 'storage' : 'Seminar' }}
                                                 </small>
                                                 <br>
                                                 <small class="text-muted">

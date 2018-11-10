@@ -104,7 +104,7 @@ class EventController extends Controller
             if ($request->file('eventImage') != null) {
                 foreach($request->file('eventImage') as $name){
                     $eventinfo['image_name'] = $name->getClientOriginalName();
-                    $name->move('public', $eventinfo['image_name']);
+                    $name->move('storage', $eventinfo['image_name']);
                     $eventinfo['image_id'] = Images::create(['location' => $eventinfo['image_name']])->id;
                     EventImages::create(['image_id' => $eventinfo['image_id'], 'event_id' => $eventinfo['event_id']]);
                 }
