@@ -38,6 +38,30 @@
                                                     </div>
                                                 @endif
                                             @endif
+                                            <div id="carouselExampleFade" class="border carousel slide carousel-fade"
+                                                 data-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    @php $i = 0 @endphp
+                                                    @foreach($article->image as $name)
+
+                                                        <div class="carousel-item @if($i == 0) active @endif">
+                                                            <img src="{{asset('/storage/'.$name->location)}}" style="object-fit: scale-down"
+                                                                 class="d-block w-100" height="450" alt="no-image">
+                                                        </div>
+                                                        @php $i++ @endphp
+                                                    @endforeach
+                                                </div>
+                                                <a class="carousel-control-prev" href="#carouselExampleFade" role="button"
+                                                   data-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#carouselExampleFade" role="button"
+                                                   data-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </div>
                                             <p class="card-text">{!! $article->body !!}</p>
                                             @if(session('user')->userTypeId == 2)
                                                 <div class="container">
