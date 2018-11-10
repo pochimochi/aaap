@@ -21,7 +21,7 @@
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
                                     @if($users->profilepic)
-                                        <img src="{{asset('/public/'.$users->profilepic->location)}}"
+                                        <img src="{{asset('/storage/'.$users->profilepic->location)}}"
                                              class="rounded-circle" width="180" height="180"
                                              style="background-color: white;object-fit: scale-down" alt="">
 
