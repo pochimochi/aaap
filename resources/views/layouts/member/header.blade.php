@@ -73,13 +73,13 @@
                     @endif
                     @if(!session('user'))
                         <li class="nav-item">
-                            <a href="{{url('/home/#about')}}" class="nav-link">
+                            <a href="{{url('home/#about')}}" class="nav-link">
                                 <i class="ni ni-ui-04 d-lg-none"></i>
                                 <span class="nav-link-inner--text">About</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{url('/home/#contact')}}" class="nav-link">
+                            <a href="{{url('home/#contact')}}" class="nav-link">
                                 <i class="ni ni-ui-04 d-lg-none"></i>
                                 <span class="nav-link-inner--text">Contact</span>
                             </a>
