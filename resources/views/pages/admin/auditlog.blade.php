@@ -29,10 +29,10 @@
                     <tbody>
                     @foreach ($auditlog as $a)
                         <tr>
-                            <td>{{ $a->id}}</td>
-                            <td>{{ $a->users->firstname .' ' .$a->users->lastname}}</td>
-                            <td>{{ $a->description }}</td>
-                            <td>{{ $a->created_at}}</td>
+                            <td>{{$a->id ? $a->id : ''}}</td>
+                            <td>{{$a->users->firstname .' ' .$a->users->lastname}}</td>
+                            <td>{{$a->description}}</td>
+                            <td>{{$a->created_at}}</td>
                         </tr>
                     @endforeach
                     </tbody>
