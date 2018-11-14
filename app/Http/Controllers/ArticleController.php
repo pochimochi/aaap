@@ -196,7 +196,7 @@ class ArticleController extends Controller
         $article->body = $request->get('body');
         $article->modified_by = session('user')['id'];
         $article->articletype_id = $request->get('articletype_id');
-        $article->status = $request->get('status');
+
 
         if ($request->file('articleImage') != null) {
             $article->image()->detach();

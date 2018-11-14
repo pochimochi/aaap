@@ -64,29 +64,30 @@
                             @if($event->image)
                                 <div class="row">
                                     <div class="col-lg-6">
-                                         <div id="carouselExampleFade" class="border carousel slide carousel-fade"
-                                              data-ride="carousel">
-                                             <div class="carousel-inner">
-                                                 @php $i = 0 @endphp
-                                                 @foreach($event->image as $name)
-                                                     <div class="carousel-item @if($i == 0) active @endif">
-                                                         <img src="{{asset('/storage/'.$name->location)}}" style="object-fit: scale-down"
-                                                              class="d-block w-100" height="250" alt="no-image">
-                                                     </div>
-                                                     @php $i++ @endphp
-                                                 @endforeach
-                                             </div>
-                                             <a class="carousel-control-prev" href="#carouselExampleFade" role="button"
-                                                data-slide="prev">
-                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                 <span class="sr-only">Previous</span>
-                                             </a>
-                                             <a class="carousel-control-next" href="#carouselExampleFade" role="button"
-                                                data-slide="next">
-                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                 <span class="sr-only">Next</span>
-                                             </a>
-                                         </div>
+                                        <div id="carouselExampleFade" class="border carousel slide carousel-fade"
+                                             data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                @php $i = 0 @endphp
+                                                @foreach($event->image as $name)
+                                                    <div class="carousel-item @if($i == 0) active @endif">
+                                                        <img src="{{asset('/storage/'.$name->location)}}"
+                                                             style="object-fit: scale-down"
+                                                             class="d-block w-100" height="250" alt="no-image">
+                                                    </div>
+                                                    @php $i++ @endphp
+                                                @endforeach
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleFade" role="button"
+                                               data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleFade" role="button"
+                                               data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
 
 
                                     </div>
@@ -97,9 +98,18 @@
                                         <br>
                                         <small class="text-muted">
                                             <b>Duration: </b>{{\Carbon\Carbon::parse($event->start_date)->toDayDateTimeString()}}
-                                            to {{\Carbon\Carbon::parse($event->end_date)->toDayDateTimeString()}}</small>
+                                            to {{\Carbon\Carbon::parse($event->end_date)->toDayDateTimeString()}}
+                                        </small>
                                         <br>
                                         <small class="text-muted"><b> Venue:</b> {{ $event->venue}}
+                                        </small>
+                                        <br>
+                                        <small class="text-muted"><b> Address:</b>
+
+                                            {{$event->address->unitno ? $event->address->unitno : ''}},
+                                            {{$event->address->street ? $event->address->street : ''}},
+                                            {{$event->address->city ? $event->address->city->name : ''}},
+                                            {{$event->address->country ? $event->address->country->name : ''}}
                                         </small>
                                         <br>
                                         @if($event->paid == 0)
