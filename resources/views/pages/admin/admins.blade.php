@@ -50,6 +50,9 @@
                                             <option value="3" {{ old('role_id') == 3 ? 'selected' : '' }}>
                                                 Content Manager
                                             </option>
+                                            <option value="5" {{ old('role_id') == 5 ? 'selected' : '' }}>
+                                                Approver
+                                            </option>
                                         </select>
                                         <span class="text-danger">{{ $errors->first('role_id') }}</span>
                                     </div>
@@ -146,7 +149,7 @@
                                    value="{{ $admin->id}}">{{ $admin->id}}</td>
                         <td>{{ $admin->firstname}}</td>
                         <td>{{ $admin->lastname }}</td>
-                        <td>{{ $admin->role_id == 2 ? 'Writer' : 'Content Manager'}}</td>
+                        <td>{{ $admin->usertype->name}}</td>
                         <td>{{ $admin->email}}</td>
                         <td>{{ \Carbon\Carbon::parse($admin->created_at)->format('d/m/Y')}}</td>
                         <td><a id="btn"

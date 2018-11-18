@@ -25,7 +25,7 @@ class AdminsController extends Controller
 {
     public function index()
     {
-        $admins = User::all()->whereIn('role_id', ['2', '3']);
+        $admins = User::all()->whereIn('role_id', ['2', '3', '5']);
         return view('pages.admin.admins', ['admins' => $admins]);
     }
 

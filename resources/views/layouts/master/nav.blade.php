@@ -32,7 +32,6 @@
 
             <!-- Navigation -->
             <ul class="navbar-nav">
-
                 @if(session('role') == 1)
                     <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/adminMaintenance')}}"><i
                                     class="fa fa-user-check text-success"></i>Administrators</a>
@@ -56,6 +55,9 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{action('AuditLogController@index')}}"><i
                                     class="menu-icon fa fa-address-book text-success"></i>System Logs</a></li>
+                @elseif(session('role') == 5)
+                    <li class="nav-item"><a class="nav-link" href="{{URL::to('/approver/articles')}}"><i
+                                    class="menu-icon fa fa-address-book text-success"></i>Articles</a></li>
                 @endif
                 <li>
                     <hr class="my-3">

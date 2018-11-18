@@ -74,6 +74,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::resource('articles', 'ArticleController');
         });
         //---------------------------------------------------------------------------------
+        Route::group(['middleware' => 'approver', 'prefix' => 'approver'], function () {
+            Route::resource('articles', 'ArticleController');
+        });
+        //---------------------------------------------------------------------------------
         Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
             Route::get('changeStatus/{userId}/{status}', 'AdminsController@changeStatus');
             Route::resource('adminMaintenance', 'AdminsController')->only(['index', 'store']);
