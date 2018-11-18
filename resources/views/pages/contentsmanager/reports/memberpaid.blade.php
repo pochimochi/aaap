@@ -95,7 +95,7 @@
 <script src="{{asset('argon/assets/js/argon.js')}}"></script>
 
 <script src="{{asset('argon/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-<script type="text/javascript" charset="utf8"
+<script type="text/javascript" charset="utf8"></script>
 
 </body>
 </html>

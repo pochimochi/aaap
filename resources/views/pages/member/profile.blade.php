@@ -80,31 +80,36 @@
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <label>First Name</label>
-                                                                <p>{{ $users['firstname'] }}</p>
+                                                                <input value="{{ $users['firstname'] }}" readonly
+                                                                       class="form-control form-control-alternative">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label>Middle Name</label>
-                                                                <p>{{ $users['middlename'] }}</p>
+                                                                <input value="{{ $users['middlename'] }}" readonly
+                                                                       class="form-control form-control-alternative">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label>Last Name</label>
-                                                                <p>{{ $users['lastname'] }}</p>
+                                                                <input value="{{ $users['lastname'] }}" readonly
+                                                                       class="form-control form-control-alternative">
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <label>Gender</label>
-                                                                <p> @if($users['gender'] == '1')
-                                                                        Male @elseif($users['gender'] == '0')
-                                                                        Female @endif</p>
+                                                                <input value="{{ ($users['gender'] == 1 ? 'Male' : 'Female') }}"
+                                                                        readonly
+                                                                        class="form-control form-control-alternative">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label>Landline Number</label>
-                                                                <p>{{ $users->contact->landline_number }}</p>
+                                                                <input value="{{ $users->contact->landline_number }}" readonly
+                                                                       class="form-control form-control-alternative">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label>Mobile Number</label>
-                                                                <p>{{ $users->contact->mobile_number }}</p>
+                                                                <input value="{{ $users->contact->mobile_number }}" readonly
+                                                                       class="form-control form-control-alternative">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -117,25 +122,30 @@
                                                                 <div class="row">
                                                                     <div class="col-md-4">
                                                                         <label>Unit Number</label>
-                                                                        <p>{{ $users->permanentaddress->unitno }}</p>
+                                                                        <input value="{{ $users->permanentaddress->unitno }}" readonly
+                                                                               class="form-control form-control-alternative">
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label>Building</label>
-                                                                        <p>{{ $users->permanentaddress->bldg }}</p>
+                                                                        <input value="{{ $users->permanentaddress->bldg }}" readonly
+                                                                               class="form-control form-control-alternative">
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label>Street</label>
-                                                                        <p>{{ $users->permanentaddress->street }}</p>
+                                                                        <input value="{{ $users->permanentaddress->street }}" readonly
+                                                                               class="form-control form-control-alternative">
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <label>City</label>
-                                                                        <p>{{ $users->permanentaddress->city->name }}</p>
+                                                                        <input value="{{ $users->permanentaddress->city->name }}" readonly
+                                                                               class="form-control form-control-alternative">
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label>Country</label>
-                                                                        <p>{{ $users->permanentaddress->country->name }}</p>
+                                                                        <input value="{{ $users->permanentaddress->country->name }}" readonly
+                                                                               class="form-control form-control-alternative">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -146,26 +156,31 @@
                                                                 <div class="row">
                                                                     <div class="col-md-4">
                                                                         <label>Unit Number</label>
-                                                                        <p>{{ $users->temporaryaddress->unitno }}</p>
+                                                                        <input value="{{ $users->temporaryaddress->unitno }}" readonly
+                                                                               class="form-control form-control-alternative">
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label>Building</label>
-                                                                        <p>{{ $users->temporaryaddress->bldg }}</p>
+                                                                        <input value="{{ $users->temporaryaddress->bldg }}" readonly
+                                                                               class="form-control form-control-alternative">
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <label>Street</label>
-                                                                        <p>{{ $users->temporaryaddress->street }}</p>
+                                                                        <input value="{{ $users->temporaryaddress->street }}" readonly
+                                                                               class="form-control form-control-alternative">
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <label>City</label>
-                                                                        <p>{{ $users->temporaryaddress->city->name }}</p>
+                                                                        <input value="{{ $users->temporaryaddress->city->name }}" readonly
+                                                                               class="form-control form-control-alternative">
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label>Country</label>
-                                                                        <p>{{ $users->temporaryaddress->country
-                                                                        ? $users->temporaryaddress->country->name : ''}}</p>
+                                                                        <input value="{{ $users->temporaryaddress->country
+                                                                        ? $users->temporaryaddress->country->name : ''}}" readonly
+                                                                               class="form-control form-control-alternative">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -179,53 +194,45 @@
                                                             <div class="row">
                                                                 <div class="col-md-4">
                                                                     <label>First Name</label>
-                                                                    <p>{{ $users->pwa->pwaFirstName }}</p>
+                                                                    <input value="{{ $users->pwa->pwaFirstName }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Middle Name</label>
-                                                                    <p>{{ $users->pwa->pwaMiddleName }}</p>
+                                                                    <input value="{{ $users->pwa->pwaMiddleName }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Last Name</label>
-                                                                    <p>{{ $users->pwa->pwaLastName }}</p>
+                                                                    <input value="{{ $users->pwa->pwaLastName }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-4">
                                                                     <label>Gender</label>
-
-                                                                    <p> @if($users->pwa->pwaGender =='1')
-                                                                            Male
-                                                                        @elseif($users->pwa->pwaGender == '0')
-                                                                            Female
-                                                                        @else
-
-                                                                        @endif
-                                                                    </p>
+                                                                    <input value="{{ $users->pwa->pwaGender == 1 ? 'Male' : 'Female'}}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Relationship to PWA</label>
-                                                                    <p>{{ $users->pwa->pwaRelationship }}</p>
+                                                                    <input value="{{ $users->pwa->pwaRelationship }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Sibling Count</label>
-                                                                    <p>{{ $users->pwa->siblingcount }}</p>
+                                                                    <input value="{{ $users->pwa->siblingcount }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label>With Intervention</label>
-                                                                    <p>
-                                                                        @if($users->pwa->withintervention =='1')
-                                                                            Male
-                                                                        @elseif($users->pwa->withintervention == '0')
-                                                                            Female
-                                                                        @else
-
-                                                                        @endif
-                                                                    </p>
+                                                                    <input value="{{ $users->pwa->withintervention == 1 ? 'Yes' : 'No'}}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label>Occupation</label>
-                                                                    <p>{{ $users->pwa->pwaOccupation }}</p>
+                                                                    <input value="{{ $users->pwa->pwaOccupation }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -236,35 +243,43 @@
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <label>Employer Name</label>
-                                                                    <p>{{ $users->pwa->employer->employerName }}</p>
+                                                                    <input value="{{ $users->pwa->employer->employerName }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label>Contact Number</label>
-                                                                    <p>{{ $users->pwa->employer->employerContactNumber }}</p>
+                                                                    <input value="{{ $users->pwa->employer->employerContactNumber }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-4">
                                                                     <label>Unit Number</label>
-                                                                    <p>{{ $users->pwa->employer->address->unitno }}</p>
+                                                                    <input value="{{ $users->pwa->employer->address->unitno }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Building</label>
-                                                                    <p>{{ $users->pwa->employer->address->bldg }}</p>
+                                                                    <input value="{{ $users->pwa->employer->address->bldg }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Street</label>
+                                                                    <input value="{{ $users->pwa->siblingcount }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                     <p>{{ $users->pwa->employer->address->street }}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <label>City</label>
-                                                                    <p>{{ $users->pwa->employer->address->city->name }}</p>
+                                                                    <input value="{{ $users->pwa->employer->address->city->name }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <label>City</label>
-                                                                    <p>{{ $users->pwa->employer->address->country ? $users->pwa->employer->address->country->name : '' }}</p>
+                                                                    <label>Country</label>
+                                                                    <input value="{{ $users->pwa->employer->address->country ? $users->pwa->employer->address->country->name : '' }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -277,7 +292,8 @@
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <label>Email Address</label>
-                                                                    <p>{{ $users->email }}</p>
+                                                                    <input value="{{ $users->email }}" readonly
+                                                                           class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                         </div>

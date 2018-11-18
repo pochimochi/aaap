@@ -219,13 +219,11 @@
                             <td>{{($user->pwa->siblingcount > 0) ? 'Yes' : 'No'}}</td>
                             <td>{{($user->pwa->withintervention == 1) ? 'Yes' : 'No'}}</td>
                             <td>{{$user->created_at}}</td>
-
                             <td>{{$user->email}}</td>
                             <td>
                                 <div
                                     class="badge {{($user->active == 1) ? 'badge-success' : 'badge-danger'}}">{{($user->active == 1) ? 'Active' : 'Inactive'}}</div>
                             </td>
-
                         </tr>
                         <div class="modal fade" id="status-form{{$user->id}}"
                              role="dialog"
@@ -329,6 +327,18 @@
                                                                         readonly
                                                                         class="form-control form-control-alternative">
                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label>Landline Number</label>
+                                                                <input value="{{ $user->contact->landline_number }}" readonly
+                                                                       class="form-control form-control-alternative">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label>Mobile Number</label>
+                                                                <input value="{{ $user->contact->mobile_number }}" readonly
+                                                                       class="form-control form-control-alternative">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -436,7 +446,8 @@
                                                                            for="input-country">Country</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           value="" readonly>
+                                                                           value="{{ $user->temporaryaddress->country->name}}"
+                                                                           readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -594,7 +605,8 @@
                                                                            for="input-country">Country</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           value="" readonly>
+                                                                           value="{{ $user->pwa->employer->address->country->name}}"
+                                                                           readonly>
                                                                 </div>
                                                             </div>
                                                         </div>

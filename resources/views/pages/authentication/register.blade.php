@@ -573,6 +573,15 @@
                                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 required">
+                                            <label>Confirm Password</label>
+                                            <div class="form-group required">
+                                                <input value="{{ old('password') }}" type="password"
+                                                       name="password" id="password"
+                                                       class="form-control input-default">
+                                                <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
