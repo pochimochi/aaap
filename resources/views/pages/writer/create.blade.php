@@ -78,11 +78,22 @@
                                     </div>
                                     <div class="row mt-5">
                                         <div class="col">
+                                            <label class="btn btn-success btn-block" for="articleImage">Upload
+                                                Images</label>
                                             <div class="form-group">
-                                                <label class="btn btn-success btn-block" for="articleImage">Upload
-                                                    Images</label>
-                                                <input name="articleImage[]" hidden id="articleImage" multiple
-                                                       type="file"/>
+                                                <input name="articleImage[]" id="articleImage" onchange="readURL(this)" multiple
+                                                       type="file" class="form-control-file"/>
+                                                <div class="card bg-gradient-teal border-0">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                <div class="card shadow border-0">
+                                                                    <img id="blah" class="card-img"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

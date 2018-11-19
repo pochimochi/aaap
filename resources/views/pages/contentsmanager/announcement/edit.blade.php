@@ -97,6 +97,7 @@
                                                         Images</label>
                                                     <input type="file" hidden multiple name="announcementImage[]"
                                                            id="announcementImage"/>
+                                                    <span class="text-danger">{{ $errors->first('announcementImage.*') }}</span>
                                                 </div>
                                                 <div class="card bg-gradient-teal border-0">
                                                     <div class="card-body">

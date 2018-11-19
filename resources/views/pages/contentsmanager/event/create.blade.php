@@ -79,14 +79,25 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
+                                        <label class="btn btn-success btn-block" for="eventImage">Upload
+                                            Images</label>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-6">
-                                                    <label class="btn btn-success" for="eventImage">Upload
-                                                        Images
-                                                    </label>
-                                                    <input type='file' hidden="true" name="eventImage[]"
-                                                           id="eventImage" multiple/>
+                                                <div class="col-12">
+                                                    <input hidden name="eventImage[]" id="eventImage" onchange="readURL(this)" multiple
+                                                           type="file" class="form-control-file"/>
+                                                    <div class="card bg-gradient-teal border-0">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <div class="card shadow border-0">
+                                                                        <img id="blah" class="card-img"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="text-danger">{{ $errors->first('eventImage.*') }}</span>
                                                 </div>
                                             </div>
                                         </div>

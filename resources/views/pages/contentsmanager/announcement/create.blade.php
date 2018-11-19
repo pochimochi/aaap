@@ -15,7 +15,7 @@
 @endsection
 @section('content')
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid mt--200 pb--5">
             <div class="card shadow card-outline-primary">
                 <div class="card-header">
                     <h4>Add Announcement</h4>
@@ -69,10 +69,23 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
+                                        <label class="btn btn-success btn-block" for="announcementImage">Upload
+                                            Images</label>
                                         <div class="form-group">
-                                            <label for="announcementImage" class="btn btn-success">Upload Images</label>
-                                            <input name="announcementImage[]" hidden id="announcementImage" multiple
-                                                   type="file"/>
+                                            <input hidden multiple name="announcementImage[]" onchange="readURL(this)"
+                                                   id="announcementImage"
+                                                   type="file" class="form-control-file"/>
+                                            <div class="card bg-gradient-teal border-0">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <div class="card shadow border-0">
+                                                                <img id="blah" class="card-img"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <span class="text-danger">{{ $errors->first('announcementImage.*') }}</span>
                                         </div>
                                     </div>
@@ -101,7 +114,6 @@
                     </div>
                 </div>
             </div>
-
             @csrf
             <div class="card mt-5 col-12 shadow">
                 <div class="card-header border-0">
@@ -174,7 +186,8 @@
                                                             <input type="hidden" name="id"
                                                                    value="{{$announcement->id}}">
                                                             <div class="col-12 mt-5">
-                                                                <label for="remarks">Please state the reason for archiving this announcement below.</label>
+                                                                <label for="remarks">Please state the reason for
+                                                                    archiving this announcement below.</label>
                                                                 <textarea name="remarks" rows="5" id="remarks"
                                                                           class="form-control form-control-alternative"></textarea>
                                                                 <span class="text-danger">{{ $errors->first('remarks') }}</span>
@@ -224,4 +237,6 @@
     </div>
 
 @endsection
+
+
 
