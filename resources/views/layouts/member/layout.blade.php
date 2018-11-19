@@ -50,9 +50,9 @@
     <div class="container">
         <div class="row align-items-center justify-content-md-between">
             <div class="col-md-6">
-                <div class="copyright text-center text-xl-left text-muted">
+                <div class="copyright text-center text-xl-left text-muted ">
                     <a href="" class="font-weight-bold ml-1"><img src="{{asset('images/logos/logo.png')}}"
-                                                                  width="200" class="navbar-brand-img"
+                                                                  width="180" class="navbar-brand-img"
                                                                   alt="..."></a>
                 </div>
             </div>

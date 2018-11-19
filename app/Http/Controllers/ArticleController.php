@@ -30,8 +30,13 @@ class ArticleController extends Controller
             }
         }
         if (session('user')) {
-            if (session('role') == 2) {
-                $articles = Articles::all();
+            if (session('role') == 2 || session('role') == 5) {
+
+                if(session('role') == 5){
+                    $articles = Articles::all()->where('status', '=', 0);
+                }else{
+                    $articles = Articles::all();
+                }
                 return view('pages.writer.create', ['articles' => $articles]);
             } else {
                 $articles = Articles::where('status', '=', '1')->paginate(6);
@@ -68,7 +73,11 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $articles = Articles::all();
+        if(session('role') == 5){
+            $articles = Articles::all()->where('status', '=', 0);
+        }else{
+            $articles = Articles::all();
+        }
         return view('pages.writer.create', ['articles' => $articles]);
     }
 
@@ -93,7 +102,7 @@ class ArticleController extends Controller
             $users = User::all()->where('active', 1)->where('role_id', 4);
             $articleinfo['posted_by'] = session('user')['id'];
             $articleinfo['due_date'] = Carbon::now()->addYear(1);
-            $articleinfo['status'] = 1;
+            $articleinfo['status'] = 0;
             $articleinfo['article_id'] = Articles::create($articleinfo)->id;
 
             if ($request->file('articleImage') != null) {
@@ -129,7 +138,7 @@ class ArticleController extends Controller
     {
         $article = Articles::find($articleId);
         if (session('user')) {
-            if (session('role') == 2) {
+            if (session('role') == 2 || session('role') == 5) {
                 return view('pages.writer.show', ['article' => $article]);
             } else {
                 return view('pages.member.article.show', ['article' => $article]);
@@ -141,6 +150,7 @@ class ArticleController extends Controller
 
     public function changeStatus(Request $request)
     {
+
         $this->validate($request, [
             'remarks' => 'required|max:500|string',
         ], [
@@ -150,7 +160,11 @@ class ArticleController extends Controller
         ]);
         $article = Articles::find($request->id);
         $article->remarks = $request->remarks;
-        $article->status = 0;
+       if($article->status == 0){
+           $article->status = 1;
+       }else{
+           $article->status = 2;
+       }
         if ($article->save()) {
 
             $log = new logs();
@@ -196,6 +210,7 @@ class ArticleController extends Controller
         $article->body = $request->get('body');
         $article->modified_by = session('user')['id'];
         $article->articletype_id = $request->get('articletype_id');
+        $article->status = 0;
 
 
         if ($request->file('articleImage') != null) {

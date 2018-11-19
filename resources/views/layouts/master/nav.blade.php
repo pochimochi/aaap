@@ -56,7 +56,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{action('AuditLogController@index')}}"><i
                                     class="menu-icon fa fa-address-book text-success"></i>System Logs</a></li>
                 @elseif(session('role') == 5)
-                    <li class="nav-item"><a class="nav-link" href="{{URL::to('/approver/articles')}}"><i
+                    <li class="nav-item"><a class="nav-link" href="{{action('ArticleController@create')}}"><i
                                     class="menu-icon fa fa-address-book text-success"></i>Articles</a></li>
                 @endif
                 <li>

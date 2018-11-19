@@ -66,6 +66,8 @@ class HomeController extends Controller
                     return redirect('writer/articles/create');
                 } elseif (session('role') == 1) {
                     return redirect('admin/adminMaintenance ');
+                } elseif (session('role') == 5) {
+                    return redirect('editor/articles/create ');
                 }
             } else {
                 return view('pages.master.home');
@@ -79,8 +81,6 @@ class HomeController extends Controller
     {
         return view('pages.master.faqs');
     }
-
-
 
 
 }

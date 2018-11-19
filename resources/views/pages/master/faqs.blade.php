@@ -22,14 +22,18 @@
                     </div>
                     <div class="card shadow shadow-lg--hover mt-5">
                         <div class="card-body">
-                            <div class="d-flex px-3">
-                                <div>
+                            <div class="row" style="overflow-wrap:break-word">
+
+                                <div class="col-lg-2 col-md-12 col-sm-12">
                                     <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
                                         <i class="ni ni-satisfied"></i>
                                     </div>
                                 </div>
-                                <div class="pl-4">
-                                    <h5 class="title text-success">How can I become a member of Association for Adults with Autism, Philippines?</h5>
+
+
+                                <div class="col-lg-10 col-md-12 col-sm-12">
+                                    <h5 class="title text-success">How can I become a member of Association for Adults
+                                        with Autism, Philippines?</h5>
                                     <ul class="list-unstyled mt-5">
                                         <li class="py-2">
                                             <div class="d-flex align-items-center">
@@ -40,7 +44,8 @@
                                                 </div>
                                                 <div>
                                                     <h6 class="mb-0">Fill out the registration form.</h6>
-                                                    <a href="{{URL::to('/register')}}" class="btn-sm btn-success">Register Here</a>
+                                                    <a href="{{URL::to('/register')}}" class="btn-sm btn-success">Register
+                                                        Here</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -52,7 +57,9 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h6 class="mb-0">Deposit the <b>₱500.00</b> membership fee to Association for Adults with Autism Philippines (Bank of the Philippine Island c/a #0401.0099.49)</h6>
+                                                    <h6 class="mb-0">Deposit the <b>₱500.00</b> membership fee to
+                                                        Association for Adults with Autism Philippines (Bank of the
+                                                        Philippine Island c/a #0401.0099.49)</h6>
                                                 </div>
                                             </div>
                                         </li>
@@ -64,20 +71,24 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h6 class="mb-0">Write your name on the deposit slip and send scanned copy to <b>aspecialplace.alfonso@gmail.com</b>.</h6>
+                                                    <h6 class="mb-0">Write your name on the deposit slip and send
+                                                        scanned copy to <b>aspecialplace.alfonso@gmail.com</b>.</h6>
                                                 </div>
                                             </div>
                                         </li>
                                         <li class="py-2">
                                             <div class="d-flex align-items-center">
                                                 <div>
-                                                    <h6 class="mb-0">After completing these steps you are now considered as an official member of AAAP.</h6>
+                                                    <h6 class="mb-0">After completing these steps you are now considered
+                                                        as an official member of AAAP.</h6>
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                     <div class="card shadow shadow-lg--hover mt-5">
@@ -99,7 +110,8 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h6 class="mb-0">It is a project of AAAP and it is a residential community for adults with autism and related conditions.</h6>
+                                                    <h6 class="mb-0">It is a project of AAAP and it is a residential
+                                                        community for adults with autism and related conditions.</h6>
                                                 </div>
                                             </div>
                                         </li>
@@ -113,7 +125,8 @@
         </div>
         <!-- SVG separator -->
         <div class="separator separator-bottom separator-skew zindex-100">
-            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                 xmlns="http://www.w3.org/2000/svg">
                 <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
             </svg>
         </div>

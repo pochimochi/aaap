@@ -53,6 +53,7 @@ class RegisterController extends Controller
 
 
             $userinfo = $request->all();
+
             $userinfo['password'] = bcrypt($userinfo['password']);
             $userinfo['active'] = 0;
             $userinfo['role_id'] = 4;

@@ -107,7 +107,7 @@
                                             @endif
                                             <div class="col">
                                                 <small class="text-muted">
-                                                    <b>Category: </b>{{ $event->category_id== 1 ? 'storage' : 'Seminar' }}
+                                                    <b>Category: </b>{{ $event->category_id== 1 ? 'Public' : 'Seminar' }}
                                                 </small>
                                                 <br>
                                                 <small class="text-muted">

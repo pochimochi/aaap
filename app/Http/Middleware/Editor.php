@@ -12,7 +12,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 
 
-class Approver
+class Editor
 {
     public function handle($request, Closure $next)
     {
@@ -21,7 +21,7 @@ class Approver
         } else {
             if (Auth::user()->role_id != 5) {
                 // user value cannot be found in session
-                alert()->warning('Oops!', 'You need to be an Approver to access this page.');
+                alert()->warning('Oops!', 'You need to be an Editor to access this page.');
                 return redirect('/home');
             }
         }

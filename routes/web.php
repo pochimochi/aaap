@@ -74,8 +74,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::resource('articles', 'ArticleController');
         });
         //---------------------------------------------------------------------------------
-        Route::group(['middleware' => 'approver', 'prefix' => 'approver'], function () {
+        Route::group(['middleware' => 'editor', 'prefix' => 'editor'], function () {
             Route::resource('articles', 'ArticleController');
+            Route::post('articles/change_status', 'ArticleController@changeStatus');
         });
         //---------------------------------------------------------------------------------
         Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {

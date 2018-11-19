@@ -11,12 +11,12 @@
             <div class="navbar-collapse collapse" id="navbar_global">
                 <div class="navbar-collapse-header">
                     <div class="row">
-                        <div class="col-6 collapse-brand">
+                        <div class="col-10 collapse-brand">
                             <a href="{{url('/home')}}">
-                                <img src="{{asset('images/logos/logo.png')}}">
+                                <img class="img-fluid" src="{{asset('images/logos/logo.png')}}">
                             </a>
                         </div>
-                        <div class="col-6 collapse-close">
+                        <div class="col-1 collapse-close">
                             <button type="button" class="navbar-toggler" data-toggle="collapse"
                                     data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false"
                                     aria-label="Toggle navigation">
