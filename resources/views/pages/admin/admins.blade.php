@@ -51,7 +51,7 @@
                                                 Content Manager
                                             </option>
                                             <option value="5" {{ old('role_id') == 5 ? 'selected' : '' }}>
-                                                Approver
+                                                Editor
                                             </option>
                                         </select>
                                         <span class="text-danger">{{ $errors->first('role_id') }}</span>

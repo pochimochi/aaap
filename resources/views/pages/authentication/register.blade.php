@@ -210,7 +210,8 @@
                                         <label>Landline Number</label>
                                         <div class="form-group">
                                             <input value="{{ old('landline_number') }}" type="text"
-                                                   name="landline_number" id="landline_number" MAXLENGTH="7" placeholder="#######"
+                                                   name="landline_number" id="landline_number" MAXLENGTH="7"
+                                                   placeholder="#######"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('landline_number') }}</span>
                                         </div>
@@ -236,9 +237,9 @@
                                             <span class="text-danger">{{ $errors->first('profile_id') }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 required">
+                                    <div class="col-md-6">
                                         <label>ID Verification</label>
-                                        <div class="form-group required">
+                                        <div class="form-group">
                                             <input value="{{ old('idverification_id') }}" type="file"
                                                    name="idverification_id" id="id-input"
                                                    class="form-control-file"/>
@@ -576,8 +577,8 @@
                                         <div class="col-md-6 required">
                                             <label>Confirm Password</label>
                                             <div class="form-group required">
-                                                <input value="{{ old('password') }}" type="password"
-                                                       name="password" id="password"
+                                                <input value="{{ old('password_confirmation') }}" type="password"
+                                                       name="password_confirmation" id="password_confirmation"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                                             </div>
@@ -592,7 +593,8 @@
                                                            value="true" {{ !old('terms') ?: 'checked' }}>
                                                     <label class="custom-control-label" for="terms">
                                                         <span>I have read and agreed to the <a data-toggle="modal"
-                                                                                               data-target="#status-form" class="text-primary">Terms and Conditions</a>.</span>
+                                                                                               data-target="#status-form"
+                                                                                               class="text-primary">Terms and Conditions</a>.</span>
                                                     </label>
                                                 </div>
                                                 <span class="text-danger">{{ $errors->first('terms') }}</span>
@@ -635,37 +637,100 @@
                                                 <div class="card-body mt-2">
                                                     <div class="row justify-content-center">
                                                         <div class="col-lg-4 order-lg-2">
-                                                            <h2 class="modal-title" id="exampleModalLabel">Terms and Conditions</h2>
+                                                            <h2 class="modal-title" id="exampleModalLabel">Terms and
+                                                                Conditions</h2>
                                                         </div>
                                                     </div>
                                                     <div class="card-body pt-0 pt-md-4">
                                                         <div class="pl-lg-4">
-                                                                <b>Last updated: October 26, 2018</b><br><br>
-                                                                Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the https://isproj2b.benilde.edu.ph/aaap website (the "Service") operated by AAAP Today ("us", "we", or "our").
-                                                                Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.<br>
-                                                                By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service. This Terms and Conditions agreement for AAAP Today is managed by <a href="https://termsfeed.com/terms-conditions/generator/">the Terms and Conditions Generator</a>.
-                                                                <br><br><b>Accounts</b><br>
-                                                                When you create an account with us, you must provide us information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account on our Service.
-                                                                You are responsible for safeguarding the password that you use to access the Service and for any activities or actions under your password, whether your password is with our Service or a third-party service.
-                                                                You agree not to disclose your password to any third party. You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.
-                                                                <br><br><b>Links To Other Web Sites</b><br>
-                                                                Our Service may contain links to third-party web sites or services that are not owned or controlled by AAAP Today.
-                                                                AAAP Today has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that AAAP Today shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.
-                                                                We strongly advise you to read the terms and conditions and privacy policies of any third-party web sites or services that you visit.
-                                                                <br><br><b>Termination</b><br>
-                                                                We may terminate or suspend access to our Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.
-                                                                All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.
-                                                                We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.
-                                                                Upon termination, your right to use the Service will immediately cease. If you wish to terminate your account, you may simply discontinue using the Service.
-                                                                All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.
-                                                                <br><br><b>Governing Law</b><br>
-                                                                These Terms shall be governed and construed in accordance with the laws of Philippines, without regard to its conflict of law provisions.
-                                                                Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service, and supersede and replace any prior agreements we might have between us regarding the Service.
-                                                                <br><br><b>Changes</b><br>
-                                                                We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
-                                                                By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the Service.
-                                                                <br><br><b>Contact Us</b><br>
-                                                                If you have any questions about these Terms, please contact us. </p>
+                                                            <b>Last updated: October 26, 2018</b><br><br>
+                                                            Please read these Terms and Conditions ("Terms", "Terms and
+                                                            Conditions") carefully before using the
+                                                            https://isproj2b.benilde.edu.ph/aaap website (the "Service")
+                                                            operated by AAAP Today ("us", "we", or "our").
+                                                            Your access to and use of the Service is conditioned on your
+                                                            acceptance of and compliance with these Terms. These Terms
+                                                            apply to all visitors, users and others who access or use
+                                                            the Service.<br>
+                                                            By accessing or using the Service you agree to be bound by
+                                                            these Terms. If you disagree with any part of the terms then
+                                                            you may not access the Service. This Terms and Conditions
+                                                            agreement for AAAP Today is managed by <a
+                                                                    href="https://termsfeed.com/terms-conditions/generator/">the
+                                                                Terms and Conditions Generator</a>.
+                                                            <br><br><b>Accounts</b><br>
+                                                            When you create an account with us, you must provide us
+                                                            information that is accurate, complete, and current at all
+                                                            times. Failure to do so constitutes a breach of the Terms,
+                                                            which may result in immediate termination of your account on
+                                                            our Service.
+                                                            You are responsible for safeguarding the password that you
+                                                            use to access the Service and for any activities or actions
+                                                            under your password, whether your password is with our
+                                                            Service or a third-party service.
+                                                            You agree not to disclose your password to any third party.
+                                                            You must notify us immediately upon becoming aware of any
+                                                            breach of security or unauthorized use of your account.
+                                                            <br><br><b>Links To Other Web Sites</b><br>
+                                                            Our Service may contain links to third-party web sites or
+                                                            services that are not owned or controlled by AAAP Today.
+                                                            AAAP Today has no control over, and assumes no
+                                                            responsibility for, the content, privacy policies, or
+                                                            practices of any third party web sites or services. You
+                                                            further acknowledge and agree that AAAP Today shall not be
+                                                            responsible or liable, directly or indirectly, for any
+                                                            damage or loss caused or alleged to be caused by or in
+                                                            connection with use of or reliance on any such content,
+                                                            goods or services available on or through any such web sites
+                                                            or services.
+                                                            We strongly advise you to read the terms and conditions and
+                                                            privacy policies of any third-party web sites or services
+                                                            that you visit.
+                                                            <br><br><b>Termination</b><br>
+                                                            We may terminate or suspend access to our Service
+                                                            immediately, without prior notice or liability, for any
+                                                            reason whatsoever, including without limitation if you
+                                                            breach the Terms.
+                                                            All provisions of the Terms which by their nature should
+                                                            survive termination shall survive termination, including,
+                                                            without limitation, ownership provisions, warranty
+                                                            disclaimers, indemnity and limitations of liability.
+                                                            We may terminate or suspend your account immediately,
+                                                            without prior notice or liability, for any reason
+                                                            whatsoever, including without limitation if you breach the
+                                                            Terms.
+                                                            Upon termination, your right to use the Service will
+                                                            immediately cease. If you wish to terminate your account,
+                                                            you may simply discontinue using the Service.
+                                                            All provisions of the Terms which by their nature should
+                                                            survive termination shall survive termination, including,
+                                                            without limitation, ownership provisions, warranty
+                                                            disclaimers, indemnity and limitations of liability.
+                                                            <br><br><b>Governing Law</b><br>
+                                                            These Terms shall be governed and construed in accordance
+                                                            with the laws of Philippines, without regard to its conflict
+                                                            of law provisions.
+                                                            Our failure to enforce any right or provision of these Terms
+                                                            will not be considered a waiver of those rights. If any
+                                                            provision of these Terms is held to be invalid or
+                                                            unenforceable by a court, the remaining provisions of these
+                                                            Terms will remain in effect. These Terms constitute the
+                                                            entire agreement between us regarding our Service, and
+                                                            supersede and replace any prior agreements we might have
+                                                            between us regarding the Service.
+                                                            <br><br><b>Changes</b><br>
+                                                            We reserve the right, at our sole discretion, to modify or
+                                                            replace these Terms at any time. If a revision is material
+                                                            we will try to provide at least 30 days notice prior to any
+                                                            new terms taking effect. What constitutes a material change
+                                                            will be determined at our sole discretion.
+                                                            By continuing to access or use our Service after those
+                                                            revisions become effective, you agree to be bound by the
+                                                            revised terms. If you do not agree to the new terms, please
+                                                            stop using the Service.
+                                                            <br><br><b>Contact Us</b><br>
+                                                            If you have any questions about these Terms, please contact
+                                                            us. </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -769,25 +834,15 @@
     }
 
     function validateForm() {
-        // This function deals with validation of the form fields
-        var x, y, i, valid = true;
+        var x, y, valid = true;
         x = document.getElementsByClassName("tab");
         y = x[currentTab].getElementsByTagName("input");
-        // A loop that checks every input field in the current tab:
-        for (i = 0; i < y.length; i++) {
-            // If a field is empty...
-            if (y[i].value == "") {
-                // add an "invalid" class to the field:
-                y[i].className += " invalid";
-                // and set the current valid status to false:
-                valid = false;
-            }
-        }
-        // If the valid status is true, mark the step as finished and valid:
-        if (valid) {
+        if ($('#regForm').valid()) {
             document.getElementsByClassName("step")[currentTab].className += " finish";
+            return valid;
+        } else {
+            y.className += "invalid"
         }
-        return valid; // return the valid status
     }
 
     function nextPrev(n) {
