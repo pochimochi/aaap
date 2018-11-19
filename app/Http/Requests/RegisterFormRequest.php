@@ -35,7 +35,7 @@ class RegisterFormRequest extends FormRequest
             'profile_id' => 'nullable|image|mimes:jpeg,jpg,png|max:8000',
             'password' => 'required|confirmed|max:64|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'password_confirmation' => 'required',
-            'idverification_id' => 'required|mimes:jpg,jpeg,png,docx,doc,pdf|max:8000',
+            'idverification_id' => 'nullable|mimes:jpg,jpeg,png,docx,doc,pdf|max:8000',
             'email' => 'required|unique:users,email|email',
             'unitno' => 'required|max:5|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'bldg' => 'nullable|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
