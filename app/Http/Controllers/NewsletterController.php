@@ -13,7 +13,9 @@ class NewsletterController extends Controller
 
     public function index()
     {
-        return view('pages.writer.newsletter');
+        $users = User::all()->where('role_id', 4)->where('active', 1);
+
+        return view('pages.writer.newsletter', compact(['users']));
     }
 
 
@@ -26,6 +28,7 @@ class NewsletterController extends Controller
     public function store(Request $request)
     {
 
+
         $valid = Validator::make($request->all(), [
             'subject' => 'required',
             'body' => 'required',
@@ -33,7 +36,12 @@ class NewsletterController extends Controller
 
         $body = $request['body'];
         $subject = $request['subject'];
-        $receiver = User::all()->where('role_id', 4)->where('active', 1);
+        if ($request->receiver == null) {
+            $receiver = User::all()->where('role_id', 4)->where('active', 1);
+        } else {
+            $receiver = $request->receiver;
+        }
+
 
         if ($valid->passes()) {
             $helper = new helper();

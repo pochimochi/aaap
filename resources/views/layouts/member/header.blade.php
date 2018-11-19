@@ -27,25 +27,14 @@
                     </div>
                 </div>
                 <ul class="navbar-nav navbar-nav-hover align-items-lg-center ml-lg-auto">
-                    @if(session('user'))
+                    @if(session('user')['active'] == 1)
                         <li class="nav-item">
                             <a href="{{URL::to('/member/events')}}" class="nav-link">
                                 <i class="ni ni-ui-04 d-lg-none"></i>
                                 <span class="nav-link-inner--text">Events</span>
                             </a>
                         </li>
-                        {{--<li class="nav-item dropdown">--}}
-                            {{--<a href="" class="nav-link" data-toggle="dropdown" href="" role="button">--}}
-                                {{--<i class="ni ni-collection d-lg-none"></i>--}}
-                                {{--<span class="nav-link-inner--text">Events</span>--}}
-                            {{--</a>--}}
-                            {{--<div class="dropdown-menu">--}}
-                                {{--<a href="{{URL::to('/member/events')}}"--}}
-                                   {{--class="dropdown-item">List</a>--}}
-                                {{--<a href="{{action('AttendanceController@index')}}"--}}
-                                   {{--class="dropdown-item">Joined Events</a>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
+
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown" href="#" role="button">
                                 <i class="ni ni-collection d-lg-none"></i>
@@ -64,6 +53,13 @@
                                 <span class="nav-link-inner--text">Articles</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{URL::to('member/profile')}}" class="nav-link">
+                                <span class="btn-inner--icon"><i class="ni ni-circle-08"></i></span>
+                                <span class="nav-link-inner--text">Account</span>
+                            </a>
+                        </li>
+                        @else
                         <li class="nav-item">
                             <a href="{{URL::to('member/profile')}}" class="nav-link">
                                 <span class="btn-inner--icon"><i class="ni ni-circle-08"></i></span>

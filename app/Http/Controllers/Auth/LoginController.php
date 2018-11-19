@@ -63,9 +63,13 @@ class LoginController extends Controller
                 alert()->success('Login Successful!', 'Welcome ' . $user->firstname);
                 return redirect('home');
             } else {
-                alert()->warning('Login Failed', 'Your account is inactive.');
-
-                return redirect('/login');
+                $user = Auth::user();
+                session(['user' => $user]);
+                session(['userId' => $user->id]);
+                session(['role' => $user->role_id]);
+                alert()->warning('Login Successful', 'Your account is inactive');
+                $log->savelog($user->id, 'Logged In');
+                return redirect('member/profile');
             }
 
 

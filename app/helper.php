@@ -88,7 +88,7 @@ class Helper
         $mail->CharSet = 'windows-1250';
         foreach($receiver as $receive){
 
-            $mail->AddBCC($receive->email); // send to mail
+            $mail->AddBCC($receive['email']); // send to mail
 
         }
 

@@ -17,7 +17,10 @@
 @endsection
 @section('content')
     <body class="open"></body>
+    <form action="{{URL::to('/writer/newsletter')}}" method="post">
     <div class="content">
+
+
         <div class="card shadow">
             <div class="card-body">
                 <div class="container">
@@ -35,7 +38,7 @@
                     </div>
                 </div>
                 <div class="container">
-                    <form action="{{URL::to('/writer/newsletter')}}" method="post">
+
                         @csrf
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Subject" name="subject"
@@ -52,9 +55,52 @@
                                 Reset
                             </button>
                         </div>
-                    </form>
+
                 </div>
             </div>
         </div>
+
+
+        <div class="card mt-5">
+
+
+            <div class="card-body">
+                <div class="container">
+                    <div class="card-title"><h3>Users</h3></div>
+
+
+                    <table id="myTable" class="table-bordered table" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <td></td>
+                                <td>{{$user->id}}</td>
+                                <td>{{$user->firstname}}</td>
+                                <td>{{$user->middlename}}</td>
+                                <td>{{$user->lastname}}</td>
+                                <td>{{$user->email}}<input type="hidden" name="receiver[][email]" value="{{$user->email}}"></td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
     </div>
+    </form>
+
+
 @endsection

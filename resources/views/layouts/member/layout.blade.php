@@ -83,6 +83,8 @@
 <script src="{{asset('argonmember/assets/vendor/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{asset('argonmember/assets/vendor/headroom/headroom.min.js')}}"></script>
 <!-- Optional JS -->
+<script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+@include('sweetalert::alert')
 <script src="{{asset('argon/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <!-- Laravel Javascript Validation -->
 
