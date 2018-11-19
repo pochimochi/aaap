@@ -446,7 +446,7 @@
                                                                            for="input-country">Country</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           value="{{ $user->temporaryaddress->country->name}}"
+                                                                           value="{{ $user->temporaryaddress->country ? $user->temporaryaddress->country->name : ''}}"
                                                                            readonly>
                                                                 </div>
                                                             </div>
