@@ -28,10 +28,12 @@
                 
                 unhighlight: function(element) {
                     $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid');
+                    $(element).closest('.form-group').removeClass('focused').removeClass('has-success').removeClass('has-danger /');
                 },
                 
                 success: function (element) {
                     $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid'); // remove the Boostrap error class from the control group
+                    $(element).closest('.form-group').removeClass('focused').removeClass('has-success').removeClass('has-danger /');
                 },
 
                 focusInvalid: false, // do not focus the last invalid input

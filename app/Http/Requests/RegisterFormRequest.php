@@ -8,6 +8,8 @@
 
 namespace App\Http\Requests;
 
+
+use Illuminate\Validation\Rule;
 use JsValidator;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -21,10 +23,14 @@ class RegisterFormRequest extends FormRequest
 
     public function rules()
     {
+        $firstname = $this->request->get('firstname');
+        $unique = Rule::unique('users')->where('lastname', $this->request->get('lastname'))
+            ->where('firstname', $this->request->get('firstname'));
         return [
-            'firstname' => 'required|max:30|string|regex:/^[a-z ,.\'-]+$/i',
+            'firstname' => 'required|max:30|regex:/^[a-z ,.\'-]+$/i',
+
             'middlename' => 'nullable|max:30|string|regex:/^[a-z ,.\'-]+$/i',
-            'lastname' => 'required|max:30|string|regex:/^[a-z ,.\'-]+$/i',
+            'lastname' => "required|max:30|string|regex:/^[a-z ,.\'-]+$/i|" . $unique,
             'gender' => 'required',
             'profile_id' => 'nullable|image|mimes:jpeg,jpg,png|max:8000',
             'password' => 'required|confirmed|max:64|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
@@ -70,11 +76,13 @@ class RegisterFormRequest extends FormRequest
             'firstname.required' => 'The first name field is required.',
             'firstname.max' => 'The first name may not be greater than 30 characters.',
             'firstname.regex' => 'The first name format is invalid.',
+
             'middlename.regex' => 'The middle name format is invalid',
             'middlename.max' => 'The middle name may not be greater than 30 characters.',
             'lastname.required' => 'The last name field is required',
             'lastname.max' => 'The last name may not be greater than 30 characters.',
             'lastname.regex' => 'The last name format is invalid.',
+            'lastname.unique' => 'The first name and last name has been taken.',
             'pwaFirstName.max' => 'The first name may not be greater than 30 characters.',
             'pwaFirstName.regex' => 'The first name format is invalid.',
             'pwaMiddleName.max' => 'The middle name may not be greater than 30 characters.',

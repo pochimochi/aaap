@@ -156,7 +156,16 @@
                                                                     <span class="text-danger">{{ $errors->first('profile[location]') }}</span>
                                                                 </div>
                                                             </div>
-
+                                                            <div class="col-md-6">
+                                                                <label>Profile Picture</label>
+                                                                <div class="form-group">
+                                                                    <input value="{{ old('profile_id') }}" type="file"
+                                                                           name="idverification[location]" id="file-input"
+                                                                           class="form-control-file"/>
+                                                                    <div id="thumb-output"></div>
+                                                                    <span class="text-danger">{{ $errors->first('idverification_id[location]') }}</span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane" id="address">

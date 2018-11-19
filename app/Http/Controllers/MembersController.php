@@ -9,15 +9,26 @@
 namespace App\Http\Controllers;
 
 use App\Helper;
+use App\logs;
 use App\User;
+use Carbon\Carbon;
 use DB;
+use Illuminate\Http\Request;
 
 
 class MembersController extends Controller
 {
     public function index()
     {
+
         $members = User::all()->where('role_id', 4);
+        foreach ($members as $member) {
+            if (Carbon::parse($member->statusdate)->lt(Carbon::now())) {
+                $member->active = 0;
+
+                $member->save();
+            }
+        }
 
         return view('pages.admin.members', ['members' => $members]);
 
@@ -31,6 +42,7 @@ class MembersController extends Controller
      */
     public function changeStatus($userId, $status)
     {
+
         $paid = "<h1>Welcome to AAAP</h1>
 
 <hr />
@@ -46,10 +58,11 @@ class MembersController extends Controller
             if ($status == 1) {
                 $user = User::find($userId);
                 $user->approvedby = session('user')['id'];
+                $user->statusdate = now()->addYear(1);
                 $user->save();
                 $helper->emailSend($admins->email, $paid, 'Welcome to AAAP!');
             } else {
-                $helper->emailSend($admins->email, $unpaid, 'You account has been deactivated');
+                $helper->emailSend($admins->email, $unpaid, 'Your account has been deactivated');
             }
 
             toast('Status Changed!', 'success', 'bottom-right');
@@ -58,6 +71,25 @@ class MembersController extends Controller
             alert()->error('Oops!', 'something went wrong 😞');
             return redirect()->back();
         }
+    }
+    public function reminder(Request $request)
+    {
+
+        $user = User::find($request->id);
+        $request->validate([
+            'subject' => 'required|max:70',
+            'body' => 'required'
+        ]);
+        $helper = new Helper();
+        $helper->emailSend($user->email, $request->body, $request->subject);
+        $log = new logs();
+        $log->savelog(session('user')['id'], 'Sent a Message [' . $request->subject . ']');
+        alert()->success('Success!', 'Message has been sent!');
+        return back();
+
+
+
+
     }
 }
 

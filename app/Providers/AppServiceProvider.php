@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +24,13 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
             //use \URL:forceSchema('https') if you use laravel < 5.4
         }
+        Validator::extend('uniqueFirstAndLastName', function ($attribute, $value, $parameters, $validator) {
+            $count = DB::table('users')->where('firstname', $value)
+                ->where('lastname', $parameters[0])
+                ->count();
+
+            return $count === 0;
+        });
     }
 
     /**

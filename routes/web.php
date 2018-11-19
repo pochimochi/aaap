@@ -84,6 +84,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::resource('adminMaintenance', 'AdminsController')->only(['index', 'store']);
             Route::get('memberchangeStatus/{userId}/{status}', 'MembersController@changeStatus');
             Route::get('members', 'MembersController@index');
+            Route::post('members/send', 'MembersController@reminder');
 
         });
     });

@@ -27,6 +27,7 @@ class EditProfileRequest extends FormRequest
             'lastname' => 'required|max:30|string|regex:/^[a-z ,.\'-]+$/i',
             'gender' => 'required',
             'profile.location' => 'nullable|image|mimes:jpeg,jpg,png|max:2000',
+            'idverification_id.location' => 'nullable|image|mimes:jpeg,jpg,png|max:2000',
             'email' => 'required|email',
             'paddress.unitno' => 'required|max:5|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'paddress.bldg' => 'nullable|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
@@ -117,6 +118,7 @@ class EditProfileRequest extends FormRequest
             'email.email' => 'The email address format is invalid.',
 
             'profile_id' => 'The profile picture must be an image.',
+
         ];
     }
 
