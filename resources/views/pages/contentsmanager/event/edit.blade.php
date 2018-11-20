@@ -210,10 +210,10 @@
                                     <div class="col-md-4 ">
                                         <div class="form-group required">
                                         <label>State/Province</label>
-                                            <input value="{{$event->address->province->name}}" type="text" name="province" id="province"
+                                            <input value="{{$event->address->province ? $event->address->province->name : ''}}" type="text" name="province" id="province"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('province') }}</span>
-                                        </div>d
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row justify-content-end">

@@ -391,7 +391,7 @@
                                                                     <label class="form-control-label" for="input-province">State/Province</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           value="{{ $user->permanentaddress->province->name}}"
+                                                                           value="{{$user->permanentaddress->province ? $user->permanentaddress->province->name : ''}}"
                                                                            readonly>
                                                                 </div>
                                                             </div>
@@ -401,7 +401,7 @@
                                                                            for="input-country">Country</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           value="{{ $user->permanentaddress->country->name}}"
+                                                                           value="{{$user->permanentaddress->country ? $user->permanentaddress->country->name : ''}}"
                                                                            readonly>
                                                                 </div>
                                                             </div>
@@ -454,7 +454,7 @@
                                                                     <label class="form-control-label" for="input-province">State/Province</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           value="{{ $user->temporaryaddress->province->name}}"
+                                                                           value="{{$user->temporaryaddress->province ? $user->temporaryaddress->province->name : ''}}"
                                                                            readonly>
                                                                 </div>
                                                             </div>
@@ -622,7 +622,7 @@
                                                                     <label class="form-control-label" for="input-province">State/Province</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           value="{{ $user->pwa->employer->address->province->name}}"
+                                                                           value="{{$user->pwa->employer->address->province ? $user->pwa->employer->address->province->name : ''}}"
                                                                            readonly>
                                                                 </div>
                                                             </div>
@@ -632,7 +632,7 @@
                                                                            for="input-country">Country</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
-                                                                           value="{{ $user->pwa->employer->address->country->name}}"
+                                                                           value="{{$user->pwa->employer->address->country ? $user->pwa->employer->address->country->name : ''}}"
                                                                            readonly>
                                                                 </div>
                                                             </div>

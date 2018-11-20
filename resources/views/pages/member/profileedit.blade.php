@@ -559,12 +559,16 @@
                                                        value="{{ $users->temporaryaddress_id }}">
                                                 <input type="hidden" name="tcityid"
                                                        value="{{ $users->temporaryaddress->city_id }}">
+                                                <input type="hidden" name="tprovinceid"
+                                                       value="{{ $users->temporaryaddress->province_id }}">
                                                 <input type="hidden" name="tcountryid"
                                                        value="{{ $users->temporaryaddress->country_id }}">
                                                 <input type="hidden" name="paddressid"
                                                        value="{{ $users->permanentaddress_id }}">
                                                 <input type="hidden" name="pcityid"
                                                        value="{{ $users->permanentaddress->city_id }}">
+                                                <input type="hidden" name="pprovinceid"
+                                                       value="{{ $users->permanentaddress->province_id }}">
                                                 <input type="hidden" name="pcountryid"
                                                        value="{{ $users->permanentaddress->country_id }}">
                                                 <input type="hidden" name="profileid" value="{{ $users->profile_id }}">
@@ -578,6 +582,8 @@
                                                        value="{{ $users->pwa->employer->address_id }}">
                                                 <input type="hidden" name="ecityid"
                                                        value="{{ $users->pwa->employer->address->city_id }}">
+                                                <input type="hidden" name="eprovinceid"
+                                                       value="{{ $users->pwa->employer->address->province_id }}">
                                                 <input type="hidden" name="ecountryid"
                                                        value="{{ $users->pwa->employer->address->country_id }}">
 

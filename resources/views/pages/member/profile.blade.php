@@ -153,7 +153,7 @@
                                                                 <div class="col-md-4">
                                                                     <label>State/Province</label>
                                                                     <div class="form-group required">
-                                                                        <input value="{{ $users->permanentaddress->province->name  }}" readonly
+                                                                        <input value="{{$users->permanentaddress->province ? $users->permanentaddress->province->name : ''  }}" readonly
                                                                                class="form-control input-default">
                                                                     </div>
                                                                 </div>
@@ -199,7 +199,7 @@
                                                                 <div class="col-md-4">
                                                                     <label>State/Province</label>
                                                                     <div class="form-group required">
-                                                                        <input value="{{ $users->temporaryaddress->province->name  }}" readonly
+                                                                        <input value="{{$users->temporaryaddress->province ? $users->temporaryaddress->province->name : ''  }}" readonly
                                                                                class="form-control input-default">
                                                                     </div>
                                                                 </div>
@@ -315,7 +315,7 @@
                                                             <div class="col-md-4">
                                                                 <label>State/Province</label>
                                                                 <div class="form-group required">
-                                                                    <input value="{{ $users->pwa->employer->address->province->name  }}" readonly
+                                                                    <input value="{{$users->pwa->employer->address->province ? $users->pwa->employer->address->province->name : '' }}" readonly
                                                                            class="form-control input-default">
                                                                 </div>
                                                             </div>
