@@ -204,7 +204,7 @@
                         <th>With Intervention</th>
                         <th>Date Created</th>
                         <th>Email</th>
-                        <th>Payment</th>
+                        <th>Balance</th>
                         <th>Active</th>
                     </tr>
                     </thead>
@@ -234,7 +234,7 @@
                                 @endif
                             </td>
                             <td>
-                                {{($user->active == 1) ? 'Active' : 'Inactive'}}
+                                {{($user->active == 1) ? 'Active' : 'Suspended'}}
                             </td>
                         </tr>
                         <div class="modal fade" id="status-form{{$user->id}}"
@@ -878,7 +878,7 @@
                         select6.append('<option value="Yes">Yes</option>');
                         select6.append('<option value="No">No</option>');
                     });
-                    var column7 = this.api().column(9);
+                    var column7 = this.api().column(10);
                     var select7 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
                         .appendTo($('#activefilter').empty().text('Active: '))
                         .on('change', function () {
@@ -892,7 +892,7 @@
                         });
                     column7.data().unique().sort().each(function (d, j) {
                         select7.append('<option value="Active">Active</option>');
-                        select7.append('<option value="Inactive">Inactive</option>');
+                        select7.append('<option value="Suspended">Inactive</option>');
                     });
                 },
 
