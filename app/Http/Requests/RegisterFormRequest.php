@@ -130,6 +130,8 @@ class RegisterFormRequest extends FormRequest
             'email.unique' => 'The email address is already taken.',
             'email.email' => 'The email address format is invalid.',
 
+            'mobile_number.regex' => 'Please Enter a Valid Mobile Number starting with 09.',
+
             'profile_id' => 'The profile picture must be an image.',
             'idverification_id.required' => 'The ID Verification field is required. Please upload a photo or file of your ID.',
             'password.regex' => 'The password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 Special Character.',

@@ -299,9 +299,9 @@
                                                 <div class="col-md-4 required">
                                                     <label>State/Province</label>
                                                     <div class="form-group required">
-                                                        <input value="{{ old('province') }}" type="text" name="province" id="province"
+                                                        <input value="{{ old('province_id') }}" type="text" name="province" id="province"
                                                                class="form-control input-default">
-                                                        <span class="text-danger">{{ $errors->first('province') }}</span>
+                                                        <span class="text-danger">{{ $errors->first('province_id') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 required">
