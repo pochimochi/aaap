@@ -74,11 +74,11 @@ class EventController extends Controller
             'name' => 'required|unique:events,name,'. '0' .',status|string|max:100',
             'description' => 'required|max:500',
             'venue' => 'required|max:50',
-            'city' => 'required|max:50',
-            'province' => 'required|max:50',
             'unitno' => 'required|max:5|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'bldg' => 'nullable|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'street' => 'required|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
+            'city' => 'required|string|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
+            'province' => 'required|string|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'start_date' => 'date|after:today',
             'end_date' => 'nullable|date|after:start_date',
         ], [
@@ -91,8 +91,8 @@ class EventController extends Controller
             'street.max' => 'The street may not be greater than 50 characters.',
             'city.regex' => 'The city format is invalid.',
             'city.max' => 'The city may not be greater than 50 characters.',
-            'province.regex' => 'The city format is invalid.',
-            'province.max' => 'The city may not be greater than 50 characters.',
+            'province.regex' => 'The province/state format is invalid.',
+            'province.max' => 'The province/state may not be greater than 50 characters.',
         ]);
         if ($valid->passes()) {
             $eventinfo = $request->all();
@@ -145,6 +145,7 @@ class EventController extends Controller
             'bldg' => 'nullable|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'street' => 'required|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'city' => 'required|string|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
+            'province' => 'required|string|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'start_date' => 'date',
             'end_date' => 'nullable|date',
         ], [
@@ -157,6 +158,8 @@ class EventController extends Controller
             'street.max' => 'The street may not be greater than 50 characters.',
             'city.regex' => 'The city format is invalid.',
             'city.max' => 'The city may not be greater than 50 characters.',
+            'province.regex' => 'The province/state format is invalid.',
+            'province.max' => 'The province/state may not be greater than 50 characters.',
         ]);
         $eventinfo = $request->except(['_token', '_method']);
         $event = Event::find($eventId);
