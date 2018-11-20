@@ -19,8 +19,6 @@
     <body class="open"></body>
     <form action="{{URL::to('/writer/newsletter')}}" method="post">
     <div class="content">
-
-
         <div class="card shadow">
             <div class="card-body">
                 <div class="container">
