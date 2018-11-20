@@ -211,7 +211,7 @@
                                         <div class="form-group">
                                             <input value="{{ old('landline_number') }}" type="text"
                                                    name="landline_number" id="landline_number" MAXLENGTH="11"
-                                                   placeholder="Ex. 6245388 or 025 6245388"
+                                                   placeholder="Ex. 1234567 or 025 1234567"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('landline_number') }}</span>
                                         </div>
@@ -220,8 +220,8 @@
                                         <label>Mobile Number</label>
                                         <div class="form-group required">
                                             <input value="{{ old('mobile_number') }}" type="text"
-                                                   name="mobile_number" id="mobile_number" MAXLENGTH="12"
-                                                   placeholder="Ex. 09214444444"
+                                                   name="mobile_number" id="mobile_number" MAXLENGTH="11"
+                                                   placeholder="Ex. 09211234567"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('mobile_number') }}</span>
                                         </div>
@@ -299,9 +299,9 @@
                                                 <div class="col-md-4 required">
                                                     <label>State/Province</label>
                                                     <div class="form-group required">
-                                                        <input value="{{ old('province') }}" type="text" name="province" id="province"
+                                                        <input value="{{ old('province_id') }}" type="text" name="province" id="province"
                                                                class="form-control input-default">
-                                                        <span class="text-danger">{{ $errors->first('province') }}</span>
+                                                        <span class="text-danger">{{ $errors->first('province_id') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 required">

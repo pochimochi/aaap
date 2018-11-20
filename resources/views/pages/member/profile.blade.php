@@ -144,13 +144,20 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
                                                                     <label>City</label>
                                                                     <input value="{{ $users->permanentaddress->city->name }}"
                                                                            readonly
                                                                            class="form-control form-control-alternative">
                                                                 </div>
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
+                                                                    <label>State/Province</label>
+                                                                    <div class="form-group required">
+                                                                        <input value="{{ $users->permanentaddress->province->name  }}" readonly
+                                                                               class="form-control input-default">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
                                                                     <label>Country</label>
                                                                     <input value="{{ $users->permanentaddress->country->name }}"
                                                                            readonly
@@ -183,13 +190,20 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
                                                                     <label>City</label>
                                                                     <input value="{{ $users->temporaryaddress->city->name }}"
                                                                            readonly
                                                                            class="form-control form-control-alternative">
                                                                 </div>
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
+                                                                    <label>State/Province</label>
+                                                                    <div class="form-group required">
+                                                                        <input value="{{ $users->temporaryaddress->province->name  }}" readonly
+                                                                               class="form-control input-default">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
                                                                     <label>Country</label>
                                                                     <input value="{{ $users->temporaryaddress->country
                                                                         ? $users->temporaryaddress->country->name : ''}}"
@@ -292,13 +306,20 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-4">
                                                                 <label>City</label>
                                                                 <input value="{{ $users->pwa->employer->address->city->name }}"
                                                                        readonly
                                                                        class="form-control form-control-alternative">
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-4">
+                                                                <label>State/Province</label>
+                                                                <div class="form-group required">
+                                                                    <input value="{{ $users->pwa->employer->address->province->name  }}" readonly
+                                                                           class="form-control input-default">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
                                                                 <label>Country</label>
                                                                 <input value="{{ $users->pwa->employer->address->country ? $users->pwa->employer->address->country->name : '' }}"
                                                                        readonly

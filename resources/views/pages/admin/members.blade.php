@@ -271,7 +271,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-city">City</label>
@@ -281,7 +281,16 @@
                                                                            readonly>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $member->permanentaddress->province->name}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-country">Country</label>
@@ -309,7 +318,7 @@
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
-                                                                           for="input-city">Building</label>
+                                                                           for="input-bldg">Building</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{ $member->temporaryaddress->bldg}}"
@@ -319,7 +328,7 @@
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
-                                                                           for="input-city">Street</label>
+                                                                           for="input-street">Street</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{ $member->temporaryaddress->street}}"
@@ -328,7 +337,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-city">City</label>
@@ -338,7 +347,16 @@
                                                                            readonly>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $member->temporaryaddress->province->name}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-country">Country</label>
@@ -474,7 +492,7 @@
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
-                                                                           for="input-city">Building</label>
+                                                                           for="input-bldg">Building</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{ $member->pwa->employer->address->bldg }}"
@@ -484,7 +502,7 @@
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
-                                                                           for="input-city">Street</label>
+                                                                           for="input-street">Street</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{ $member->pwa->employer->address->street }}"
@@ -493,7 +511,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-city">City</label>
@@ -503,7 +521,16 @@
                                                                            readonly>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $member->pwa->employer->address->province->name}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-country">Country</label>
