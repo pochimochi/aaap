@@ -827,8 +827,7 @@
 
                         });
                     column3.data().unique().sort().each(function (d, j) {
-                        select3.append('<option value="Paid">Paid</option>');
-                        select3.append('<option value="Unpaid">Unpaid</option>');
+                        select3.append('<option value="' + d + '">' + d + '</option>');
                     });
                     var column4 = this.api().column(7);
                     var select4 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
@@ -843,8 +842,7 @@
 
                         });
                     column4.data().unique().sort().each(function (d, j) {
-                        select4.append('<option value="Male">Male</option>');
-                        select4.append('<option value="Female">Female</option>');
+                        select4.append('<option value="' + d + '">' + d + '</option>');
                     });
                     var column5 = this.api().column(8);
                     var select5 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
@@ -859,8 +857,7 @@
 
                         });
                     column5.data().unique().sort().each(function (d, j) {
-                        select5.append('<option value="Yes">Yes</option>');
-                        select5.append('<option value="No">No</option>');
+                        select5.append('<option value="' + d + '">' + d + '</option>');
                     });
                     var column6 = this.api().column(9);
                     var select6 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
@@ -875,10 +872,9 @@
 
                         });
                     column6.data().unique().sort().each(function (d, j) {
-                        select6.append('<option value="Yes">Yes</option>');
-                        select6.append('<option value="No">No</option>');
+                        select6.append('<option value="' + d + '">' + d + '</option>');
                     });
-                    var column7 = this.api().column(10);
+                    var column7 = this.api().column(13);
                     var select7 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
                         .appendTo($('#activefilter').empty().text('Active: '))
                         .on('change', function () {
@@ -891,8 +887,7 @@
 
                         });
                     column7.data().unique().sort().each(function (d, j) {
-                        select7.append('<option value="Active">Active</option>');
-                        select7.append('<option value="Suspended">Inactive</option>');
+                        select7.append('<option value="' + d + '">' + d + '</option>');
                     });
                 },
 
