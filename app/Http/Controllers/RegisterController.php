@@ -59,36 +59,39 @@ class RegisterController extends Controller
             $userinfo['active'] = 0;
             $userinfo['role_id'] = 4;
 
-            if($request->file('profile_id') != null){
+            if ($request->file('profile_id') != null) {
                 $file1 = $request->file('profile_id')->getClientOriginalName();
                 $request->file('profile_id')->move('storage', $file1);
                 $userinfo['profile_id'] = Images::create(['location' => $file1])->id;
             }
-            if ($request->file('idverification_id') != null){
+            if ($request->file('idverification_id') != null) {
                 $file2 = $request->file('idverification_id')->getClientOriginalName();
                 $request->file('idverification_id')->move('storage', $file2);
                 $userinfo['idverification_id'] = Images::create(['location' => $file2])->id;
 
             }
 
-
+            $userinfo['tprovince_id'] = Province::create(['name' => $userinfo['tprovince']])->id;
             $userinfo['tcity_id'] = City::create(['name' => $userinfo['tcity']])->id;
             $userinfo['temporaryaddress_id'] = Address::create([
                 'unitno' => $userinfo['tunitno'], 'bldg' => $userinfo['tbldg'], 'street' => $userinfo['tstreet'],
                 'city_id' => $userinfo['tcity_id'], 'country_id' => $userinfo['tcountry'],
-                'province_id' => $userinfo['tprovince']])->id;
+                'province_id' => $userinfo['tprovince_id']])->id;
 
+            $userinfo['province_id'] = Province::create(['name' => $userinfo['province']])->id;
             $userinfo['city_id'] = City::create(['name' => $userinfo['city']])->id;
             $userinfo['permanentaddress_id'] = Address::create($userinfo)->id;
+
 
             $userinfo['user_id'] = User::create($userinfo)->id;
             Contact::create($userinfo);
 
+            $userinfo['eprovince_id'] = Province::create(['name' => $userinfo['eprovince']])->id;
             $userinfo['ecity_id'] = City::create(['name' => $userinfo['ecity']])->id;
             $userinfo['address_id'] = Address::create([
                 'unitno' => $userinfo['eunitno'], 'bldg' => $userinfo['ebldg'], 'street' => $userinfo['estreet'],
                 'city_id' => $userinfo['ecity_id'], 'country_id' => $userinfo['ecountry'],
-                'province_id' => $userinfo['eprovince']])->id;
+                'province_id' => $userinfo['eprovince_id']])->id;
             $userinfo['employer_id'] = Employer::create($userinfo)->id;
 
             $userinfo['pwa_id'] = Pwa::create($userinfo)->id;
