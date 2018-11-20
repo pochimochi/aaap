@@ -11,6 +11,7 @@ use App\EventImages;
 use App\Helper;
 use App\Images;
 use App\logs;
+use App\Province;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -74,6 +75,7 @@ class EventController extends Controller
             'description' => 'required|max:500',
             'venue' => 'required|max:50',
             'city' => 'required|max:50',
+            'province' => 'required|max:50',
             'unitno' => 'required|max:5|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'bldg' => 'nullable|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
             'street' => 'required|max:50|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
@@ -89,12 +91,15 @@ class EventController extends Controller
             'street.max' => 'The street may not be greater than 50 characters.',
             'city.regex' => 'The city format is invalid.',
             'city.max' => 'The city may not be greater than 50 characters.',
+            'province.regex' => 'The city format is invalid.',
+            'province.max' => 'The city may not be greater than 50 characters.',
         ]);
         if ($valid->passes()) {
             $eventinfo = $request->all();
             $event = new Event($eventinfo);
             $users = User::all()->where('active', 1)->where('role_id', 4);
             $eventinfo['city_id'] = City::create(['name' => $eventinfo['city']])->id;
+            $eventinfo['province_id'] = Province::create(['name' => $eventinfo['province']])->id;
             $eventinfo['address_id'] = Address::create($eventinfo)->id;
             $eventinfo['posted_by'] = session('user')['id'];
             $eventinfo['status'] = 1;
@@ -168,10 +173,12 @@ class EventController extends Controller
         }
         City::where('id', $event->address->city->id)
             ->update(['name' => $eventinfo['city']]);
+        Province::where('id', $event->address->province->id)
+            ->update(['name' => $eventinfo['province']]);
         Address::where('id', $event->address->id)
             ->update(['street' => $eventinfo['street'], 'bldg' => $eventinfo['bldg'], 'unitno' => $eventinfo['unitno']]);
 
-        $eventinfo = $request->except(['_token','_method', 'street', 'bldg', 'eventImage', 'unitno', 'city', 'city_id', 'fileToUpload', 'event_image']);
+        $eventinfo = $request->except(['_token','_method', 'street', 'bldg', 'eventImage', 'unitno', 'city', 'city_id', 'province', 'province_id', 'fileToUpload', 'event_image']);
         $eventinfo['modified_by'] = session('user')['id'];
 
         Event::where('id', $eventId)

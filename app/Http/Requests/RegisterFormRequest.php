@@ -62,8 +62,8 @@ class RegisterFormRequest extends FormRequest
             'pwaGender' => 'nullable|integer',
             'pwaRelationship' => 'nullable|max:50|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaOccupation' => 'nullable|max:50|string|regex:/^[a-z ,.\'-]+$/i',
-            'landline_number' => 'nullable|numeric|digits:7',
-            'mobile_number' => 'required|numeric|digits_between:11,13',
+            'landline_number' => 'nullable|min:7|max:12',
+            'mobile_number' => 'required|numeric|digits_between:10,12|regex:/^[0-9]{1}[0-9]{9}$/',
             'terms' => 'required',
             'g-recaptcha-response' => 'required'
         ];

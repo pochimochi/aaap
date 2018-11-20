@@ -210,8 +210,8 @@
                                         <label>Landline Number</label>
                                         <div class="form-group">
                                             <input value="{{ old('landline_number') }}" type="text"
-                                                   name="landline_number" id="landline_number" MAXLENGTH="7"
-                                                   placeholder="#######"
+                                                   name="landline_number" id="landline_number" MAXLENGTH="11"
+                                                   placeholder="Ex. 6245388 or 025 6245388"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('landline_number') }}</span>
                                         </div>
@@ -220,7 +220,8 @@
                                         <label>Mobile Number</label>
                                         <div class="form-group required">
                                             <input value="{{ old('mobile_number') }}" type="text"
-                                                   name="mobile_number" id="mobile_number" MAXLENGTH="11"
+                                                   name="mobile_number" id="mobile_number" MAXLENGTH="14"
+                                                   placeholder="Ex. 9214444444"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('mobile_number') }}</span>
                                         </div>
@@ -763,6 +764,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
                     </div>
                     <!-- Circles which indicates the steps of the form: -->
                     <div style="text-align:center;margin-top:40px;">

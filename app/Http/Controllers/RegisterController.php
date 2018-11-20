@@ -12,6 +12,7 @@ use App\Image;
 use App\Images;
 use App\logs;
 use App\Pwa;
+use App\Province;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RegisterFormRequest;
@@ -74,7 +75,8 @@ class RegisterController extends Controller
             $userinfo['tcity_id'] = City::create(['name' => $userinfo['tcity']])->id;
             $userinfo['temporaryaddress_id'] = Address::create([
                 'unitno' => $userinfo['tunitno'], 'bldg' => $userinfo['tbldg'], 'street' => $userinfo['tstreet'],
-                'city_id' => $userinfo['tcity_id'], 'country_id' => $userinfo['tcountry']])->id;
+                'city_id' => $userinfo['tcity_id'], 'country_id' => $userinfo['tcountry'],
+                'province_id' => $userinfo['tprovince']])->id;
 
             $userinfo['city_id'] = City::create(['name' => $userinfo['city']])->id;
             $userinfo['permanentaddress_id'] = Address::create($userinfo)->id;
@@ -85,7 +87,8 @@ class RegisterController extends Controller
             $userinfo['ecity_id'] = City::create(['name' => $userinfo['ecity']])->id;
             $userinfo['address_id'] = Address::create([
                 'unitno' => $userinfo['eunitno'], 'bldg' => $userinfo['ebldg'], 'street' => $userinfo['estreet'],
-                'city_id' => $userinfo['ecity_id'], 'country_id' => $userinfo['ecountry']])->id;
+                'city_id' => $userinfo['ecity_id'], 'country_id' => $userinfo['ecountry'],
+                'province_id' => $userinfo['eprovince']])->id;
             $userinfo['employer_id'] = Employer::create($userinfo)->id;
 
             $userinfo['pwa_id'] = Pwa::create($userinfo)->id;

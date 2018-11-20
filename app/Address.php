@@ -32,6 +32,10 @@ class Address extends Model
     {
         return $this->belongsTo('\App\Country');
     }
+    public function province()
+    {
+        return $this->belongsTo('\App\Province');
+    }
 
     public function user()
     {

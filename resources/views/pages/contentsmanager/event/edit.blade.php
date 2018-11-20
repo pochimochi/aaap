@@ -207,6 +207,14 @@
                                             <span class="text-danger">{{ $errors->first('city') }}</span>
                                         </div>
                                     </div>
+                                    <div class="col-md-4 required">
+                                        <label>State/Province</label>
+                                        <div class="form-group required">
+                                            <input value="{{ old('province') }}" type="text" name="province" id="province"
+                                                   class="form-control input-default">
+                                            <span class="text-danger">{{ $errors->first('province') }}</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row justify-content-end">
                                     <div class="form-actions">
