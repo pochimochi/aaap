@@ -377,7 +377,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label" for="input-city">City</label>
                                                                     <input type="text"
@@ -386,7 +386,16 @@
                                                                            readonly>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->permanentaddress->province->name}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-country">Country</label>
@@ -431,7 +440,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label" for="input-city">City</label>
                                                                     <input type="text"
@@ -440,7 +449,16 @@
                                                                            readonly>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->temporaryaddress->province->name}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-country">Country</label>
@@ -590,7 +608,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label" for="input-city">City</label>
                                                                     <input type="text"
@@ -599,7 +617,16 @@
                                                                            readonly>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group focused">
+                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <input type="text"
+                                                                           class="form-control form-control-alternative"
+                                                                           value="{{ $user->pwa->employer->address->province->name}}"
+                                                                           readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label class="form-control-label"
                                                                            for="input-country">Country</label>

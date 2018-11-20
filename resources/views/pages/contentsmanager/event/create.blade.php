@@ -166,9 +166,7 @@
                                             <span class="text-danger">{{ $errors->first('bldg') }}</span>
                                         </div>
                                     </div>
-
-
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <div class="form-group required">
                                             <label>Street</label>
                                             <input type="text" name="street" value="{{old('street')}}"
@@ -176,9 +174,7 @@
                                             <span class="text-danger">{{ $errors->first('street') }}</span>
                                         </div>
                                     </div>
-
-
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <div class="form-group required">
                                             <label>City</label>
                                             <input type="text" name="city" id="city" value="{{old('city')}}"
@@ -186,10 +182,9 @@
                                             <span class="text-danger">{{ $errors->first('city') }}</span>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-4 required">
-                                        <label>State/Province</label>
+                                    <div class="col-md-4">
                                         <div class="form-group required">
+                                        <label>State/Province</label>
                                             <input value="{{ old('province') }}" type="text" name="province" id="province"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('province') }}</span>
