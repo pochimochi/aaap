@@ -198,8 +198,8 @@
                         <th>With Intervention</th>
                         <th>Date Created</th>
                         <th>Email</th>
-                        <th>Active</th>
                         <th>Payment</th>
+                        <th>Active</th>
                     </tr>
                     </thead>
                     <tbody>
