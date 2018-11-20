@@ -105,10 +105,11 @@
                                         </small>
                                         <br>
                                         <small class="text-muted"><b> Location:</b>
-                                            {{$event->address->unitno ? $event->address->unitno : ''}},
+                                            {{$event->address->unitno ? $event->address->unitno : ''}}
+                                            {{$event->address->bldg ? $event->address->bldg : ''}},
                                             {{$event->address->street ? $event->address->street : ''}},
-                                            {{$event->address->city ? $event->address->city->name : ''}},
-                                            {{$event->address->country ? $event->address->country->name : ''}}
+                                            {{$event->address->city ? $event->address->city->name : ''}}
+                                            {{$event->address->province ? $event->address->province->name : ''}}
                                         </small>
                                         <br>
                                         @if($event->paid == 0)
