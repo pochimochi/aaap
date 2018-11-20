@@ -220,8 +220,8 @@
                                         <label>Mobile Number</label>
                                         <div class="form-group required">
                                             <input value="{{ old('mobile_number') }}" type="text"
-                                                   name="mobile_number" id="mobile_number" MAXLENGTH="14"
-                                                   placeholder="Ex. 9214444444"
+                                                   name="mobile_number" id="mobile_number" MAXLENGTH="12"
+                                                   placeholder="Ex. 09214444444"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('mobile_number') }}</span>
                                         </div>
