@@ -234,8 +234,7 @@
                                 @endif
                             </td>
                             <td>
-                                <div
-                                        class="badge {{($user->active == 1) ? 'badge-success' : 'badge-danger'}}">{{($user->active == 1) ? 'Active' : 'Inactive'}}</div>
+                                {{($user->active == 1) ? 'Active' : 'Inactive'}}
                             </td>
                         </tr>
                         <div class="modal fade" id="status-form{{$user->id}}"
