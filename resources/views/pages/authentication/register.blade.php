@@ -285,7 +285,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6 required">
+                                                <div class="col-md-4 required">
                                                     <label>City</label>
                                                     <div class="form-group required">
                                                         <input value="{{ old('city') }}" type="text"
@@ -295,7 +295,15 @@
                                                         <span class="text-danger">{{ $errors->first('city') }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 required">
+                                                <div class="col-md-4 required">
+                                                    <label>State/Province</label>
+                                                    <div class="form-group required">
+                                                        <input value="{{ old('province') }}" type="text" name="province" id="province"
+                                                               class="form-control input-default">
+                                                        <span class="text-danger">{{ $errors->first('province') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 required">
                                                     <label>Country</label>
                                                     <div class="form-group required">
                                                         <select class="form-control custom-select input-default"
@@ -344,7 +352,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <label>City</label>
                                                     <div class="form-group">
                                                         <input value="{{ old('tcity') }}" type="text"
@@ -353,7 +361,15 @@
                                                         <span class="text-danger">{{ $errors->first('tcity') }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
+                                                    <label>State/Province</label>
+                                                    <div class="form-group">
+                                                        <input value="{{ old('tprovince') }}" type="text" name="tprovince" id="tprovince"
+                                                               class="form-control input-default">
+                                                        <span class="text-danger">{{ $errors->first('tprovince') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
                                                     <label>Country</label>
                                                     <div class="form-group">
                                                         <select class="form-control custom-select input-default"
@@ -525,7 +541,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label>City</label>
                                             <div class="form-group">
                                                 <input value="{{ old('ecity') }}" type="text" name="ecity"
@@ -534,7 +550,15 @@
                                                 <span class="text-danger">{{ $errors->first('ecity') }}</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <label>State/Province</label>
+                                            <div class="form-group">
+                                                <input value="{{ old('eprovince') }}" type="text" name="eprovince" id="eprovince"
+                                                       class="form-control input-default">
+                                                <span class="text-danger">{{ $errors->first('eprovince') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
                                             <label>Country</label>
                                             <div class="form-group">
                                                 <select name="ecountry" id="ecountry"
