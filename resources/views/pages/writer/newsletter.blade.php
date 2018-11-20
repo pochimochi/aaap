@@ -3,7 +3,7 @@
     @include('layouts.master.nav')
 @endsection
 @section('pagetitle')
-    Edit Article
+    Send Newsletter
 @endsection
 @section('header')
     <div class="header bg-gradient-teal pb-8 pt-5 pt-md-8">
