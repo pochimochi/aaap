@@ -61,7 +61,7 @@
                                     </div>
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                             <span class="text-info mr-2"><i
-                                                    class="fa fa-location-arrow"></i> {{$events->whereMonth('start_date', today()->month)->count()}}</span>
+                                                        class="fa fa-location-arrow"></i> {{$events->whereMonth('start_date', today()->month)->count()}}</span>
                                         <span class="text-nowrap">For this month</span>
                                     </p>
                                 </div>
@@ -84,7 +84,7 @@
                                     </div>
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                         <span class="text-success mr-2"><i
-                                                class="fa fa-location-arrow"></i> {{$announcements->whereMonth('created_at', today()->month)->count()}}</span>
+                                                    class="fa fa-location-arrow"></i> {{$announcements->whereMonth('created_at', today()->month)->count()}}</span>
                                         <span class="text-nowrap">For this month</span>
                                     </p>
                                 </div>
@@ -106,7 +106,7 @@
                                     </div>
                                     <p class="mt-3 mb-0 text-muted text-sm">
                                             <span class="text-warning mr-2"><i
-                                                    class="fa fa-location-arrow"></i> {{$articles->whereMonth('created_at', today()->month)->count()}}</span>
+                                                        class="fa fa-location-arrow"></i> {{$articles->whereMonth('created_at', today()->month)->count()}}</span>
                                         <span class="text-nowrap">For this month</span>
                                     </p>
                                 </div>
@@ -148,7 +148,6 @@
                         Members of AAAP
                     </div>
                 </div>
-
 
 
                 <div class="row">
@@ -200,6 +199,7 @@
                         <th>Date Created</th>
                         <th>Email</th>
                         <th>Active</th>
+                        <th>Payment</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -221,8 +221,15 @@
                             <td>{{$user->created_at}}</td>
                             <td>{{$user->email}}</td>
                             <td>
+                                @if($user->active == 0)
+                                    500
+                                @else
+                                    None
+                                @endif
+                            </td>
+                            <td>
                                 <div
-                                    class="badge {{($user->active == 1) ? 'badge-success' : 'badge-danger'}}">{{($user->active == 1) ? 'Active' : 'Inactive'}}</div>
+                                        class="badge {{($user->active == 1) ? 'badge-success' : 'badge-danger'}}">{{($user->active == 1) ? 'Active' : 'Inactive'}}</div>
                             </td>
                         </tr>
                         <div class="modal fade" id="status-form{{$user->id}}"
@@ -246,10 +253,10 @@
                                                         <div class="card-profile-image">
                                                             <a href="#">
                                                                 <img
-                                                                    src="{{$user->profilepic ? asset('/public/'. $user->profilepic->location) : ''}}"
-                                                                    alt="" width="150" height="150"
-                                                                    style="object-fit:scale-down;background-color: white"
-                                                                    class="bg-gradient-teal rounded-circle">
+                                                                        src="{{$user->profilepic ? asset('/public/'. $user->profilepic->location) : ''}}"
+                                                                        alt="" width="150" height="150"
+                                                                        style="object-fit:scale-down;background-color: white"
+                                                                        class="bg-gradient-teal rounded-circle">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -259,7 +266,7 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div
-                                                                class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                                                    class="card-profile-stats d-flex justify-content-center mt-md-5">
 
                                                             </div>
                                                         </div>
@@ -323,21 +330,23 @@
                                                                     <label class="form-control-label"
                                                                            for="input-last-name">Gender</label>
                                                                     <input
-                                                                        value="{{ ($user['gender'] == 1 ? 'Male' : 'Female') }}"
-                                                                        readonly
-                                                                        class="form-control form-control-alternative">
+                                                                            value="{{ ($user['gender'] == 1 ? 'Male' : 'Female') }}"
+                                                                            readonly
+                                                                            class="form-control form-control-alternative">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <label>Landline Number</label>
-                                                                <input value="{{ $user->contact->landline_number }}" readonly
+                                                                <input value="{{ $user->contact->landline_number }}"
+                                                                       readonly
                                                                        class="form-control form-control-alternative">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label>Mobile Number</label>
-                                                                <input value="{{ $user->contact->mobile_number }}" readonly
+                                                                <input value="{{ $user->contact->mobile_number }}"
+                                                                       readonly
                                                                        class="form-control form-control-alternative">
                                                             </div>
                                                         </div>
@@ -388,7 +397,8 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <label class="form-control-label"
+                                                                           for="input-province">State/Province</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{$user->permanentaddress->province ? $user->permanentaddress->province->name : ''}}"
@@ -451,7 +461,8 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <label class="form-control-label"
+                                                                           for="input-province">State/Province</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{$user->temporaryaddress->province ? $user->temporaryaddress->province->name : ''}}"
@@ -516,7 +527,7 @@
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
                                                                     <label
-                                                                        class="form-control-label">Relationship</label>
+                                                                            class="form-control-label">Relationship</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{ $user->pwa->pwaRelationship}}"
@@ -619,7 +630,8 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <label class="form-control-label"
+                                                                           for="input-province">State/Province</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{$user->pwa->employer->address->province ? $user->pwa->employer->address->province->name : ''}}"
@@ -700,7 +712,7 @@
                                                             </div>
                                                             <div class="col-2 text-right">
                                                                 <div
-                                                                    class="badge {{($attendance->status == 1) ? 'badge-success' : 'badge-danger'}}">
+                                                                        class="badge {{($attendance->status == 1) ? 'badge-success' : 'badge-danger'}}">
                                                                     {{($attendance->status == 1) ? 'Attending' : 'Cancelled'}}</div>
                                                             </div>
                                                         </div>
