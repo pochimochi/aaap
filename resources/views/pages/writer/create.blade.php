@@ -81,7 +81,7 @@
                                             <label class="btn btn-success btn-block" for="articleImage">Upload
                                                 Images</label>
                                             <div class="form-group">
-                                                <input name="articleImage[]" id="articleImage" onchange="readURL(this)" multiple
+                                                <input hidden name="articleImage[]" id="articleImage" onchange="readURL(this)" multiple
                                                        type="file" class="form-control-file"/>
                                                 <div class="card bg-gradient-teal border-0">
                                                     <div class="card-body">

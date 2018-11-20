@@ -71,6 +71,12 @@
                                         <small class="text-muted"><b> Venue:</b> {{ $event->venue}}
                                         </small>
                                         <br>
+                                        <small class="text-muted"><b> Location:</b>
+                                            {{$event->address->unitno ? $event->address->unitno : ''}},
+                                            {{$event->address->street ? $event->address->street : ''}},
+                                            {{$event->address->city ? $event->address->city->name : ''}},
+                                            {{$event->address->country ? $event->address->country->name : ''}}
+                                        </small>
                                         @if($event->paid == 0)
                                             <small class="text-muted">
                                                 <b>Rate: </b>{{$event->rate}}</small>

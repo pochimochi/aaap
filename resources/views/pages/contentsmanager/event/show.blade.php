@@ -104,8 +104,7 @@
                                         <small class="text-muted"><b> Venue:</b> {{ $event->venue}}
                                         </small>
                                         <br>
-                                        <small class="text-muted"><b> Address:</b>
-
+                                        <small class="text-muted"><b> Location:</b>
                                             {{$event->address->unitno ? $event->address->unitno : ''}},
                                             {{$event->address->street ? $event->address->street : ''}},
                                             {{$event->address->city ? $event->address->city->name : ''}},
