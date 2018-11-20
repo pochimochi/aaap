@@ -213,7 +213,7 @@
                                             <input value="{{$event->address->province->name}}" type="text" name="province" id="province"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('province') }}</span>
-                                        </div>
+                                        </div>d
                                     </div>
                                 </div>
                                 <div class="row justify-content-end">

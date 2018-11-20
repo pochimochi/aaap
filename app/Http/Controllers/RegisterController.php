@@ -88,7 +88,7 @@ class RegisterController extends Controller
             $userinfo['address_id'] = Address::create([
                 'unitno' => $userinfo['eunitno'], 'bldg' => $userinfo['ebldg'], 'street' => $userinfo['estreet'],
                 'city_id' => $userinfo['ecity_id'], 'country_id' => $userinfo['ecountry'],
-                'province_id' => $userinfo['eprovince']])->id;
+                'province' => $userinfo['eprovince']])->id;
             $userinfo['employer_id'] = Employer::create($userinfo)->id;
 
             $userinfo['pwa_id'] = Pwa::create($userinfo)->id;

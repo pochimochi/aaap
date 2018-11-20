@@ -185,7 +185,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group required">
                                         <label>State/Province</label>
-                                            <input value="{{ old('province') }}" type="text" name="province" id="province"
+                                            <input value="{{ old('province_') }}" type="text" name="province" id="province"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('province') }}</span>
                                         </div>

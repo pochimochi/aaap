@@ -99,7 +99,7 @@ class EventController extends Controller
             $event = new Event($eventinfo);
             $users = User::all()->where('active', 1)->where('role_id', 4);
             $eventinfo['city_id'] = City::create(['name' => $eventinfo['city']])->id;
-            $eventinfo['province_id'] = Province::create(['name' => $eventinfo['province']])->id;
+            $eventinfo['province'] = Province::create(['name' => $eventinfo['province']])->id;
             $eventinfo['address_id'] = Address::create($eventinfo)->id;
             $eventinfo['posted_by'] = session('user')['id'];
             $eventinfo['status'] = 1;
