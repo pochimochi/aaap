@@ -207,7 +207,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-4">
                                                                         <label>City</label>
                                                                         <div class="form-group">
                                                                             <input value="{{ $users->permanentaddress->city->name }}"
@@ -217,7 +217,15 @@
                                                                         </div>
                                                                         <span class="text-danger">{{ $errors->first('city') }}</span>
                                                                     </div>
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-4">
+                                                                        <label>State/Province</label>
+                                                                        <div class="form-group">
+                                                                            <input value="{{ $users->permanentaddress->province->name }}" type="text" name="paddress[province]" id="province_id"
+                                                                                   class="form-control input-default">
+                                                                            <span class="text-danger">{{ $errors->first('province') }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
                                                                         <label>Country</label>
                                                                         <div class="form-group">
                                                                             <select class="form-control custom-select input-default"
@@ -272,7 +280,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-4">
                                                                         <label>City</label>
                                                                         <div class="form-group">
                                                                             <input value="{{ $users->temporaryaddress->city->name }}"
@@ -282,7 +290,15 @@
                                                                             <span class="text-danger">{{ $errors->first('tcity') }}</span>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-4">
+                                                                        <label>State/Province</label>
+                                                                        <div class="form-group">
+                                                                            <input value="{{ $users->temporaryaddress->province->name }}" type="text" name="taddress[province]" id="tprovince"
+                                                                                   class="form-control input-default">
+                                                                            <span class="text-danger">{{ $errors->first('tprovince') }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
                                                                         <label>Country</label>
                                                                         <div class="form-group">
                                                                             <select class="form-control custom-select input-default"
@@ -465,7 +481,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
                                                                     <label>City</label>
                                                                     <div class="form-group">
                                                                         <input value="{{ $users->pwa->employer->address->city->name }}"
@@ -475,7 +491,15 @@
                                                                         <span class="text-danger">{{ $errors->first('ecity') }}</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
+                                                                    <label>State/Province</label>
+                                                                    <div class="form-group">
+                                                                        <input value="{{ $users->pwa->employer->address->province->name }}" name="eaddress[province]" id="eprovince"
+                                                                               class="form-control input-default">
+                                                                        <span class="text-danger">{{ $errors->first('eprovince') }}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
                                                                     <label>Country</label>
                                                                     <div class="form-group">
                                                                         <select name="eaddress[country_id]"
