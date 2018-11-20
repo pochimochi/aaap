@@ -181,6 +181,12 @@
                     <div class="col-lg-3 col-sm-12 col-md-6">
                         <span id="interventionfilter"></span>
                     </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12 col-md-6">
+                        <span id="activefilter"></span>
+                    </div>
                 </div>
                 <hr>
                 <table id="memberdashboard" class="table bg-white table-bordered table-condensed shadow dt-responsive">
@@ -872,6 +878,22 @@
                     column6.data().unique().sort().each(function (d, j) {
                         select6.append('<option value="Yes">Yes</option>');
                         select6.append('<option value="No">No</option>');
+                    });
+                    var column7 = this.api().column(9);
+                    var select7 = $('<select class="form-control form-control-sm"><option value="">Show All</option></select>')
+                        .appendTo($('#activefilter').empty().text('Active: '))
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column7
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+
+                        });
+                    column7.data().unique().sort().each(function (d, j) {
+                        select7.append('<option value="Active">Active</option>');
+                        select7.append('<option value="Inactive">Inactive</option>');
                     });
                 },
 
