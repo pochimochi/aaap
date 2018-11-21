@@ -165,7 +165,7 @@
                                         <label for="firstname">First Name</label>
                                         <div class="form-group">
                                             <input value="{{ old('firstname') }}" type="text"
-                                                   name="firstname" id="firstname"  MAXLENGTH="50"
+                                                   name="firstname" id="firstname"  MAXLENGTH="30"
                                                    class="form-control">
                                             <span class="text-danger">{{ $errors->first('firstname') }}</span>
                                         </div>
@@ -174,7 +174,7 @@
                                         <label>Middle Name</label>
                                         <div class="form-group">
                                             <input value="{{ old('middlename') }}" type="text"
-                                                   name="middlename" id="middlename" MAXLENGTH="50"
+                                                   name="middlename" id="middlename" MAXLENGTH="30"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('middlename') }}</span>
                                         </div>
@@ -183,7 +183,7 @@
                                         <label>Last Name</label>
                                         <div class="form-group required">
                                             <input value="{{ old('lastname') }}" type="text"
-                                                   name="lastname" id="lastname" MAXLENGTH="50"
+                                                   name="lastname" id="lastname" MAXLENGTH="30"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('lastname') }}</span>
                                         </div>
@@ -398,7 +398,7 @@
                                             <label>First Name</label>
                                             <div class="form-group">
                                                 <input value="{{ old('pwaFirstName') }}" type="text"
-                                                       name="pwaFirstName" id="pwaFirstName" MAXLENGTH="50"
+                                                       name="pwaFirstName" id="pwaFirstName" MAXLENGTH="30"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('pwaFirstName') }}</span>
                                             </div>
@@ -407,7 +407,7 @@
                                             <label>Middle Name</label>
                                             <div class="form-group">
                                                 <input value="{{ old('pwaMiddleName') }}" type="text"
-                                                       name="pwaMiddleName" id="pwaMiddleName" MAXLENGTH="50"
+                                                       name="pwaMiddleName" id="pwaMiddleName" MAXLENGTH="30"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('pwaMiddleName') }}</span>
                                             </div>
@@ -416,7 +416,7 @@
                                             <label>Last Name</label>
                                             <div class="form-group">
                                                 <input value="{{ old('pwaLastName') }}" type="text"
-                                                       name="pwaLastName" id="pwaLastName"  MAXLENGTH="50"
+                                                       name="pwaLastName" id="pwaLastName"  MAXLENGTH="30"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('pwaLastName') }}</span>
                                             </div>
