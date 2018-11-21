@@ -50,10 +50,12 @@
                             <td>{{ $member->lastname }}</td>
                             <td>{{ $member->email}}</td>
                             <td>
-                                @if(file_exists(public_path('/storage/'.$member->idverification->location)))
-                                    <a href="{{ asset('/storage/'.$member->idverification->location) }}">Download</a>
-                                @else
-                                    No file
+                                @if($member->idverification)
+                                    @if(file_exists(public_path('/storage/'.$member->idverification->location)))
+                                        <a href="{{ asset('/storage/'.$member->idverification->location) }}">Download</a>
+                                    @else
+                                        No file
+                                    @endif
                                 @endif
                             </td>
                             <td>{{ \Carbon\Carbon::parse($member->created_at)->format('d/m/Y')}}</td>
@@ -283,7 +285,8 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <label class="form-control-label"
+                                                                           for="input-province">State/Province</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{ $member->permanentaddress->province->name}}"
@@ -349,7 +352,8 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <label class="form-control-label"
+                                                                           for="input-province">State/Province</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{ $member->temporaryaddress->province->name}}"
@@ -523,7 +527,8 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group focused">
-                                                                    <label class="form-control-label" for="input-province">State/Province</label>
+                                                                    <label class="form-control-label"
+                                                                           for="input-province">State/Province</label>
                                                                     <input type="text"
                                                                            class="form-control form-control-alternative"
                                                                            value="{{ $member->pwa->employer->address->province->name}}"
