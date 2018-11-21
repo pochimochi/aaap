@@ -62,7 +62,12 @@ class Helper
         // you may also use $mail->Body =       file_get_contents('your_mail_template.html');
         $mail->AddAddress($receiver);
         // you may also use this format $mail->AddAddress ($recipient);
-        return $result = $mail->Send();
+        if ($result = $mail->Send()) {
+            alert()->success('Email sent!' ,'Your Email was sent successfully!');
+            return $result;
+        } else {
+            return alert()->error('Oops!' ,'Something went wrong');
+        }
 
 
     }
