@@ -147,7 +147,7 @@
                                                     <div class="col-lg-3 order-lg-2">
                                                         <div class="card-profile-image">
 
-                                                            <img src="{{$member->profilepic ? asset('/public/'. $member->profilepic->location) : ''}}"
+                                                            <img src="{{$member->profilepic ? asset('/storage/'. $member->profilepic->location) : ''}}"
                                                                  width="150" height="150"
                                                                  style="object-fit:scale-down;background-color: white"
                                                                  class="bg-gradient-teal rounded-circle">

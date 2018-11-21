@@ -258,7 +258,7 @@
                                                         <div class="card-profile-image">
                                                             <a href="#">
                                                                 <img
-                                                                        src="{{$user->profilepic ? asset('/public/'. $user->profilepic->location) : ''}}"
+                                                                        src="{{$user->profilepic ? asset('/storage/'. $user->profilepic->location) : ''}}"
                                                                         alt="" width="150" height="150"
                                                                         style="object-fit:scale-down;background-color: white"
                                                                         class="bg-gradient-teal rounded-circle">
