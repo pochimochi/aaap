@@ -157,9 +157,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label>Profile Picture</label>
+                                                                <label>ID Verification</label>
                                                                 <div class="form-group">
-                                                                    <input value="{{ old('profile_id') }}" type="file"
+                                                                    <input value="{{ old('idverification_id') }}" type="file"
                                                                            name="idverification[location]" id="file-input"
                                                                            class="form-control-file"/>
                                                                     <div id="thumb-output"></div>
@@ -220,7 +220,7 @@
                                                                     <div class="col-md-4">
                                                                         <label>State/Province</label>
                                                                         <div class="form-group">
-                                                                            <input value="{{ $users->permanentaddress->province->name }}" type="text" name="paddress[province]" id="province_id"
+                                                                            <input value="{{$users->permanentaddress->province ? $users->permanentaddress->province->name: '' }}" type="text" name="paddress[province]" id="province_id"
                                                                                    class="form-control input-default">
                                                                             <span class="text-danger">{{ $errors->first('province') }}</span>
                                                                         </div>

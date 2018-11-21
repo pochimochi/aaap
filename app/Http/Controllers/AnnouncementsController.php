@@ -87,7 +87,7 @@ class AnnouncementsController extends Controller
             'type_id' => 'required',
             'due_date' => 'nullable|after:today',
             'announcementImage' => 'nullable',
-            'announcementImage.*' => 'image|mimes:jpeg,png,jpg|size:5000'
+            'announcementImage.*' => 'image|mimes:jpeg,png,jpg'
         ], [
             'type_id.required' => 'The type of the announcement must be specified.',
             'announcementImage.*.image' => 'Uploads must be in image form',
@@ -108,7 +108,7 @@ class AnnouncementsController extends Controller
                 $announcementInfo['image_name'] = $name->getClientOriginalName();
                 $name->move('storage', $announcementInfo['image_name']);
                 $announcementInfo['image_id'] = Images::create(['location' => $announcementInfo['image_name']])->id;
-                AnnouncementImages::create(['image_id' => $announcementInfo['image_id'], 'announcement_id' => $announcementInfo['announcemnent_id']]);
+                AnnouncementImages::create(['image_id' => $announcementInfo['image_id'], 'announcement_id' => $announcementInfo['announcement_id']]);
             }
 
         }

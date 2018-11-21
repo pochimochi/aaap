@@ -61,7 +61,7 @@ class LoginController extends Controller
 
                 $log->savelog($user->id, 'Logged In');
                 alert()->success('Login Successful!', 'Welcome ' . $user->firstname);
-                return redirect('home');
+                return redirect('member/profile');
             } else {
                 $user = Auth::user();
                 session(['user' => $user]);
