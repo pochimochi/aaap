@@ -165,7 +165,7 @@
                                         <label for="firstname">First Name</label>
                                         <div class="form-group">
                                             <input value="{{ old('firstname') }}" type="text"
-                                                   name="firstname" id="firstname"
+                                                   name="firstname" id="firstname"  MAXLENGTH="50"
                                                    class="form-control">
                                             <span class="text-danger">{{ $errors->first('firstname') }}</span>
                                         </div>
@@ -174,7 +174,7 @@
                                         <label>Middle Name</label>
                                         <div class="form-group">
                                             <input value="{{ old('middlename') }}" type="text"
-                                                   name="middlename" id="middlename"
+                                                   name="middlename" id="middlename" MAXLENGTH="50"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('middlename') }}</span>
                                         </div>
@@ -183,7 +183,7 @@
                                         <label>Last Name</label>
                                         <div class="form-group required">
                                             <input value="{{ old('lastname') }}" type="text"
-                                                   name="lastname" id="lastname"
+                                                   name="lastname" id="lastname" MAXLENGTH="50"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('lastname') }}</span>
                                         </div>
@@ -260,7 +260,7 @@
                                                     <label>House/Apartment/Unit No.</label>
                                                     <div class="form-group required">
                                                         <input value="{{ old('unitno') }}" type="text"
-                                                               name="unitno" id="unitno"
+                                                               name="unitno" id="unitno" MAXLENGTH="5"
                                                                class="form-control input-default">
                                                         <span class="text-danger">{{ $errors->first('unitno') }}</span>
                                                     </div>
@@ -279,7 +279,7 @@
                                                     <label>Street</label>
                                                     <div class="form-group required">
                                                         <input value="{{ old('street') }}" type="text"
-                                                               name="street" id="street"
+                                                               name="street" id="street" MAXLENGTH="50"
                                                                class="form-control input-default">
                                                         <span class="text-danger">{{ $errors->first('street') }}</span>
                                                     </div>
@@ -291,7 +291,7 @@
                                                     <div class="form-group required">
                                                         <input value="{{ old('city') }}" type="text"
                                                                name="city"
-                                                               id="city"
+                                                               id="city" MAXLENGTH="50"
                                                                class="form-control input-default">
                                                         <span class="text-danger">{{ $errors->first('city') }}</span>
                                                     </div>
@@ -299,7 +299,7 @@
                                                 <div class="col-md-4 required">
                                                     <label>State/Province</label>
                                                     <div class="form-group required">
-                                                        <input value="{{ old('province') }}" type="text" name="province" id="province"
+                                                        <input value="{{ old('province') }}" type="text" name="province" id="province" MAXLENGTH="50"
                                                                class="form-control input-default">
                                                         <span class="text-danger">{{ $errors->first('province') }}</span>
                                                     </div>
@@ -328,7 +328,7 @@
                                                     <label>House/Apartment/Unit No.</label>
                                                     <div class="form-group">
                                                         <input value="{{ old('tunitno') }}" type="text"
-                                                               name="tunitno" id="tunitno"
+                                                               name="tunitno" id="tunitno" MAXLENGTH="5"
                                                                class="form-control input-default">
                                                         <span class="text-danger">{{ $errors->first('tunitno') }}</span>
                                                     </div>
@@ -337,7 +337,7 @@
                                                     <label>Building</label>
                                                     <div class="form-group">
                                                         <input value="{{ old('tbldg') }}" type="text"
-                                                               name="tbldg" id="tbldg"
+                                                               name="tbldg" id="tbldg" MAXLENGTH="50"
                                                                class="form-control input-default">
                                                         <span class="text-danger">{{ $errors->first('tbldg') }}</span>
                                                     </div>
@@ -346,7 +346,7 @@
                                                     <label>Street</label>
                                                     <div class="form-group">
                                                         <input value="{{ old('tstreet') }}" type="text"
-                                                               name="tstreet" id="tstreet"
+                                                               name="tstreet" id="tstreet" MAXLENGTH="50"
                                                                class="form-control input-default">
                                                         <span class="text-danger">{{ $errors->first('tstreet') }}</span>
                                                     </div>
@@ -357,7 +357,7 @@
                                                     <label>City</label>
                                                     <div class="form-group">
                                                         <input value="{{ old('tcity') }}" type="text"
-                                                               name="tcity" id="tcity"
+                                                               name="tcity" id="tcity" MAXLENGTH="50"
                                                                class="form-control input-default">
                                                         <span class="text-danger">{{ $errors->first('tcity') }}</span>
                                                     </div>
@@ -365,7 +365,7 @@
                                                 <div class="col-md-4">
                                                     <label>State/Province</label>
                                                     <div class="form-group">
-                                                        <input value="{{ old('tprovince') }}" type="text" name="tprovince" id="tprovince"
+                                                        <input value="{{ old('tprovince') }}" type="text" name="tprovince" id="tprovince" MAXLENGTH="50"
                                                                class="form-control input-default">
                                                         <span class="text-danger">{{ $errors->first('tprovince') }}</span>
                                                     </div>
@@ -398,7 +398,7 @@
                                             <label>First Name</label>
                                             <div class="form-group">
                                                 <input value="{{ old('pwaFirstName') }}" type="text"
-                                                       name="pwaFirstName" id="pwaFirstName"
+                                                       name="pwaFirstName" id="pwaFirstName" MAXLENGTH="50"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('pwaFirstName') }}</span>
                                             </div>
@@ -407,7 +407,7 @@
                                             <label>Middle Name</label>
                                             <div class="form-group">
                                                 <input value="{{ old('pwaMiddleName') }}" type="text"
-                                                       name="pwaMiddleName" id="pwaMiddleName"
+                                                       name="pwaMiddleName" id="pwaMiddleName" MAXLENGTH="50"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('pwaMiddleName') }}</span>
                                             </div>
@@ -416,7 +416,7 @@
                                             <label>Last Name</label>
                                             <div class="form-group">
                                                 <input value="{{ old('pwaLastName') }}" type="text"
-                                                       name="pwaLastName" id="pwaLastName"
+                                                       name="pwaLastName" id="pwaLastName"  MAXLENGTH="50"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('pwaLastName') }}</span>
                                             </div>
@@ -443,7 +443,7 @@
                                             <label>Relationship to PWA</label>
                                             <div class="form-group">
                                                 <input value="{{ old('pwaRelationship') }}" type="text"
-                                                       name="pwaRelationship" id="pwaRelationship"
+                                                       name="pwaRelationship" id="pwaRelationship" MAXLENGTH="50"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('pwaRelationship') }}</span>
                                             </div>
@@ -452,7 +452,7 @@
                                             <label>Occupation</label>
                                             <div class="form-group">
                                                 <input value="{{ old('pwaOccupation') }}"
-                                                       name="pwaOccupation"
+                                                       name="pwaOccupation" MAXLENGTH="50"
                                                        id="pwaOccupation" type="text"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('pwaOccupation') }}</span>
@@ -493,7 +493,7 @@
                                             <label>Employer's Name</label>
                                             <div class="form-group">
                                                 <input value="{{ old('employerName') }}" type="text"
-                                                       name="employerName" id="employerName"
+                                                       name="employerName" id="employerName" MAXLENGTH="50"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('employerName') }}</span>
                                             </div>
@@ -516,7 +516,7 @@
                                             <div class="form-group">
                                                 <input value="{{ old('eunitno') }}" type="text"
                                                        name="eunitno"
-                                                       id="eunitno"
+                                                       id="eunitno" MAXLENGTH="5"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('eunitno') }}</span>
                                             </div>
@@ -525,7 +525,7 @@
                                             <label>Building</label>
                                             <div class="form-group">
                                                 <input value="{{ old('ebldg') }}" type="text" name="ebldg"
-                                                       id="ebldg"
+                                                       id="ebldg" MAXLENGTH="50"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('ebldg') }}</span>
                                             </div>
@@ -535,7 +535,7 @@
                                             <div class="form-group">
                                                 <input value="{{ old('estreet') }}" type="text"
                                                        name="estreet"
-                                                       id="estreet"
+                                                       id="estreet" MAXLENGTH="50"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('estreet') }}</span>
                                             </div>
@@ -546,7 +546,7 @@
                                             <label>City</label>
                                             <div class="form-group">
                                                 <input value="{{ old('ecity') }}" type="text" name="ecity"
-                                                       id="ecity"
+                                                       id="ecity" MAXLENGTH="50"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('ecity') }}</span>
                                             </div>
@@ -554,7 +554,7 @@
                                         <div class="col-md-4">
                                             <label>State/Province</label>
                                             <div class="form-group">
-                                                <input value="{{ old('eprovince') }}" type="text" name="eprovince" id="eprovince"
+                                                <input value="{{ old('eprovince') }}" type="text" name="eprovince" id="eprovince" MAXLENGTH="50"
                                                        class="form-control input-default">
                                                 <span class="text-danger">{{ $errors->first('eprovince') }}</span>
                                             </div>
