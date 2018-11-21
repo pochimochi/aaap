@@ -62,16 +62,23 @@ class Helper
         // you may also use $mail->Body =       file_get_contents('your_mail_template.html');
         $mail->AddAddress($receiver);
         // you may also use this format $mail->AddAddress ($recipient);
-        return $result = $mail->Send();
+        if ($result = $mail->Send()) {
+            alert()->success('Email sent!' ,'Your Email was sent successfully!');
+            return $result;
+        } else {
+            return alert()->error('Oops!' ,'Something went wrong');
+        }
 
 
     }
+
     function emailBulk($receiver, $body, $subject)
     {
+        $mail = new PHPMailer(true);
+
         $bodyhtml = $body;
         //https://stackoverflow.com/questions/38309422/phpmailer-server-smtp-error-password-command-failed-smtp-connect-failed
 
-        $mail = new PHPMailer(true);
 
         $mail->isSMTP();                       // telling the class to use SMTP
         $mail->SMTPDebug = 0;
@@ -86,7 +93,7 @@ class Helper
         $mail->Password = "AAAP4lyf";      // Gmail password
 
         $mail->CharSet = 'windows-1250';
-        foreach($receiver as $receive){
+        foreach ($receiver as $receive) {
 
             $mail->AddBCC($receive['email']); // send to mail
 
@@ -101,7 +108,12 @@ class Helper
         // you may also use $mail->Body =       file_get_contents('your_mail_template.html');
         $mail->AddAddress('AAAPToday@gmail.com');
         // you may also use this format $mail->AddAddress ($recipient);
-        return $result = $mail->Send();
+        if ($result = $mail->Send()) {
+            alert()->success('Email sent!' ,'Your Email was sent successfully!');
+            return $result;
+        } else {
+            return alert()->error('Oops!' ,'Something went wrong');
+        }
 
 
     }
