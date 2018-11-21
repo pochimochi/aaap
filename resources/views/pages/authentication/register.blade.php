@@ -208,10 +208,10 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>Landline Number</label>
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <input value="{{ old('landline_number') }}" type="text"
-                                                   name="landline_number" id="landline_number" MAXLENGTH="11"
-                                                   placeholder="Ex. 1234567 or 025 1234567"
+                                                   name="landline_number" id="landline_number" MAXLENGTH="14"
+                                                   placeholder="Ex. 1234567 or 025-1234567"
                                                    class="form-control input-default">
                                             <span class="text-danger">{{ $errors->first('landline_number') }}</span>
                                         </div>
@@ -901,8 +901,11 @@
     }
 </script>
 
+{{--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
+{{--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>--}}
 <script>
     $(document).ready(function () {
+        // $('#landline_number').mask('(00)000-0000');
         $('#file-input').on('change', function () { //on file input change
             if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
             {

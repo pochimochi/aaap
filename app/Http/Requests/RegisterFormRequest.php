@@ -34,7 +34,7 @@ class RegisterFormRequest extends FormRequest
             'gender' => 'required',
             'profile_id' => 'nullable|image|mimes:jpeg,jpg,png|max:8000',
             'password' => 'required|confirmed|max:64|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-            'password_confirmation' => 'required',
+            'password_confirmation' => 'required|same:password',
             'idverification_id' => 'nullable|mimes:jpg,jpeg,png,docx,doc,pdf|max:8000',
             'email' => 'required|unique:users,email|email',
             'unitno' => 'required|max:5|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
@@ -65,7 +65,7 @@ class RegisterFormRequest extends FormRequest
             'pwaGender' => 'nullable|integer',
             'pwaRelationship' => 'nullable|max:50|string|regex:/^[a-z ,.\'-]+$/i',
             'pwaOccupation' => 'nullable|max:50|string|regex:/^[a-z ,.\'-]+$/i',
-            'landline_number' => 'nullable|min:7|max:12',
+            'landline_number' => 'nullable|min:7|max:14|regex:/^[0-9-+()]*$/',
             'mobile_number' => 'required|numeric|digits_between:10,11|regex:/^[09]{2}[0-9]{9}$/',
             'terms' => 'required',
             'g-recaptcha-response' => 'required'
@@ -142,6 +142,7 @@ class RegisterFormRequest extends FormRequest
             'email.email' => 'The email address format is invalid.',
 
             'mobile_number.regex' => 'Please Enter a Valid Mobile Number starting with 09.',
+            'password_confirmation.same' => 'Password must Match',
 
             'profile_id' => 'The profile picture must be an image.',
             'idverification_id.required' => 'The ID Verification field is required. Please upload a photo or file of your ID.',
