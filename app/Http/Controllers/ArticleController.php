@@ -74,7 +74,7 @@ class ArticleController extends Controller
     public function create()
     {
         if(session('role') == 5){
-            $articles = Articles::all()->where('status', '=', 0);
+            $articles = Articles::orderBy('status', 'asc')->get();
         }else{
             $articles = Articles::all();
         }
