@@ -51,7 +51,7 @@
                             <td>{{ $member->email}}</td>
                             <td>
                                 @if(file_exists(public_path('/storage/'.$member->idverification->location)))
-                                    <a href="{{ asset('/storage/'.$member->idverification->location) }}">Download</a>
+                                    <a href="{{ asset('/storage/'.$member->idverification->location? $member->idverification->location : '') }}">Download</a>
                                 @else
                                     No file
                                 @endif
