@@ -88,7 +88,7 @@
                                 <td>{{$user->firstname}}</td>
                                 <td>{{$user->lastname}}</td>
                                 <td>{{($user->gender == 1) ? 'Male' : 'Female'}}</td>
-                                <td>{{$user->city->name}}</td>
+                                <td>{{$user->address->city->name}}</td>
                                 <td>{{$user->email}}<input type="hidden" name="receiver[][email]" value="{{$user->email}}"></td>
                             </tr>
                         @endforeach
