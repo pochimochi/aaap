@@ -142,6 +142,7 @@ class RegisterFormRequest extends FormRequest
             'email.email' => 'The email address format is invalid.',
 
             'mobile_number.regex' => 'Please Enter a Valid Mobile Number starting with 09.',
+            'landline_number.regex' => 'Letters and Spaces are not Accepted.',
             'password_confirmation.same' => 'Password must Match',
 
             'profile_id' => 'The profile picture must be an image.',
