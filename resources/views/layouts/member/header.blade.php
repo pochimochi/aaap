@@ -59,7 +59,7 @@
                                 <span class="nav-link-inner--text">Account</span>
                             </a>
                         </li>
-                        @else
+                        @elseif(session('user')['active'] == 0)
                         <li class="nav-item">
                             <a href="{{URL::to('member/profile')}}" class="nav-link">
                                 <span class="btn-inner--icon"><i class="ni ni-circle-08"></i></span>
